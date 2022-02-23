@@ -30,6 +30,13 @@ public class CameraController : MonoBehaviour
     ///</summary>
     private Vector3 _nextPosition;
 
+    #region methods
+    public void SetOffset(Vector3 direction)
+    {
+        _offset.x = direction.normalized.x;
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +48,11 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     
     private void Update() {
-        _nextPosition = Vector3.Lerp(_cameraTransform.position, _playerTransform.position + _offset, _lerpSpeed);
+        
     }
     void LateUpdate()
     {
+        _nextPosition = Vector3.Lerp(_cameraTransform.position, _playerTransform.position + _offset, _lerpSpeed);
         //Actualiza el movimiento de la cam.
         _cameraTransform.position = _nextPosition;
         

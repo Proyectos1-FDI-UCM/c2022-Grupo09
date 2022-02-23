@@ -15,6 +15,9 @@ public class CharacterMovementController : MonoBehaviour
 
     #region references
     private Transform _myTransform;
+    [SerializeField]
+    private GameObject _myCamera;
+    private CameraController _myCameraController;
     //private Rigidbody2D _myRigidbody;
     #endregion
 
@@ -29,6 +32,7 @@ public class CharacterMovementController : MonoBehaviour
     void Start()
     {
         _myTransform = transform;
+        _myCameraController = _myCamera.GetComponent<CameraController>();
         //_myRigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -36,6 +40,7 @@ public class CharacterMovementController : MonoBehaviour
     void Update()
     {
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
+        if(_movementDirection.x != 0) _myCameraController.SetOffset(_movementDirection);
         _movementDirection = Vector3.zero;
     }
 }
