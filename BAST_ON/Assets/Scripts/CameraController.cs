@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
     #region methods
     public void SetOffset(Vector3 direction)
     {
-        _offset.x = direction.normalized.x;
+        _offset.x *= direction.x;
     }
     #endregion
 

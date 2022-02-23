@@ -57,7 +57,7 @@ public class CharacterMovementController : MonoBehaviour
     void Update()
     {
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
-        if(_movementDirection.x != 0) _myCameraController.SetOffset(_movementDirection);
+        if(_movementDirection.x != 0) _myCameraController.SetOffset(_movementDirection.normalized);
         _movementDirection = Vector3.zero;
     }
 }
