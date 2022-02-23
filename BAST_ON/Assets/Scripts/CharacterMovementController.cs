@@ -40,7 +40,8 @@ public class CharacterMovementController : MonoBehaviour
     {
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
-        //_myRigidbody = GetComponent<Rigidbody2D>();
+        _myRigidbody2D = GetComponent<Rigidbody2D>();
+     
     }
 
     // Update is called once per frame
