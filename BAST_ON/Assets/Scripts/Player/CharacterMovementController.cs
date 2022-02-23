@@ -10,10 +10,15 @@ public class CharacterMovementController : MonoBehaviour
 
     [SerializeField]
     private float _jumpForce = 5f;
+
+   
+
     #endregion
 
     #region properties
     private Vector3 _movementDirection = Vector3.zero;
+
+
     #endregion
 
     #region references
@@ -29,10 +34,13 @@ public class CharacterMovementController : MonoBehaviour
     {
         _movementDirection.x = direction;
     }
+    
     public void JumpRequest()
     {
         _myRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
+
+    
     #endregion
 
     // Start is called before the first frame update
@@ -41,6 +49,7 @@ public class CharacterMovementController : MonoBehaviour
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
         _myRigidbody2D = GetComponent<Rigidbody2D>();
+       
      
     }
 
