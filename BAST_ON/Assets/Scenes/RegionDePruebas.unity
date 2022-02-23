@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1682984275}
   _offset: {x: 0, y: 0, z: -10}
-  _lerpSpeed: 0.05
+  _lerpSpeed: 0.01
 --- !u!1 &304404748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5747380373329773871, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
@@ -395,6 +395,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: _myCamera
+      value: 
+      objectReference: {fileID: 240717819}
     - target: {fileID: 6908164961401010825, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_BodyType
       value: 0
