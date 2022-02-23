@@ -27,5 +27,9 @@ public class CharacterInputManager : MonoBehaviour
         {
             _myMovementController.SetMovementDirection(_horizontalInput);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _myMovementController.JumpRequest();
+        }
     }
 }

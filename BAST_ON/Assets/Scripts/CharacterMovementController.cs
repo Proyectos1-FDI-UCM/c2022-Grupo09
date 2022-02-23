@@ -7,6 +7,9 @@ public class CharacterMovementController : MonoBehaviour
     #region parameters
     [SerializeField]
     private float _speedMovement = 1f;
+
+    [SerializeField]
+    private float _jumpForce = 5f;
     #endregion
 
     #region properties
@@ -18,13 +21,17 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField]
     private GameObject _myCamera;
     private CameraController _myCameraController;
-    //private Rigidbody2D _myRigidbody;
+    private Rigidbody2D _myRigidbody2D;
     #endregion
 
     #region methods
     public void SetMovementDirection(float direction)
     {
         _movementDirection.x = direction;
+    }
+    public void JumpRequest()
+    {
+        _myRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
     #endregion
 
