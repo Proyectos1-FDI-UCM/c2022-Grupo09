@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     ///<summary>
     ///Vector que desplaza el centro de la cámara.
     ///</summary>
-    [SerializeField] private Vector3 _offset = new Vector3(1, 0, 0);
+    [SerializeField] private Vector3 _offset = new Vector3(1, 0, -10);
     ///<summary>
     ///Valor que determina a qué distancia se queda la cámara del punto final
     ///</summary>
