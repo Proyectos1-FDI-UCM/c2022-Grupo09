@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
     #region methods
     public void SetOffset(Vector3 direction)
     {
-        _offset.x *= direction.x;
+        _offset.x = Mathf.Abs(_offset.x) * direction.x;
     }
     #endregion
 
