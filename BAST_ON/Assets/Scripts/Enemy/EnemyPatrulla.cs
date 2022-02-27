@@ -6,17 +6,26 @@ public class EnemyPatrulla : MonoBehaviour
 {
     [SerializeField]
     public float speed;
-    public bool rightMov = true;
+    private bool rightMov = true;
     public Transform floorDetect;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        RaycastHit2D floorData = Physics2D.Raycast(floorDetect.position,Vector2.down,1f);
+        if (!floorData.collider)
+        {
+            if (rightMov)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                rightMov = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                rightMov = true;
+            }
+
+        }
     }
 }
