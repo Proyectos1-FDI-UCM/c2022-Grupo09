@@ -11,7 +11,9 @@ public class EnemyPatrulla : MonoBehaviour
 
     void Update()
     {
+        //
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+        // Raycast de tamaño uno desde el objeto vacio
         RaycastHit2D floorData = Physics2D.Raycast(floorDetect.position,Vector2.down,1f);
         if (!floorData.collider)
         {
@@ -21,7 +23,9 @@ public class EnemyPatrulla : MonoBehaviour
                 rightMov = false;
             }
             else
+
             {
+    
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 rightMov = true;
             }
