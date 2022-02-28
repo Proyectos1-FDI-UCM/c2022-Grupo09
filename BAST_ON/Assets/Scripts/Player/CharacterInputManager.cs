@@ -17,6 +17,18 @@ public class CharacterInputManager : MonoBehaviour
     private float _verticalAttackInput;
     #endregion
 
+    #region methods
+    private void NormalizeAttackInput(ref float horizontal, ref float vertical)
+    {
+        Vector2 attackDirectionInput;
+        attackDirectionInput.x = horizontal;
+        attackDirectionInput.y = vertical;
+        attackDirectionInput.Normalize();
+        horizontal = attackDirectionInput.x;
+        vertical = attackDirectionInput.y;
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +43,9 @@ public class CharacterInputManager : MonoBehaviour
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
 
+        _horizontalAttackInput = Input.GetAxis(""); // Eje horizontal joystick derecho
+        _verticalAttackInput = Input.GetAxis("");   // Eje vertical joystick derecho
+        NormalizeAttackInput(ref _horizontalAttackInput, ref _verticalAttackInput);
 
         if(_horizontalInput != 0)
         {
