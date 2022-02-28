@@ -20,6 +20,7 @@ public class CharacterAttackController : MonoBehaviour
     #endregion
 
     #region methods
+    // Recibe la dirección del ataque y lo activa en esa dirección
     public void Bastonazo(int horizontalAttackDirection, int verticalAttackDirection)
     {
         _attackTime = 0f;

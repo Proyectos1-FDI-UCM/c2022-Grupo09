@@ -10,15 +10,14 @@ public class CharacterMovementController : MonoBehaviour
 
     [SerializeField]
     private float _jumpForce = 5f;
-
-   
-
+    [SerializeField]
+    private int _nJumps;
+    [SerializeField]
+    private int _limitJumps = 1;
     #endregion
 
     #region properties
     private Vector3 _movementDirection = Vector3.zero;
-
-
     #endregion
 
     #region references
@@ -30,6 +29,13 @@ public class CharacterMovementController : MonoBehaviour
     #endregion
 
     #region methods
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Floor")
+        {
+            _nJumps = 0;
+        }
+    }
     public void SetMovementDirection(float direction)
     {
         _movementDirection.x = direction;
@@ -37,7 +43,11 @@ public class CharacterMovementController : MonoBehaviour
     
     public void JumpRequest()
     {
-        _myRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
+        if (_nJumps < _limitJumps)
+        {
+            _myRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
+            _nJumps++;
+        }
     }
 
     
@@ -46,11 +56,10 @@ public class CharacterMovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _nJumps = 0;
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
         _myRigidbody2D = GetComponent<Rigidbody2D>();
-       
-     
     }
 
     // Update is called once per frame
