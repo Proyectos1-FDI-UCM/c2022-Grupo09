@@ -28,7 +28,7 @@ public class CharacterAttackController : MonoBehaviour
         // a (-22'5º, 22'5º) Derecha
         if ((horizontalAttackDirection >= ((Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) && 
             (verticalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) && 
-            (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { Debug.Log("ASDF"); _bastonTransform.Rotate(Vector3.zero); _baston.SetActive(true); }
+            (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(Vector3.zero); _baston.SetActive(true); }
         // b (22'5º, 3*22'5º) Arriba derecha
         else if ((horizontalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
                 (horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
