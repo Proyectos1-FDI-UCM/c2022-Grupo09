@@ -8,14 +8,17 @@ public class CharacterInputManager : MonoBehaviour
     private CharacterMovementController _myMovementController;
     #endregion
 
-    #region properties
-    private float _horizontalInput;
-
+    #region parameters
     [SerializeField]
     private int _nJumps;
 
     [SerializeField]
     private int _limitJumps = 1;
+    #endregion
+
+    #region properties
+    private float _horizontalInput;
+    private float _jumpInput;
     #endregion
 
     #region methods
@@ -38,12 +41,14 @@ public class CharacterInputManager : MonoBehaviour
     void Update()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
+        _jumpInput = Input.GetAxis("Jump");
+
 
         if(_horizontalInput != 0)
         {
             _myMovementController.SetMovementDirection(_horizontalInput);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_jumpInput != 0)
         {
             if(_nJumps<_limitJumps)
             {
