@@ -13,8 +13,8 @@ public class CharacterInputManager : MonoBehaviour
     private float _horizontalInput;
     private float _jumpInput;
     private float _attackInput;
-    private float _horizontalAttackInput = 1f;
-    private float _verticalAttackInput = 0f;
+    private float _horizontalAttackInput;
+    private float _verticalAttackInput;
     #endregion
 
     // Start is called before the first frame update

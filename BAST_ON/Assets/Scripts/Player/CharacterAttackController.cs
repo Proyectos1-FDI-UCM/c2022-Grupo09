@@ -17,50 +17,66 @@ public class CharacterAttackController : MonoBehaviour
 
     #region properties
     private float _elapsedAttackTime;
+    private float _defaultDirection;
     #endregion
 
     #region methods
+    public void SetDefaultDirection(float dir)
+    {
+        _defaultDirection = dir;
+    }
     // Recibe la dirección del ataque y lo activa en esa dirección
     public void Bastonazo(float horizontalAttackDirection, float verticalAttackDirection)
     {
         _attackTime = 0f;
         _bastonTransform.rotation = Quaternion.identity;
-        // a (-22'5º, 22'5º) Derecha
-        if ((horizontalAttackDirection >= ((Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) && 
-            (verticalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) && 
-            (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(Vector3.zero); _baston.SetActive(true); }
-        // b (22'5º, 3*22'5º) Arriba derecha
-        else if ((horizontalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 45)); _baston.SetActive(true); }
-        // c (3*22'5º, 5*22'5º) Arriba
-        else if ((horizontalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 90)); _baston.SetActive(true); }
-        // d (5*22'5º, 7*22'5º) Arriba izquierda
-        else if ((horizontalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 135)); _baston.SetActive(true); }
-        // e (7*22'5º, -7*22'5º) Izquierda
-        else if ((horizontalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 180)); _baston.SetActive(true); }
-        // f (-7*22'5º, -5*22'5º) Abajo izquierda
-        else if ((horizontalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 225)); _baston.SetActive(true); }
-        // g (-5*22'5º, -3*22'5º) Abajo
-        else if ((horizontalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 270)); _baston.SetActive(true); }
-        // h (-3*22'5º, -22'5º) Abajo derecha
-        else if ((horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2) &&
-                (horizontalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2)))/2) &&
-                (verticalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))/2)) { _bastonTransform.Rotate(new Vector3(0, 0, 315)); _baston.SetActive(true); }
+        // Si se ha escogido una dirección para el ataque
+        if(horizontalAttackDirection != 0 && verticalAttackDirection != 0)
+        {
+            // a (-22'5º, 22'5º) Derecha
+            if ((horizontalAttackDirection >= ((Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2)) &&
+                (verticalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(Vector3.zero); _baston.SetActive(true); }
+            // b (22'5º, 3*22'5º) Arriba derecha
+            else if ((horizontalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 45)); _baston.SetActive(true); }
+            // c (3*22'5º, 5*22'5º) Arriba
+            else if ((horizontalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 90)); _baston.SetActive(true); }
+            // d (5*22'5º, 7*22'5º) Arriba izquierda
+            else if ((horizontalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 135)); _baston.SetActive(true); }
+            // e (7*22'5º, -7*22'5º) Izquierda
+            else if ((horizontalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 180)); _baston.SetActive(true); }
+            // f (-7*22'5º, -5*22'5º) Abajo izquierda
+            else if ((horizontalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 225)); _baston.SetActive(true); }
+            // g (-5*22'5º, -3*22'5º) Abajo
+            else if ((horizontalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 270)); _baston.SetActive(true); }
+            // h (-3*22'5º, -22'5º) Abajo derecha
+            else if ((horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2) &&
+                    (horizontalAttackDirection < (Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2) &&
+                    (verticalAttackDirection < -(Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2)) { _bastonTransform.Rotate(new Vector3(0, 0, 315)); _baston.SetActive(true); }
+        }
+        // Si no se escoge dirección del ataque, el ataque es en la dirección del jugador
+        else
+        {
+            if(_defaultDirection > 0) { _bastonTransform.Rotate(Vector3.zero); _baston.SetActive(true); }
+            else { _bastonTransform.Rotate(new Vector3(0, 0, 180)); _baston.SetActive(true); }
+        }
+        Debug.Log(_bastonTransform.rotation);
     }
     #endregion
 
