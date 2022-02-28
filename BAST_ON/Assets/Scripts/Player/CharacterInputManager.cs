@@ -43,9 +43,9 @@ public class CharacterInputManager : MonoBehaviour
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
 
-        _horizontalAttackInput = Input.GetAxis(""); // Eje horizontal joystick derecho
-        _verticalAttackInput = Input.GetAxis("");   // Eje vertical joystick derecho
-        NormalizeAttackInput(ref _horizontalAttackInput, ref _verticalAttackInput);
+        //_horizontalAttackInput = Input.GetAxis(""); // Eje horizontal joystick derecho
+        //_verticalAttackInput = Input.GetAxis("");   // Eje vertical joystick derecho
+        //NormalizeAttackInput(ref _horizontalAttackInput, ref _verticalAttackInput);
 
         if(_horizontalInput != 0)
         {
