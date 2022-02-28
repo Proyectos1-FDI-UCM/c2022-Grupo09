@@ -91,8 +91,11 @@ public class CharacterAttackController : MonoBehaviour
     void Update()
     {
         // Si el ataque ha empezado empieza a contar
-        if (_baston.activeSelf) _elapsedAttackTime += Time.deltaTime;
-        // Cuando el ataque se haya completado desactiva el bastón
-        if (_elapsedAttackTime > _attackTime) _baston.SetActive(false);
+        if (_baston.activeSelf) 
+        { 
+            _elapsedAttackTime += Time.deltaTime;
+            // Cuando el ataque se haya completado desactiva el bastón
+            if (_elapsedAttackTime > _attackTime) _baston.SetActive(false);
+        }
     }
 }
