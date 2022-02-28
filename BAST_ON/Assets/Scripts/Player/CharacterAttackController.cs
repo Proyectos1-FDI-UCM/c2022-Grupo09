@@ -21,7 +21,7 @@ public class CharacterAttackController : MonoBehaviour
 
     #region methods
     // Recibe la dirección del ataque y lo activa en esa dirección
-    public void Bastonazo(int horizontalAttackDirection, int verticalAttackDirection)
+    public void Bastonazo(float horizontalAttackDirection, float verticalAttackDirection)
     {
         _attackTime = 0f;
         _bastonTransform.rotation = Quaternion.identity;
@@ -34,7 +34,7 @@ public class CharacterAttackController : MonoBehaviour
                 (horizontalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))) &&
                 (verticalAttackDirection >= (Mathf.Sqrt(2 - Mathf.Sqrt(2)))) &&
                 (verticalAttackDirection < -(Mathf.Sqrt(2 + Mathf.Sqrt(2))))) { _bastonTransform.Rotate(new Vector3(0, 0, 45)); _baston.SetActive(true); }
-        // c (3*22'5º, 5*22'5º) Arrib
+        // c (3*22'5º, 5*22'5º) Arriba
         else if ((horizontalAttackDirection < (Mathf.Sqrt(2 - Mathf.Sqrt(2)))) &&
                 (horizontalAttackDirection >= -(Mathf.Sqrt(2 - Mathf.Sqrt(2)))) &&
                 (verticalAttackDirection >= -(Mathf.Sqrt(2 + Mathf.Sqrt(2))))) { _bastonTransform.Rotate(new Vector3(0, 0, 90)); _baston.SetActive(true); }
