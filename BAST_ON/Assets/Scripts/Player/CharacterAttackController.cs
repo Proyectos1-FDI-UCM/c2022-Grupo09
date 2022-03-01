@@ -21,7 +21,15 @@ public class CharacterAttackController : MonoBehaviour
     private float _elapsedAttackTime;
     private float _elapsedCooldownTime;
     private float _defaultDirection;
+    ///<summary>
+    ///Es cos(22'5º) y sen(3*22'5º).
+    ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
+    ///</summary>
     private float _cotaSuma = ((Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2);
+    ///<summary>
+    ///Es sen(22'5º) y cos(3*22'5º).
+    ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
+    ///</summary>
     private float _cotaResta = ((Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2);
     #endregion
 
@@ -91,6 +99,8 @@ public class CharacterAttackController : MonoBehaviour
                 // else Rotación original
             }
             _baston.SetActive(true);
+            Debug.Log(horizontalAttackDirection);
+            Debug.Log(verticalAttackDirection);
         }
     }
     #endregion

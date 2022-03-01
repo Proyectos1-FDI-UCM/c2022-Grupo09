@@ -21,12 +21,12 @@ public class CharacterInputManager : MonoBehaviour
     private void NormalizeAttackInput(ref float horizontal, ref float vertical)
     {
         Vector2 attackDirectionInput;
-
         attackDirectionInput.x = horizontal;
         attackDirectionInput.y = vertical;
 
-        horizontal = attackDirectionInput.normalized.x;
-        vertical = attackDirectionInput.normalized.y;
+        attackDirectionInput.Normalize();
+        horizontal = attackDirectionInput.x;
+        vertical = attackDirectionInput.y;
     }
     #endregion
 

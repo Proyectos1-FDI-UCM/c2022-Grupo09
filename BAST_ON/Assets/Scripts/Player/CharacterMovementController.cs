@@ -60,7 +60,7 @@ public class CharacterMovementController : MonoBehaviour
         _nJumps = 0;
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
-        _myAttackController = _myCamera.GetComponent<CharacterAttackController>();
+        _myAttackController = GetComponent<CharacterAttackController>();
         _myRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
