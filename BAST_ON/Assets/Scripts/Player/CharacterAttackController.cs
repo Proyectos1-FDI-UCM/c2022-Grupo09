@@ -31,6 +31,7 @@ public class CharacterAttackController : MonoBehaviour
     ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
     ///</summary>
     private float _cotaResta = ((Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2);
+    private bool _onFloor = false;
     #endregion
 
     #region methods
@@ -38,12 +39,25 @@ public class CharacterAttackController : MonoBehaviour
     {
         _defaultDirection = dir;
     }
+    public void SetFloorDetector(bool a)
+    {
+        _onFloor = a;
+    }
+    private void RedirectFloorAttack(ref float horizontalAttackDirection, ref float verticalAttackDirection)
+    {
+        if (verticalAttackDirection < 0)
+        {
+            verticalAttackDirection = 0;
+            horizontalAttackDirection /= Mathf.Abs(horizontalAttackDirection);
+        }
+    }
     // Recibe la dirección del ataque y lo activa en esa dirección
     public void Bastonazo(float horizontalAttackDirection, float verticalAttackDirection)
     {
         // Solo entra en el método si no hay ya un ataque
         if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown)
         {
+            if (_onFloor) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
             // Si se ha escogido una dirección para el ataque
