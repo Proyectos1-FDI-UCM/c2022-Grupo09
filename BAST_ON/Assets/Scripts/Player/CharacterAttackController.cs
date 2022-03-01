@@ -42,12 +42,10 @@ public class CharacterAttackController : MonoBehaviour
             if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {
                 // a (-22'5º, 22'5º) Derecha
-                if ((horizontalAttackDirection >= _cotaSuma) &&
-                    (verticalAttackDirection < _cotaResta) &&
-                    (verticalAttackDirection >= -_cotaResta))
-                { _bastonTransform.Rotate(Vector3.zero); }
+                // Es la rotación 0, no hace falta cambiarla
+
                 // b (22'5º, 3*22'5º) Arriba derecha
-                else if ((horizontalAttackDirection < _cotaSuma) &&
+                if ((horizontalAttackDirection < _cotaSuma) &&
                         (horizontalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection < _cotaSuma))
@@ -93,8 +91,6 @@ public class CharacterAttackController : MonoBehaviour
                 // else Rotación original
             }
             _baston.SetActive(true);
-            Debug.Log(horizontalAttackDirection);
-            Debug.Log(verticalAttackDirection);
         }
     }
     #endregion
