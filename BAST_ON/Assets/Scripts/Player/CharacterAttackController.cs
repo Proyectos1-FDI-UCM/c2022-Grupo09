@@ -39,7 +39,7 @@ public class CharacterAttackController : MonoBehaviour
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
             // Si se ha escogido una dirección para el ataque
-            if (horizontalAttackDirection != 0 && verticalAttackDirection != 0)
+            if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {
                 // a (-22'5º, 22'5º) Derecha
                 if ((horizontalAttackDirection >= _cotaSuma) &&
@@ -93,7 +93,8 @@ public class CharacterAttackController : MonoBehaviour
                 // else Rotación original
             }
             _baston.SetActive(true);
-            Debug.Log(_bastonTransform.rotation);
+            Debug.Log(horizontalAttackDirection);
+            Debug.Log(verticalAttackDirection);
         }
     }
     #endregion
