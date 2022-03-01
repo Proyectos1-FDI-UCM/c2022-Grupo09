@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 8393193518399024480}
   - component: {fileID: 7218060007591462780}
   - component: {fileID: 4707773782861010996}
+  - component: {fileID: 3388199697058540207}
   m_Layer: 0
   m_Name: Baston Attack
   m_TagString: Untagged
@@ -433,3 +434,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3388199697058540207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705272921097061316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408b89fba667d014dbc586207b47f9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
