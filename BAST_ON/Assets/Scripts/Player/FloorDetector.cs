@@ -12,11 +12,17 @@ public class FloorDetector : MonoBehaviour
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _AttackController.SetFloorDetector(true);
+        if(collision.gameObject.tag == "Floor")
+        {
+            _AttackController.SetFloorDetector(true);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _AttackController.SetFloorDetector(false);
+        if(collision.gameObject.tag == "Floor")
+        {
+            _AttackController.SetFloorDetector(false);
+        }
     }
     #endregion
 
