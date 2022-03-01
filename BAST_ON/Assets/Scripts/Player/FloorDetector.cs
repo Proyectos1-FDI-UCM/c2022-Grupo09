@@ -7,26 +7,21 @@ public class FloorDetector : MonoBehaviour
     #region references
     [SerializeField]
     private GameObject _player;
-    [SerializeField]
-    private GameObject _baston;
-    private CharacterAttackController _attackController;
-    private BastonImpulseController _impulseController;
+    private CharacterAttackController _AttackController;
     #endregion
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Floor")
         {
-            _attackController.SetFloorDetector(true);
-            _impulseController.SetFloorDetector(true);
+            _AttackController.SetFloorDetector(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Floor")
         {
-            _attackController.SetFloorDetector(false);
-            _impulseController.SetFloorDetector(false);
+            _AttackController.SetFloorDetector(false);
         }
     }
     #endregion
@@ -34,8 +29,7 @@ public class FloorDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _attackController = _player.GetComponent<CharacterAttackController>();
-        _impulseController = _baston.GetComponent<BastonImpulseController>();
+        _AttackController = _player.GetComponent<CharacterAttackController>();
     }
 
     // Update is called once per frame
