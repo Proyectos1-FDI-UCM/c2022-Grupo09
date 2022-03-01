@@ -51,14 +51,6 @@ public class CharacterMovementController : MonoBehaviour
         }
     }
 
-    ///<summary>
-    ///Tentativa de función para añadir la fuerza al personaje. Si al final vamos a hacerlo por CharacterController, habrá que cambiar
-    ///</summary>
-    public void addRepelForce(Vector2 forceDirection){
-        _myRigidbody2D.AddForce(forceDirection , ForceMode2D.Impulse);
-        
-    }
-
     
     #endregion
 
