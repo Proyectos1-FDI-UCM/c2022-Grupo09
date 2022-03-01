@@ -50,12 +50,12 @@ public class CharacterAttackController : MonoBehaviour
                 else if ((horizontalAttackDirection < _cotaSuma) &&
                         (horizontalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection >= _cotaResta) &&
-                        (verticalAttackDirection < -_cotaSuma))
+                        (verticalAttackDirection < _cotaSuma))
                 { _bastonTransform.Rotate(new Vector3(0, 0, 45)); }
                 // c (3*22'5º, 5*22'5º) Arriba
                 else if ((horizontalAttackDirection < _cotaResta) &&
                         (horizontalAttackDirection >= -_cotaResta) &&
-                        (verticalAttackDirection >= -_cotaSuma))
+                        (verticalAttackDirection >= _cotaSuma))
                 { _bastonTransform.Rotate(new Vector3(0, 0, 90)); }
                 // d (5*22'5º, 7*22'5º) Arriba izquierda
                 else if ((horizontalAttackDirection < -_cotaResta) &&
