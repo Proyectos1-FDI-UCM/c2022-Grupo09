@@ -99,8 +99,6 @@ public class CharacterAttackController : MonoBehaviour
                 // else Rotación original
             }
             _baston.SetActive(true);
-            Debug.Log(horizontalAttackDirection);
-            Debug.Log(verticalAttackDirection);
         }
     }
     #endregion
