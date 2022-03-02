@@ -45,7 +45,7 @@ public class Character_HealthManager : MonoBehaviour
         }
         for(int i = _currentHealth; i < _maxHealth; i++)
         {
-            _fruitArray[i].sprite = fullFruit;
+            _fruitArray[i].sprite = emptyFruit;
         }
     }
 
@@ -91,6 +91,7 @@ public class Character_HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _maxHealth = _fruitArray.Length;
         _currentHealth = _maxHealth;
         updateLifeBar();
     }
