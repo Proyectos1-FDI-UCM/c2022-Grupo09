@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6865706433320300249}
   - component: {fileID: 6621447605377065058}
+  - component: {fileID: 1054122495030894754}
+  - component: {fileID: 1584309136788183797}
+  - component: {fileID: 5466383375658251101}
   m_Layer: 0
   m_Name: Volador
   m_TagString: Untagged
@@ -82,6 +85,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1054122495030894754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219343484582173311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab054d5081d97049bf4791d3f59584d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myDisp: {fileID: 3448941494746741969, guid: 00ecd898d4e65934c92bd18496430fbf, type: 3}
+  _myPlayer: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+  _myEnemy: {fileID: 219343484582173311}
+--- !u!114 &1584309136788183797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219343484582173311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8654a0ef99502ad428af055674d287d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  tiempo: 2
+--- !u!114 &5466383375658251101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219343484582173311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00778a874e28124295c95eec84c4afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4105865500195146518
 GameObject:
   m_ObjectHideFlags: 0
