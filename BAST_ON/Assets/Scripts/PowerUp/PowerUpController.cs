@@ -6,27 +6,24 @@ public class PowerUpController : MonoBehaviour
 {
     #region references
 
-   // Transform _myTransform;
+    Character_HealthManager _myCharacter_HealthManager;
+    private int _extraHealth = 1;
 
-    #endregion 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //_myTransform = GetComponent<Transform>();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    #endregion
+    #region methods
+    //Método para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            _myCharacter_HealthManager.ChangeHealthValue(_extraHealth);
             Destroy(gameObject);
         }
+    }
+    #endregion
+    void Start()
+    {
+        _myCharacter_HealthManager = GetComponent<Character_HealthManager>();
     }
 }
