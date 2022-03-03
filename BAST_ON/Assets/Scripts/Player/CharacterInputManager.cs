@@ -7,10 +7,14 @@ public class CharacterInputManager : MonoBehaviour
     #region references
     private CharacterMovementController _myMovementController;
     private CharacterAttackController _myAttackController;
+    [SerializeField]
+    private GameObject _myCamera;
+    private CameraController _myCameraController;
     #endregion
 
     #region properties
     private float _horizontalInput;
+    private float _verticalInput;
     private float _jumpInput;
     private float _attackInput;
     private float _horizontalAttackInput;
@@ -35,18 +39,24 @@ public class CharacterInputManager : MonoBehaviour
     {
         _myMovementController = GetComponent<CharacterMovementController>();
         _myAttackController = GetComponent<CharacterAttackController>();
+        _myCameraController = _myCamera.GetComponent<CameraController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         _horizontalInput = Input.GetAxis("Horizontal");
+        _verticalInput = Input.GetAxis("Vertical");
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
 
         if(_horizontalInput != 0)
         {
             _myMovementController.SetMovementDirection(_horizontalInput);
+        }
+        else if (_verticalInput != 0)
+        {
+            _myCameraController.SetVerticalOffset(_verticalInput);
         }
         if (_jumpInput != 0)
         {
