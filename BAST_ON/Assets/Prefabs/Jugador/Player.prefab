@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3396387542106677544}
   - component: {fileID: 2444279655192050555}
   - component: {fileID: -4938032887589543599}
+  - component: {fileID: 4744984087247694048}
   - component: {fileID: 110432957604866229}
   - component: {fileID: 6468474152613596022}
   - component: {fileID: 2021335209507521157}
-  - component: {fileID: 4744984087247694048}
   - component: {fileID: 6919599610925238725}
   m_Layer: 0
   m_Name: Player
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676595374184265813}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -128,6 +128,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!111 &4744984087247694048
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676595374184265813}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e6d48c2b8cc8a37448880310fc4551ee, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e6d48c2b8cc8a37448880310fc4551ee, type: 2}
+  - {fileID: 7400000, guid: d74041ab14ef8ba4782d072f60fe91cf, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &110432957604866229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,23 +189,6 @@ MonoBehaviour:
   _baston: {fileID: 8705272921097061316}
   _attackTime: 0.3
   _attackCooldown: 0.3
---- !u!111 &4744984087247694048
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676595374184265813}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: e6d48c2b8cc8a37448880310fc4551ee, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: e6d48c2b8cc8a37448880310fc4551ee, type: 2}
-  - {fileID: 7400000, guid: d74041ab14ef8ba4782d072f60fe91cf, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &6919599610925238725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,8 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2227a6e55e98b41b7d345afae4bcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myPlayer: {fileID: 1676595374184265813}
   _maxHealth: 0
   _currentHealth: 0
+  _hitDamage: 0
   _fruitArray:
   - {fileID: 0}
   fullFruit: {fileID: 21300000, guid: 4f1e9262cec73694f8e4e99daa45b795, type: 3}
