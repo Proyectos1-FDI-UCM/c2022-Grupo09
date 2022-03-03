@@ -15,6 +15,7 @@ public class CharacterInputManager : MonoBehaviour
     #region properties
     private float _horizontalInput;
     private float _verticalInput;
+    private float _previusVerticalInput = 0;
     private float _jumpInput;
     private float _attackInput;
     private float _horizontalAttackInput;
@@ -58,6 +59,10 @@ public class CharacterInputManager : MonoBehaviour
         {
             _myCameraController.SetVerticalOffset(_verticalInput);
         }
+        else if (_verticalInput != _previusVerticalInput)
+        {
+            _myCameraController.ResetVerticalOffset();
+        }
         if (_jumpInput != 0)
         {
             _myMovementController.JumpRequest();
@@ -71,5 +76,7 @@ public class CharacterInputManager : MonoBehaviour
             _myAttackController.Bastonazo(_horizontalAttackInput, _verticalAttackInput);
         }
 
+
+        _previusVerticalInput = _verticalInput;
     }
 }

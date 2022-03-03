@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     ///<summary>
     ///Tiempo que tiene el jugador que mantener arriba o abajo para mirar ahí
     ///</summary>
-    [SerializeField] private float _lookUpElapsedTime = 0;
+    private float _lookUpElapsedTime = 0;
     ///<summary>
     ///Referencia al transform del Player
     ///</summary>
@@ -51,10 +51,10 @@ public class CameraController : MonoBehaviour
     }
     public void SetVerticalOffset(float vDirection)
     {
-        _verticalOffset *= (vDirection / Mathf.Abs(vDirection));
+        _verticalOffset = Mathf.Abs(_verticalOffset) * (vDirection / Mathf.Abs(vDirection));
         if (vDirection != 0 && _lookUpElapsedTime < _lookUpTime) _lookUpElapsedTime += Time.deltaTime;
     }
-    private void ResetVerticalOffset()
+    public void ResetVerticalOffset()
     {
         _lookUpElapsedTime = 0;
         _offset.y = 0;
