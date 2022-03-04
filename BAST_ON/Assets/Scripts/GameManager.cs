@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+
+
+
     #region references
 
-    Character_HealthManager _myCharacterHealthManager;
+    private Character_HealthManager _myCharacterHealthManager;
+
+    private UI_Manager _UIManagerReference;
+
+    static private GameManager _instance;
+
+    static public GameManager Instance => _instance;
+    
+    [SerializeField] private GameObject _playerReference; 
+    [SerializeField] private GameObject _UIReference;
     #endregion
 
     #region methods
@@ -15,11 +28,27 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    public void OnHealthValueChange(int newHealthValue)
+    {
+        _UIManagerReference.updateLifeBar(newHealthValue);
+    }
+
+    public void OnPlayerDeath()
+    {
+        //@TODO implementar 
+    }
     #endregion
+    
+    private void Awake() {
+        _instance = this;
+        _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
+        _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
-        _myCharacterHealthManager = GetComponent<Character_HealthManager>();
     }
 
     // Update is called once per frame

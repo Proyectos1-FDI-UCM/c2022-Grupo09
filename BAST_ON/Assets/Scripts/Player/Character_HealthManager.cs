@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Character_HealthManager : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameObject _myPlayer;
+    
+    
 
   
     ///<summary>
@@ -20,35 +20,10 @@ public class Character_HealthManager : MonoBehaviour
     ///</summary>
     [SerializeField] private int _currentHealth;
 
-    [SerializeField] private int _hitDamage;
-
-    ///<summary>
-    ///Array que determina la vida en el UI
-    ///</summary>
+    
+    
 
     
-    [SerializeField] private Image[] _fruitArray;
-    
-    ///<summary>
-    ///Referencia al sprite de la vida llena
-    ///</summary>
-    [SerializeField] private Sprite fullFruit;
-    ///<summary>
-    ///Referencia al sprite de la vida vacía
-    ///</summary>
-    [SerializeField] private Sprite emptyFruit;
-
-    private void updateLifeBar(){
-        for(int i = 0; i < _currentHealth; i++)
-        {
-            _fruitArray[i].sprite = fullFruit;
-        }
-        for(int i = _currentHealth; i < _maxHealth; i++)
-        {
-            _fruitArray[i].sprite = emptyFruit;
-        }
-    }
-
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -
     ///en el valor que sea para meter daño, que normalmente usamos Damage(intdamage) y ya está
@@ -65,9 +40,8 @@ public class Character_HealthManager : MonoBehaviour
         {
            //Hay que mantener el tope de vida
            _currentHealth = _maxHealth;
-        }
-       
-       updateLifeBar();
+       }
+       GameManager.Instance.OnHealthValueChange(_currentHealth);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -75,32 +49,38 @@ public class Character_HealthManager : MonoBehaviour
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
         if (enemy != null)
         {
-            Damage();
+            ChangeHealthValue(-1);
         }
-    }
-
-    public void Damage()
-    {
-        _currentHealth -= _hitDamage;
     }
 
     public void Die()
     {
-        Destroy(_myPlayer);
+        Destroy(this.gameObject);
+        GameManager.Instance.OnPlayerDeath();
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _maxHealth = _fruitArray.Length;
         _currentHealth = _maxHealth;
-        updateLifeBar();
+        GameManager.Instance.OnHealthValueChange(_currentHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        //Descomentar para usarlo de debug
+        /*
+        if(Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            ChangeHealthValue(1);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            ChangeHealthValue(-1);
+        } 
+        */               
     }
 }
