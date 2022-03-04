@@ -75,9 +75,10 @@ public class CharacterMovementController : MonoBehaviour
         // Rotación ajustada para dirección de la animación
         _myTransform.rotation = Quaternion.identity;
         if (_movementDirection.x < 0) _myTransform.Rotate(Vector3.up, 180f);
-        // Movimiento del personaje (Siempre positivo porque se ha rotado con la animación)
-        _movementDirection.x = Mathf.Abs(_movementDirection.x);
-        _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
+        // Movimiento del personaje
+        _movementDirection.x *= _speedMovement;
+        _movementDirection.y = _myRigidbody.velocity.y;
+        _myRigidbody.velocity = _movementDirection;
         _movementDirection = Vector3.zero;
 
     }
