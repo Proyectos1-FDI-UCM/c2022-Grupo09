@@ -9,15 +9,22 @@ public class CharacterMovementController : MonoBehaviour
     private float _speedMovement = 1f;
 
     [SerializeField]
-    private float _jumpForce = 5f;
+    private float _jumpSpeed = 1f;
+    // Gravity value applied to player
     [SerializeField]
-    private int _nJumps;
+    private float _gravity = 1.0f;
+    // Maximum falling speed
     [SerializeField]
-    private int _limitJumps = 1;
+    private float _fallSpeed = 10.0f;
     #endregion
 
     #region properties
     private Vector3 _movementDirection = Vector3.zero;
+    private bool _onFloor = false;
+    private float _jumpStart;
+    private float _elapsedJumpTime;
+    // Stores current vertical speed value
+    private float _verticalSpeed = 0;
     #endregion
 
     #region references
@@ -26,16 +33,12 @@ public class CharacterMovementController : MonoBehaviour
     private GameObject _myCamera;
     private CameraController _myCameraController;
     private CharacterAttackController _myAttackController;
-    private Rigidbody2D _myRigidbody2D;
     #endregion
 
     #region methods
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void SetFloorDetector(bool a)
     {
-        if (collision.collider.tag == "Floor")
-        {
-            _nJumps = 0;
-        }
+        _onFloor = a;
     }
     public void SetMovementDirection(float direction)
     {
@@ -44,10 +47,10 @@ public class CharacterMovementController : MonoBehaviour
     
     public void JumpRequest()
     {
-        if (_nJumps < _limitJumps)
+        if (_onFloor)
         {
-            _myRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
-            _nJumps++;
+            _verticalSpeed = _jumpSpeed;
+            _jumpStart = _elapsedJumpTime;
         }
     }
 
@@ -55,7 +58,7 @@ public class CharacterMovementController : MonoBehaviour
     ///Tentativa de función para añadir la fuerza al personaje. Si al final vamos a hacerlo por CharacterController, habrá que cambiar
     ///</summary>
     public void addRepelForce(Vector2 forceDirection){
-        _myRigidbody2D.AddForce(forceDirection , ForceMode2D.Impulse);
+        //_myRigidbody2D.AddForce(forceDirection , ForceMode2D.Impulse);
         
     }
 
@@ -65,16 +68,23 @@ public class CharacterMovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _nJumps = 0;
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
         _myAttackController = GetComponent<CharacterAttackController>();
-        _myRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Jump
+        if (!_onFloor && _verticalSpeed < _fallSpeed)
+        {
+            _verticalSpeed += -_gravity * (_elapsedJumpTime - _jumpStart);
+        }
+        _elapsedJumpTime += Time.deltaTime;
+
+        _movementDirection.y = _verticalSpeed;
+
         _myTransform.rotation = Quaternion.identity;
         if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
         if (_movementDirection.x != 0)
@@ -85,5 +95,6 @@ public class CharacterMovementController : MonoBehaviour
         _movementDirection.x = Mathf.Abs(_movementDirection.x);
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
         _movementDirection = Vector3.zero;
+
     }
 }

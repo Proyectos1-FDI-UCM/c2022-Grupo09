@@ -350,6 +350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4938032887589543599, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 110432957604866229, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: animator
       value: 
@@ -361,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: _gravity
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: _myCamera

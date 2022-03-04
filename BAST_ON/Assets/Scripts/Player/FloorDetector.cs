@@ -6,10 +6,9 @@ public class FloorDetector : MonoBehaviour
 {
     #region references
     [SerializeField]
-    private GameObject _player;
-    [SerializeField]
     private GameObject _baston;
     private CharacterAttackController _attackController;
+    private CharacterMovementController _movementController;
     private BastonImpulseController _impulseController;
     #endregion
     #region methods
@@ -18,6 +17,7 @@ public class FloorDetector : MonoBehaviour
         if(collision.gameObject.tag == "Floor")
         {
             _attackController.SetFloorDetector(true);
+            _movementController.SetFloorDetector(true);
             _impulseController.SetFloorDetector(true);
         }
     }
@@ -26,6 +26,7 @@ public class FloorDetector : MonoBehaviour
         if(collision.gameObject.tag == "Floor")
         {
             _attackController.SetFloorDetector(false);
+            _movementController.SetFloorDetector(false);
             _impulseController.SetFloorDetector(false);
         }
     }
@@ -34,7 +35,8 @@ public class FloorDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _attackController = _player.GetComponent<CharacterAttackController>();
+        _attackController = GetComponent<CharacterAttackController>();
+        _movementController = GetComponent<CharacterMovementController>();
         _impulseController = _baston.GetComponent<BastonImpulseController>();
     }
 

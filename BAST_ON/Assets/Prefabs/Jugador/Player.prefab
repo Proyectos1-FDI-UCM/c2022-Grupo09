@@ -182,9 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMovement: 7
-  _jumpForce: 5
-  _nJumps: 0
-  _limitJumps: 1
+  _jumpSpeed: 1
+  _gravity: 0.01
+  _fallSpeed: 10
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f069ab97c8d732243a49e441fdebf4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1676595374184265813}
   _baston: {fileID: 8705272921097061316}
 --- !u!95 &3416954483749118995
 Animator:
