@@ -8,7 +8,9 @@ public class DisparadorController : MonoBehaviour
     [SerializeField]
     private GameObject _myDisp, _myPlayer, _myEnemy;
     private GameObject _myInstance;
-    private Vector2 pos;
+    private Vector3 pos;
+    [SerializeField]
+    private float frecuencia=6;
     private float timer;
     #endregion
 
@@ -20,12 +22,14 @@ public class DisparadorController : MonoBehaviour
 
     void Update()
     {
-        Vector3 relativePos = _myPlayer.transform.position - transform.position;
+        pos = _myPlayer.transform.position - _myEnemy.transform.position;
         timer += Time.deltaTime;
-            if (timer >= 6)
+            if (timer >= frecuencia)
             {
-                _myInstance = Instantiate(_myDisp, transform.position, Quaternion.LookRotation(relativePos, Vector3.up));
-                timer=0;
+            _myInstance = Instantiate(_myDisp, transform.position, Quaternion.identity);
+            _myInstance.transform.Rotate(pos);
+            timer = 0;
             }
+            
     }
 }
