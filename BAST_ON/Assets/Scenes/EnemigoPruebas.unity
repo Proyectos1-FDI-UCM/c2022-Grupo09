@@ -391,6 +391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2147194444}
   _offset: {x: 1, y: 0, z: -10}
+  _verticalOffset: 3
+  _lookUpTime: 2
   _lerpSpeed: 0.5
 --- !u!1001 &1820776681
 PrefabInstance:
@@ -399,6 +401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5844576796703386413, guid: 00ecd898d4e65934c92bd18496430fbf, type: 3}
+      propertyPath: _myPlayer
+      value: 
+      objectReference: {fileID: 2147194444}
     - target: {fileID: 1718531671358780698, guid: 00ecd898d4e65934c92bd18496430fbf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -535,6 +541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00778a874e28124295c95eec84c4afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentHealth: 1
+  _maxHealth: 1
+  _myEnemy: {fileID: 0}
 --- !u!114 &2147194452
 MonoBehaviour:
   m_ObjectHideFlags: 0
