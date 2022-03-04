@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     ///<summary>
     ///Valor que determina a qué distancia se queda la cámara del punto final
     ///</summary>
-    [SerializeField] private float _lerpSpeed = 0.5f;
+    [SerializeField] private float _lerpSpeed = 0.05f;
 
 
     ///<summary>
