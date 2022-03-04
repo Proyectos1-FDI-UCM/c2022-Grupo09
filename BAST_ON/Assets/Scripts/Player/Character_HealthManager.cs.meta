@@ -3,7 +3,10 @@ guid: 7c2227a6e55e98b41b7d345afae4bcc4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _myPlayer: {instanceID: 0}
+  - fullFruit: {fileID: 21300000, guid: 4f1e9262cec73694f8e4e99daa45b795, type: 3}
+  - emptyFruit: {fileID: 21300000, guid: fa4cb11faf51f024fa2d8eb14a8349c7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

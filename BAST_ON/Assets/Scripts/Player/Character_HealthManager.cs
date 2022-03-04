@@ -9,7 +9,7 @@ public class Character_HealthManager : MonoBehaviour
     [SerializeField]
     private GameObject _myPlayer;
 
-    private EnemyLifeComponent _myEnemyLifeComponent;
+  
     ///<summary>
     ///Vida maxima que puede tener el jugador
     ///</summary>
@@ -55,16 +55,18 @@ public class Character_HealthManager : MonoBehaviour
     ///</summary>
     public void ChangeHealthValue(int value)
     {
-       _currentHealth += value;
-       if(_currentHealth <= 0)
-       {
+        _currentHealth += value;
+
+        if (_currentHealth <= 0)
+        {
             Die();
-       }
-       if(_currentHealth > _maxHealth)
-       {
+        }
+        if(_currentHealth > _maxHealth)
+        {
            //Hay que mantener el tope de vida
            _currentHealth = _maxHealth;
-       }
+        }
+       
        updateLifeBar();
     }
     private void OnCollisionEnter(Collision collision)
