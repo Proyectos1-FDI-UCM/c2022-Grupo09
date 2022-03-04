@@ -56,7 +56,6 @@ public class CharacterMovementController : MonoBehaviour
     ///</summary>
     public void addRepelForce(Vector2 forceDirection){
         _myRigidbody2D.AddForce(forceDirection , ForceMode2D.Impulse);
-        
     }
 
     
