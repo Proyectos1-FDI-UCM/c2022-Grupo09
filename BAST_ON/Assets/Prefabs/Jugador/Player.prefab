@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8428227548490663363}
   - component: {fileID: 3396387542106677544}
-  - component: {fileID: 2444279655192050555}
   - component: {fileID: -4938032887589543599}
+  - component: {fileID: 2444279655192050555}
   - component: {fileID: 6120585351839443029}
   - component: {fileID: 110432957604866229}
   - component: {fileID: 6468474152613596022}
@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6919599610925238725}
   - component: {fileID: 1865850140569161645}
   - component: {fileID: 3416954483749118995}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,22 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2444279655192050555
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676595374184265813}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.8, y: 1}
-  m_Direction: 0
 --- !u!50 &-4938032887589543599
 Rigidbody2D:
   serializedVersion: 4
@@ -129,6 +113,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!70 &2444279655192050555
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676595374184265813}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.8, y: 1}
+  m_Direction: 0
 --- !u!61 &6120585351839443029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   _jumpSpeed: 0.75
   _gravity: 0.075
   _fallSpeed: 10
+  _baston: {fileID: 8705272921097061316}
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
@@ -258,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4940902694816062429}
   - component: {fileID: 9221971695234640135}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,8 +274,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4743018970056696156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8393193518399024480}
   m_RootOrder: 0
@@ -342,7 +343,7 @@ GameObject:
   - component: {fileID: 7218060007591462780}
   - component: {fileID: 4707773782861010996}
   - component: {fileID: 3388199697058540207}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Baston Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +378,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1, y: 0}
+  m_Offset: {x: 0.5, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -388,7 +389,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &4707773782861010996
 SpriteRenderer:
