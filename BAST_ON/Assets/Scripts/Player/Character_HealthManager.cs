@@ -70,6 +70,17 @@ public class Character_HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        //Descomentar para usarlo de debug
+        /*
+        if(Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            ChangeHealthValue(1);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            ChangeHealthValue(-1);
+        } 
+        */               
     }
 }

@@ -42,12 +42,13 @@ public class GameManager : MonoBehaviour
     
     private void Awake() {
         _instance = this;
+        _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
+        _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
     }
 
     // Update is called once per frame
