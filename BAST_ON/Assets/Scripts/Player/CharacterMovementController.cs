@@ -21,7 +21,6 @@ public class CharacterMovementController : MonoBehaviour
     #region properties
     private Vector3 _movementDirection = Vector3.zero;
     private bool _onFloor = false;
-    private float _jumpStart;
     private float _elapsedJumpTime;
     // Stores current vertical speed value
     private float _verticalSpeed = 0;
@@ -39,6 +38,11 @@ public class CharacterMovementController : MonoBehaviour
     public void SetFloorDetector(bool a)
     {
         _onFloor = a;
+        if (a) 
+        {
+            _elapsedJumpTime = 0;
+            _verticalSpeed = 0; 
+        }
     }
     public void SetMovementDirection(float direction)
     {
@@ -50,7 +54,6 @@ public class CharacterMovementController : MonoBehaviour
         if (_onFloor)
         {
             _verticalSpeed = _jumpSpeed;
-            _jumpStart = _elapsedJumpTime;
         }
     }
 
@@ -77,21 +80,23 @@ public class CharacterMovementController : MonoBehaviour
     void Update()
     {
         // Jump
-        if (!_onFloor && _verticalSpeed < _fallSpeed)
+        if (!_onFloor)
         {
-            _verticalSpeed += -_gravity * (_elapsedJumpTime - _jumpStart);
+            _verticalSpeed += -_gravity * _elapsedJumpTime;
+            _elapsedJumpTime += Time.deltaTime;
         }
-        _elapsedJumpTime += Time.deltaTime;
-
         _movementDirection.y = _verticalSpeed;
 
+        // Rotación ajustada para dirección de la animación
         _myTransform.rotation = Quaternion.identity;
         if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
+        // Offset cámara y dirección predeterminada del ataque
         if (_movementDirection.x != 0)
         {
             _myCameraController.SetOffset(_movementDirection.normalized);
             _myAttackController.SetDefaultDirection(_movementDirection.x);
         }
+        // Movimiento del personaje (Siempre positivo porque se ha rotado con la animación)
         _movementDirection.x = Mathf.Abs(_movementDirection.x);
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
         _movementDirection = Vector3.zero;

@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!61 &6120585351839443029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMovement: 7
-  _jumpSpeed: 1
-  _gravity: 0.01
+  _jumpSpeed: 0.75
+  _gravity: 0.075
   _fallSpeed: 10
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
