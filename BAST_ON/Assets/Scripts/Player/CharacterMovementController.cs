@@ -77,13 +77,13 @@ public class CharacterMovementController : MonoBehaviour
     {
         _myTransform.rotation = Quaternion.identity;
         if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
-        _movementDirection.x = Mathf.Abs(_movementDirection.x);
-        _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
         if (_movementDirection.x != 0)
         {
             _myCameraController.SetOffset(_movementDirection.normalized);
             _myAttackController.SetDefaultDirection(_movementDirection.x);
         }
+        _movementDirection.x = Mathf.Abs(_movementDirection.x);
+        _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
         _movementDirection = Vector3.zero;
     }
 }
