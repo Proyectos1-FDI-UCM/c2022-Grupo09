@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour
     ///Tiempo que tiene el jugador que mantener arriba o abajo para mirar ahí
     ///</summary>
     private float _lookUpElapsedTime = 0;
+    private float _originalVerticalOffset;
     ///<summary>
     ///Referencia al transform del Player
     ///</summary>
@@ -57,7 +58,7 @@ public class CameraController : MonoBehaviour
     public void ResetVerticalOffset()
     {
         _lookUpElapsedTime = 0;
-        _offset.y = 0;
+        _offset.y = _originalVerticalOffset;
     }
     #endregion
 
@@ -67,6 +68,8 @@ public class CameraController : MonoBehaviour
         // Se rellenan las referencias a los Transform
         _playerTransform = _player.GetComponent<Transform>();
         _cameraTransform = this.gameObject.GetComponent<Transform>();
+
+        _originalVerticalOffset = _offset.y;
     }
 
     // Update is called once per frame
@@ -76,7 +79,7 @@ public class CameraController : MonoBehaviour
     }
     void LateUpdate()
     {
-        if (_lookUpElapsedTime > _lookUpTime && _offset.y != _verticalOffset) _offset.y = _verticalOffset;
+        if (_lookUpElapsedTime > _lookUpTime && _offset.y != _originalVerticalOffset + _verticalOffset) _offset.y += _verticalOffset;
         _nextPosition = Vector3.Lerp(_cameraTransform.position, _playerTransform.position + _offset, _lerpSpeed);
         //Actualiza el movimiento de la cam.
         _cameraTransform.position = _nextPosition;
