@@ -10,8 +10,7 @@ public class CharacterInputManager : MonoBehaviour
     [SerializeField]
     private GameObject _myCamera;
     private CameraController _myCameraController;
-    [SerializeField]
-    private Animator animator;
+    private Animator _myAnimator;
     #endregion
 
     #region properties
@@ -43,6 +42,7 @@ public class CharacterInputManager : MonoBehaviour
         _myMovementController = GetComponent<CharacterMovementController>();
         _myAttackController = GetComponent<CharacterAttackController>();
         _myCameraController = _myCamera.GetComponent<CameraController>();
+        _myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class CharacterInputManager : MonoBehaviour
         _verticalInput = Input.GetAxis("Vertical");
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
-        animator.SetFloat("MovementDirection", Mathf.Abs(_horizontalInput));
+        _myAnimator.SetFloat("MovementDirection", Mathf.Abs(_horizontalInput));
 
         if(_horizontalInput != 0)
         {
