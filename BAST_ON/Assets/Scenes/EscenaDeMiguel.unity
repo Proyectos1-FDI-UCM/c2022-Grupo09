@@ -330,10 +330,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1171207514}
   _offset: {x: 1, y: 0, z: -10}
+  _verticalOffset: 3
+  _lookUpTime: 2
   _lerpSpeed: 0.05
 --- !u!1 &1171207514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+  m_PrefabInstance: {fileID: 1838470924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1171207521 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3416954483749118995, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
   m_PrefabInstance: {fileID: 1838470924}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1838470924
@@ -343,6 +350,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110432957604866229, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1171207521}
+    - target: {fileID: 110432957604866229, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: _myCamera
+      value: 
+      objectReference: {fileID: 793742797}
     - target: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_Name
       value: Player
