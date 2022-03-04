@@ -54,6 +54,7 @@ public class CharacterMovementController : MonoBehaviour
         if (_onFloor)
         {
             _verticalSpeed = _jumpSpeed;
+            _myCameraController.ResetVerticalOffset();
         }
     }
 
@@ -87,15 +88,16 @@ public class CharacterMovementController : MonoBehaviour
         }
         _movementDirection.y = _verticalSpeed;
 
-        // Rotación ajustada para dirección de la animación
-        _myTransform.rotation = Quaternion.identity;
-        if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
         // Offset cámara y dirección predeterminada del ataque
         if (_movementDirection.x != 0)
         {
             _myCameraController.SetOffset(_movementDirection.normalized);
             _myAttackController.SetDefaultDirection(_movementDirection.x);
         }
+
+        // Rotación ajustada para dirección de la animación
+        _myTransform.rotation = Quaternion.identity;
+        if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
         // Movimiento del personaje (Siempre positivo porque se ha rotado con la animación)
         _movementDirection.x = Mathf.Abs(_movementDirection.x);
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
