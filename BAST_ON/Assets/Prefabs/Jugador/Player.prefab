@@ -16,10 +16,9 @@ GameObject:
   - component: {fileID: 110432957604866229}
   - component: {fileID: 6468474152613596022}
   - component: {fileID: 2021335209507521157}
-  - component: {fileID: 6919599610925238725}
+  - component: {fileID: 2064836601977449977}
   - component: {fileID: 1865850140569161645}
   - component: {fileID: 3416954483749118995}
-  - component: {fileID: 2064836601977449977}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -113,7 +112,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!70 &2444279655192050555
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myCamera: {fileID: 0}
-  animator: {fileID: 3416954483749118995}
 --- !u!114 &6468474152613596022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMovement: 7
-  _jumpSpeed: 0.75
+  _jumpSpeed: 5
   _gravity: 0.075
   _fallSpeed: 10
   _myCamera: {fileID: 0}
@@ -202,7 +200,7 @@ MonoBehaviour:
   _baston: {fileID: 8705272921097061316}
   _attackTime: 0.3
   _attackCooldown: 0.3
---- !u!114 &6919599610925238725
+--- !u!114 &2064836601977449977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,7 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f069ab97c8d732243a49e441fdebf4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baston: {fileID: 8705272921097061316}
+  _floorLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!95 &3416954483749118995
 Animator:
   serializedVersion: 3
@@ -248,20 +248,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2064836601977449977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676595374184265813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2227a6e55e98b41b7d345afae4bcc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 8
-  _currentHealth: 8
 --- !u!1 &4341972834328012880
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,3 +473,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408b89fba667d014dbc586207b47f9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1676595374184265813}

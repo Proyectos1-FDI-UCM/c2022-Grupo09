@@ -5,44 +5,35 @@ using UnityEngine;
 public class FloorDetector : MonoBehaviour
 {
     #region references
+    private CapsuleCollider2D _myCollider;
     [SerializeField]
-    private GameObject _baston;
-    private CharacterAttackController _attackController;
-    private CharacterMovementController _movementController;
-    private BastonImpulseController _impulseController;
+    private LayerMask _floorLayer;
     #endregion
+    
     #region methods
-    private void OnTriggerEnter2D(Collider2D collision)
+    public bool IsGrounded()
     {
-        if(collision.gameObject.tag == "Floor")
-        {
-            _attackController.SetFloorDetector(true);
-            _movementController.SetFloorDetector(true);
-            _impulseController.SetFloorDetector(true);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Floor")
-        {
-            _attackController.SetFloorDetector(false);
-            _movementController.SetFloorDetector(false);
-            _impulseController.SetFloorDetector(false);
-        }
+        float _floorDetectorOffset = 0.1f;
+        RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center, _myCollider.bounds.size, 0f, Vector2.down, _floorDetectorOffset, _floorLayer);
+        /*
+        if (_boxCast.collider != null) Debug.Log(_boxCast.collider);
+        Debug.DrawRay(_myCollider.bounds.center + new Vector3(_myCollider.bounds.extents.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
+        Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
+        Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, _myCollider.bounds.extents.y + _floorDetectorOffset), Vector2.right * 2*(_myCollider.bounds.extents.x));
+        */
+        return _boxCast.collider != null;
     }
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        _attackController = GetComponent<CharacterAttackController>();
-        _movementController = GetComponent<CharacterMovementController>();
-        _impulseController = _baston.GetComponent<BastonImpulseController>();
+        _myCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

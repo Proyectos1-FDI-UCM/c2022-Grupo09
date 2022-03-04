@@ -8,6 +8,7 @@ public class CharacterAttackController : MonoBehaviour
     [SerializeField]
     private GameObject _baston;
     private Transform _bastonTransform;
+    private FloorDetector _myFloorDetector;
     #endregion
 
     #region parameters
@@ -31,17 +32,12 @@ public class CharacterAttackController : MonoBehaviour
     ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
     ///</summary>
     private float _cotaResta = ((Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2);
-    private bool _onFloor = false;
     #endregion
 
     #region methods
     public void SetDefaultDirection(float dir)
     {
         _defaultDirection = dir;
-    }
-    public void SetFloorDetector(bool a)
-    {
-        _onFloor = a;
     }
     private void RedirectFloorAttack(ref float horizontalAttackDirection, ref float verticalAttackDirection)
     {
@@ -57,7 +53,7 @@ public class CharacterAttackController : MonoBehaviour
         // Solo entra en el método si no hay ya un ataque
         if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown)
         {
-            if (_onFloor) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
+            if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
             // Si se ha escogido una dirección para el ataque
@@ -120,6 +116,7 @@ public class CharacterAttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _myFloorDetector = GetComponent<FloorDetector>();
         _bastonTransform = _baston.transform;
         _baston.SetActive(false);
     }

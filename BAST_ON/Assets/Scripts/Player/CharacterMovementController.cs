@@ -10,20 +10,10 @@ public class CharacterMovementController : MonoBehaviour
 
     [SerializeField]
     private float _jumpSpeed = 1f;
-    // Gravity value applied to player
-    [SerializeField]
-    private float _gravity = 1.0f;
-    // Maximum falling speed
-    [SerializeField]
-    private float _fallSpeed = 10.0f;
     #endregion
 
     #region properties
     private Vector3 _movementDirection = Vector3.zero;
-    private bool _onFloor = false;
-    private float _elapsedJumpTime;
-    // Stores current vertical speed value
-    private float _verticalSpeed = 0;
     #endregion
 
     #region references
@@ -32,18 +22,11 @@ public class CharacterMovementController : MonoBehaviour
     private GameObject _myCamera;
     private CameraController _myCameraController;
     private CharacterAttackController _myAttackController;
+    private FloorDetector _myFloorDetector;
+    private Rigidbody2D _myRigidbody;
     #endregion
 
     #region methods
-    public void SetFloorDetector(bool a)
-    {
-        _onFloor = a;
-        if (a) 
-        {
-            _elapsedJumpTime = 0;
-            _verticalSpeed = 0; 
-        }
-    }
     public void SetMovementDirection(float direction)
     {
         _movementDirection.x = direction;
@@ -51,9 +34,9 @@ public class CharacterMovementController : MonoBehaviour
     
     public void JumpRequest()
     {
-        if (_onFloor)
+        if (_myFloorDetector.IsGrounded())
         {
-            _verticalSpeed = _jumpSpeed;
+            _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _jumpSpeed);
             _myCameraController.ResetVerticalOffset();
         }
     }
@@ -75,19 +58,13 @@ public class CharacterMovementController : MonoBehaviour
         _myTransform = transform;
         _myCameraController = _myCamera.GetComponent<CameraController>();
         _myAttackController = GetComponent<CharacterAttackController>();
+        _myFloorDetector = GetComponent<FloorDetector>();
+        _myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Jump
-        if (!_onFloor)
-        {
-            _verticalSpeed += -_gravity * _elapsedJumpTime;
-            _elapsedJumpTime += Time.deltaTime;
-        }
-        _movementDirection.y = _verticalSpeed;
-
         // Offset cámara y dirección predeterminada del ataque
         if (_movementDirection.x != 0)
         {
@@ -97,7 +74,7 @@ public class CharacterMovementController : MonoBehaviour
 
         // Rotación ajustada para dirección de la animación
         _myTransform.rotation = Quaternion.identity;
-        if (_movementDirection.x < 0) _myTransform.Rotate(new Vector3(0, 180, 0));
+        if (_movementDirection.x < 0) _myTransform.Rotate(Vector3.up, 180f);
         // Movimiento del personaje (Siempre positivo porque se ha rotado con la animación)
         _movementDirection.x = Mathf.Abs(_movementDirection.x);
         _myTransform.Translate(_movementDirection * _speedMovement * Time.deltaTime);
