@@ -67,40 +67,40 @@ public class CharacterAttackController : MonoBehaviour
                         (horizontalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection < _cotaSuma))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 45)); }
+                { _bastonTransform.Rotate(Vector3.forward, 45); }
                 // c (3*22'5º, 5*22'5º) Arriba
                 else if ((horizontalAttackDirection < _cotaResta) &&
                         (horizontalAttackDirection >= -_cotaResta) &&
                         (verticalAttackDirection >= _cotaSuma))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 90)); }
+                { _bastonTransform.Rotate(Vector3.forward, 90); }
                 // d (5*22'5º, 7*22'5º) Arriba izquierda
                 else if ((horizontalAttackDirection < -_cotaResta) &&
                         (horizontalAttackDirection >= -_cotaSuma) &&
                         (verticalAttackDirection < _cotaSuma) &&
                         (verticalAttackDirection >= _cotaResta))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 135)); }
+                { _bastonTransform.Rotate(Vector3.forward, 135); }
                 // e (7*22'5º, -7*22'5º) Izquierda
                 else if ((horizontalAttackDirection < -_cotaSuma) &&
                         (verticalAttackDirection < _cotaResta) &&
                         (verticalAttackDirection >= -_cotaResta))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 180)); }
+                { _bastonTransform.Rotate(Vector3.forward, 180); }
                 // f (-7*22'5º, -5*22'5º) Abajo izquierda
                 else if ((horizontalAttackDirection >= -_cotaSuma) &&
                         (horizontalAttackDirection < -_cotaResta) &&
                         (verticalAttackDirection < -_cotaResta) &&
                         (verticalAttackDirection >= -_cotaSuma))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 225)); }
+                { _bastonTransform.Rotate(Vector3.forward, 225); }
                 // g (-5*22'5º, -3*22'5º) Abajo
                 else if ((horizontalAttackDirection >= -_cotaResta) &&
                         (horizontalAttackDirection < _cotaResta) &&
                         (verticalAttackDirection < -_cotaSuma))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 270)); }
+                { _bastonTransform.Rotate(Vector3.forward, 270); }
                 // h (-3*22'5º, -22'5º) Abajo derecha
                 else if ((horizontalAttackDirection >= _cotaResta) &&
                         (horizontalAttackDirection < _cotaSuma) &&
                         (verticalAttackDirection >= -_cotaSuma) &&
                         (verticalAttackDirection < -_cotaResta))
-                { _bastonTransform.Rotate(new Vector3(0, 0, 315)); }
+                { _bastonTransform.Rotate(Vector3.forward, 315); }
             }
             // Si no se escoge dirección del ataque, el ataque es en la dirección del jugador
             else
