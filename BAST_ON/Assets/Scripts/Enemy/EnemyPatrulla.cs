@@ -6,16 +6,19 @@ public class EnemyPatrulla : MonoBehaviour
 {
     [SerializeField]
     public float speed;
+    private bool col = false;
+    [SerializeField]
     private bool rightMov = true;
-    public Transform floorDetect;
 
-    void Update()
+       public void truecol()
     {
-        //
+        col = true;
+    }
+
+        void Update()
+    {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
-        // Raycast de tamaño uno desde el objeto vacio
-        RaycastHit2D floorData = Physics2D.Raycast(floorDetect.position,Vector2.down,1f);
-        if (!floorData.collider)
+        if (col)
         {
             if (rightMov)
             {
@@ -29,7 +32,7 @@ public class EnemyPatrulla : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 rightMov = true;
             }
-
+            col = false;
         }
     }
 }
