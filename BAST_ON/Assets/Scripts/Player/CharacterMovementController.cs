@@ -10,10 +10,14 @@ public class CharacterMovementController : MonoBehaviour
 
     [SerializeField]
     private float _jumpSpeed = 1f;
+    [SerializeField]
+    private float _bastonImpulse = 1f;
     #endregion
 
     #region properties
-    private Vector3 _movementDirection = Vector3.zero;
+    private Vector2 _movementDirection = Vector2.zero;
+    private Vector2 _impulseDirection = Vector2.zero;
+    private float _attackElapsedTime = 1f;
     #endregion
 
     #region references
@@ -44,12 +48,13 @@ public class CharacterMovementController : MonoBehaviour
     ///<summary>
     ///Tentativa de función para añadir la fuerza al personaje. Si al final vamos a hacerlo por CharacterController, habrá que cambiar
     ///</summary>
-    public void addRepelForce(Vector2 forceDirection){
-        //_myRigidbody2D.AddForce(forceDirection , ForceMode2D.Impulse);
-        
+    public void addRepelForce(Vector2 forceDirection)
+    {
+        Debug.Log(forceDirection);
+        _impulseDirection = forceDirection * _bastonImpulse;
+        _impulseDirection.y /= 10f;
+        _attackElapsedTime = 1f;
     }
-
-    
     #endregion
 
     // Start is called before the first frame update
@@ -78,8 +83,12 @@ public class CharacterMovementController : MonoBehaviour
         // Movimiento del personaje
         _movementDirection.x *= _speedMovement;
         _movementDirection.y = _myRigidbody.velocity.y;
-        _myRigidbody.velocity = _movementDirection;
-        _movementDirection = Vector3.zero;
 
+        _impulseDirection = _impulseDirection / _attackElapsedTime;
+        _myRigidbody.velocity = _movementDirection + _impulseDirection;
+        _movementDirection = Vector2.zero;
+
+        if (_attackElapsedTime < _impulseDirection.magnitude) _attackElapsedTime += Time.deltaTime;
+        else _impulseDirection = Vector2.zero;
     }
 }
