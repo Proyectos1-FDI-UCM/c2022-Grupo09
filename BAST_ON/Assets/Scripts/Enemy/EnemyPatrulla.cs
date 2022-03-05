@@ -6,33 +6,27 @@ public class EnemyPatrulla : MonoBehaviour
 {
     [SerializeField]
     public float speed;
-    private bool col = false;
     [SerializeField]
     private bool rightMov = true;
+    [SerializeField]
+    private GameObject _limIzq, _limDer;
 
-       public void truecol()
-    {
-        col = true;
-    }
-
-        void Update()
+    void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
-        if (col)
-        {
-            if (rightMov)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                rightMov = false;
-            }
-            else
 
-            {
-    
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                rightMov = true;
-            }
-            col = false;
+        if (transform.position.x >= _limDer.transform.position.x)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            rightMov = false;
+        }
+        else if (transform.position.x <= _limIzq.transform.position.x)
+
+        {
+
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            rightMov = true;
         }
     }
+
 }
