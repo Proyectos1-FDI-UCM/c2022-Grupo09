@@ -50,7 +50,6 @@ public class CharacterMovementController : MonoBehaviour
     ///</summary>
     public void addRepelForce(Vector2 forceDirection)
     {
-        Debug.Log(forceDirection);
         _impulseDirection = forceDirection * _bastonImpulse;
         _impulseDirection.y /= 10f;
         _attackElapsedTime = 1f;
