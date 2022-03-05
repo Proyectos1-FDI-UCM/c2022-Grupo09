@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMovement: 7
   _jumpSpeed: 5
+  _bastonImpulse: 15
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
