@@ -13,19 +13,35 @@ public class EnemyPatrulla : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-        if (transform.position.x >= _limDer.transform.position.x)
+        if (rightMov)
         {
-            transform.eulerAngles = new Vector3(0, -180, 0);
-            rightMov = false;
-        }
-        else if (transform.position.x <= _limIzq.transform.position.x)
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            if (transform.position.x >= _limDer.transform.position.x)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+            }
+            else if (transform.position.x <= _limIzq.transform.position.x)
 
+            {
+
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+        }else if (!rightMov)
         {
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            
+            if (transform.position.x <= _limIzq.transform.position.x)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+            }
+            else if (transform.position.x >= _limDer.transform.position.x)
+            {
 
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            rightMov = true;
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+
+
         }
     }
 
