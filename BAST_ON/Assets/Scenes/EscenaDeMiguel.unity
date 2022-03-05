@@ -461,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 793742797}
     - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: _bastonImpulse
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8428227548490663363, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_RootOrder
