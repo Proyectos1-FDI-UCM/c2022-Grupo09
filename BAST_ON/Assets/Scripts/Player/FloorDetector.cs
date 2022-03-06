@@ -9,11 +9,14 @@ public class FloorDetector : MonoBehaviour
     [SerializeField]
     private LayerMask _floorLayer;
     #endregion
-    
+    #region parameters
+    [SerializeField]
+    private float _floorDetectorOffset = 0.01f;
+    #endregion
+
     #region methods
     public bool IsGrounded()
     {
-        float _floorDetectorOffset = 0.1f;
         RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center, _myCollider.bounds.size, 0f, Vector2.down, _floorDetectorOffset, _floorLayer);
         /*
         if (_boxCast.collider != null) Debug.Log(_boxCast.collider);
