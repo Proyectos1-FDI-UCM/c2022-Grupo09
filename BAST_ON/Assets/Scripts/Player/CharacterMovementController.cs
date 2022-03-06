@@ -17,7 +17,9 @@ public class CharacterMovementController : MonoBehaviour
     #region properties
     private Vector2 _movementDirection = Vector2.zero;
     private Vector2 _impulseDirection = Vector2.zero;
-    private float _attackElapsedTime = 1f;
+    private float _impulseElapsedTime = 1f;
+    private float _onAirElasedTime = 0f;
+    private Vector2 _gravity = Vector2.zero;
     #endregion
 
     #region references
@@ -35,24 +37,32 @@ public class CharacterMovementController : MonoBehaviour
     {
         _movementDirection.x = direction;
     }
-    
+
+    ///<summary>
+    ///Hace que el personaje salte si está en el suelo.
+    ///</summary>
     public void JumpRequest()
     {
         if (_myFloorDetector.IsGrounded())
         {
-            _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _jumpSpeed);
+            //_myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _jumpSpeed);
+            _impulseDirection.y = _jumpSpeed;
+            _impulseElapsedTime = 1f;
             _myCameraController.ResetVerticalOffset();
         }
     }
 
     ///<summary>
-    ///Tentativa de función para añadir la fuerza al personaje. Si al final vamos a hacerlo por CharacterController, habrá que cambiar
+    ///Añade el impulso recibido del bastón al personaje si está en el aire.
     ///</summary>
-    public void addRepelForce(Vector2 forceDirection)
+    public void ImpulseRequest(Vector2 forceDirection)
     {
-        _impulseDirection = forceDirection * _bastonImpulse;
-        _impulseDirection.y /= 10f;
-        _attackElapsedTime = 1f;
+        if (!_myFloorDetector.IsGrounded())
+        {
+            _impulseDirection = forceDirection * _bastonImpulse;
+            _impulseElapsedTime = 1f;
+            _onAirElasedTime = 0f;
+        }
     }
     #endregion
 
@@ -77,17 +87,31 @@ public class CharacterMovementController : MonoBehaviour
         }
 
         // Rotación ajustada para dirección de la animación
-        _myTransform.rotation = Quaternion.identity;
-        if (_movementDirection.x < 0) _myTransform.Rotate(Vector3.up, 180f);
+        if (_movementDirection.x > 0) _myTransform.rotation = Quaternion.identity;
+        else if (_movementDirection.x < 0)
+        {
+            _myTransform.rotation = Quaternion.identity;
+            _myTransform.Rotate(Vector3.up, 180f);
+        }
         // Movimiento del personaje
+    }
+
+    private void FixedUpdate()
+    {
         _movementDirection.x *= _speedMovement;
-        _movementDirection.y = _myRigidbody.velocity.y;
+        //_movementDirection.y = _myRigidbody.position.y;
 
-        _impulseDirection = _impulseDirection / _attackElapsedTime;
-        _myRigidbody.velocity = _movementDirection + _impulseDirection;
-        _movementDirection = Vector2.zero;
+        _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
-        if (_attackElapsedTime < _impulseDirection.magnitude) _attackElapsedTime += Time.deltaTime;
+        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime);
+
+        // Movimiento del personaje
+        _myRigidbody.MovePosition(_gravity + _myRigidbody.position + ((_movementDirection + _impulseDirection) * Time.fixedDeltaTime));
+
+        if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
+        else _onAirElasedTime = 0f;
+        if (_impulseElapsedTime < _impulseDirection.magnitude) _impulseElapsedTime += Time.fixedDeltaTime;
         else _impulseDirection = Vector2.zero;
+        _movementDirection = Vector2.zero;
     }
 }

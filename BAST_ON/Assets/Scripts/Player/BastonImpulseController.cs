@@ -8,7 +8,6 @@ public class BastonImpulseController : MonoBehaviour
     [SerializeField]
     GameObject _player;
     CharacterMovementController _characterMovementController;
-    FloorDetector _myFloorDetector;
     Transform _bastonTransform;
     #endregion
     #region methods
@@ -18,7 +17,7 @@ public class BastonImpulseController : MonoBehaviour
         impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
         impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
         // Llamada al método impulso a enemigos (con duck typing?)
-        if (!_myFloorDetector.IsGrounded()) { _characterMovementController.addRepelForce(-impulseDirection); } 
+        _characterMovementController.ImpulseRequest(-impulseDirection);
     }
     #endregion
 
@@ -27,7 +26,6 @@ public class BastonImpulseController : MonoBehaviour
     {
         _bastonTransform = transform;
         _characterMovementController = _player.GetComponent<CharacterMovementController>();
-        _myFloorDetector = _player.GetComponent<FloorDetector>();
     }
 
     // Update is called once per frame
