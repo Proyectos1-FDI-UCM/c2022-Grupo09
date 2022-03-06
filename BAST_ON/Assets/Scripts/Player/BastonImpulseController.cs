@@ -13,11 +13,15 @@ public class BastonImpulseController : MonoBehaviour
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector2 impulseDirection;
-        impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
-        impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
-        // Llamada al método impulso a enemigos (con duck typing?)
-        _characterMovementController.ImpulseRequest(-impulseDirection);
+        PowerUpController powerup = collision.GetComponent<PowerUpController>();
+        if (powerup == null)
+        {
+            Vector2 impulseDirection;
+            impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
+            impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
+            // Llamada al método impulso a enemigos (con duck typing?)
+            _characterMovementController.ImpulseRequest(-impulseDirection);
+        }
     }
     #endregion
 
