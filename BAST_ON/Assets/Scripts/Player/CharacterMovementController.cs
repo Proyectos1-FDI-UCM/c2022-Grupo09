@@ -79,6 +79,7 @@ public class CharacterMovementController : MonoBehaviour
         {
             _impulseDirection = forceDirection * _bastonImpulse;
             _impulseElapsedTime = 1f;
+            // Reset del tiempo en el aire para dar mejor sensación de juego
             _onAirElasedTime = 0f;
         }
     }
