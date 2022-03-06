@@ -9,8 +9,6 @@ public class PowerUpController : MonoBehaviour
     private int _extraHealth = 1; //variable para aumentar 1 pto de vida
 
     GameObject _myPowerUp;
-
-
     #endregion
     #region methods
     //Método para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
@@ -21,9 +19,12 @@ public class PowerUpController : MonoBehaviour
         {
             check.ChangeHealthValue(_extraHealth);
             Destroy(_myPowerUp);
-
         }
     }
     #endregion
-   
+    private void Start()
+    {
+        _myPowerUp = gameObject;
+    }
+
 }
