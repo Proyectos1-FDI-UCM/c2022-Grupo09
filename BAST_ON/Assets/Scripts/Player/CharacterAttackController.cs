@@ -22,19 +22,33 @@ public class CharacterAttackController : MonoBehaviour
     private float _elapsedAttackTime;
     private float _elapsedCooldownTime;
     private float _defaultDirection;
+
+    [SerializeField] private float repelStrenght = 15;
     ///<summary>
-    ///Es cos(22'5º) y sen(3*22'5º).
-    ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
+    ///Es cos(22'5ï¿½) y sen(3*22'5ï¿½).
+    ///Utilizado para delimitar las areas de input que corresponden a cada direcciï¿½n de ataque.
     ///</summary>
     private float _cotaSuma = ((Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2);
     ///<summary>
-    ///Es sen(22'5º) y cos(3*22'5º).
-    ///Utilizado para delimitar las areas de input que corresponden a cada dirección de ataque.
+    ///Es sen(22'5ï¿½) y cos(3*22'5ï¿½).
+    ///Utilizado para delimitar las areas de input que corresponden a cada direcciï¿½n de ataque.
     ///</summary>
     private float _cotaResta = ((Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2);
     #endregion
 
     #region methods
+    
+    public void modifyStrenght(float strenghtModifier, float duration)
+    {
+        StartCoroutine(ModifyStrenghtCoroutine(strenghtModifier, duration));
+    }
+
+    IEnumerator ModifyStrenghtCoroutine(float strenghtModifier, float duration){
+        repelStrenght *= strenghtModifier;
+        yield return new WaitForSeconds(duration);
+        repelStrenght /= strenghtModifier;
+    }
+
     public void SetDefaultDirection(float dir)
     {
         _defaultDirection = dir;
@@ -47,66 +61,66 @@ public class CharacterAttackController : MonoBehaviour
             horizontalAttackDirection /= Mathf.Abs(horizontalAttackDirection);
         }
     }
-    // Recibe la dirección del ataque y lo activa en esa dirección
+    // Recibe la direcciï¿½n del ataque y lo activa en esa direcciï¿½n
     public void Bastonazo(float horizontalAttackDirection, float verticalAttackDirection)
     {
-        // Solo entra en el método si no hay ya un ataque
+        // Solo entra en el mï¿½todo si no hay ya un ataque
         if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown)
         {
             if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
-            // Si se ha escogido una dirección para el ataque
+            // Si se ha escogido una direcciï¿½n para el ataque
             if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {
-                // a (-22'5º, 22'5º) Derecha
-                // Es la rotación 0, no hace falta cambiarla
+                // a (-22'5ï¿½, 22'5ï¿½) Derecha
+                // Es la rotaciï¿½n 0, no hace falta cambiarla
 
-                // b (22'5º, 3*22'5º) Arriba derecha
+                // b (22'5ï¿½, 3*22'5ï¿½) Arriba derecha
                 if ((horizontalAttackDirection < _cotaSuma) &&
                         (horizontalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection >= _cotaResta) &&
                         (verticalAttackDirection < _cotaSuma))
                 { _bastonTransform.Rotate(Vector3.forward, 45); }
-                // c (3*22'5º, 5*22'5º) Arriba
+                // c (3*22'5ï¿½, 5*22'5ï¿½) Arriba
                 else if ((horizontalAttackDirection < _cotaResta) &&
                         (horizontalAttackDirection >= -_cotaResta) &&
                         (verticalAttackDirection >= _cotaSuma))
                 { _bastonTransform.Rotate(Vector3.forward, 90); }
-                // d (5*22'5º, 7*22'5º) Arriba izquierda
+                // d (5*22'5ï¿½, 7*22'5ï¿½) Arriba izquierda
                 else if ((horizontalAttackDirection < -_cotaResta) &&
                         (horizontalAttackDirection >= -_cotaSuma) &&
                         (verticalAttackDirection < _cotaSuma) &&
                         (verticalAttackDirection >= _cotaResta))
                 { _bastonTransform.Rotate(Vector3.forward, 135); }
-                // e (7*22'5º, -7*22'5º) Izquierda
+                // e (7*22'5ï¿½, -7*22'5ï¿½) Izquierda
                 else if ((horizontalAttackDirection < -_cotaSuma) &&
                         (verticalAttackDirection < _cotaResta) &&
                         (verticalAttackDirection >= -_cotaResta))
                 { _bastonTransform.Rotate(Vector3.forward, 180); }
-                // f (-7*22'5º, -5*22'5º) Abajo izquierda
+                // f (-7*22'5ï¿½, -5*22'5ï¿½) Abajo izquierda
                 else if ((horizontalAttackDirection >= -_cotaSuma) &&
                         (horizontalAttackDirection < -_cotaResta) &&
                         (verticalAttackDirection < -_cotaResta) &&
                         (verticalAttackDirection >= -_cotaSuma))
                 { _bastonTransform.Rotate(Vector3.forward, 225); }
-                // g (-5*22'5º, -3*22'5º) Abajo
+                // g (-5*22'5ï¿½, -3*22'5ï¿½) Abajo
                 else if ((horizontalAttackDirection >= -_cotaResta) &&
                         (horizontalAttackDirection < _cotaResta) &&
                         (verticalAttackDirection < -_cotaSuma))
                 { _bastonTransform.Rotate(Vector3.forward, 270); }
-                // h (-3*22'5º, -22'5º) Abajo derecha
+                // h (-3*22'5ï¿½, -22'5ï¿½) Abajo derecha
                 else if ((horizontalAttackDirection >= _cotaResta) &&
                         (horizontalAttackDirection < _cotaSuma) &&
                         (verticalAttackDirection >= -_cotaSuma) &&
                         (verticalAttackDirection < -_cotaResta))
                 { _bastonTransform.Rotate(Vector3.forward, 315); }
             }
-            // Si no se escoge dirección del ataque, el ataque es en la dirección del jugador
+            // Si no se escoge direcciï¿½n del ataque, el ataque es en la direcciï¿½n del jugador
             else
             {
                 if (_defaultDirection < 0) { _bastonTransform.Rotate(new Vector3(0, 0, 180)); }
-                // else Rotación original
+                // else Rotaciï¿½n original
             }
             _baston.SetActive(true);
         }
@@ -128,7 +142,7 @@ public class CharacterAttackController : MonoBehaviour
         if (_baston.activeSelf)
         {
             _elapsedAttackTime += Time.deltaTime;
-            // Cuando el ataque se haya completado desactiva el bastón
+            // Cuando el ataque se haya completado desactiva el bastï¿½n
             if (_elapsedAttackTime > _attackTime)
             {
                 _baston.SetActive(false);
