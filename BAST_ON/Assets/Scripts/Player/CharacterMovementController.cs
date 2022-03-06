@@ -15,10 +15,25 @@ public class CharacterMovementController : MonoBehaviour
     #endregion
 
     #region properties
+    /// <summary>
+    /// Dirección del movimiento del jugador
+    /// </summary>
     private Vector2 _movementDirection = Vector2.zero;
+    /// <summary>
+    /// Dirección en la que es impulsado el jugador por un salto o un golpe con el bastón.
+    /// </summary>
     private Vector2 _impulseDirection = Vector2.zero;
+    /// <summary>
+    /// Variable auxiliar que cuenta el tiempo transcurrido desde un impulso aplicado (salto o bastón) para ir reduciendo la velocidad aplicada por este con el tiempo.
+    /// </summary>
     private float _impulseElapsedTime = 1f;
+    /// <summary>
+    /// Variable auxiliar que cuenta el tiempo que el jugador lleva en el aire para aplicarlo a la gravedad.
+    /// </summary>
     private float _onAirElasedTime = 0f;
+    /// <summary>
+    /// Réplica de la gravedad que se le aplicaría al Rigidbody2D para así poder mover al jugador de forma consistente con el método MovePosition().
+    /// </summary>
     private Vector2 _gravity = Vector2.zero;
     #endregion
 
@@ -33,6 +48,10 @@ public class CharacterMovementController : MonoBehaviour
     #endregion
 
     #region methods
+    /// <summary>
+    /// Asigna a la dirección del movimiento la recibida por el input.
+    /// </summary>
+    /// <param name="direction"></param>
     public void SetMovementDirection(float direction)
     {
         _movementDirection.x = direction;
@@ -45,7 +64,6 @@ public class CharacterMovementController : MonoBehaviour
     {
         if (_myFloorDetector.IsGrounded())
         {
-            //_myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _jumpSpeed);
             _impulseDirection.y = _jumpSpeed;
             _impulseElapsedTime = 1f;
             _myCameraController.ResetVerticalOffset();
@@ -93,25 +111,26 @@ public class CharacterMovementController : MonoBehaviour
             _myTransform.rotation = Quaternion.identity;
             _myTransform.Rotate(Vector3.up, 180f);
         }
-        // Movimiento del personaje
     }
 
     private void FixedUpdate()
     {
-        _movementDirection.x *= _speedMovement;
-        //_movementDirection.y = _myRigidbody.position.y;
-
+        // Impulso que va reduciendo a cada iteración
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime);
 
         // Movimiento del personaje
-        _myRigidbody.MovePosition(_gravity + _myRigidbody.position + ((_movementDirection + _impulseDirection) * Time.fixedDeltaTime));
+        _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
 
+        // Contador del tiempo en el aire
         if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
         else _onAirElasedTime = 0f;
+
+        // Contador para reducir el impulso
         if (_impulseElapsedTime < _impulseDirection.magnitude) _impulseElapsedTime += Time.fixedDeltaTime;
         else _impulseDirection = Vector2.zero;
+        // Reset del movimiento
         _movementDirection = Vector2.zero;
     }
 }
