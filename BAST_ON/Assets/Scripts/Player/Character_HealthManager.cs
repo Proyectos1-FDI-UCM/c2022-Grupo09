@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class Character_HealthManager : MonoBehaviour
 {
-
-    
-    
-
-  
     ///<summary>
     ///Vida maxima que puede tener el jugador
     ///</summary>
@@ -19,10 +14,6 @@ public class Character_HealthManager : MonoBehaviour
     ///Valor que determina la vida máxima
     ///</summary>
     [SerializeField] private int _currentHealth;
-
-    
-    
-
     
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -

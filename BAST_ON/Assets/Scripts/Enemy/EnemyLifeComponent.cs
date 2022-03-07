@@ -38,10 +38,7 @@ public class EnemyLifeComponent : MonoBehaviour
         Destroy(_myEnemy);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
+   
     #endregion
     // Start is called before the first frame update
     void Start()

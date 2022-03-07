@@ -31,6 +31,14 @@ public class BastonImpulseController : MonoBehaviour
         _bastonTransform = transform;
         _characterMovementController = _player.GetComponent<CharacterMovementController>();
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
+        if (check != null)
+        {
+            check.ChangeHealth(-1);
+        }
+    }
 
     // Update is called once per frame
     void Update()
