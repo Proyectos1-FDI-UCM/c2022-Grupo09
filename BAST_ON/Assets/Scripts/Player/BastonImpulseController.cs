@@ -9,6 +9,10 @@ public class BastonImpulseController : MonoBehaviour
     GameObject _player;
     CharacterMovementController _characterMovementController;
     Transform _bastonTransform;
+
+     public Vector3 referenciaAlTransformPos(){
+         return _bastonTransform.position;
+    }
     #endregion
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +26,7 @@ public class BastonImpulseController : MonoBehaviour
 
 
 
-            // Llamada al método impulso a enemigos (con duck typing?)
+            // Llamada al mï¿½todo impulso a enemigos (con duck typing?)
 
             EnemyShot disparo = collision.GetComponent<EnemyShot>();
             if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
@@ -31,7 +35,7 @@ public class BastonImpulseController : MonoBehaviour
 
             _characterMovementController.ImpulseRequest(-impulseDirection);
 
-            //Detectar enemigo con el bastón y quiatarle 1 de vida
+            //Detectar enemigo con el bastï¿½n y quiatarle 1 de vida
             EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
             if (check != null)
             {

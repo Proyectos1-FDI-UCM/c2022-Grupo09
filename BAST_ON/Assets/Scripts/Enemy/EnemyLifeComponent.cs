@@ -58,8 +58,8 @@ public class EnemyLifeComponent : MonoBehaviour
         BastonImpulseController check = GetComponent<BastonImpulseController>();
         if(check != null)
         {
-            
-
+            Vector3 papa = _thisTransform.position - check.referenciaAlTransformPos();
+            Debug.Log(papa);
 
             return;
         }
