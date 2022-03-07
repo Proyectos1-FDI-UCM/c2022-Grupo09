@@ -24,9 +24,14 @@ public class GameManager : MonoBehaviour
 
     #region methods
 
-    public void PickTangerine()
+    public void Pause()
     {
+        Time.timeScale = 0;
+    }
 
+    public void Resume()
+    {
+        Time.timeScale = 1;
     }
 
     public void OnHealthValueChange(int newHealthValue)
