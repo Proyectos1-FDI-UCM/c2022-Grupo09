@@ -19,7 +19,16 @@ public class BastonImpulseController : MonoBehaviour
             Vector2 impulseDirection;
             impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
             impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
+
+
+
             // Llamada al método impulso a enemigos (con duck typing?)
+
+            EnemyShot disparo = collision.GetComponent<EnemyShot>();
+            if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
+
+
+
             _characterMovementController.ImpulseRequest(-impulseDirection);
         }
     }

@@ -4,18 +4,47 @@ using UnityEngine;
 
 public class EnemyShot : MonoBehaviour
 {
+    #region references
+    private Transform _myTransform;
+    #endregion
 
+    #region references
     [SerializeField]
     private float _speed;
-    void Start()
+    #endregion
+
+
+    #region methods
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-      //  objtv = new Vector2(_myPlayer.transform.position.x, _myPlayer.transform.position.y);
+        Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
+        if (player != null)
+        {
+            player.ChangeHealthValue(-1);
+            Destroy(gameObject);
+        }
+        else
+        {
+            BastonImpulseController baston = collision.gameObject.GetComponent<BastonImpulseController>();
+            if (baston == null) Destroy(gameObject);
+        }
+    }
+
+    public void CambiaRotacion(float rotation)
+    {
+        _myTransform.rotation = Quaternion.identity;
+        _myTransform.Rotate(Vector3.forward, rotation);
+    }
+    #endregion
+
+    private void Start()
+    {
+        _myTransform = transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        transform.Translate(Vector3.right*_speed * Time.deltaTime);
+        transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }
