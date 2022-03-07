@@ -26,6 +26,7 @@ public class EnemyLifeComponent : MonoBehaviour
 
     
 
+    private EnemyStrikingForceController _myEnemyStrikingForceController;
     #endregion
 
     #region methods
@@ -52,31 +53,45 @@ public class EnemyLifeComponent : MonoBehaviour
         Destroy(_myEnemy);
     }
 
-   
-    private void OnCollisionEnter(Collision collision)
+    public Vector3 referenciaAlTransformPos(){
+         return _thisTransform.position;
+    }
+
+    public void hitForceCallback(Vector3 forceVector)
     {
         BastonImpulseController check = GetComponent<BastonImpulseController>();
         if(check != null)
         {
-            return;
+            
+         _myEnemyStrikingForceController.StrikeCallback(forceVector);
         }
+    }
+
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     BastonImpulseController check = GetComponent<BastonImpulseController>();
+    //     if(check != null)
+    //     {
+           
+    //     }
     
-        EnemyLifeComponent otherCheck = GetComponent<EnemyLifeComponent>();
+    //     EnemyLifeComponent otherCheck = GetComponent<EnemyLifeComponent>();
     
         
-    }
+    // }
     
-        public void ReleasePowerUp()
-        {
-            Instantiate(_myPowerUp, _myEnemy.transform);
-        }
-        #endregion
-        // Start is called before the first frame update
-        void Start()
-        {
-            _thisTransform = gameObject.GetComponent<Transform>();        
-            _myPowerUp = gameObject;
-        }
+    public void ReleasePowerUp()
+    {
+        Instantiate(_myPowerUp, _myEnemy.transform);
+    }
+    #endregion
+    // Start is called before the first frame update
+    void Start()
+    {
+        _thisTransform = transform;
+        _myPowerUp = gameObject;
+        _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
+    }
 
         // Update is called once per frame
         void Update()

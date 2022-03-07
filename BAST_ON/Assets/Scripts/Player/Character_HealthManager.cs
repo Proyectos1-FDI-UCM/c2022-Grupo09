@@ -9,22 +9,36 @@ public class Character_HealthManager : MonoBehaviour
     ///<summary>
     ///Vida maxima que puede tener el jugador
     ///</summary>
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxHealth = 8;
     ///<summary>
     ///Valor que determina la vida máxima
     ///</summary>
-    [SerializeField] private int _currentHealth;
+    [SerializeField] private int _currentHealth = 8;
+    [SerializeField] private float _invulnerabilityTime = 1.0f;
+
+    private bool isInvincible = false;
     #endregion
 
     #region methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(!isInvincible) //Hago el check aquí para quitarnos llamadas a GetComponent que son muy caras
+        {      
         //Si se produce colisión entre enemigos baja la vida
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
         if (enemy != null)
         {
             ChangeHealthValue(-1);
+            InvulnerabilityTrigger(_invulnerabilityTime); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
+        }
+    }
+
+
+    private IEnumerator InvulnerabilityTrigger(float invulnerabilityTime){
+        isInvincible = true;
+        yield return new WaitForSeconds(invulnerabilityTime);
+        isInvincible = false;
     }
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -

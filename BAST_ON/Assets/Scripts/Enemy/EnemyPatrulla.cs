@@ -12,8 +12,8 @@ public class EnemyPatrulla : MonoBehaviour
     private GameObject _limIzq, _limDer;
 
     void Update()
-    {
-
+    {   
+        
         if (rightMov)
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);

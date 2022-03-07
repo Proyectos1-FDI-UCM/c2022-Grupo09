@@ -10,9 +10,7 @@ public class BastonImpulseController : MonoBehaviour
     CharacterMovementController _characterMovementController;
     Transform _bastonTransform;
 
-     public Vector3 referenciaAlTransformPos(){
-         return _bastonTransform.position;
-    }
+    
     #endregion
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +37,15 @@ public class BastonImpulseController : MonoBehaviour
             EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
             if (check != null)
             {
+                Vector3 papa = check.referenciaAlTransformPos() - _bastonTransform.position;
+                Debug.Log(papa);
+
                 check.ChangeHealth(-1);
+                check.hitForceCallback(papa);
+                
+                return;
+
+
             }
         }
     }
