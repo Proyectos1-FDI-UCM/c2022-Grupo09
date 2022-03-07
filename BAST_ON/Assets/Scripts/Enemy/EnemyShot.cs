@@ -8,15 +8,17 @@ public class EnemyShot : MonoBehaviour
     private Transform _myTransform;
     #endregion
 
-
+    #region references
     [SerializeField]
     private float _speed;
+    #endregion
 
 
     #region methods
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Character_HealthManager player = collision.GetComponent<Character_HealthManager>();
+        Debug.Log("colisión");
+        Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
         if (player != null)
         {
             player.ChangeHealthValue(-1);
@@ -24,7 +26,7 @@ public class EnemyShot : MonoBehaviour
         }
         else
         {
-            BastonImpulseController baston = collision.GetComponent<BastonImpulseController>();
+            BastonImpulseController baston = collision.gameObject.GetComponent<BastonImpulseController>();
             if (baston == null) Destroy(gameObject);
         }
     }
