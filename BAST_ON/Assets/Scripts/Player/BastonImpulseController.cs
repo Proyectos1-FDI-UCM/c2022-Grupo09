@@ -30,6 +30,13 @@ public class BastonImpulseController : MonoBehaviour
 
 
             _characterMovementController.ImpulseRequest(-impulseDirection);
+
+            //Detectar enemigo con el bastón y quiatarle 1 de vida
+            EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
+            if (check != null)
+            {
+                check.ChangeHealth(-1);
+            }
         }
     }
     #endregion
@@ -40,15 +47,6 @@ public class BastonImpulseController : MonoBehaviour
         _bastonTransform = transform;
         _characterMovementController = _player.GetComponent<CharacterMovementController>();
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
-        if (check != null)
-        {
-            check.ChangeHealth(-1);
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {

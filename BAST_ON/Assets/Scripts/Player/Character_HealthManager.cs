@@ -34,7 +34,7 @@ public class Character_HealthManager : MonoBehaviour
        }
        GameManager.Instance.OnHealthValueChange(_currentHealth);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //Si se produce colisión entre enemigos baja la vida
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
