@@ -484,68 +484,6 @@ MonoBehaviour:
   _verticalOffset: 3
   _lookUpTime: 2
   _lerpSpeed: 0.05
---- !u!1001 &1027289147
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1380252254035357236, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_Name
-      value: "Men\xFA de pausa"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8839343271674007034, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
---- !u!1 &1027289148 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1380252254035357236, guid: ff4c33939ba7e76459795a2456e6fa66, type: 3}
-  m_PrefabInstance: {fileID: 1027289147}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1755349081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,10 +491,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8433497145446151560, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
-      propertyPath: _pauseMenu
-      value: 
-      objectReference: {fileID: 1027289148}
+    - target: {fileID: 2282594809913959528, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_Text
+      value: Exit to main menu
+      objectReference: {fileID: 0}
     - target: {fileID: 8433497145446151560, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
       propertyPath: _gameManager
       value: 
@@ -648,6 +586,10 @@ PrefabInstance:
     - target: {fileID: 8433497145446151573, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722575797068323622, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_Name
+      value: Exit to main menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
