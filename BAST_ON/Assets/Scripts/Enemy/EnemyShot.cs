@@ -17,7 +17,6 @@ public class EnemyShot : MonoBehaviour
     #region methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("colisión");
         Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
         if (player != null)
         {
