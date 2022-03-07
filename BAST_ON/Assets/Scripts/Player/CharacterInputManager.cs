@@ -21,6 +21,7 @@ public class CharacterInputManager : MonoBehaviour
     private float _attackInput;
     private float _horizontalAttackInput;
     private float _verticalAttackInput;
+    private float _pauseInput;
     #endregion
 
     #region methods
@@ -53,6 +54,7 @@ public class CharacterInputManager : MonoBehaviour
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
         _myAnimator.SetFloat("MovementDirection", Mathf.Abs(_horizontalInput));
+        _pauseInput = Input.GetAxis("Pause");
 
         if(_horizontalInput != 0)
         {
@@ -69,6 +71,10 @@ public class CharacterInputManager : MonoBehaviour
         if (_jumpInput != 0)
         {
             _myMovementController.JumpRequest();
+        }
+        if (_pauseInput != 0)
+        {
+            GameManager.Instance.Pause();
         }
 
         _horizontalAttackInput = Input.GetAxis("HorizontalAttack"); // Eje horizontal joystick derecho

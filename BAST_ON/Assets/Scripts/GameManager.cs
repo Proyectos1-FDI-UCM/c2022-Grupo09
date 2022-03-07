@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
-
-
-
     #region references
 
     private Character_HealthManager _myCharacterHealthManager;
@@ -23,15 +20,24 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region methods
-
     public void Pause()
     {
         Time.timeScale = 0;
+        _UIManagerReference.PauseGame();
     }
 
     public void Resume()
     {
         Time.timeScale = 1;
+    }
+    public void ExitToMainMenu()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void OnHealthValueChange(int newHealthValue)
