@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 1
   _maxHealth: 1
-  _myEnemy: {fileID: 0}
+  _myPowerUp: {fileID: 1152281271246692589, guid: 811fd918a8d44274782c2eb5fe4a5064, type: 3}
 --- !u!114 &4405429721014355802
 MonoBehaviour:
   m_ObjectHideFlags: 0

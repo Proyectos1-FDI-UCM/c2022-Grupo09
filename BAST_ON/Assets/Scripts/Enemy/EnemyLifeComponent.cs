@@ -4,32 +4,27 @@ using UnityEngine;
 
 public class EnemyLifeComponent : MonoBehaviour
 {
-    #region references 
+    #region parameters
     [SerializeField]
     private int _currentHealth = 3;
-
     [SerializeField]
     private int _maxHealth = 3;
+    #endregion
 
-    [SerializeField]
-    private GameObject _myEnemy;
-
-
+    #region properties
     ///<summary>
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     private bool _hasBeenHit = false;
+    #endregion
 
+    #region references 
     private Transform _thisTransform;
     [SerializeField]
     private GameObject _myPowerUp;
-
-    
-
     #endregion
 
     #region methods
-
     public void ChangeHealth(int value)
     {
         _currentHealth += value;
@@ -49,7 +44,7 @@ public class EnemyLifeComponent : MonoBehaviour
 
     public void Die()
     {
-        Destroy(_myEnemy);
+        Destroy(gameObject);
     }
 
    
@@ -69,21 +64,20 @@ public class EnemyLifeComponent : MonoBehaviour
         
     }
     
-        public void ReleasePowerUp()
-        {
-            Instantiate(_myPowerUp, _myEnemy.transform);
-        }
-        #endregion
-        // Start is called before the first frame update
-        void Start()
-        {
-            _thisTransform = gameObject.GetComponent<Transform>();        
-            _myPowerUp = gameObject;
-        }
+    public void ReleasePowerUp()
+    {
+        Instantiate(_myPowerUp, _thisTransform);
+    }
+    #endregion
+    // Start is called before the first frame update
+    void Start()
+    {
+        _thisTransform = transform;
+    }
 
-        // Update is called once per frame
-        void Update()
-        {
+    // Update is called once per frame
+    void Update()
+    {
 
-        }
+    }
 }
