@@ -472,7 +472,7 @@ MonoBehaviour:
   _offset: {x: 1, y: 0, z: -10}
   _verticalOffset: 3
   _lookUpTime: 2
-  _lerpSpeed: 0.5
+  _lerpSpeed: 0.05
 --- !u!1001 &1755349081
 PrefabInstance:
   m_ObjectHideFlags: 0

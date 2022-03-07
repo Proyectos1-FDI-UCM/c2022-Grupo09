@@ -24,7 +24,6 @@ public class EnemyShot : MonoBehaviour
         }
         else
         {
-            Debug.Log("a");
             BastonImpulseController baston = collision.GetComponent<BastonImpulseController>();
             if (baston == null) Destroy(gameObject);
         }
