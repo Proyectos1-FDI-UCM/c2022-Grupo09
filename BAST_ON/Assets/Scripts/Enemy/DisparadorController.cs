@@ -7,6 +7,7 @@ public class DisparadorController : MonoBehaviour
     #region parameters
     [SerializeField]
     private GameObject _myDisp,_myPlayer;
+    private Transform _myTransform;
     private GameObject _myInstance;
     [SerializeField]
     private float frecuencia=6;
@@ -17,30 +18,25 @@ public class DisparadorController : MonoBehaviour
 
     void Start()
     {
-
+        _myTransform = transform;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-            if (timer >= frecuencia)
-            {
-
-            pos = _myPlayer.transform.position - _myDisp.transform.position;
+        if (timer >= frecuencia)
+        {
+            pos = _myPlayer.transform.position - _myTransform.position;
+            Debug.Log(pos);
             //pos.Normalize();
             ang = Mathf.Acos(pos.normalized.x);
-            pos.y = -pos.y;
-            if (pos.y < 0)
-            {
-
-                ang = -ang;
-            }
-            Debug.Log(pos.y);
+            if (pos.y < 0) ang = -ang;
+            //Debug.Log(pos.y);
             ang *= 180 / Mathf.PI;
             _myInstance = Instantiate(_myDisp, transform.position, Quaternion.Euler(0,0,ang));
             // _myInstance=
             timer = 0;
-            }
+        }
             
     }
 }
