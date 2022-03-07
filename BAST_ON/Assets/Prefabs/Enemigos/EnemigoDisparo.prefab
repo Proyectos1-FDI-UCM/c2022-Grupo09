@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab054d5081d97049bf4791d3f59584d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myDisp: {fileID: 3448941494746741969, guid: 00ecd898d4e65934c92bd18496430fbf, type: 3}
+  _myDisp: {fileID: 9078195965090468923, guid: 25f5e08e86b2b1643b6eec099cd59930, type: 3}
+  _myPlayer: {fileID: 0}
   frecuencia: 6
 --- !u!114 &5466383375658251101
 MonoBehaviour:
