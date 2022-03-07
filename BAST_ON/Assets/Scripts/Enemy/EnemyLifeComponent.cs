@@ -63,25 +63,27 @@ public class EnemyLifeComponent : MonoBehaviour
 
             return;
         }
-
-
+    
         EnemyLifeComponent otherCheck = GetComponent<EnemyLifeComponent>();
+    
         
-    public void ReleasePowerUp()
-    {
-        Instantiate(_myPowerUp, _myEnemy.transform);
     }
-    #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        _thisTransform = gameObject.GetComponent<Transform>();        
-        _myPowerUp = gameObject;
-    }
+    
+        public void ReleasePowerUp()
+        {
+            Instantiate(_myPowerUp, _myEnemy.transform);
+        }
+        #endregion
+        // Start is called before the first frame update
+        void Start()
+        {
+            _thisTransform = gameObject.GetComponent<Transform>();        
+            _myPowerUp = gameObject;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
 }
