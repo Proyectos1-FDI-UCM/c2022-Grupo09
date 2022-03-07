@@ -5,25 +5,27 @@ using UnityEngine.UI;
 
 public class Character_HealthManager : MonoBehaviour
 {
-
-    
-    
-
-  
+    #region parameters    
     ///<summary>
     ///Vida maxima que puede tener el jugador
     ///</summary>
     [SerializeField] private int _maxHealth;
-
     ///<summary>
     ///Valor que determina la vida máxima
     ///</summary>
     [SerializeField] private int _currentHealth;
+    #endregion
 
-    
-    
-
-    
+    #region methods
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Si se produce colisión entre enemigos baja la vida
+        EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
+        if (enemy != null)
+        {
+            ChangeHealthValue(-1);
+        }
+    }
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -
     ///en el valor que sea para meter daño, que normalmente usamos Damage(intdamage) y ya está
@@ -36,21 +38,12 @@ public class Character_HealthManager : MonoBehaviour
         {
             Die();
         }
-        if(_currentHealth > _maxHealth)
+        if (_currentHealth > _maxHealth)
         {
-           //Hay que mantener el tope de vida
-           _currentHealth = _maxHealth;
-       }
-       GameManager.Instance.OnHealthValueChange(_currentHealth);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Si se produce colisión entre enemigos baja la vida
-        EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
-        if (enemy != null)
-        {
-            ChangeHealthValue(-1);
+            //Hay que mantener el tope de vida
+            _currentHealth = _maxHealth;
         }
+        GameManager.Instance.OnHealthValueChange(_currentHealth);
     }
 
     public void Die()
@@ -58,7 +51,7 @@ public class Character_HealthManager : MonoBehaviour
         Destroy(this.gameObject);
         GameManager.Instance.OnPlayerDeath();
     }
-
+    #endregion
 
     // Start is called before the first frame update
     void Start()

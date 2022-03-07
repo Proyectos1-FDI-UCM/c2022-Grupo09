@@ -14,6 +14,22 @@ public class EnemyShot : MonoBehaviour
 
 
     #region methods
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Character_HealthManager player = collision.GetComponent<Character_HealthManager>();
+        if (player != null)
+        {
+            player.ChangeHealthValue(-1);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("a");
+            BastonImpulseController baston = collision.GetComponent<BastonImpulseController>();
+            if (baston == null) Destroy(gameObject);
+        }
+    }
+
     public void CambiaRotacion(float rotation)
     {
         _myTransform.rotation = Quaternion.identity;
