@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     #region methods
     public void Pause()
     {
-        Time.timeScale = 0;
         _UIManagerReference.PauseGame();
+        Time.timeScale = 0;
     }
 
     public void Resume()
@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
     {
         _UIManagerReference.updateLifeBar(newHealthValue);
     }
+    public void StartGame()
+    {
+
+    }
+
 
     public void OnPlayerDeath()
     {

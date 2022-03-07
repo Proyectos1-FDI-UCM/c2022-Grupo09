@@ -32,6 +32,10 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        GameManager.Instance.StartGame();
+    }
     public void ResumeGame()
     {
         GameManager.Instance.Resume();
@@ -43,7 +47,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void ExitToMainMenu()
     {
-
+        GameManager.Instance.ExitToMainMenu();
     }
     public void QuitGame()
     {
