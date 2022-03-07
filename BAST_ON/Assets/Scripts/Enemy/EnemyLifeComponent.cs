@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class EnemyLifeComponent : MonoBehaviour
 {
-    #region parameters
+    #region references 
     [SerializeField]
     private int _currentHealth = 3;
+
     [SerializeField]
     private int _maxHealth = 3;
-    #endregion
 
-    #region properties
+    [SerializeField]
+    private GameObject _myEnemy;
+
+
     ///<summary>
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     private bool _hasBeenHit = false;
-    #endregion
 
-    #region references 
     private Transform _thisTransform;
     [SerializeField]
     private GameObject _myPowerUp;
+
+    
+
     #endregion
 
     #region methods
+
     public void ChangeHealth(int value)
     {
         _currentHealth += value;
@@ -44,7 +49,7 @@ public class EnemyLifeComponent : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(_myEnemy);
     }
 
    
@@ -53,9 +58,6 @@ public class EnemyLifeComponent : MonoBehaviour
         BastonImpulseController check = GetComponent<BastonImpulseController>();
         if(check != null)
         {
-            Vector3 papa = _thisTransform.position - check.referenciaAlTransformPos();
-            Debug.Log(papa);
-
             return;
         }
     
@@ -64,20 +66,21 @@ public class EnemyLifeComponent : MonoBehaviour
         
     }
     
-    public void ReleasePowerUp()
-    {
-        Instantiate(_myPowerUp, _thisTransform);
-    }
-    #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        _thisTransform = transform;
-    }
+        public void ReleasePowerUp()
+        {
+            Instantiate(_myPowerUp, _myEnemy.transform);
+        }
+        #endregion
+        // Start is called before the first frame update
+        void Start()
+        {
+            _thisTransform = gameObject.GetComponent<Transform>();        
+            _myPowerUp = gameObject;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
 
-    }
+        }
 }
