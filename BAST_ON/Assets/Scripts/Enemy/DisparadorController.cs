@@ -27,14 +27,10 @@ public class DisparadorController : MonoBehaviour
         if (timer >= frecuencia)
         {
             pos = _myPlayer.transform.position - _myTransform.position;
-            Debug.Log(pos);
-            //pos.Normalize();
-            ang = Mathf.Acos(pos.normalized.x);
+            ang = Mathf.Acos(pos.x);
             if (pos.y < 0) ang = -ang;
-            //Debug.Log(pos.y);
             ang *= 180 / Mathf.PI;
             _myInstance = Instantiate(_myDisp, transform.position, Quaternion.Euler(0,0,ang));
-            // _myInstance=
             timer = 0;
         }
             
