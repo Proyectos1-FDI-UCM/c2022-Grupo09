@@ -48,7 +48,7 @@ public class Character_HealthManager : MonoBehaviour
 
     public void Die()
     {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
         GameManager.Instance.OnPlayerDeath();
     }
     #endregion
