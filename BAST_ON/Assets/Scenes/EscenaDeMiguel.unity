@@ -458,7 +458,7 @@ PrefabInstance:
       objectReference: {fileID: 1171207514}
     - target: {fileID: 1054122495030894754, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
       propertyPath: frecuencia
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4105865500195146518, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
       propertyPath: m_Name

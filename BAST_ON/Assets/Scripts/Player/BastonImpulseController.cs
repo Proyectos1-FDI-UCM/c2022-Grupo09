@@ -12,6 +12,7 @@ public class BastonImpulseController : MonoBehaviour
 
     
     #endregion
+
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
