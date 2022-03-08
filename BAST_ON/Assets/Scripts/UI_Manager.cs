@@ -46,6 +46,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void PauseGame()
     {
+        GameManager.Instance.Pause();
         _pauseMenu.SetActive(true);
     }
     public void ExitToMainMenu()
@@ -79,6 +80,6 @@ public class UI_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) PauseGame();
     }
 }

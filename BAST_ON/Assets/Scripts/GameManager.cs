@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     #region methods
     public void Pause()
     {
-        _UIManagerReference.PauseGame();
         Time.timeScale = 0;
     }
 
