@@ -7,6 +7,8 @@ public class EnemyLifeComponent : MonoBehaviour
     #region parameters
     [SerializeField]
     private int _maxHealth = 3;
+    [SerializeField]
+    private int _dropPercentage = 50;
     #endregion
 
     #region properties
@@ -71,7 +73,7 @@ public class EnemyLifeComponent : MonoBehaviour
     
     public void ReleasePowerUp()
     {
-        Instantiate(_myPowerUp, _thisTransform);
+        if (Random.Range(0, (100 / _dropPercentage) - 1) == 0)Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
     }
     #endregion
     // Start is called before the first frame update
