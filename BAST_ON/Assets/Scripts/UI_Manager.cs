@@ -38,6 +38,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void ResumeGame()
     {
+        Debug.Log("a");
         GameManager.Instance.Resume();
         _pauseMenu.SetActive(false);
     }
