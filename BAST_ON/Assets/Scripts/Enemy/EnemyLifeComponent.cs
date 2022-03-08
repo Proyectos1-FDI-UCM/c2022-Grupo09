@@ -48,18 +48,13 @@ public class EnemyLifeComponent : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public Vector3 referenciaAlTransformPos(){
-         return _thisTransform.position;
-    }
+    
 
     public void hitForceCallback(Vector3 forceVector)
     {
-        BastonImpulseController check = GetComponent<BastonImpulseController>();
-        if(check != null)
-        {
-            _myEnemyStrikingForceController.StrikeCallback(forceVector);
-        }
-    }
+         _myEnemyStrikingForceController.StrikeCallback(forceVector);
+        
+     }
 
     // private void OnCollisionEnter(Collision collision)
     // {

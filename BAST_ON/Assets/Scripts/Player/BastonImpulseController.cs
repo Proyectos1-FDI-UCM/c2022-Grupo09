@@ -37,13 +37,12 @@ public class BastonImpulseController : MonoBehaviour
             EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
             if (check != null)
             {
-                Vector3 papa = check.referenciaAlTransformPos() - _bastonTransform.position;
-                Debug.Log(papa);
+                
 
                 check.ChangeHealth(-1);
-                check.hitForceCallback(papa);
+                check.hitForceCallback(impulseDirection);
                 
-                return;
+                
 
 
             }
