@@ -16,6 +16,7 @@ public class EnemyLifeComponent : MonoBehaviour
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     private bool _hasBeenHit = false;
+    
     #endregion
 
     #region references 
@@ -33,8 +34,9 @@ public class EnemyLifeComponent : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            ReleasePowerUp();
             Die();
+            ReleasePowerUp();
+           
         }
         if (_currentHealth > _maxHealth)
         {
@@ -72,6 +74,8 @@ public class EnemyLifeComponent : MonoBehaviour
     public void ReleasePowerUp()
     {
         Instantiate(_myPowerUp, _thisTransform);
+        
+        
     }
     #endregion
     // Start is called before the first frame update
