@@ -22,30 +22,14 @@ public class BastonImpulseController : MonoBehaviour
             impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
             impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
 
-
-
-            // Llamada al m�todo impulso a enemigos (con duck typing?)
-
             EnemyShot disparo = collision.GetComponent<EnemyShot>();
             if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
 
-
-
             _characterMovementController.ImpulseRequest(-impulseDirection);
 
-            //Detectar enemigo con el bast�n y quiatarle 1 de vida
-            EnemyLifeComponent check = collision.gameObject.GetComponent<EnemyLifeComponent>();
-            if (check != null)
-            {
-                
-
-                check.ChangeHealth(-1);
-                check.hitForceCallback(impulseDirection);
-                
-                
-
-
-            }
+            //Detectar enemigo con el bastón y empujarlo
+            EnemyLifeComponent enemigo = collision.GetComponent<EnemyLifeComponent>();
+            if (enemigo != null) enemigo.hitForceCallback(impulseDirection);
         }
     }
     #endregion

@@ -27,7 +27,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     }
 
     private void Start() {
-        _myEnemyPatrulla = gameObject.GetComponent<EnemyPatrulla>();
-        _myTransform = gameObject.transform;
+        _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
+        _myTransform = transform;
     }    
 }
