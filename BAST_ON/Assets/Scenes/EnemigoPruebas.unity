@@ -733,7 +733,8 @@ PrefabInstance:
       propertyPath: _myEnemy
       value: 
       objectReference: {fileID: 652681864}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7828171307037738920, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
 --- !u!1 &2147194444 stripped
 GameObject:
