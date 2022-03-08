@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class EnemyLifeComponent : MonoBehaviour
 {
-    #region references 
-    [SerializeField]
-    private int _currentHealth = 3;
-
+    #region parameters
     [SerializeField]
     private int _maxHealth = 3;
+    #endregion
 
+    #region properties
     [SerializeField]
-    private GameObject _myEnemy;
-
-
+    private int _currentHealth = 3;
     ///<summary>
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     private bool _hasBeenHit = false;
+    #endregion
 
+    #region references 
     private Transform _thisTransform;
     [SerializeField]
     private GameObject _myPowerUp;
-
-    
-
     private EnemyStrikingForceController _myEnemyStrikingForceController;
     #endregion
 
@@ -39,7 +35,6 @@ public class EnemyLifeComponent : MonoBehaviour
         {
             ReleasePowerUp();
             Die();
-           
         }
         if (_currentHealth > _maxHealth)
         {
@@ -50,7 +45,7 @@ public class EnemyLifeComponent : MonoBehaviour
 
     public void Die()
     {
-        Destroy(_myEnemy);
+        Destroy(gameObject);
     }
 
     public Vector3 referenciaAlTransformPos(){
@@ -62,8 +57,7 @@ public class EnemyLifeComponent : MonoBehaviour
         BastonImpulseController check = GetComponent<BastonImpulseController>();
         if(check != null)
         {
-            
-         _myEnemyStrikingForceController.StrikeCallback(forceVector);
+            _myEnemyStrikingForceController.StrikeCallback(forceVector);
         }
     }
 
@@ -82,20 +76,13 @@ public class EnemyLifeComponent : MonoBehaviour
     
     public void ReleasePowerUp()
     {
-        Instantiate(_myPowerUp, _myEnemy.transform);
+        Instantiate(_myPowerUp, _thisTransform);
     }
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         _thisTransform = transform;
-        _myPowerUp = gameObject;
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
     }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 }
