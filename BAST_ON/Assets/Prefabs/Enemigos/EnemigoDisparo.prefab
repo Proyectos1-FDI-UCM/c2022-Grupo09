@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myDisp: {fileID: 9078195965090468923, guid: 25f5e08e86b2b1643b6eec099cd59930, type: 3}
-  _myPlayer: {fileID: 0}
+  _myPlayer: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
   frecuencia: 6
 --- !u!114 &5466383375658251101
 MonoBehaviour:
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1
+  _dropPercentage: 50
   _currentHealth: 1
   _myPowerUp: {fileID: 1152281271246692589, guid: 811fd918a8d44274782c2eb5fe4a5064, type: 3}
 --- !u!114 &4405429721014355802
