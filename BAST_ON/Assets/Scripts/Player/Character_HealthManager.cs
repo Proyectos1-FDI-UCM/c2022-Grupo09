@@ -22,15 +22,12 @@ public class Character_HealthManager : MonoBehaviour
     #region methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!isInvincible) //Hago el check aquí para quitarnos llamadas a GetComponent que son muy caras
-        {      
         //Si se produce colisión entre enemigos baja la vida
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
         if (enemy != null)
         {
             ChangeHealthValue(-1);
             InvulnerabilityTrigger(_invulnerabilityTime); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
-        }
         }
     }
 
@@ -46,18 +43,21 @@ public class Character_HealthManager : MonoBehaviour
     ///</summary>
     public void ChangeHealthValue(int value)
     {
-        _currentHealth += value;
+        if (!isInvincible)
+        {
+            _currentHealth += value;
 
-        if (_currentHealth <= 0)
-        {
-            Die();
+            if (_currentHealth <= 0)
+            {
+                Die();
+            }
+            if (_currentHealth > _maxHealth)
+            {
+                //Hay que mantener el tope de vida
+                _currentHealth = _maxHealth;
+            }
+            GameManager.Instance.OnHealthValueChange(_currentHealth);
         }
-        if (_currentHealth > _maxHealth)
-        {
-            //Hay que mantener el tope de vida
-            _currentHealth = _maxHealth;
-        }
-        GameManager.Instance.OnHealthValueChange(_currentHealth);
     }
 
     public void Die()

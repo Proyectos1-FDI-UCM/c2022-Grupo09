@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        //@TODO implementar 
+        ExitToMainMenu(); 
     }
     #endregion
     
