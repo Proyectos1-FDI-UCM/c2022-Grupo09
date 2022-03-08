@@ -7,8 +7,6 @@ public class EnemyLifeComponent : MonoBehaviour
     #region parameters
     [SerializeField]
     private int _maxHealth = 3;
-    [SerializeField]
-    private int _dropPercentage = 50;
     #endregion
 
     #region properties
@@ -18,6 +16,7 @@ public class EnemyLifeComponent : MonoBehaviour
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     private bool _hasBeenHit = false;
+    
     #endregion
 
     #region references 
@@ -35,8 +34,9 @@ public class EnemyLifeComponent : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            ReleasePowerUp();
             Die();
+            ReleasePowerUp();
+           
         }
         if (_currentHealth > _maxHealth)
         {
@@ -73,7 +73,9 @@ public class EnemyLifeComponent : MonoBehaviour
     
     public void ReleasePowerUp()
     {
-        if (Random.Range(0, (100 / _dropPercentage) - 1) == 0)Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
+        Instantiate(_myPowerUp, _thisTransform);
+        
+        
     }
     #endregion
     // Start is called before the first frame update
