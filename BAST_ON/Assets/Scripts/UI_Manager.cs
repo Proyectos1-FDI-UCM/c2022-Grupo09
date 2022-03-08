@@ -19,6 +19,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Sprite emptyFruit;
     [SerializeField]
     private GameObject _mainMenu, _pauseMenu, _optionsMenu;
+    private GameObject _previusMenu;
 
     #region methods
     public void updateLifeBar(int _currentHealth){
@@ -34,13 +35,14 @@ public class UI_Manager : MonoBehaviour
 
     public void StartGame()
     {
+        _mainMenu.SetActive(false);
         GameManager.Instance.StartGame();
     }
     public void ResumeGame()
     {
         Debug.Log("a");
-        GameManager.Instance.Resume();
         _pauseMenu.SetActive(false);
+        GameManager.Instance.Resume();
     }
     public void PauseGame()
     {
@@ -50,6 +52,17 @@ public class UI_Manager : MonoBehaviour
     {
         GameManager.Instance.ExitToMainMenu();
     }
+    public void OpenOptionsMenu([SerializeField] GameObject previusMenu)
+    {
+        _previusMenu = previusMenu;
+        _previusMenu.SetActive(false);
+        _optionsMenu.SetActive(true);
+    }
+    public void ExitOptionsMenu()
+    {
+        _optionsMenu.SetActive(false);
+        _previusMenu.SetActive(true);
+    }
     public void QuitGame()
     {
         GameManager.Instance.QuitGame();
@@ -58,7 +71,7 @@ public class UI_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _mainMenu.SetActive(false);
+        _mainMenu.SetActive(true);
         _pauseMenu.SetActive(false);
         _optionsMenu.SetActive(false);
     }

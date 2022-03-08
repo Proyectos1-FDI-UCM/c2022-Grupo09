@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
-
+        _playerReference.SetActive(true);
+        Time.timeScale = 1;
     }
 
 
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _playerReference.SetActive(false);
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
