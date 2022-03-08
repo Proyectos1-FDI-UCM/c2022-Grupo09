@@ -46,8 +46,11 @@ public class UI_Manager : MonoBehaviour
     }
     public void PauseGame()
     {
-        GameManager.Instance.Pause();
-        _pauseMenu.SetActive(true);
+        if (!_mainMenu.activeSelf && !_optionsMenu.activeSelf)
+        {
+            GameManager.Instance.Pause();
+            _pauseMenu.SetActive(true);
+        }
     }
     public void ExitToMainMenu()
     {
