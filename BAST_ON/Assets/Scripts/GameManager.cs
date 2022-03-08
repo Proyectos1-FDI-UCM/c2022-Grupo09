@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     #region methods
     public void Pause()
     {
-        _UIManagerReference.PauseGame();
         Time.timeScale = 0;
     }
 
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        //@TODO implementar 
+        ExitToMainMenu(); 
     }
     #endregion
     
