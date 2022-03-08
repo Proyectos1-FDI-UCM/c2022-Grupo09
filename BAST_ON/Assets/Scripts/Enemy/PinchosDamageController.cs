@@ -15,7 +15,7 @@ public class PinchosDamageController : MonoBehaviour
         Character_HealthManager player = collision.GetComponent<Character_HealthManager>();
         if (player != null)
         {
-            player.ChangeHealthValue(_damage);
+            player.ChangeHealthValue(-_damage);
         }
     }
     #endregion
