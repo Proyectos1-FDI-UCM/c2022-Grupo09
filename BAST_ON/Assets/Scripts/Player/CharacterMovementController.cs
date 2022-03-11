@@ -160,7 +160,5 @@ public class CharacterMovementController : MonoBehaviour
 
         // Reset del movimiento
         _movementDirection = Vector2.zero;
-
-        Debug.Log(_myWallDetector.isInWall());
     }
 }
