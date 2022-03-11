@@ -92,8 +92,7 @@ public class CharacterAttackController : MonoBehaviour
                     if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 45);
                     else _bastonTransform.Rotate(Vector3.forward, 135);
                 }
-                // Frente (default) o mover izquierda si es hacia la izquierda
-                else if (horizontalAttackDirection > 0 && _defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
+                // Frente (default)
                 // Frente abajo
                 else if ((horizontalAttackDirection > _cotaResta) &&
                     (horizontalAttackDirection <= _cotaSuma) &&
@@ -108,6 +107,8 @@ public class CharacterAttackController : MonoBehaviour
                     (verticalAttackDirection >= -1) &&
                     (verticalAttackDirection) <= -_cotaSuma)
                 { _bastonTransform.Rotate(Vector3.forward, -90); }
+                // hacia la izquierda si se mueve a la izquierda
+                else if (horizontalAttackDirection > 0 && _defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
             }
             else if (_defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
 
