@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2021335209507521157}
   - component: {fileID: 2064836601977449977}
   - component: {fileID: 1865850140569161645}
+  - component: {fileID: 7959864021097517536}
   - component: {fileID: 3416954483749118995}
   m_Layer: 7
   m_Name: Player
@@ -172,6 +173,7 @@ MonoBehaviour:
   _baston: {fileID: 8705272921097061316}
   _attackTime: 0.3
   _attackCooldown: 0.3
+  repelStrenght: 15
 --- !u!114 &2064836601977449977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 8
   _currentHealth: 8
+  _invulnerabilityTime: 1
 --- !u!114 &1865850140569161645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +204,25 @@ MonoBehaviour:
   _floorLayer:
     serializedVersion: 2
     m_Bits: 256
+  _floorDetectorOffset: 0.01
+  _horizontalSizeDiminuer: 0.015
+--- !u!114 &7959864021097517536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676595374184265813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1bb8fa1d7856545b8fbe3076ff46e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _floorDetectorOffset: 0.01
+  _horizontalSizeAmplier: 0.05
 --- !u!95 &3416954483749118995
 Animator:
   serializedVersion: 3

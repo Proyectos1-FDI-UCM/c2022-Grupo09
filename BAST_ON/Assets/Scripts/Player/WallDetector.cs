@@ -8,11 +8,13 @@ public class WallDetector : MonoBehaviour
     private CapsuleCollider2D _myCollider;
     [SerializeField]
     private LayerMask _wallLayer;
+    #endregion
 
     #region parameters
     [SerializeField]
-    private float _floorDetectorOffset = 0.01f, _horizontalSizeAmplier = 0.015f;
+    private float _horizontalSizeAmplifier = 0.015f;
     #endregion
+
     #region properties
     private Vector3 _sizeOffset;
     #endregion methods
@@ -24,12 +26,11 @@ public class WallDetector : MonoBehaviour
         return _boxCast.collider != null;
     }
 
-    #endregion
     // Start is called before the first frame update
     void Start()
     {
         _myCollider = GetComponent<CapsuleCollider2D>();
-        _sizeOffset = Vector2.right * _horizontalSizeAmplier;
+        _sizeOffset = Vector2.right * _horizontalSizeAmplifier;
         
     }
 

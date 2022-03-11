@@ -123,7 +123,7 @@ public class CharacterMovementController : MonoBehaviour
         // Impulso que va reduciendo a cada iteración
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
-        if (_myWallDetector.isInWall())_gravityReducer = 0.5f;
+        if (_myWallDetector.isInWall() && !_myFloorDetector.IsGrounded())_gravityReducer = 5f;
 
         else _gravityReducer = 1;
 
