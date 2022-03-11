@@ -31,6 +31,8 @@ public class CharacterMovementController : MonoBehaviour
     /// Variable auxiliar que cuenta el tiempo que el jugador lleva en el aire para aplicarlo a la gravedad.
     /// </summary>
     private float _onAirElasedTime = 0f;
+
+    private float _gravityReducer;
     /// <summary>
     /// Réplica de la gravedad que se le aplicaría al Rigidbody2D para así poder mover al jugador de forma consistente con el método MovePosition().
     /// </summary>
@@ -45,6 +47,7 @@ public class CharacterMovementController : MonoBehaviour
     private CharacterAttackController _myAttackController;
     private FloorDetector _myFloorDetector;
     private Rigidbody2D _myRigidbody;
+    private WallDetector _myWallDetector;
     #endregion
 
     #region methods
@@ -93,6 +96,7 @@ public class CharacterMovementController : MonoBehaviour
         _myAttackController = GetComponent<CharacterAttackController>();
         _myFloorDetector = GetComponent<FloorDetector>();
         _myRigidbody = GetComponent<Rigidbody2D>();
+        _myWallDetector = GetComponent<WallDetector>();
     }
 
     // Update is called once per frame
@@ -119,8 +123,11 @@ public class CharacterMovementController : MonoBehaviour
         // Impulso que va reduciendo a cada iteración
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
-        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime);
+        if (_myWallDetector.isInWall())_gravityReducer = 0.5f;
 
+        else _gravityReducer = 1;
+
+        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime) / _gravityReducer;
         // Movimiento del personaje
         _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
 
