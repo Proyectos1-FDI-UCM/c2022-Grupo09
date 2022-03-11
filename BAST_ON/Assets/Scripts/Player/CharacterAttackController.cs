@@ -72,7 +72,6 @@ public class CharacterAttackController : MonoBehaviour
             if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
-            if (_defaultDirection < 0) _bastonTransform.Rotate(Vector3.up, 180);
             // Si se ha escogido una direcci�n para el ataque
             if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {
@@ -87,19 +86,27 @@ public class CharacterAttackController : MonoBehaviour
                     (horizontalAttackDirection <= _cotaSuma) &&
                     (verticalAttackDirection < _cotaSuma) &&
                     (verticalAttackDirection >= _cotaResta))
-                { _bastonTransform.Rotate(Vector3.forward, 45); }
+                {
+                    if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 45);
+                    else _bastonTransform.Rotate(Vector3.forward, 135);
+                }
                 // Frente (default)
                 // Frente abajo
                 else if ((horizontalAttackDirection > _cotaResta) &&
                     (horizontalAttackDirection <= _cotaSuma) &&
                     (verticalAttackDirection > -_cotaSuma) &&
                     (verticalAttackDirection <= -_cotaResta))
-                { _bastonTransform.Rotate(Vector3.forward, -45); }
+                {
+                    if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -45);
+                    else _bastonTransform.Rotate(Vector3.forward, -135);
+                }
                 else if ((horizontalAttackDirection >= 0) &&
                     (horizontalAttackDirection <= _cotaResta) &&
                     (verticalAttackDirection >= -1) &&
                     (verticalAttackDirection) <= -_cotaSuma)
                 { _bastonTransform.Rotate(Vector3.forward, -90); }
+                else if (_defaultDirection < 0)
+                { _bastonTransform.Rotate(Vector3.forward, 180); }
             }
             _baston.SetActive(true);
         }
