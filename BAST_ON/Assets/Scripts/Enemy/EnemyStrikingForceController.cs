@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class EnemyStrikingForceController : MonoBehaviour
 {
+    [SerializeField] private float conversionValue = 5.0f;
     private EnemyPatrulla _myEnemyPatrulla;
+    private EnemyLifeComponent _myEnemyLifeComponent;
     private Transform _myTransform;
-    private Vector3 _strikeDirection = Vector3.zero; 
+    private Rigidbody2D _myRigidBody;
     private bool hasBeenStruck = false;
     public void StrikeCallback(Vector3 strikeVector){
         _myEnemyPatrulla.enabled = false;
-        _strikeDirection = strikeVector;
+        _myRigidBody.WakeUp();
+        _myRigidBody.AddForce(strikeVector, ForceMode2D.Impulse);
         hasBeenStruck = true;
     }
 
     private void OnCollisionEnter(Collision other) {
         if(hasBeenStruck){
-            Destroy(gameObject);
+            _myEnemyLifeComponent.ChangeHealth(Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue));
+            _myRigidBody.Sleep();
+            hasBeenStruck = false;
+
         }
     }    
 
-    private void Update() {
-        if(hasBeenStruck){
-            _myTransform.Translate(_strikeDirection * Time.deltaTime);
-        }
-    }
-
     private void Start() {
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
+        _myRigidBody = GetComponent<Rigidbody2D>();
         _myTransform = transform;
     }    
 }

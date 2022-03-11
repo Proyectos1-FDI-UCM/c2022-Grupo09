@@ -51,14 +51,6 @@ public class EnemyLifeComponent : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
-
-    public void hitForceCallback(Vector3 forceVector)
-    {
-         _myEnemyStrikingForceController.StrikeCallback(forceVector);
-        
-     }
-
     // private void OnCollisionEnter(Collision collision)
     // {
     //     BastonImpulseController check = GetComponent<BastonImpulseController>();
