@@ -21,6 +21,7 @@ public class CharacterInputManager : MonoBehaviour
     private float _attackInput;
     private float _horizontalAttackInput;
     private float _verticalAttackInput;
+    private float _dashInput;
     #endregion
 
     #region methods
@@ -73,10 +74,15 @@ public class CharacterInputManager : MonoBehaviour
 
         _horizontalAttackInput = Input.GetAxis("Horizontal");
         _verticalAttackInput = Input.GetAxis("Vertical");
+        _dashInput = Input.GetAxis("Dash");
         NormalizeAttackInput(ref _horizontalAttackInput, ref _verticalAttackInput);
         if (_attackInput != 0)
         {
             _myAttackController.Bastonazo(Mathf.Abs(_horizontalAttackInput), _verticalAttackInput);
+        }
+        if (_dashInput > 0)
+        {
+            _myAttackController.Dash();
         }
 
         _previusVerticalInput = _verticalInput;

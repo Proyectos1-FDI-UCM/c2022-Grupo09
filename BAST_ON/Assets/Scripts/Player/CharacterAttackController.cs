@@ -111,6 +111,18 @@ public class CharacterAttackController : MonoBehaviour
             _baston.SetActive(true);
         }
     }
+
+    public void Dash()
+    {
+        if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown && !_myFloorDetector.IsGrounded())
+        {
+            _elapsedAttackTime = 0f;
+            _bastonTransform.rotation = Quaternion.identity;
+            if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 225f);
+            else _bastonTransform.Rotate(Vector3.forward, -45f);
+            _baston.SetActive(true);
+        }
+    }
     #endregion
 
     // Start is called before the first frame update
