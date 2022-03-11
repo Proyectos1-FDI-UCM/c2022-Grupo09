@@ -105,9 +105,9 @@ public class CharacterAttackController : MonoBehaviour
                     (verticalAttackDirection >= -1) &&
                     (verticalAttackDirection) <= -_cotaSuma)
                 { _bastonTransform.Rotate(Vector3.forward, -90); }
-                else if (_defaultDirection < 0)
-                { _bastonTransform.Rotate(Vector3.forward, 180); }
             }
+            else if (_defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
+
             _baston.SetActive(true);
         }
     }

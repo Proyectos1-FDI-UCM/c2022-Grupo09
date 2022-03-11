@@ -7,7 +7,8 @@ public class CharacterMovementController : MonoBehaviour
     #region parameters
     [SerializeField]
     private float _speedMovement = 1f;
-
+    [SerializeField]
+    private float _onWallGravityReduce = 3f;
     [SerializeField]
     private float _jumpSpeed = 1f;
     [SerializeField]
@@ -123,7 +124,7 @@ public class CharacterMovementController : MonoBehaviour
         // Impulso que va reduciendo a cada iteración
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
-        if (_myWallDetector.isInWall() && !_myFloorDetector.IsGrounded()) _gravityReducer = 5f;
+        if (_myWallDetector.isInWall() && !_myFloorDetector.IsGrounded()) _gravityReducer = _onWallGravityReduce;
 
         else _gravityReducer = 1;
 
