@@ -9,6 +9,8 @@ public class CharacterAttackController : MonoBehaviour
     private GameObject _baston;
     private Transform _bastonTransform;
     private FloorDetector _myFloorDetector;
+    private WallDetector _myWallDetector;
+    private CharacterMovementController _myMovementController;
     #endregion
 
     #region parameters
@@ -129,6 +131,8 @@ public class CharacterAttackController : MonoBehaviour
     void Start()
     {
         _myFloorDetector = GetComponent<FloorDetector>();
+        _myWallDetector = GetComponent<WallDetector>();
+        _myMovementController = GetComponent<CharacterMovementController>();
         _bastonTransform = _baston.transform;
         _baston.SetActive(false);
     }
@@ -139,6 +143,7 @@ public class CharacterAttackController : MonoBehaviour
         // Si el ataque ha empezado empieza a contar
         if (_baston.activeSelf)
         {
+            if (_myWallDetector.isInWall()) _myMovementController.WallWasAttacked(true);
             _elapsedAttackTime += Time.deltaTime;
             // Cuando el ataque se haya completado desactiva el bast�n
             if (_elapsedAttackTime > _attackTime)
@@ -147,6 +152,10 @@ public class CharacterAttackController : MonoBehaviour
                 _elapsedCooldownTime = 0f;
             }
         }
-        else if (_elapsedCooldownTime < _attackCooldown) _elapsedCooldownTime += Time.deltaTime;
+        else if (_elapsedCooldownTime < _attackCooldown) 
+        { 
+            _elapsedCooldownTime += Time.deltaTime;
+            _myMovementController.WallWasAttacked(false);
+        }
     }
 }

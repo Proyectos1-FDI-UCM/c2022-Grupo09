@@ -10,6 +10,8 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField]
     private float _onWallGravityReduce = 3f;
     [SerializeField]
+    private float _wallAttackedMovementPauseTime = 1f;
+    [SerializeField]
     private float _jumpSpeed = 1f;
     [SerializeField]
     private float _bastonImpulse = 1f;
@@ -38,6 +40,10 @@ public class CharacterMovementController : MonoBehaviour
     /// Réplica de la gravedad que se le aplicaría al Rigidbody2D para así poder mover al jugador de forma consistente con el método MovePosition().
     /// </summary>
     private Vector2 _gravity = Vector2.zero;
+
+    private float _originalSpeedMovement;
+
+    private bool _attackedWall = false;
     #endregion
 
     #region references
@@ -87,6 +93,10 @@ public class CharacterMovementController : MonoBehaviour
             _onAirElasedTime = 0f;
         }
     }
+    public void WallWasAttacked(bool attacked)
+    {
+        _attackedWall = attacked;
+    }
     #endregion
 
     // Start is called before the first frame update
@@ -98,6 +108,8 @@ public class CharacterMovementController : MonoBehaviour
         _myFloorDetector = GetComponent<FloorDetector>();
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myWallDetector = GetComponent<WallDetector>();
+
+        _originalSpeedMovement = _speedMovement;
     }
 
     // Update is called once per frame
@@ -124,11 +136,17 @@ public class CharacterMovementController : MonoBehaviour
         // Impulso que va reduciendo a cada iteración
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
+        // Reductor gravedad si está en la pared
         if (_myWallDetector.isInWall() && !_myFloorDetector.IsGrounded()) _gravityReducer = _onWallGravityReduce;
-
         else _gravityReducer = 1;
 
+        // Calculo de la gravedad
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime) / _gravityReducer;
+
+        // Velocidad a 0 si acaba de golpear una pared
+        if (_attackedWall) _speedMovement = 0;
+        else _speedMovement = _originalSpeedMovement;
+
         // Movimiento del personaje
         _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
 
@@ -139,7 +157,10 @@ public class CharacterMovementController : MonoBehaviour
         // Contador para reducir el impulso
         if (_impulseElapsedTime < _impulseDirection.magnitude) _impulseElapsedTime += Time.fixedDeltaTime;
         else _impulseDirection = Vector2.zero;
+
         // Reset del movimiento
         _movementDirection = Vector2.zero;
+
+        Debug.Log(_myWallDetector.isInWall());
     }
 }

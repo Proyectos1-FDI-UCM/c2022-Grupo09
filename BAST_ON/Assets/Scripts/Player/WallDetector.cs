@@ -13,15 +13,18 @@ public class WallDetector : MonoBehaviour
     #region parameters
     [SerializeField]
     private float _horizontalSizeAmplifier = 0.015f;
+    [SerializeField]
+    private float _verticalSizeReducer = 0.02f;
     #endregion
 
     #region properties
     private Vector3 _sizeOffset;
+    private Vector3 _verticalReducer;
     #endregion methods
 
     public bool isInWall()
     {
-        RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center + _sizeOffset / 2, _myCollider.bounds.size + _sizeOffset, 0f, Vector2.zero, 0f, _wallLayer);
+        RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center + _sizeOffset / 2, _myCollider.bounds.size + _sizeOffset - _verticalReducer, 0f, Vector2.zero, 0f, _wallLayer);
 
         return _boxCast.collider != null;
     }
@@ -31,7 +34,7 @@ public class WallDetector : MonoBehaviour
     {
         _myCollider = GetComponent<CapsuleCollider2D>();
         _sizeOffset = Vector2.right * _horizontalSizeAmplifier;
-        
+        _verticalReducer = Vector2.up * _verticalSizeReducer;
     }
 
     // Update is called once per frame
