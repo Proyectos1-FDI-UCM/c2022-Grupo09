@@ -8,6 +8,9 @@ public class BastonImpulseController : MonoBehaviour
     [SerializeField]
     GameObject _player;
     CharacterMovementController _characterMovementController;
+
+    CharacterAttackController _myCharacterAttackController;
+
     Transform _bastonTransform;
 
     
@@ -29,8 +32,8 @@ public class BastonImpulseController : MonoBehaviour
             _characterMovementController.ImpulseRequest(-impulseDirection);
 
             //Detectar enemigo con el bastón y empujarlo
-            EnemyLifeComponent enemigo = collision.GetComponent<EnemyLifeComponent>();
-            if (enemigo != null) enemigo.hitForceCallback(impulseDirection);
+            EnemyStrikingForceController enemigo = collision.GetComponent<EnemyStrikingForceController>();
+            if (enemigo != null) enemigo.StrikeCallback(impulseDirection * _myCharacterAttackController.RepelStrenght);
         }
     }
     #endregion
@@ -40,10 +43,10 @@ public class BastonImpulseController : MonoBehaviour
     {
         _bastonTransform = transform;
         _characterMovementController = _player.GetComponent<CharacterMovementController>();
+        _myCharacterAttackController = _player.GetComponent<CharacterAttackController>();        
     }
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

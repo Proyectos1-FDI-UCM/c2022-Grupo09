@@ -24,6 +24,8 @@ public class CharacterAttackController : MonoBehaviour
     private float _defaultDirection;
 
     [SerializeField] private float repelStrenght = 15;
+
+    public float RepelStrenght => repelStrenght;
     ///<summary>
     ///Es cos(22'5�) y sen(3*22'5�).
     ///Utilizado para delimitar las areas de input que corresponden a cada direcci�n de ataque.
