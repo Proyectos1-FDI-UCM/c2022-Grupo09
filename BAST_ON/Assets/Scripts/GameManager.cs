@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
         _playerReference.SetActive(true);
         Time.timeScale = 1;
     }
-
-
+  
     public void OnPlayerDeath()
     {
         ExitToMainMenu(); 
