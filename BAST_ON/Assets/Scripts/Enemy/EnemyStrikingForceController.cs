@@ -16,16 +16,15 @@ public class EnemyStrikingForceController : MonoBehaviour
         _myRigidBody.AddForce(strikeVector, ForceMode2D.Impulse);
         hasBeenStruck = true;
     }
-
-    private void OnCollisionEnter(Collision other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         if(hasBeenStruck){
             _myEnemyLifeComponent.ChangeHealth(Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue));
             _myRigidBody.Sleep();
             hasBeenStruck = false;
 
         }
-    }    
-
+    } 
+    
     private void Start() {
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
         _myRigidBody = GetComponent<Rigidbody2D>();
