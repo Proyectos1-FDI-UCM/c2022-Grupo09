@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMovement: 10
   _onWallGravityReduce: 3.2
-  _jumpSpeed: 10
-  _bastonImpulse: 15
+  _jumpSpeed: 13
+  _bastonImpulse: 22
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
@@ -223,6 +223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _horizontalSizeAmplifier: 0.015
+  _verticalSizeReducer: 0.02
 --- !u!95 &3416954483749118995
 Animator:
   serializedVersion: 3

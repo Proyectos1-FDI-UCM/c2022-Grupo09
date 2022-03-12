@@ -74,8 +74,14 @@ public class CharacterAttackController : MonoBehaviour
             if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
+
+            if (_myWallDetector.isInWall())
+            {
+                if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -45);
+                else _bastonTransform.Rotate(Vector3.forward, -135);
+            }
             // Si se ha escogido una direcci�n para el ataque
-            if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
+            else if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {
                 // Arriba
                 if ((horizontalAttackDirection >= 0) &&
@@ -94,18 +100,19 @@ public class CharacterAttackController : MonoBehaviour
                 }
                 // Frente (default)
                 // Frente abajo
-                else if ((horizontalAttackDirection > _cotaResta) &&
+                /*else if ((horizontalAttackDirection > _cotaResta) &&
                     (horizontalAttackDirection <= _cotaSuma) &&
                     (verticalAttackDirection > -_cotaSuma) &&
                     (verticalAttackDirection <= -_cotaResta))
                 {
                     if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -45);
                     else _bastonTransform.Rotate(Vector3.forward, -135);
-                }
+                }*/
+                // Abajo
                 else if ((horizontalAttackDirection >= 0) &&
-                    (horizontalAttackDirection <= _cotaResta) &&
+                    (horizontalAttackDirection <= Mathf.Sqrt(2) / 2) &&
                     (verticalAttackDirection >= -1) &&
-                    (verticalAttackDirection) <= -_cotaSuma)
+                    (verticalAttackDirection) <= -Mathf.Sqrt(2) / 2)
                 { _bastonTransform.Rotate(Vector3.forward, -90); }
                 // hacia la izquierda si se mueve a la izquierda
                 else if (horizontalAttackDirection > 0 && _defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);

@@ -10,8 +10,6 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField]
     private float _onWallGravityReduce = 3f;
     [SerializeField]
-    private float _wallAttackedMovementPauseTime = 1f;
-    [SerializeField]
     private float _jumpSpeed = 1f;
     [SerializeField]
     private float _bastonImpulse = 1f;

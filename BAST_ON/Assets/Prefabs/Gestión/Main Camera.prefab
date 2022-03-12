@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _offset: {x: 0, y: 0, z: -10}
+  _offset: {x: 2, y: 2, z: -10}
   _verticalOffset: 3
   _lookUpTime: 2
-  _lerpSpeed: 0.01
+  _lerpSpeed: 0.05
