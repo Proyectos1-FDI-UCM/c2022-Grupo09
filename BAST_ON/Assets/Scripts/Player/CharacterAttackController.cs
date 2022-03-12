@@ -18,15 +18,14 @@ public class CharacterAttackController : MonoBehaviour
     private float _attackTime = 1f;
     [SerializeField]
     private float _attackCooldown = 1f;
+    [SerializeField] private float repelStrenght = 15;
     #endregion
 
     #region properties
     private float _elapsedAttackTime;
     private float _elapsedCooldownTime;
     private float _defaultDirection;
-
-    [SerializeField] private float repelStrenght = 15;
-
+    private Quaternion _originalAttackRotation;
     public float RepelStrenght => repelStrenght;
     ///<summary>
     ///Es cos(22'5�) y sen(3*22'5�).
@@ -119,6 +118,7 @@ public class CharacterAttackController : MonoBehaviour
             }
             else if (_defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
 
+            _originalAttackRotation = _bastonTransform.rotation;
             _baston.SetActive(true);
         }
     }
@@ -131,6 +131,7 @@ public class CharacterAttackController : MonoBehaviour
             _bastonTransform.rotation = Quaternion.identity;
             if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 225f);
             else _bastonTransform.Rotate(Vector3.forward, -45f);
+            _originalAttackRotation = _bastonTransform.rotation;
             _baston.SetActive(true);
         }
     }
@@ -152,6 +153,7 @@ public class CharacterAttackController : MonoBehaviour
         // Si el ataque ha empezado empieza a contar
         if (_baston.activeSelf)
         {
+            _bastonTransform.rotation = _originalAttackRotation;
             if (_myWallDetector.isInWall()) _myMovementController.WallWasAttacked(true);
             _elapsedAttackTime += Time.deltaTime;
             // Cuando el ataque se haya completado desactiva el bast�n
