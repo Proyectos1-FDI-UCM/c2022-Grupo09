@@ -83,6 +83,10 @@ public class UI_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame();
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) 
+        {
+            if (!_pauseMenu.activeSelf) PauseGame();
+            else ResumeGame();
+        }
     }
 }

@@ -23,8 +23,8 @@ public class FloorDetector : MonoBehaviour
         RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center, _myCollider.bounds.size - _offsetDeTal, 0f, Vector2.down, _floorDetectorOffset, _floorLayer);
         /*
         if (_boxCast.collider != null) Debug.Log(_boxCast.collider);
-        Debug.DrawRay(_myCollider.bounds.center + new Vector3(_myCollider.bounds.extents.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
-        Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
+        Debug.DrawRay(_myCollider.bounds.center + new Vector3(_myCollider.bounds.extents.x - _offsetDeTal.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
+        Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x - _offsetDeTal.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, _myCollider.bounds.extents.y + _floorDetectorOffset), Vector2.right * 2*(_myCollider.bounds.extents.x));
         */
         return _boxCast.collider != null;
