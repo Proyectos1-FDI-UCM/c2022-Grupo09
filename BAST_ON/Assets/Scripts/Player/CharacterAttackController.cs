@@ -77,7 +77,7 @@ public class CharacterAttackController : MonoBehaviour
             if (_myWallDetector.isInWall())
             {
                 if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -60);
-                else _bastonTransform.Rotate(Vector3.forward, -150);
+                else _bastonTransform.Rotate(Vector3.forward, -120);
             }
             // Si se ha escogido una direcci�n para el ataque
             else if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
