@@ -18,7 +18,7 @@ public class UI_Manager : MonoBehaviour
     ///</summary>
     [SerializeField] private Sprite emptyFruit;
     [SerializeField]
-    private GameObject _mainMenu, _pauseMenu, _optionsMenu;
+    private GameObject _mainMenu, _pauseMenu, _controlsMenu;
     private GameObject _previusMenu;
 
     #region methods
@@ -46,7 +46,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void PauseGame()
     {
-        if (!_mainMenu.activeSelf && !_optionsMenu.activeSelf)
+        if (!_mainMenu.activeSelf && !_controlsMenu.activeSelf)
         {
             GameManager.Instance.Pause();
             _pauseMenu.SetActive(true);
@@ -60,11 +60,11 @@ public class UI_Manager : MonoBehaviour
     {
         _previusMenu = previusMenu;
         _previusMenu.SetActive(false);
-        _optionsMenu.SetActive(true);
+        _controlsMenu.SetActive(true);
     }
     public void ExitOptionsMenu()
     {
-        _optionsMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
         _previusMenu.SetActive(true);
     }
     public void QuitGame()
@@ -77,7 +77,7 @@ public class UI_Manager : MonoBehaviour
     {
         _mainMenu.SetActive(true);
         _pauseMenu.SetActive(false);
-        _optionsMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
     }
 
     // Update is called once per frame
