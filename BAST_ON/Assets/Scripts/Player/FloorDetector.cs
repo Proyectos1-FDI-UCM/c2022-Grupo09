@@ -28,7 +28,6 @@ public class FloorDetector : MonoBehaviour
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x - _offsetDeTal.x, 0), Vector2.down * (_myCollider.bounds.extents.y + _floorDetectorOffset));
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, _myCollider.bounds.extents.y + _floorDetectorOffset), Vector2.right * 2*(_myCollider.bounds.extents.x));
         */
-        Debug.Log(_boxCast.collider != null);
         return _boxCast.collider != null;
     }
     #endregion

@@ -18,7 +18,7 @@ public class UI_Manager : MonoBehaviour
     ///</summary>
     [SerializeField] private Sprite emptyFruit;
     [SerializeField]
-    private GameObject _mainMenu, _pauseMenu, _controlsMenu;
+    private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
     private GameObject _previusMenu;
 
     #region methods
@@ -36,6 +36,7 @@ public class UI_Manager : MonoBehaviour
     public void StartGame()
     {
         _mainMenu.SetActive(false);
+        _hud.SetActive(true);
         GameManager.Instance.StartGame();
     }
     public void ResumeGame()
@@ -78,6 +79,7 @@ public class UI_Manager : MonoBehaviour
         _mainMenu.SetActive(true);
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
+        _hud.SetActive(false);
     }
 
     // Update is called once per frame
