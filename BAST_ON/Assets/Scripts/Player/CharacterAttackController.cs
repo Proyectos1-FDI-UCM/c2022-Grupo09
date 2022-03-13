@@ -74,11 +74,13 @@ public class CharacterAttackController : MonoBehaviour
             _elapsedAttackTime = 0f;
             _bastonTransform.rotation = Quaternion.identity;
 
+            // Walljump
             if (_myWallDetector.isInWall())
             {
-                if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -60);
-                else _bastonTransform.Rotate(Vector3.forward, -120);
+                if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -52);
+                else _bastonTransform.Rotate(Vector3.forward, -127);
             }
+
             // Si se ha escogido una direcci�n para el ataque
             else if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
             {

@@ -206,7 +206,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _floorDetectorOffset: 0.01
-  _horizontalSizeDiminuer: 0.015
+  _horizontalSizeDiminuer: 0.04
+  _verticalSizeDiminuer: 0.5
 --- !u!114 &7959864021097517536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,8 +223,8 @@ MonoBehaviour:
   _wallLayer:
     serializedVersion: 2
     m_Bits: 256
-  _horizontalSizeAmplifier: 0.015
-  _verticalSizeReducer: 0.02
+  _horizontalSizeAmplifier: 0.03
+  _verticalSizeReducer: 0.5
 --- !u!95 &3416954483749118995
 Animator:
   serializedVersion: 3
