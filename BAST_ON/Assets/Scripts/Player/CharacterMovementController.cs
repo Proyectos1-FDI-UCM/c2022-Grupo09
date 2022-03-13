@@ -95,6 +95,25 @@ public class CharacterMovementController : MonoBehaviour
     {
         _attackedWall = attacked;
     }
+
+    public void MoreVelocity(float amount, float duration, float currentDuration)
+    {
+        currentDuration--;
+
+        if (currentDuration > 0)
+        {
+            _myRigidbody.MovePosition(_myRigidbody.position + ((_movementDirection * (_speedMovement * amount) + _impulseDirection) * Time.fixedDeltaTime));
+            Time.timeScale = 0.25f;
+            duration = currentDuration;
+        }
+
+        else if (currentDuration <= 0)
+        {
+            Time.timeScale = 1f;
+            
+        }
+
+    }
     #endregion
 
     // Start is called before the first frame update

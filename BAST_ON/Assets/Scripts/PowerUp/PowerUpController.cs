@@ -5,10 +5,11 @@ using UnityEngine;
 public class PowerUpController : MonoBehaviour
 {
     #region references
+    GameObject _myPowerUp;
+    #endregion
+    #region parameters
     [SerializeField]
     private int _extraHealth = 1; //variable para aumentar 1 pto de vida
-
-    GameObject _myPowerUp;
     #endregion
     #region methods
     //Método para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
