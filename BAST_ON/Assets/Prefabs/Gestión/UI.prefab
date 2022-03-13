@@ -1701,7 +1701,7 @@ MonoBehaviour:
   emptyFruit: {fileID: 21300000, guid: fa4cb11faf51f024fa2d8eb14a8349c7, type: 3}
   _mainMenu: {fileID: 9119655466240981555}
   _pauseMenu: {fileID: 9198581502665334822}
-  _optionsMenu: {fileID: 6537893501047638615}
+  _controlsMenu: {fileID: 6537893501047638615}
 --- !u!114 &2567117419428094455
 MonoBehaviour:
   m_ObjectHideFlags: 0
