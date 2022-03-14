@@ -39,12 +39,8 @@ public class DisparadorController : MonoBehaviour
             ang = Mathf.Acos(pos.x);
             if (pos.y < 0) ang = -ang;
             ang *= 180 / Mathf.PI;
-            // LIMPIAR ESTO
-            _instanciatePoint = _myTransform.position;
-            if (pos.x > 0) _instanciatePoint.x += _collider.offset.x + _collider.radius + 0.2f;
-            else _instanciatePoint.x += _collider.offset.x - (_collider.radius + 0.2f);
-            if (pos.y > 0) _instanciatePoint.x += _collider.offset.x + _collider.radius + 0.2f;
-            else _instanciatePoint.y += _collider.offset.y - (_collider.radius + 0.2f);
+
+            _instanciatePoint = (Vector2)_myTransform.position + _collider.offset + (pos * (_collider.radius + 0.5f));
 
             Instantiate(_myDisp, _instanciatePoint, Quaternion.Euler(0, 0, ang));
             timer = 0;

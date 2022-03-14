@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6621447605377065058}
   - component: {fileID: 5537780883250685217}
   - component: {fileID: 6671219493820737354}
+  - component: {fileID: 2495994228854539463}
   - component: {fileID: 1054122495030894754}
   - component: {fileID: 5466383375658251101}
   - component: {fileID: 4405429721014355802}
   - component: {fileID: 3996574713896568564}
-  - component: {fileID: 2495994228854539463}
   m_Layer: 0
   m_Name: Volador
   m_TagString: Untagged
@@ -124,6 +124,27 @@ CircleCollider2D:
   m_Offset: {x: 0.020559072, y: 0.10964778}
   serializedVersion: 2
   m_Radius: 0.3074782
+--- !u!50 &2495994228854539463
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219343484582173311}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &1054122495030894754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myDisp: {fileID: 9078195965090468923, guid: 25f5e08e86b2b1643b6eec099cd59930, type: 3}
-  _myPlayer: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+  _myPlayer: {fileID: 0}
   frecuencia: 6
 --- !u!114 &5466383375658251101
 MonoBehaviour:
@@ -184,27 +205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversionValue: 5
---- !u!50 &2495994228854539463
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219343484582173311}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &252146285106640637
 GameObject:
   m_ObjectHideFlags: 0
