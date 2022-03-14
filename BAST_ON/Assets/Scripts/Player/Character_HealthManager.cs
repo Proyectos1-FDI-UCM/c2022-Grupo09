@@ -24,7 +24,7 @@ public class Character_HealthManager : MonoBehaviour
     {
         //Si se produce colisión entre enemigos baja la vida
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
-        if (enemy != null)
+        if (enemy != null && !isInvincible & !enemy.isDead)
         {
             ChangeHealthValue(-1);
             InvulnerabilityTrigger(_invulnerabilityTime); //Hace invulnerable a Chicho para que no le quite 20millones en un momento

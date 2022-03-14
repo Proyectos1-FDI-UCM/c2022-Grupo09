@@ -7,6 +7,8 @@ public class EnemyStrikingForceController : MonoBehaviour
     [SerializeField] private float conversionValue = 1.0f;
     private EnemyPatrulla _myEnemyPatrulla;
     private EnemyLifeComponent _myEnemyLifeComponent;
+
+    private Animator _myAnimator;
     private Transform _myTransform;
     private Rigidbody2D _myRigidBody;
     private bool hasBeenStruck = false;
@@ -16,6 +18,7 @@ public class EnemyStrikingForceController : MonoBehaviour
         Debug.Log(_myRigidBody.IsAwake());
         _myRigidBody.AddForce(strikeVector, ForceMode2D.Impulse);
         hasBeenStruck = true;
+        _myAnimator.SetBool("haSidoGolpeado", true);
     }
     private void OnCollisionEnter2D(Collision2D other) 
     {
@@ -29,6 +32,7 @@ public class EnemyStrikingForceController : MonoBehaviour
             _myEnemyLifeComponent.ChangeHealth(/*- Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue)*/ -1);
             _myRigidBody.Sleep();
             hasBeenStruck = false;
+            _myAnimator.SetBool("haSidoGolpeado", false);
             _myEnemyPatrulla.enabled = true;
         }
     }
@@ -36,6 +40,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     
         private void Start() 
         {
+        _myAnimator = GetComponent<Animator>();
         _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
         _myRigidBody = GetComponent<Rigidbody2D>();

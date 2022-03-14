@@ -11,13 +11,14 @@ public class EnemyLifeComponent : MonoBehaviour
     private int _dropPercentage = 50;
     #endregion
 
-    #region properties
     [SerializeField]
     private int _currentHealth = 3;
+    #region properties
     ///<summary>
     ///Valor que detecta si ha sido golpeado
     ///</summary>
-    private bool _hasBeenHit = false;
+    public bool isDead = false;
+    
     
     #endregion
 
@@ -25,6 +26,9 @@ public class EnemyLifeComponent : MonoBehaviour
     private Transform _thisTransform;
     [SerializeField]
     private GameObject _myPowerUp;
+    private Animator _myAnimator;
+
+    private EnemyPatrulla _myEnemyPatrulla;
     private EnemyStrikingForceController _myEnemyStrikingForceController;
     #endregion
 
@@ -47,8 +51,11 @@ public class EnemyLifeComponent : MonoBehaviour
     }
 
     public void Die()
-    {
-        Destroy(gameObject);
+    {   
+        isDead = true;
+        _myEnemyPatrulla.enabled = false;
+       Destroy(gameObject, 0.45f);
+        _myAnimator.Play("Explosion");
     }
 
     // private void OnCollisionEnter(Collision collision)
@@ -75,5 +82,7 @@ public class EnemyLifeComponent : MonoBehaviour
     {
         _thisTransform = transform;
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
+        _myAnimator = gameObject.GetComponent<Animator>();
+        _myEnemyPatrulla = gameObject.GetComponent<EnemyPatrulla>();
     }
 }
