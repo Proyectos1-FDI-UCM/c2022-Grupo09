@@ -13,6 +13,7 @@ public class CharacterMovementController : MonoBehaviour
     private float _jumpSpeed = 1f;
     [SerializeField]
     private float _bastonImpulse = 1f;
+    
     #endregion
 
     #region properties
@@ -53,6 +54,7 @@ public class CharacterMovementController : MonoBehaviour
     private FloorDetector _myFloorDetector;
     private Rigidbody2D _myRigidbody;
     private WallDetector _myWallDetector;
+    
     #endregion
 
     #region methods
@@ -95,24 +97,12 @@ public class CharacterMovementController : MonoBehaviour
     {
         _attackedWall = attacked;
     }
-
-    public void MoreVelocity(float amount, float duration, float currentDuration)
+    //Método para aumentar la velocidad del jugaador en caso de que coja un kiwi
+    public void PlusVelocity(float newVelocity)
     {
-        currentDuration--;
-
-        if (currentDuration > 0)
-        {
-            _myRigidbody.MovePosition(_myRigidbody.position + ((_movementDirection * (_speedMovement * amount) + _impulseDirection) * Time.fixedDeltaTime));
-            Time.timeScale = 0.25f;
-            duration = currentDuration;
-        }
-
-        else if (currentDuration <= 0)
-        {
-            Time.timeScale = 1f;
-            
-        }
-
+        _speedMovement = _speedMovement * newVelocity;
+        _originalSpeedMovement = _speedMovement;
+        _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
     }
     #endregion
 
@@ -177,5 +167,6 @@ public class CharacterMovementController : MonoBehaviour
 
         // Reset del movimiento
         _movementDirection = Vector2.zero;
+      
     }
 }
