@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: _myCamera
       value: 
       objectReference: {fileID: 240717819}
+    - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: _speedMovement
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8428227548490663363, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -486,6 +490,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
   m_PrefabInstance: {fileID: 1570258152}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1738072224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 827933764642965411, guid: 4c6942f69f6b2344c8d134603aa0a053, type: 3}
+  m_PrefabInstance: {fileID: 827933763907741382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1738072226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738072224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf076b6f79a56a4fb3354ea790e091f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slowDownFactor: 0.05
+  _moreVelocity: 5
 --- !u!1 &1768263376
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +1017,10 @@ PrefabInstance:
       value: Kiwi
       objectReference: {fileID: 0}
     - target: {fileID: 827933764642965420, guid: 4c6942f69f6b2344c8d134603aa0a053, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 827933764642965420, guid: 4c6942f69f6b2344c8d134603aa0a053, type: 3}
       propertyPath: _moreSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -1041,7 +1068,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 827933764642965420, guid: 4c6942f69f6b2344c8d134603aa0a053, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c6942f69f6b2344c8d134603aa0a053, type: 3}
 --- !u!1001 &2476860186040768364
 PrefabInstance:
