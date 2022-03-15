@@ -43,6 +43,8 @@ public class CharacterMovementController : MonoBehaviour
     private float _originalSpeedMovement;
 
     private bool _attackedWall = false;
+
+    private Vector2 _movement;
     #endregion
 
     #region references
@@ -54,7 +56,7 @@ public class CharacterMovementController : MonoBehaviour
     private FloorDetector _myFloorDetector;
     private Rigidbody2D _myRigidbody;
     private WallDetector _myWallDetector;
-    
+    private Animator _myAnimator;
     #endregion
 
     #region methods
@@ -116,6 +118,8 @@ public class CharacterMovementController : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myWallDetector = GetComponent<WallDetector>();
 
+        _myAnimator = GetComponent<Animator>();
+
         _originalSpeedMovement = _speedMovement;
     }
 
@@ -136,6 +140,10 @@ public class CharacterMovementController : MonoBehaviour
             _myTransform.rotation = Quaternion.identity;
             _myTransform.Rotate(Vector3.up, 180f);
         }
+
+        _myAnimator.SetBool("Wall", _myWallDetector.isInWall());
+        _myAnimator.SetBool("Grounded", _myFloorDetector.IsGrounded());
+        _myAnimator.SetFloat("VerticalDirection", _movement.y);
     }
 
     private void FixedUpdate()
@@ -155,7 +163,8 @@ public class CharacterMovementController : MonoBehaviour
         else _speedMovement = _originalSpeedMovement;
 
         // Movimiento del personaje
-        _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
+        _movement = _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime);
+        _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         // Contador del tiempo en el aire
         if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
