@@ -144,8 +144,12 @@ public class CharacterMovementController : MonoBehaviour
             _myTransform.Rotate(Vector3.up, 180f);
         }
 
-        if (_wallAttackElapsedTime < _wallJumpBlockMovement) _attackedWall = false;
-        else if (_attackedWall && _wallAttackElapsedTime < _wallJumpBlockMovement) _wallAttackElapsedTime += Time.deltaTime;
+        if (_wallAttackElapsedTime > _wallJumpBlockMovement) 
+        {
+            _attackedWall = false;
+            _wallAttackElapsedTime = 0f;
+        }
+        else if (_attackedWall) _wallAttackElapsedTime += Time.deltaTime;
 
         _myAnimator.SetBool("Wall", _myWallDetector.isInWall());
         _myAnimator.SetBool("Grounded", _myFloorDetector.IsGrounded());

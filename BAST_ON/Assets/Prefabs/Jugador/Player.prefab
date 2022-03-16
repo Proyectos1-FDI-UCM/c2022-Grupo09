@@ -157,7 +157,8 @@ MonoBehaviour:
   _speedMovement: 10
   _onWallGravityReduce: 3.2
   _jumpSpeed: 14
-  _bastonImpulse: 23
+  _bastonImpulse: 24
+  _wallJumpBlockMovement: 0.3
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
