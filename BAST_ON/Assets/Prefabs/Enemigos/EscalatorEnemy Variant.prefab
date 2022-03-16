@@ -60,6 +60,25 @@ Transform:
   m_Father: {fileID: 595314332760737699}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7320801436878101931
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797663451842698359}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fdd40ec151386941ace028f29b66892, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7628507064818689486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,8 +88,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 426499849466296761, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_Name
-      value: EscalatorEnemy
+      value: EscalatorEnemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2599036758040143387, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7fdd40ec151386941ace028f29b66892, type: 2}
     - target: {fileID: 2806493738234058059, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -230,9 +253,14 @@ PrefabInstance:
     - target: {fileID: 9031535232171397407, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1029431583159064506, guid: 220edbd4dfdfa4d4db878d20313ce3f5, type: 3}
+      objectReference: {fileID: 6918105125365141123, guid: 220edbd4dfdfa4d4db878d20313ce3f5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
+--- !u!1 &7797663451842698359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 426499849466296761, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
+  m_PrefabInstance: {fileID: 7628507064818689486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &595314332760737699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7034374099349824109, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
