@@ -165,10 +165,6 @@ public class CharacterAttackController : MonoBehaviour
                 _elapsedCooldownTime = 0f;
             }
         }
-        else if (_elapsedCooldownTime < _attackCooldown) 
-        { 
-            _elapsedCooldownTime += Time.deltaTime;
-            _myMovementController.WallWasAttacked(false);
-        }
+        else if (_elapsedCooldownTime < _attackCooldown) _elapsedCooldownTime += Time.deltaTime;
     }
 }

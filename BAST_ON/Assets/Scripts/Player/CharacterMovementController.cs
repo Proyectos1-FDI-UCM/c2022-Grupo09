@@ -13,7 +13,8 @@ public class CharacterMovementController : MonoBehaviour
     private float _jumpSpeed = 1f;
     [SerializeField]
     private float _bastonImpulse = 1f;
-    
+    [SerializeField]
+    private float _wallJumpBlockMovement = 0.5f;
     #endregion
 
     #region properties
@@ -45,6 +46,8 @@ public class CharacterMovementController : MonoBehaviour
     private bool _attackedWall = false;
 
     private Vector2 _movement;
+
+    private float _wallAttackElapsedTime = 0;
     #endregion
 
     #region references
@@ -140,6 +143,9 @@ public class CharacterMovementController : MonoBehaviour
             _myTransform.rotation = Quaternion.identity;
             _myTransform.Rotate(Vector3.up, 180f);
         }
+
+        if (_wallAttackElapsedTime < _wallJumpBlockMovement) _attackedWall = false;
+        else if (_attackedWall && _wallAttackElapsedTime < _wallJumpBlockMovement) _wallAttackElapsedTime += Time.deltaTime;
 
         _myAnimator.SetBool("Wall", _myWallDetector.isInWall());
         _myAnimator.SetBool("Grounded", _myFloorDetector.IsGrounded());
