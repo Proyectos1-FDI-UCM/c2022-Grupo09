@@ -73,7 +73,7 @@ public class EnemyLifeComponent : MonoBehaviour
     
     public void ReleasePowerUp()
     {
-        if(Random.Range(0, (100 / _dropPercentage)) == 0) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
+        if(Random.Range(0, 100) < _dropPercentage) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
         
     }
     #endregion
