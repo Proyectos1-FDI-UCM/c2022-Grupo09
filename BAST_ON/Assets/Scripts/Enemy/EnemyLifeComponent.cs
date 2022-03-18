@@ -18,7 +18,7 @@ public class EnemyLifeComponent : MonoBehaviour
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     public bool isDead = false;
-    
+    private float _originalspeed;
     
     #endregion
 
@@ -54,10 +54,10 @@ public class EnemyLifeComponent : MonoBehaviour
 
     public void Die()
     {   
-        isDead = true;
-        _myEnemyPatrulla.enabled = false;
-       Destroy(gameObject, 0.45f);
-        _myAnimator.Play("Explosion");
+         isDead = true;
+         _myEnemyPatrulla.enabled = false;
+         Destroy(gameObject, 0.45f);
+         _myAnimator.Play("Explosion");
     }
 
 
@@ -81,9 +81,14 @@ public class EnemyLifeComponent : MonoBehaviour
         
     }
 
-    public void SlowDown()
+    public void SlowDown(EnemyPatrulla enemy)
     {
-        _myEnemyPatrulla.speed = _myEnemyPatrulla.speed / 2;
+        _originalspeed = enemy.speed / 2;
+    }
+
+    public void DontSlowDown(EnemyPatrulla enemy)
+    {
+        _originalspeed = enemy.speed;
     }
    
     #endregion
@@ -94,6 +99,7 @@ public class EnemyLifeComponent : MonoBehaviour
         _thisTransform = transform;
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
         _myAnimator = gameObject.GetComponent<Animator>();
-        _myEnemyPatrulla = gameObject.GetComponent<EnemyPatrulla>();
+        _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
+        _originalspeed = _myEnemyPatrulla.speed;
     }
 }

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private EnemyLifeComponent _myEnemyLifeComponent;
 
+    private EnemyPatrulla _myEnemy;
+
     [SerializeField] private List<EnemyLifeComponent> _listOfEnemies;
 
     
@@ -23,18 +25,15 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject _playerReference; 
     [SerializeField] private GameObject _UIReference;
+    
+
 
 
     #endregion
 
     #region methods
 
-    public void SendEnemyLifeComponent(EnemyLifeComponent reference) 
-    {
-        _listOfEnemies.Add(reference);
-        
-    
-    }
+   
     public void Pause()
     {
         Time.timeScale = 0;
@@ -68,22 +67,26 @@ public class GameManager : MonoBehaviour
     {
         ExitToMainMenu(); 
     }
-
-    public void KiwiCallback() 
+    public void KiwiCallBack()
     {
-        foreach (var enemy in _listOfEnemies) 
-        {
-            StartCoroutine(CosaDeRalentizar(EnemyLifeComponent, 5));
+        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Iniciamos corrutina para cada componente de la lista de enemigos
+        {            
+           enemy.StartCoroutine(CosaDeRalentizar(5));
         }
-
     }
-
-
-    IEnumerator CosaDeRalentizar(int duration) {
-        //ralentizar
+    public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Añadimos referencias a EnemyLifeCOmponent a la lista
+    {
+        _listOfEnemies.Add(reference);
+    }
+    IEnumerator CosaDeRalentizar(int duration)
+    {
+        _myEnemyLifeComponent.SlowDown(_myEnemy);
         yield return new WaitForSeconds(duration);
-        //desralentizar
+        _myEnemyLifeComponent.DontSlowDown(_myEnemy);
+
     }
+    
+    
     #endregion
     
     private void Awake() {
@@ -98,7 +101,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
         _playerReference.SetActive(false);
         Time.timeScale = 0;
     }

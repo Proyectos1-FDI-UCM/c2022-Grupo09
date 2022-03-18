@@ -5,7 +5,8 @@ using UnityEngine;
 public class KiwiController : MonoBehaviour
 {
     #region references
-    [SerializeField] private EnemyLifeComponent _myEnemyLifeComponent;
+    
+    private GameManager _myGameManager;
     #endregion
 
     #region parameters
@@ -19,34 +20,28 @@ public class KiwiController : MonoBehaviour
 
     private float _currentDuration;
 
-    private bool _isKiwiTime = false;
+    
 
     #endregion
 
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CharacterMovementController check = collision.gameObject.GetComponent<CharacterMovementController>();
-        if (check != null && _isKiwiTime == false)
+        GameManager check = collision.gameObject.GetComponent<GameManager>();
+        if (check != null)
         {
-            _isKiwiTime = true;
-            _currentDuration = _duration;
-            _currentDuration --;
-            Destroy(this.gameObject);
-
-            if (_currentDuration > 0 && _isKiwiTime == true)
-            {
-                _myEnemyLifeComponent.SlowDown();
-                //Time.timeScale = _SlowDown; //Relentiza el tiempo ssegun el valor del parámetro
-
-            }
-            else if (_currentDuration <= 0) 
+                _myGameManager.KiwiCallBack();
+            
+                Destroy(this.gameObject);
+            /*if (_currentDuration > 0 && _isKiwiTime == true)
+            {*/
+            /*else if (_currentDuration <= 0) 
             {
                 //_isKiwiTime = false;
                 //Time.timeScale = 1f;
                
             }
-            _currentDuration = 0;
+            _currentDuration = 0;*/
         }
     }
 
@@ -55,7 +50,7 @@ public class KiwiController : MonoBehaviour
 
     private void Start()
     {
-        _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
+        _myGameManager = GameManager.Instance;
 
     }
 
