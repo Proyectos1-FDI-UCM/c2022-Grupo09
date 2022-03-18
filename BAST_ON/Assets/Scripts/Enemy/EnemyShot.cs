@@ -20,7 +20,7 @@ public class EnemyShot : MonoBehaviour
         Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
         if (player != null)
         {
-            player.ChangeHealthValue(-1);
+            player.ChangeHealthValue(-1, transform.position);
             Destroy(gameObject);
         }
         else

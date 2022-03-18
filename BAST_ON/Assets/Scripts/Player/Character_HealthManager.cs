@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Character_HealthManager : MonoBehaviour
 {
+    #region references
+    CharacterMovementController _myMovementController;
+    #endregion
+
     #region parameters
     ///<summary>
     ///Vida maxima que puede tener el jugador
@@ -26,7 +30,7 @@ public class Character_HealthManager : MonoBehaviour
         EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
         if (enemy != null && !isInvincible & !enemy.isDead)
         {
-            ChangeHealthValue(-1);
+            ChangeHealthValue(-1, enemy.transform.position);
             InvulnerabilityTrigger(_invulnerabilityTime); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
     }
@@ -41,6 +45,26 @@ public class Character_HealthManager : MonoBehaviour
     ///Función que cambia el valor de vida del personaje. Importante poner el -
     ///en el valor que sea para meter daño, que normalmente usamos Damage(intdamage) y ya está
     ///</summary>
+    public void ChangeHealthValue(int value, Vector3 damagerPosition)
+    {
+        if (!isInvincible)
+        {
+            _currentHealth += value;
+            if (value < 0) _myMovementController.DamageImpulseRequest(damagerPosition);
+
+            if (_currentHealth <= 0)
+            {
+                Die();
+            }
+            if (_currentHealth > _maxHealth)
+            {
+                //Hay que mantener el tope de vida
+                _currentHealth = _maxHealth;
+            }
+            GameManager.Instance.OnHealthValueChange(_currentHealth);
+        }
+    }
+
     public void ChangeHealthValue(int value)
     {
         if (!isInvincible)
@@ -60,6 +84,7 @@ public class Character_HealthManager : MonoBehaviour
         }
     }
 
+
     public void Die()
     {
         Destroy(this.gameObject);
@@ -73,6 +98,7 @@ public class Character_HealthManager : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         GameManager.Instance.OnHealthValueChange(_currentHealth);
+        _myMovementController = GetComponent<CharacterMovementController>();
     }
 
     // Update is called once per frame

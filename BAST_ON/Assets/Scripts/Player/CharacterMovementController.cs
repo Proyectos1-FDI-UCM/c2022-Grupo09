@@ -15,6 +15,10 @@ public class CharacterMovementController : MonoBehaviour
     private float _bastonImpulse = 1f;
     [SerializeField]
     private float _wallJumpBlockMovement = 0.5f;
+    [SerializeField]
+    private float _verticalDamageImpulse = 2f;
+    [SerializeField]
+    private float _horizontalDamageImpulse = 2f;
     #endregion
 
     #region properties
@@ -96,7 +100,24 @@ public class CharacterMovementController : MonoBehaviour
             _impulseElapsedTime = 1f;
             // Reset del tiempo en el aire para dar mejor sensación de juego
             _onAirElasedTime = 0f;
+            _myCameraController.ResetVerticalOffset();
         }
+    }
+    public void DamageImpulseRequest(Vector3 damagerPosition)
+    {
+        if(_movement != Vector2.zero)
+        {
+            _impulseDirection.y = -_movement.y * _verticalDamageImpulse;
+            _impulseDirection.x = -_movement.x * _horizontalDamageImpulse;
+        }
+        else
+        {
+            _impulseDirection.x = (_myTransform.position.x - damagerPosition.x) * _horizontalDamageImpulse;
+            _impulseDirection.y = (_myTransform.position.y - damagerPosition.y) * _verticalDamageImpulse;
+        }
+        _attackedWall = true;
+        _impulseElapsedTime = 1f;
+        _onAirElasedTime = 0f;
     }
     public void WallWasAttacked(bool attacked)
     {
