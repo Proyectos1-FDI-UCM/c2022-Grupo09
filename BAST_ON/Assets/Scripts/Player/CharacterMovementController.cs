@@ -100,6 +100,7 @@ public class CharacterMovementController : MonoBehaviour
             _impulseElapsedTime = 1f;
             // Reset del tiempo en el aire para dar mejor sensación de juego
             _onAirElasedTime = 0f;
+            _myCameraController.ResetVerticalOffset();
         }
     }
     public void DamageImpulseRequest(Vector3 damagerPosition)
