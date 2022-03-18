@@ -47,11 +47,13 @@ public class CameraController : MonoBehaviour
     #region methods
     public void SetOffset(Vector3 direction)
     {
+        if(direction.x!=0)
         _offset.x = Mathf.Abs(_offset.x) * (direction.x / Mathf.Abs(direction.x));
         ResetVerticalOffset();
     }
     public void SetVerticalOffset(float vDirection)
     {
+        if(vDirection!=0)
         _verticalOffset = Mathf.Abs(_verticalOffset) * (vDirection / Mathf.Abs(vDirection));
         if (vDirection != 0 && _lookUpElapsedTime < _lookUpTime) _lookUpElapsedTime += Time.deltaTime;
     }
