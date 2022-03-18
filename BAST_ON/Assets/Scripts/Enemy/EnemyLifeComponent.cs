@@ -24,6 +24,8 @@ public class EnemyLifeComponent : MonoBehaviour
 
     #region references 
     private Transform _thisTransform;
+    
+
     [SerializeField]
     private GameObject _myPowerUp;
     private Animator _myAnimator;
@@ -58,6 +60,8 @@ public class EnemyLifeComponent : MonoBehaviour
         _myAnimator.Play("Explosion");
     }
 
+
+
     // private void OnCollisionEnter(Collision collision)
     // {
     //     BastonImpulseController check = GetComponent<BastonImpulseController>();
@@ -76,10 +80,17 @@ public class EnemyLifeComponent : MonoBehaviour
         if(Random.Range(0, 100) < _dropPercentage) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
         
     }
+
+    public void SlowDown()
+    {
+        _myEnemyPatrulla.speed = _myEnemyPatrulla.speed / 2;
+    }
+   
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.SendEnemyLifeComponent(this);
         _thisTransform = transform;
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
         _myAnimator = gameObject.GetComponent<Animator>();

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class KiwiController : MonoBehaviour
 {
+    #region references
+    [SerializeField] private EnemyLifeComponent _myEnemyLifeComponent;
+    #endregion
+
     #region parameters
 
     [SerializeField]
@@ -28,27 +32,32 @@ public class KiwiController : MonoBehaviour
             _isKiwiTime = true;
             _currentDuration = _duration;
             _currentDuration --;
+            Destroy(this.gameObject);
 
             if (_currentDuration > 0 && _isKiwiTime == true)
             {
-                check.PlusVelocity(_moreVelocity);
-                Time.timeScale = _SlowDown; //Relentiza el tiempo ssegun el valor del parámetro
+                _myEnemyLifeComponent.SlowDown();
+                //Time.timeScale = _SlowDown; //Relentiza el tiempo ssegun el valor del parámetro
 
             }
             else if (_currentDuration <= 0) 
             {
-                _isKiwiTime = false;
-                Time.timeScale = 1f;
-                Destroy(this.gameObject);
+                //_isKiwiTime = false;
+                //Time.timeScale = 1f;
+               
             }
             _currentDuration = 0;
         }
     }
-   
+
 
     #endregion
 
-    
+    private void Start()
+    {
+        _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
+
+    }
 
 
 

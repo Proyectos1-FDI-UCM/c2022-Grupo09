@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
 
     private Character_HealthManager _myCharacterHealthManager;
 
+    private EnemyLifeComponent _myEnemyLifeComponent;
+
+    [SerializeField] private List<EnemyLifeComponent> _listOfEnemies;
+
+    
+
     private UI_Manager _UIManagerReference;
 
     static private GameManager _instance;
@@ -17,9 +23,18 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject _playerReference; 
     [SerializeField] private GameObject _UIReference;
+
+
     #endregion
 
     #region methods
+
+    public void SendEnemyLifeComponent(EnemyLifeComponent reference) 
+    {
+        _listOfEnemies.Add(reference);
+        
+    
+    }
     public void Pause()
     {
         Time.timeScale = 0;
@@ -53,17 +68,37 @@ public class GameManager : MonoBehaviour
     {
         ExitToMainMenu(); 
     }
+
+    public void KiwiCallback() 
+    {
+        foreach (var enemy in _listOfEnemies) 
+        {
+            StartCoroutine(CosaDeRalentizar(EnemyLifeComponent, 5));
+        }
+
+    }
+
+
+    IEnumerator CosaDeRalentizar(int duration) {
+        //ralentizar
+        yield return new WaitForSeconds(duration);
+        //desralentizar
+    }
     #endregion
     
     private void Awake() {
+
+        _listOfEnemies = new List<EnemyLifeComponent>();
         _instance = this;
         _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
         _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
+        
     }
     
     // Start is called before the first frame update
     void Start()
     {
+        _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
         _playerReference.SetActive(false);
         Time.timeScale = 0;
     }
