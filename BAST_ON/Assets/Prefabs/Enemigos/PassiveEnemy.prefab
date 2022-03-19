@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  rightMov: 1
+  rightMov: 0
   _limIzq: {fileID: 2393164508548821787}
   _limDer: {fileID: 2393164508076377488}
 --- !u!114 &7345684796174965007
