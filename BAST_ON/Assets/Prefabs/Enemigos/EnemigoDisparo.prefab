@@ -175,6 +175,7 @@ MonoBehaviour:
   _maxHealth: 1
   _dropPercentage: 50
   _currentHealth: 1
+  isDead: 0
   _myPowerUp: {fileID: 1152281271246692589, guid: 811fd918a8d44274782c2eb5fe4a5064, type: 3}
 --- !u!114 &4405429721014355802
 MonoBehaviour:
@@ -230,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252146285106640637}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -2.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4294643289583510034}
@@ -312,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979696236526973526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 2.54, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4294643289583510034}
