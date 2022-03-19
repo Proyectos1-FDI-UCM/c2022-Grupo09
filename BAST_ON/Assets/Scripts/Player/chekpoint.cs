@@ -7,10 +7,15 @@ public class chekpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        playerrespwn player = collision.GetComponent<playerrespwn>();
+
+
+
+        if (player!=null)
         {
 
-            collision.GetComponent<playerrespwn>().ReachedCheckPoint(transform.position.x, transform.position.y);
+ 
+          player.ReachedCheckPoint(transform.position.x, transform.position.y);
         }
     }
 }
