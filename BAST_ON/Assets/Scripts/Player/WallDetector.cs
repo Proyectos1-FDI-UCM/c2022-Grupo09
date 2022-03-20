@@ -24,6 +24,7 @@ public class WallDetector : MonoBehaviour
 
     public bool isInWall()
     {
+        //Bounds Cordenadas xyz de la caja del collider
         RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center, _myCollider.bounds.size + _sizeOffset - _verticalReducer, 0f, Vector2.zero, 0f, _wallLayer);
         /*
         Debug.DrawRay(_myCollider.bounds.center + new Vector3(_myCollider.bounds.extents.x  + _sizeOffset.x, 0), Vector2.down * (_myCollider.bounds.extents.y  - _verticalSizeReducer));
