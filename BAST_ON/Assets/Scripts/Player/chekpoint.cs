@@ -14,7 +14,7 @@ public class chekpoint : MonoBehaviour
         if (player!=null)
         {
 
- 
+            Debug.Log("a");
           player.ReachedCheckPoint(transform.position.x, transform.position.y);
         }
     }
