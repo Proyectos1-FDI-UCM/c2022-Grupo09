@@ -17,7 +17,21 @@ public class UI_Manager : MonoBehaviour
     ///Referencia al sprite de la vida vacía
     ///</summary>
     [SerializeField] private Sprite emptyFruit;
-    [SerializeField]
+    ///<summary>
+    ///Referencia al sprite de la duración del powerUp kiwi
+    ///</summary>
+    //[SerializeField] private Sprite kiwiPower;
+    ///<summary>
+    ///Referencia al sprite de la duración del powerUp DragonFruit
+    ///</summary>
+    //[SerializeField] private Sprite DragonPower;
+
+    [SerializeField] private Animator _myKiwiAnimator;
+
+    [SerializeField] private Animator _myDragonAnimator;
+
+    [SerializeField] private GameObject _dragon, _kiwi;
+
     private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
     private GameObject _previusMenu;
 
@@ -33,8 +47,10 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+
     public void StartGame()
     {
+        
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
@@ -72,6 +88,35 @@ public class UI_Manager : MonoBehaviour
     {
         GameManager.Instance.QuitGame();
     }
+    public void KiwiSprite(int duration)
+    {
+        _kiwi.SetActive(true);
+        duration--;
+        if (duration <= duration / 2)
+        {
+            _myKiwiAnimator.Play("PowerKiwi");
+        }
+        if (duration <= 0)
+        {
+            _kiwi.SetActive(false);
+        }
+        duration = 0;
+    }
+    public void DragonSprite(float duration)
+    {
+        _dragon.SetActive(true);
+        duration--;
+        if (duration <= duration / 2)
+        {
+            _myDragonAnimator.Play("PowerDragon");
+        }
+        if (duration <= 0)
+        {
+            _dragon.SetActive(false);
+        }
+        duration = 0;
+
+    }
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -80,6 +125,8 @@ public class UI_Manager : MonoBehaviour
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
         _hud.SetActive(false);
+        //_myKiwiAnimator.GetComponent<Animator>();
+        //_myDragonAnimator.GetComponent<Animator>();
     }
 
     // Update is called once per frame

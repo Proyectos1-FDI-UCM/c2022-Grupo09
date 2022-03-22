@@ -22,6 +22,8 @@ public class DragonFruitController : MonoBehaviour
     ///</summary>
     [SerializeField] private float strenghtDuration = 1.0f;
 
+    private UI_Manager _myUIManager;
+
     GameObject _myPowerUp;
 
 
@@ -33,6 +35,7 @@ public class DragonFruitController : MonoBehaviour
         CharacterAttackController check = collision.GetComponent<CharacterAttackController>(); //variable para acceder al characterhealth manager si este colisiona con el jugador
         if (check != null)
         {
+            _myUIManager.DragonSprite(strenghtDuration);
             check.modifyStrenght(newStrenght, strenghtDuration);
             Destroy(this.gameObject);
 

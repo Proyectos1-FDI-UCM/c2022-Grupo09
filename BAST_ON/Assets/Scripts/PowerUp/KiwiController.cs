@@ -7,6 +7,8 @@ public class KiwiController : MonoBehaviour
     #region references
     
     private GameManager _myGameManager;
+    
+    private UI_Manager _myUIManager;
     #endregion
 
     #region parameters
@@ -18,7 +20,8 @@ public class KiwiController : MonoBehaviour
     [SerializeField]
     private float _duration = 10f;
 
-    private float _currentDuration;
+
+    private int _currentDuration = 10;
 
     
 
@@ -30,9 +33,9 @@ public class KiwiController : MonoBehaviour
         GameManager check = collision.gameObject.GetComponent<GameManager>();
         if (check != null)
         {
-                _myGameManager.KiwiCallBack();
-            
-                Destroy(this.gameObject);
+             _myGameManager.KiwiCallBack();
+             _myUIManager.KiwiSprite(_currentDuration);
+             Destroy(this.gameObject);
             /*if (_currentDuration > 0 && _isKiwiTime == true)
             {*/
             /*else if (_currentDuration <= 0) 
@@ -51,6 +54,7 @@ public class KiwiController : MonoBehaviour
     private void Start()
     {
         _myGameManager = GameManager.Instance;
+        _myUIManager = GetComponent<UI_Manager>();
 
     }
 
