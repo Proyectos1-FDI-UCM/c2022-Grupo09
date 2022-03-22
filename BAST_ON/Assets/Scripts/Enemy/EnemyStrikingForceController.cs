@@ -52,6 +52,9 @@ public class EnemyStrikingForceController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cancela el impulso del bastón y llama al método de recuperar ruta
+    /// </summary>
     private void RestartEnemy()
     {
         _myRigidBody.velocity = Vector3.zero;
