@@ -37,9 +37,9 @@ public class Character_HealthManager : MonoBehaviour
 
 
     private IEnumerator InvulnerabilityTrigger(float invulnerabilityTime){
-        isInvincible = true;
+        Physics2D.IgnoreLayerCollision(6, 7, true);
         yield return new WaitForSeconds(invulnerabilityTime);
-        isInvincible = false;
+        Physics2D.IgnoreLayerCollision(6, 7, false);
     }
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -
