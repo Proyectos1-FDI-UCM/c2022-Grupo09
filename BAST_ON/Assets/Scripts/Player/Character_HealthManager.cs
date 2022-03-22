@@ -31,7 +31,7 @@ public class Character_HealthManager : MonoBehaviour
         if (enemy != null && !isInvincible & !enemy.isDead)
         {
             ChangeHealthValue(-1, enemy.transform.position);
-            InvulnerabilityTrigger(_invulnerabilityTime); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
+            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
     }
 
@@ -62,6 +62,7 @@ public class Character_HealthManager : MonoBehaviour
                 _currentHealth = _maxHealth;
             }
             GameManager.Instance.OnHealthValueChange(_currentHealth);
+            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
     }
 
@@ -81,6 +82,7 @@ public class Character_HealthManager : MonoBehaviour
                 _currentHealth = _maxHealth;
             }
             GameManager.Instance.OnHealthValueChange(_currentHealth);
+            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
     }
 
