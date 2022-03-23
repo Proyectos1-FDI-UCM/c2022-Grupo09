@@ -7,6 +7,8 @@ public class EnemyPatrulla : MonoBehaviour
     #region parameters
     [SerializeField]
     public float speed = 5f;
+    [SerializeField]
+    private bool _staticEnemy = false;
     #endregion
 
     #region references
@@ -76,13 +78,22 @@ public class EnemyPatrulla : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Cálculo  y aplicación del movimiento
+        // Cálculo del movimiento
         _movementDirection = _targetPosition - _myRigidbody.position;
+
+        // Si el enemigo es estático y está suficientemente cerca del target no lo mueve
+        // Hecho esto para evitar que continúe moviéndose continuamente cuando a efectos prácticos ya ha llegado al target
+        if (_staticEnemy && (_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
+
+        // Aplicación del movimiento
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
         // Cambio de target cuando se llega a uno de ellos
-        if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
-        else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
+        if (!_staticEnemy)
+        {
+            if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
+            else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
+        }
     }
 
 }
