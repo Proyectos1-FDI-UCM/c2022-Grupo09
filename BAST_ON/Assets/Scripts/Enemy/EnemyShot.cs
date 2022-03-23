@@ -26,12 +26,7 @@ public class EnemyShot : MonoBehaviour
         else
         {
             BastonImpulseController baston = collision.gameObject.GetComponent<BastonImpulseController>();
-            if (baston == null)
-            {
-                EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
-                if (enemy != null) enemy.ChangeHealth(-1);
-                Destroy(gameObject); 
-            }
+            if (baston == null) Destroy(gameObject);
         }
     }
 
