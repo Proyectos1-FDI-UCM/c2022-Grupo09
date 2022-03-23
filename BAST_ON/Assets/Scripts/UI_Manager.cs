@@ -32,8 +32,8 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private GameObject _dragon, _kiwi;
 
-    private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
-    private GameObject _previusMenu;
+    [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
+    private GameObject _previousMenu;
 
     #region methods
     public void updateLifeBar(int _currentHealth){
@@ -73,16 +73,16 @@ public class UI_Manager : MonoBehaviour
     {
         GameManager.Instance.ExitToMainMenu();
     }
-    public void OpenOptionsMenu([SerializeField] GameObject previusMenu)
+    public void OpenOptionsMenu([SerializeField] GameObject previousMenu)
     {
-        _previusMenu = previusMenu;
-        _previusMenu.SetActive(false);
+        _previousMenu = previousMenu;
+        _previousMenu.SetActive(false);
         _controlsMenu.SetActive(true);
     }
     public void ExitOptionsMenu()
     {
         _controlsMenu.SetActive(false);
-        _previusMenu.SetActive(true);
+        _previousMenu.SetActive(true);
     }
     public void QuitGame()
     {
