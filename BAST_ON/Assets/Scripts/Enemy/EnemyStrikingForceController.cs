@@ -37,7 +37,7 @@ public class EnemyStrikingForceController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        Debug.Log("la colisión se está detectando");
+        //Debug.Log("la colisión se está detectando");
 
         CharacterAttackController check = other.gameObject.GetComponent<CharacterAttackController>();
 

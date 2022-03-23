@@ -7,6 +7,7 @@ public class Character_HealthManager : MonoBehaviour
 {
     #region references
     CharacterMovementController _myMovementController;
+    SpriteRenderer _mySpriteRenderer;
     #endregion
 
     #region parameters
@@ -18,9 +19,10 @@ public class Character_HealthManager : MonoBehaviour
     ///Valor que determina la vida máxima
     ///</summary>
     [SerializeField] private int _currentHealth = 8;
+    private float _currentTime=1, _blinkTime=0.5f;
     [SerializeField] private float _invulnerabilityTime = 1.0f;
 
-    private bool isInvincible = false;
+    private bool blink = false, isInvincible = false;
     #endregion
 
     #region methods
@@ -37,9 +39,11 @@ public class Character_HealthManager : MonoBehaviour
 
 
     private IEnumerator InvulnerabilityTrigger(float invulnerabilityTime){
+        blink = true;
         Physics2D.IgnoreLayerCollision(6, 7, true);
-        yield return new WaitForSeconds(invulnerabilityTime);
+         yield return new WaitForSeconds(invulnerabilityTime);
         Physics2D.IgnoreLayerCollision(6, 7, false);
+        blink = false;
     }
     ///<summary>
     ///Función que cambia el valor de vida del personaje. Importante poner el -
@@ -47,6 +51,7 @@ public class Character_HealthManager : MonoBehaviour
     ///</summary>
     public void ChangeHealthValue(int value, Vector3 damagerPosition)
     {
+        
         if (!isInvincible)
         {
             _currentHealth += value;
@@ -64,6 +69,9 @@ public class Character_HealthManager : MonoBehaviour
             GameManager.Instance.OnHealthValueChange(_currentHealth);
             StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
+        
+            
+        
     }
 
     public void ChangeHealthValue(int value)
@@ -101,12 +109,28 @@ public class Character_HealthManager : MonoBehaviour
         _currentHealth = _maxHealth;
         GameManager.Instance.OnHealthValueChange(_currentHealth);
         _myMovementController = GetComponent<CharacterMovementController>();
+        _mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        _currentTime += Time.deltaTime;
+        if (blink&&_currentTime>=_blinkTime)
+        {
+            Debug.Log("a");
+            _mySpriteRenderer.enabled = false;
+            
+        }
+        else if(blink&&_currentTime>=_blinkTime+0.5)
+        {
+            _mySpriteRenderer.enabled = true;
+            _currentTime = 0;
+        }
+        else if(!blink)
+        {
+            _mySpriteRenderer.enabled = true;
+        }
         //Descomentar para usarlo de debug
         /*
         if(Input.GetKeyDown(KeyCode.Keypad7))
