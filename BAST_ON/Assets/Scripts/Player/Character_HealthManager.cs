@@ -19,7 +19,7 @@ public class Character_HealthManager : MonoBehaviour
     ///Valor que determina la vida máxima
     ///</summary>
     [SerializeField] private int _currentHealth = 8;
-    private float _currentTime=1, _blinkTime=0.5f;
+    private float _currentTime=1, _blinkTime=0.2f;
     [SerializeField] private float _invulnerabilityTime = 1.0f;
 
     private bool blink = false, isInvincible = false;
@@ -116,20 +116,23 @@ public class Character_HealthManager : MonoBehaviour
     void Update()
     {
         _currentTime += Time.deltaTime;
-        if (blink&&_currentTime>=_blinkTime)
+        if (blink&&_currentTime<=_blinkTime)
         {
             Debug.Log("a");
             _mySpriteRenderer.enabled = false;
             
         }
-        else if(blink&&_currentTime>=_blinkTime+0.5)
+        else if(blink&&_currentTime> _blinkTime&&_currentTime<_blinkTime*2)
         {
             _mySpriteRenderer.enabled = true;
-            _currentTime = 0;
         }
         else if(!blink)
         {
             _mySpriteRenderer.enabled = true;
+        }
+        else
+        {
+            _currentTime = 0;
         }
         //Descomentar para usarlo de debug
         /*
