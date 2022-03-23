@@ -35,7 +35,7 @@ public class DragonFruitController : MonoBehaviour
         CharacterAttackController check = collision.GetComponent<CharacterAttackController>(); //variable para acceder al characterhealth manager si este colisiona con el jugador
         if (check != null)
         {
-            _myUIManager.DragonSprite(strenghtDuration);
+            _myUIManager.DragonActive(strenghtDuration);
             check.modifyStrenght(newStrenght, strenghtDuration);
             Destroy(this.gameObject);
 

@@ -9,6 +9,8 @@ public class KiwiController : MonoBehaviour
     private GameManager _myGameManager;
     
     private UI_Manager _myUIManager;
+
+    
     #endregion
 
     #region parameters
@@ -34,7 +36,7 @@ public class KiwiController : MonoBehaviour
         if (check != null)
         {
              _myGameManager.KiwiCallBack();
-             _myUIManager.KiwiSprite(_currentDuration);
+             _myUIManager.KiwiActive(_currentDuration);
              Destroy(this.gameObject);
             /*if (_currentDuration > 0 && _isKiwiTime == true)
             {*/

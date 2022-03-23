@@ -26,10 +26,6 @@ public class UI_Manager : MonoBehaviour
     ///</summary>
     //[SerializeField] private Sprite DragonPower;
 
-    [SerializeField] private Animator _myKiwiAnimator;
-
-    [SerializeField] private Animator _myDragonAnimator;
-
     [SerializeField] private GameObject _dragon, _kiwi;
 
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
@@ -50,7 +46,8 @@ public class UI_Manager : MonoBehaviour
 
     public void StartGame()
     {
-        
+        _dragon.SetActive(false);
+        _kiwi.SetActive(false);
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
@@ -88,35 +85,27 @@ public class UI_Manager : MonoBehaviour
     {
         GameManager.Instance.QuitGame();
     }
-    public void KiwiSprite(int duration)
+    IEnumerator KiwiSprite(int duration)
     {
         _kiwi.SetActive(true);
-        duration--;
-        if (duration <= duration / 2)
-        {
-            _myKiwiAnimator.Play("PowerKiwi");
-        }
-        if (duration <= 0)
-        {
-            _kiwi.SetActive(false);
-        }
-        duration = 0;
+        yield return new WaitForSeconds(duration);
+        _kiwi.SetActive(false);
     }
-    public void DragonSprite(float duration)
+    IEnumerator DragonSprite(float duration)
     {
         _dragon.SetActive(true);
-        duration--;
-        if (duration <= duration / 2)
-        {
-            _myDragonAnimator.Play("PowerDragon");
-        }
-        if (duration <= 0)
-        {
-            _dragon.SetActive(false);
-        }
-        duration = 0;
-
+        yield return new WaitForSeconds(duration);
+        _dragon.SetActive(false);
     }
+    public void KiwiActive(int duration)
+    {
+        StartCoroutine(KiwiSprite(duration));
+    }
+    public void DragonActive(float duration)
+    {
+        StartCoroutine(DragonSprite(duration));
+    }
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -125,8 +114,9 @@ public class UI_Manager : MonoBehaviour
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
         _hud.SetActive(false);
-        //_myKiwiAnimator.GetComponent<Animator>();
-        //_myDragonAnimator.GetComponent<Animator>();
+        _kiwi.SetActive(false);
+        _dragon.SetActive(false);
+      
     }
 
     // Update is called once per frame
