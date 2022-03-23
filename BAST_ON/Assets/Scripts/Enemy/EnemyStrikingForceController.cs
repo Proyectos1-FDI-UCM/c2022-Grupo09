@@ -29,7 +29,7 @@ public class EnemyStrikingForceController : MonoBehaviour
         _myRigidBody.WakeUp();
         
         _myRigidBody.AddForce(strikeVector, ForceMode2D.Impulse);
-        hasBeenStruck = true;
+        if (_myEnemyPatrulla != null) hasBeenStruck = true;
         _myAnimator.SetBool("haSidoGolpeado", true);
 
         _impulsedElapsedTime = 0;
@@ -47,7 +47,7 @@ public class EnemyStrikingForceController : MonoBehaviour
             _myRigidBody.Sleep();
             hasBeenStruck = false;
             _myAnimator.SetBool("haSidoGolpeado", false);
-            _myEnemyPatrulla.enabled = true;
+            if (_myEnemyPatrulla != null) _myEnemyPatrulla.enabled = true;
         }
     }
 
@@ -59,9 +59,7 @@ public class EnemyStrikingForceController : MonoBehaviour
         _myRigidBody.velocity = Vector3.zero;
         hasBeenStruck = false;
         _myAnimator.SetBool("haSidoGolpeado", false);
-
-        // Llamar aquí al método de restart ruta y que al llegar al sitio reactive el comp de patrulla
-        // ¿Que ese método ha una cosa u otra dependiendo del enemigo con un enum?
+        if(_myEnemyPatrulla != null) _myEnemyPatrulla.enabled = true;
     }
     #endregion
 

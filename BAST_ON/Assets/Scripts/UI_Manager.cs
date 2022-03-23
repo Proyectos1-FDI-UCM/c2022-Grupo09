@@ -46,15 +46,14 @@ public class UI_Manager : MonoBehaviour
 
     public void StartGame()
     {
-        _dragon.SetActive(false);
-        _kiwi.SetActive(false);
+        //_dragon.SetActive(false);
+        //_kiwi.SetActive(false);
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
     }
     public void ResumeGame()
     {
-        Debug.Log("a");
         _pauseMenu.SetActive(false);
         GameManager.Instance.Resume();
     }
