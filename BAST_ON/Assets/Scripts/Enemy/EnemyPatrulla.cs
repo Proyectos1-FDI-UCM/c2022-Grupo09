@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class EnemyPatrulla : MonoBehaviour
 {
+    #region parameters
     [SerializeField]
     public float speed = 5f;
-    [SerializeField]
-    private bool rightMov = true;
+    #endregion
+
+    #region references
     [SerializeField]
     private GameObject _limIzq, _limDer;
-    private Vector3 _rightTarget, _leftTarget;
-
-    private Vector3 _targetPosition;
-    private Transform _myTransform;
+    private Vector2 _rightTarget, _leftTarget;
+    private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
+    #endregion
 
+    #region properties
+    private Vector2 _targetPosition;
     private Vector2 _movementDirection;
+    #endregion
 
 
     private void Start()
     {
-        _myTransform = transform;
+        _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myRigidbody = GetComponent<Rigidbody2D>();
 
         _rightTarget = _limDer.transform.position;
@@ -65,18 +69,20 @@ public class EnemyPatrulla : MonoBehaviour
     }*/
     private void Update()
     {
-        _myTransform.rotation = Quaternion.identity;
-        if (_movementDirection.x < 0) _myTransform.Rotate(Vector2.up, 180);
+        // Ajuste de la rotación del sprite del enemigo en función de la dirección
+        // Si el movimiento es hacia la izquierda lo gira
+        _mySpriteRenderer.flipX = _movementDirection.x < 0;
     }
 
     private void FixedUpdate()
     {
-        _movementDirection = (Vector2)_targetPosition - _myRigidbody.position;
-
+        // Cálculo  y aplicación del movimiento
+        _movementDirection = _targetPosition - _myRigidbody.position;
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
-        if (_targetPosition == (_rightTarget) && _myRigidbody.position.x >= _rightTarget.x) _targetPosition = _leftTarget;
-        else if (_targetPosition == (_leftTarget) && _myRigidbody.position.x <= _leftTarget.x) _targetPosition = _rightTarget;
+        // Cambio de target cuando se llega a uno de ellos
+        if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
+        else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
     }
 
 }
