@@ -27,7 +27,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     public void StrikeCallback(Vector3 strikeVector){
         _myEnemyPatrulla.enabled = false;
         _myRigidBody.WakeUp();
-        Debug.Log(_myRigidBody.IsAwake());
+        
         _myRigidBody.AddForce(strikeVector, ForceMode2D.Impulse);
         hasBeenStruck = true;
         _myAnimator.SetBool("haSidoGolpeado", true);
@@ -43,7 +43,6 @@ public class EnemyStrikingForceController : MonoBehaviour
 
         if(hasBeenStruck && check == null)
         {
-            Debug.Log("hey");
             _myEnemyLifeComponent.ChangeHealth(/*- Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue)*/ -1);
             _myRigidBody.Sleep();
             hasBeenStruck = false;

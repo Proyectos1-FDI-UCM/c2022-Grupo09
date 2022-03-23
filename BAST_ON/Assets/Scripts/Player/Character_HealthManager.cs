@@ -76,7 +76,7 @@ public class Character_HealthManager : MonoBehaviour
 
     public void ChangeHealthValue(int value)
     {
-        if (!isInvincible)
+        if (!isInvincible)  
         {
             _currentHealth += value;
 
