@@ -7,8 +7,11 @@ public class EnemyPatrulla : MonoBehaviour
     #region parameters
     [SerializeField]
     public float speed = 5f;
-    [SerializeField]
-    private bool _staticEnemy = false;
+    /// <summary>
+    /// Determina si un enemigo se quedará quieto en un punto.
+    /// En caso de estar en otro sitio, se moverá por defecto al límite derecho de la patrulla.
+    /// </summary>
+    [SerializeField] private bool _staticEnemy = false;
     #endregion
 
     #region references
@@ -81,8 +84,8 @@ public class EnemyPatrulla : MonoBehaviour
         // Cálculo del movimiento
         _movementDirection = _targetPosition - _myRigidbody.position;
 
-        // Si el enemigo es estático y está suficientemente cerca del target no lo mueve
-        // Hecho esto para evitar que continúe moviéndose continuamente cuando a efectos prácticos ya ha llegado al target
+        // Si el enemigo es estático y está suficientemente cerca del target no se mueve
+        // Hecho para evitar que continúe moviéndose alante y atrás cuando a efectos prácticos ya ha llegado al target
         if (_staticEnemy && (_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
 
         // Aplicación del movimiento
