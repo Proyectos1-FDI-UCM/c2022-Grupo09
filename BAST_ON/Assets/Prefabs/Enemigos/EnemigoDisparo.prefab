@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversionValue: 5
+  _impulseStopTime: 3
 --- !u!1 &252146285106640637
 GameObject:
   m_ObjectHideFlags: 0

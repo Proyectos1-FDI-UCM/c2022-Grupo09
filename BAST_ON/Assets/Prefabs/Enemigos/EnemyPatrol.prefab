@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914be58fb207c3549a7e10117430217b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  rightMov: 0
+  speed: 5
+  rightMov: 1
   _limIzq: {fileID: 6735636303987122118}
   _limDer: {fileID: 6248310766087053814}
 --- !u!114 &7189572618772707305
@@ -218,6 +218,7 @@ MonoBehaviour:
   _maxHealth: 1
   _dropPercentage: 50
   _currentHealth: 1
+  isDead: 0
   _myPowerUp: {fileID: 1152281271246692589, guid: 811fd918a8d44274782c2eb5fe4a5064, type: 3}
 --- !u!114 &7831484201044462788
 MonoBehaviour:
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversionValue: 5
+  _impulseStopTime: 3
 --- !u!1 &6248310766087053814
 GameObject:
   m_ObjectHideFlags: 0
