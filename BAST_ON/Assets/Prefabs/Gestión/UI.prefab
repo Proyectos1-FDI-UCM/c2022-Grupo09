@@ -1857,7 +1857,7 @@ MonoBehaviour:
   _kiwi: {fileID: 0}
   _mainMenu: {fileID: 9119655466240981555}
   _pauseMenu: {fileID: 9198581502665334822}
-  _controlsMenu: {fileID: 5853792875273791277}
+  _controlsMenu: {fileID: 6537893501047638615}
   _hud: {fileID: 839391657012912914}
 --- !u!114 &2567117419428094455
 MonoBehaviour:

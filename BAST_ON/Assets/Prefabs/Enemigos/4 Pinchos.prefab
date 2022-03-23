@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1121081893037801538}
   - component: {fileID: -5904820284244656010}
   - component: {fileID: 4041583087765646925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4 Pinchos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0a5ceccc0d0fd26499c92037488e46dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
