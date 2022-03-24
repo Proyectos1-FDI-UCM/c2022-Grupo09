@@ -5,16 +5,12 @@ using UnityEngine;
 public class KiwiController : MonoBehaviour
 {
     #region references
-    
     private GameManager _myGameManager;
     
     private UI_Manager _myUIManager;
-
-    
     #endregion
 
     #region parameters
-
     [SerializeField]
     private float _SlowDown = 0.25f; //Velocidad de relentización de tiempo
     [SerializeField]
@@ -24,9 +20,6 @@ public class KiwiController : MonoBehaviour
 
 
     private int _currentDuration = 10;
-
-    
-
     #endregion
 
     #region methods
@@ -36,8 +29,8 @@ public class KiwiController : MonoBehaviour
         if (check != null)
         {
              _myGameManager.KiwiCallBack();
-             _myUIManager.KiwiActive(_currentDuration);
-             Destroy(this.gameObject);
+            Destroy(gameObject);
+            _myUIManager.KiwiActive(_currentDuration);
             /*if (_currentDuration > 0 && _isKiwiTime == true)
             {*/
             /*else if (_currentDuration <= 0) 

@@ -7,15 +7,12 @@ public class DragonFruitController : MonoBehaviour
 
     //Me he inspirado (se lo he fusilado) de el codigo de Luisja, si no funciona claramente es su culpa
 
-    #region references
-
-
+    #region parameters
     ///<summary>
     ///Multiplicador de fuerza del powerup
     ///</summary>
     [SerializeField]
     private float newStrenght = 1.4f; 
-    
 
     ///<summary>
     ///Duracion del powerup
@@ -23,10 +20,6 @@ public class DragonFruitController : MonoBehaviour
     [SerializeField] private float strenghtDuration = 1.0f;
 
     private UI_Manager _myUIManager;
-
-    GameObject _myPowerUp;
-
-
     #endregion
     #region methods
     //M�todo para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
@@ -35,12 +28,12 @@ public class DragonFruitController : MonoBehaviour
         CharacterAttackController check = collision.GetComponent<CharacterAttackController>(); //variable para acceder al characterhealth manager si este colisiona con el jugador
         if (check != null)
         {
-            _myUIManager.DragonActive(strenghtDuration);
             check.modifyStrenght(newStrenght, strenghtDuration);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            _myUIManager.DragonActive(strenghtDuration);
         }
     }
     #endregion
-   
+
 }
 
