@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 827933764642965409}
   - component: {fileID: 827933764642965408}
   - component: {fileID: 827933764642965420}
-  - component: {fileID: 827933764642965423}
   m_Layer: 0
   m_Name: Kiwi
   m_TagString: Untagged
@@ -123,17 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf076b6f79a56a4fb3354ea790e091f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _freezeTime: 5
---- !u!114 &827933764642965423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827933764642965411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a77154cb9c28d04bb4c0a2322079e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _extraHealth: 1
+  _SlowDown: 0.25
+  _moreVelocity: 2
+  _duration: 10
