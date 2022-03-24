@@ -36,8 +36,6 @@ public class Character_HealthManager : MonoBehaviour
             StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
         }
     }
-
-
     private IEnumerator InvulnerabilityTrigger(float invulnerabilityTime){
         blink = true;
         Physics2D.IgnoreLayerCollision(6, 7, true);
@@ -45,59 +43,45 @@ public class Character_HealthManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(6, 7, false);
         blink = false;
     }
-    ///<summary>
-    ///Función que cambia el valor de vida del personaje. Importante poner el -
-    ///en el valor que sea para meter daño, que normalmente usamos Damage(intdamage) y ya está
-    ///</summary>
+
+    /// <summary>
+    /// Método que cambia el valor de la vida del personaje.
+    /// Recibe el valor de cambio de vida y la dirección en la que se quiere mover al jugador al recibir daño.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="damagerPosition"></param>
     public void ChangeHealthValue(int value, Vector3 damagerPosition)
     {
-        
-        if (!isInvincible)
-        {
-            _currentHealth += value;
-            if (value < 0) _myMovementController.DamageImpulseRequest(damagerPosition);
-
-            if (_currentHealth <= 0)
-            {
-                Die();
-            }
-            if (_currentHealth > _maxHealth)
-            {
-                //Hay que mantener el tope de vida
-                _currentHealth = _maxHealth;
-            }
-            GameManager.Instance.OnHealthValueChange(_currentHealth);
-            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
-        }
-        
-            
-        
+        if (value < 0) _myMovementController.DamageImpulseRequest(damagerPosition);
+        ChangeHealthValue(value);        
     }
-
+    ///<summary>
+    ///Función que cambia el valor de vida del personaje. Importante poner el -
+    ///en el valor que sea para meter daño, que normalmente usamos Damage(int damage) y ya está
+    ///</summary>
     public void ChangeHealthValue(int value)
     {
-        if (!isInvincible)  
+        _currentHealth += value;
+
+        if (_currentHealth <= 0)
         {
-            _currentHealth += value;
-
-            if (_currentHealth <= 0)
-            {
-                Die();
-            }
-            if (_currentHealth > _maxHealth)
-            {
-                //Hay que mantener el tope de vida
-                _currentHealth = _maxHealth;
-            }
-            GameManager.Instance.OnHealthValueChange(_currentHealth);
-            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
+            Die();
         }
+        if (_currentHealth > _maxHealth)
+        {
+            //Hay que mantener el tope de vida
+            _currentHealth = _maxHealth;
+        }
+        GameManager.Instance.OnHealthValueChange(_currentHealth);
+        StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
     }
-
 
     public void Die()
     {
         gameObject.SetActive(false);
+        // Desactivar invulnerabilidad al morir para que no esté activo al respawn
+        Physics2D.IgnoreLayerCollision(6, 7, false);
+        blink = false;
         GameManager.Instance.OnPlayerDeath();
     }
     #endregion
