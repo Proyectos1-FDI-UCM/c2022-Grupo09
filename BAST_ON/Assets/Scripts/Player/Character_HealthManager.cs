@@ -73,7 +73,7 @@ public class Character_HealthManager : MonoBehaviour
             _currentHealth = _maxHealth;
         }
         GameManager.Instance.OnHealthValueChange(_currentHealth);
-        StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
+        if(value<0) StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
     }
 
     public void Die()
