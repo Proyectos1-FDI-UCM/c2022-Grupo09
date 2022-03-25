@@ -19,7 +19,7 @@ public class DragonFruitController : MonoBehaviour
     ///</summary>
     [SerializeField] private float strenghtDuration = 1.0f;
 
-    private UI_Manager _myUIManager;
+    
     #endregion
     #region methods
     //M�todo para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
@@ -29,7 +29,7 @@ public class DragonFruitController : MonoBehaviour
         if (check != null)
         {
             check.modifyStrenght(newStrenght, strenghtDuration);
-            _myUIManager.DragonActive(strenghtDuration);
+            GameManager.Instance.AvisoDragon(strenghtDuration);
             Destroy(gameObject);
         }
     }

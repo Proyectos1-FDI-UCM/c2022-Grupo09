@@ -18,7 +18,6 @@ public class EnemyLifeComponent : MonoBehaviour
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     public bool isDead = false;
-    private float _originalspeed;
     
     #endregion
 
@@ -81,16 +80,6 @@ public class EnemyLifeComponent : MonoBehaviour
         if(Random.Range(0, 100) < _dropPercentage) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
         
     }
-
-    public void SlowDown(EnemyPatrulla enemy)
-    {
-        _originalspeed = enemy.speed / 2;
-    }
-
-    public void DontSlowDown(EnemyPatrulla enemy)
-    {
-        _originalspeed = enemy.speed;
-    }
    
     #endregion
     // Start is called before the first frame update
@@ -102,6 +91,5 @@ public class EnemyLifeComponent : MonoBehaviour
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
         _myAnimator = gameObject.GetComponent<Animator>();
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
-        _originalspeed = _myEnemyPatrulla.speed;
     }
 }

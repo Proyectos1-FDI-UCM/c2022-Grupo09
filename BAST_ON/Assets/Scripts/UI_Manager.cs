@@ -25,7 +25,6 @@ public class UI_Manager : MonoBehaviour
     ///Referencia al sprite de la duración del powerUp DragonFruit
     ///</summary>
     //[SerializeField] private Sprite DragonPower;
-
     [SerializeField] private GameObject _dragon, _kiwi;
 
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
@@ -43,11 +42,27 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+   
+    IEnumerator DragonSprite(float duration)
+    {
+        _dragon.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        _dragon.SetActive(false);
+    }
+    public void KiwiActive(bool active)
+    {
+        _kiwi.SetActive(active);
+    }
+
+    public void DragonActive(float duration)
+    {
+        StartCoroutine(DragonSprite(duration));
+    }
 
     public void StartGame()
     {
-        //_dragon.SetActive(false);
-        //_kiwi.SetActive(false);
+        _dragon.SetActive(false);
+        _kiwi.SetActive(false);
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
@@ -84,27 +99,6 @@ public class UI_Manager : MonoBehaviour
     {
         GameManager.Instance.QuitGame();
     }
-    IEnumerator KiwiSprite(int duration)
-    {
-        _kiwi.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        _kiwi.SetActive(false);
-    }
-    IEnumerator DragonSprite(float duration)
-    {
-        _dragon.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        _dragon.SetActive(false);
-    }
-    public void KiwiActive(int duration)
-    {
-        StartCoroutine(KiwiSprite(duration));
-    }
-    public void DragonActive(float duration)
-    {
-        StartCoroutine(DragonSprite(duration));
-    }
-
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -113,9 +107,6 @@ public class UI_Manager : MonoBehaviour
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
         _hud.SetActive(false);
-        _kiwi.SetActive(false);
-        _dragon.SetActive(false);
-      
     }
 
     // Update is called once per frame

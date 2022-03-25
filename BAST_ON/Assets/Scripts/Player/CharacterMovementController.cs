@@ -130,8 +130,11 @@ public class CharacterMovementController : MonoBehaviour
     public void PlusVelocity(float newVelocity)
     {
         _speedMovement = _speedMovement * newVelocity;
+    }
+
+    public void NormalVelocity()
+    {
         _originalSpeedMovement = _speedMovement;
-        _myRigidbody.MovePosition(_myRigidbody.position + _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime));
     }
     #endregion
 
@@ -147,7 +150,6 @@ public class CharacterMovementController : MonoBehaviour
         _myWallDetector = GetComponent<WallDetector>();
 
         _myAnimator = GetComponent<Animator>();
-
         _originalSpeedMovement = _speedMovement;
     }
 
