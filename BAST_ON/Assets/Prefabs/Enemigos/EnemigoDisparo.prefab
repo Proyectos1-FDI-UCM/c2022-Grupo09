@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  rightMov: 1
+  _staticEnemy: 0
   _limIzq: {fileID: 252146285106640637}
   _limDer: {fileID: 1979696236526973526}
 --- !u!114 &3996574713896568564
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conversionValue: 5
   _impulseStopTime: 3
+  _myEnemyPatrulla: {fileID: 4405429721014355802}
 --- !u!1 &252146285106640637
 GameObject:
   m_ObjectHideFlags: 0

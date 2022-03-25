@@ -79,6 +79,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2406025482712090990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672508745134530368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef898d0362aacf43ba3b3518a85d99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7628507064818689486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,11 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806493738234058059, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2806493738234058059, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.48
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3339564876527935533, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_Sprite
@@ -176,11 +188,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7034374099349824109, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2162814
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7034374099349824109, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7034374099349824109, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_LocalPosition.z
@@ -230,6 +242,10 @@ PrefabInstance:
       propertyPath: _currentHealth
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7831484201044462788, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
+      propertyPath: _myEnemyPatrulla
+      value: 
+      objectReference: {fileID: 5736974372910210887}
     - target: {fileID: 8143882207302505836, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
       propertyPath: m_Size.x
       value: 0.73450136
@@ -271,3 +287,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2956036120585255566, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
   m_PrefabInstance: {fileID: 7628507064818689486}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5736974372910210887 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2756261288408939145, guid: 4ef318dbba97abb4b8367cc8b203b023, type: 3}
+  m_PrefabInstance: {fileID: 7628507064818689486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672508745134530368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914be58fb207c3549a7e10117430217b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

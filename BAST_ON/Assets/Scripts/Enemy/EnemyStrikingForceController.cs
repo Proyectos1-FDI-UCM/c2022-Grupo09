@@ -15,7 +15,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     #endregion
 
     #region references
-    private EnemyPatrulla _myEnemyPatrulla;
+    [SerializeField] private MonoBehaviour _myEnemyPatrulla;
     private EnemyLifeComponent _myEnemyLifeComponent;
 
     private Animator _myAnimator;
