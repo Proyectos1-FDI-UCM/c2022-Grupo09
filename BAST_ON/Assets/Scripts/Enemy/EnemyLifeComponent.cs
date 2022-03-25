@@ -29,7 +29,7 @@ public class EnemyLifeComponent : MonoBehaviour
     [SerializeField]
     private GameObject _myPowerUp;
     private Animator _myAnimator;
-
+    private AudioSource _myAudioSource;
     private EnemyPatrulla _myEnemyPatrulla;
     private EnemyStrikingForceController _myEnemyStrikingForceController;
     #endregion
@@ -57,6 +57,7 @@ public class EnemyLifeComponent : MonoBehaviour
          isDead = true;
          _myEnemyPatrulla.enabled = false;
          Destroy(gameObject, 0.45f);
+        _myAudioSource.Play();
          _myAnimator.Play("Explosion");
     }
 
@@ -96,6 +97,7 @@ public class EnemyLifeComponent : MonoBehaviour
     void Start()
     {
         GameManager.Instance.SendEnemyLifeComponent(this);
+        _myAudioSource = GetComponent<AudioSource>();
         _thisTransform = transform;
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
         _myAnimator = gameObject.GetComponent<Animator>();
