@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
         _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
-        
+        _myCharacterMovementController = _playerReference.GetComponent<CharacterMovementController>();
     }
     
     // Start is called before the first frame update
