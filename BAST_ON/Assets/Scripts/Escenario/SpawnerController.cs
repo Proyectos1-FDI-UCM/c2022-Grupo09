@@ -21,11 +21,6 @@ public class SpawnerController : MonoBehaviour
         spawnInstance = Instantiate(whatToSpawn, spawnPosTransform.position, Quaternion.identity) as GameObject;
     }
 
-    private IEnumerator SpawnNewInstanceButDelayed(float delay){
-        SpawnNewInstance();
-        yield return new WaitForSeconds(delay);
-    }
-
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -43,6 +38,8 @@ public class SpawnerController : MonoBehaviour
         if(spawnInstance == null){
             SpawnNewInstance();
             timer = 0.0f;
-        } else timer += Time.deltaTime;
+        } 
+    
+        timer += Time.deltaTime;
     }
 }
