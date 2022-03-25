@@ -29,10 +29,8 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject _playerReference; 
     [SerializeField] private GameObject _UIReference;
-    
 
-
-
+    private bool _isBlinking;
     #endregion
 
     #region methods
@@ -85,6 +83,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator KiwiPowerUp(int duration)
     {
+       
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
             EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
@@ -92,6 +91,12 @@ public class GameManager : MonoBehaviour
         }
         _UIManagerReference.KiwiActive(true);
 
+        if (duration == duration / 2)
+        {
+            _isBlinking = true;
+            _UIManagerReference.StartBlinkKiwi();
+        }
+        
         yield return new WaitForSeconds(duration);
 
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
@@ -99,8 +104,10 @@ public class GameManager : MonoBehaviour
             EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
             if (patrulla != null) patrulla.RestoreSpeed();
         }
+        _isBlinking = false;
         _UIManagerReference.KiwiActive(false);
         _myCharacterMovementController.NormalVelocity();
+        
 
     }
     public void DragonCallBack(float duration, float newImpulse)
@@ -111,11 +118,15 @@ public class GameManager : MonoBehaviour
     {
         _UIManagerReference.DragonActive(true);
         _myCharacterMovementController.IncreaseBastonImpulse(newImpulse);
+        if (duration == duration / 2) _UIManagerReference.StartBlinkDragon();
         yield return new WaitForSeconds(duration);
         _UIManagerReference.DragonActive(false);
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);
+        
     }
+
+   
     #endregion
 
     private void Awake() {

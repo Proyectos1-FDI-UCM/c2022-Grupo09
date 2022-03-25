@@ -14,7 +14,7 @@ public class DragonFruitController : MonoBehaviour
     ///<summary>
     ///Duracion del powerup
     ///</summary>
-    [SerializeField] private float strenghtDuration = 1.0f;
+    [SerializeField] private float strenghtDuration = 10.0f;
     #endregion
 
     #region methods
