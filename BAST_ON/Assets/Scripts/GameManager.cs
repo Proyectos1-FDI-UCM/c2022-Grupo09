@@ -9,16 +9,13 @@ public class GameManager : MonoBehaviour
 
     private Character_HealthManager _myCharacterHealthManager;
 
-    private CharacterMovementController _myCharacterMovementController;
-
     private EnemyLifeComponent _myEnemyLifeComponent;
 
     private EnemyPatrulla _myEnemy;
 
     [SerializeField] private List<EnemyLifeComponent> _listOfEnemies;
 
-    [SerializeField] private GameObject _dragon, _kiwi;
-
+    
 
     private UI_Manager _UIManagerReference;
 
@@ -36,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     #region methods
 
-
+   
     public void Pause()
     {
         Time.timeScale = 0;
@@ -70,9 +67,12 @@ public class GameManager : MonoBehaviour
     {
         ExitToMainMenu(); 
     }
-    public void KiwiCallBack(int duration)
+    public void KiwiCallBack()
     {
-        StartCoroutine(CosaDeRalentizar(duration));
+        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Iniciamos corrutina para cada componente de la lista de enemigos
+        {            
+           enemy.StartCoroutine(CosaDeRalentizar(5));
+        }
     }
     public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Añadimos referencias a EnemyLifeCOmponent a la lista
     {
@@ -80,29 +80,15 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator CosaDeRalentizar(int duration)
     {
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Relentizar a los enemigos
-        {
-            EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
-            if (patrulla!=null) patrulla.SlowDown(2);
-        }
-        
-        _UIManagerReference.KiwiActive(true);
+        _myEnemyLifeComponent.SlowDown(_myEnemy);
         yield return new WaitForSeconds(duration);
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
-        {
-            EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
-            if (patrulla != null) patrulla.RestoreSpeed();
-        }
-        _UIManagerReference.KiwiActive(false);
-        _myCharacterMovementController.NormalVelocity();
+        _myEnemyLifeComponent.DontSlowDown(_myEnemy);
 
     }
-    public void AvisoDragon(float duration)
-    {
-        _UIManagerReference.DragonActive(duration);
-    }
+    
+    
     #endregion
-
+    
     private void Awake() {
 
         _listOfEnemies = new List<EnemyLifeComponent>();
@@ -117,7 +103,6 @@ public class GameManager : MonoBehaviour
     {
         _playerReference.SetActive(false);
         Time.timeScale = 0;
-        
     }
 
     // Update is called once per frame
