@@ -75,7 +75,7 @@ public class CharacterAttackController : MonoBehaviour
             _bastonTransform.rotation = Quaternion.identity;
 
             // Walljump
-            if (_myWallDetector.isInWall())
+            if (_myWallDetector.isInWall() != 0)
             {
                 if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -52);
                 else _bastonTransform.Rotate(Vector3.forward, -127);
@@ -156,7 +156,7 @@ public class CharacterAttackController : MonoBehaviour
         if (_baston.activeSelf)
         {
             _bastonTransform.rotation = _originalAttackRotation;
-            if (_myWallDetector.isInWall()) _myMovementController.WallWasAttacked(true);
+            if (_myWallDetector.isInWall() != 0) _myMovementController.WallWasAttacked(true);
             _elapsedAttackTime += Time.deltaTime;
             // Cuando el ataque se haya completado desactiva el bast�n
             if (_elapsedAttackTime > _attackTime)
