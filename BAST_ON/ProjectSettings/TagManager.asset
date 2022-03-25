@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - SonidoArea
+  - PatrolStop
   layers:
   - Default
   - TransparentFX

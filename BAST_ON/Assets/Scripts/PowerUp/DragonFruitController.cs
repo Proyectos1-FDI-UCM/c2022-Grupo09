@@ -31,7 +31,6 @@ public class DragonFruitController : MonoBehaviour
             check.modifyStrenght(newStrenght, strenghtDuration);
             GameManager.Instance.AvisoDragon(strenghtDuration);
             Destroy(gameObject);
-            _myUIManager.DragonActive(strenghtDuration);
         }
     }
     #endregion

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Enemy_ClimberPatrol : MonoBehaviour
 {
-    private Vector2 direction;
 
+    [SerializeField] private float speed = 1.0f;
+
+    private Vector2 direction;
+    private Transform _myTransform;
+    private Rigidbody _myRigidbody;
     private bool isOnFloor;
     private bool isWallAhead;
     
@@ -14,7 +18,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
     
     void Start()
     {
-        
+        _myTransform = gameObject.GetComponent<Transform>();
     }
 
     
@@ -22,7 +26,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isOnFloor)
+        if(isOnFloor && !isWallAhead)
         {
             Move();
         }
@@ -30,11 +34,11 @@ public class Enemy_ClimberPatrol : MonoBehaviour
         {
             if(isWallAhead)
             {
-                SetNewDirection();
+                SetNewDirection(_myTransform.up);
             }
             else
             {
-                SetNewDirection();
+                SetNewDirection(-_myTransform.up);
             }
         }
     }
@@ -42,7 +46,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
 
     private void FixedUpdate() {
         
-        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, transform.forward, 0.01f, 8);
+        RaycastHit2D wallHit = Physics2D.Raycast(_myTransform.position, _myTransform.forward, 0.51f, 8);
 
         if (wallHit.collider != null)
         {
@@ -59,12 +63,13 @@ public class Enemy_ClimberPatrol : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         
         
-        if(/*colisiona con tope de ruta*/){
+
+        if(other.gameObject.CompareTag("PatrolStop")){
             Flip();
         }
 
-
-        if(/*colisiona con suelo*/){
+        
+        if(/*colisiona con suelo*/false){
             isOnFloor = true;
         }
         else
@@ -84,7 +89,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
 
     void Move()
     {
-        
+        _myRigidbody.MovePosition(direction * speed * Time.deltaTime);
     }
 
     void SetNewDirection(Vector2 newDirection)
