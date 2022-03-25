@@ -49,7 +49,7 @@ public class CharacterMovementController : MonoBehaviour
 
     private float _originalSpeedMovement;
 
-    private bool _attackedWall = false;
+    private bool _blockMovement = false;
 
     private Vector2 _movement;
 
@@ -107,25 +107,31 @@ public class CharacterMovementController : MonoBehaviour
             _myCameraController.ResetVerticalOffset();
         }
     }
-    public void DamageImpulseRequest(Vector3 damagerPosition)
+    public void IncreaseBastonImpulse(float impulseIncreaser)
     {
-        if(_movement != Vector2.zero)
+        _bastonImpulse *= impulseIncreaser;
+    }
+    public void DecreaseBastonImpulse(float impulseDecreaser)
+    {
+        _bastonImpulse /= impulseDecreaser;
+    }
+
+    public void DamageImpulseRequest(Vector3 damageImpulse)
+    {
+        if (damageImpulse != Vector3.zero)
         {
-            _impulseDirection.y = -_movement.y * _verticalDamageImpulse;
-            _impulseDirection.x = -_movement.x * _horizontalDamageImpulse;
+            _impulseDirection.x = damageImpulse.normalized.x * _horizontalDamageImpulse;
+            _impulseDirection.y = damageImpulse.normalized.y * _verticalDamageImpulse;
         }
-        else
-        {
-            _impulseDirection.x = (_myTransform.position.x - damagerPosition.x) * _horizontalDamageImpulse;
-            _impulseDirection.y = (_myTransform.position.y - damagerPosition.y) * _verticalDamageImpulse;
-        }
-        _attackedWall = true;
+        else _impulseDirection = -_movement.normalized;
+
+        _blockMovement = true;
         _impulseElapsedTime = 1f;
         _onAirElasedTime = 0f;
     }
     public void WallWasAttacked(bool attacked)
     {
-        _attackedWall = attacked;
+        _blockMovement = attacked;
     }
     //Método para aumentar la velocidad del jugaador en caso de que coja un kiwi
     public void PlusVelocity(float newVelocity)
@@ -163,20 +169,21 @@ public class CharacterMovementController : MonoBehaviour
         {
             _myCameraController.SetOffset(_movementDirection.normalized);
             _myAttackController.SetDefaultDirection(_movementDirection.x);
+            // Ajustar dirección del sprite en función de la dirección
+            _mySpriteRenderer.flipX = _movementDirection.x < 0;
         }
 
-        // Ajustar dirección del sprite en función de la dirección o de la pared en la que esté.
-        if (_movementDirection.x != 0)_mySpriteRenderer.flipX = _movementDirection.x < 0;
+        // Ajustar dirección del sprite si está en una pared.
         if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = true;
         else if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = false;
 
         // Bloqueo del movimiento en walljump
         if (_wallAttackElapsedTime > _wallJumpBlockMovement) 
         {
-            _attackedWall = false;
+            _blockMovement = false;
             _wallAttackElapsedTime = 0f;
         }
-        else if (_attackedWall) _wallAttackElapsedTime += Time.deltaTime;
+        else if (_blockMovement) _wallAttackElapsedTime += Time.deltaTime;
 
         //Sonido de pasos
         _currentTime += Time.deltaTime;
@@ -211,7 +218,7 @@ public class CharacterMovementController : MonoBehaviour
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime) / _gravityReducer;
 
         // Velocidad a 0 si acaba de golpear una pared
-        if (_attackedWall) _speedMovement = 0;
+        if (_blockMovement) _speedMovement = 0;
         else _speedMovement = _originalSpeedMovement;
 
         // Movimiento del personaje

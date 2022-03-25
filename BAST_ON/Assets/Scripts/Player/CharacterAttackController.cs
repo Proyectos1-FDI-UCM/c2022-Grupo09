@@ -41,14 +41,12 @@ public class CharacterAttackController : MonoBehaviour
 
     #region methods
     
-    public void modifyStrenght(float strenghtModifier, float duration)
+    public void IncreaseStrenght(float strenghtModifier)
     {
-        StartCoroutine(ModifyStrenghtCoroutine(strenghtModifier, duration));
-    }
-
-    IEnumerator ModifyStrenghtCoroutine(float strenghtModifier, float duration){
         repelStrenght *= strenghtModifier;
-        yield return new WaitForSeconds(duration);
+    }
+    public void DecreaseStrenght(float strenghtModifier)
+    {
         repelStrenght /= strenghtModifier;
     }
 

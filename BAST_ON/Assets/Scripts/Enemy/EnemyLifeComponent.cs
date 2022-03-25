@@ -9,16 +9,21 @@ public class EnemyLifeComponent : MonoBehaviour
     private int _maxHealth = 3;
     [SerializeField]
     private int _dropPercentage = 50;
+    [SerializeField]
+    private int _damageToPlayer = 1;
     #endregion
 
+    #region properties
     [SerializeField]
     private int _currentHealth = 3;
-    #region properties
     ///<summary>
     ///Valor que detecta si ha sido golpeado
     ///</summary>
     public bool isDead = false;
-    
+    /// <summary>
+    /// Valor que guarda la dirección del movimiento del enemigo para empujar al jugador en esa dirección.
+    /// </summary>
+    private Vector2 _movementDirection;
     #endregion
 
     #region references 
@@ -34,6 +39,22 @@ public class EnemyLifeComponent : MonoBehaviour
     #endregion
 
     #region methods
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
+        if (player != null)
+        {
+            player.ChangeHealthValue(-_damageToPlayer, _movementDirection);
+        }
+    }
+    /// <summary>
+    /// Recibe la dirección de movimiento del enemigo para impulsar al jugador en esa dirección.
+    /// </summary>
+    /// <param name="movementDirection"></param>
+    public void SetMovementDirection(Vector2 movementDirection)
+    {
+        _movementDirection = movementDirection;
+    }
 
     public void ChangeHealth(int value)
     {
@@ -53,11 +74,12 @@ public class EnemyLifeComponent : MonoBehaviour
 
     public void Die()
     {   
-         isDead = true;
-         _myEnemyPatrulla.enabled = false;
-         Destroy(gameObject, 0.45f);
+        isDead = true;
+        _myEnemyPatrulla.enabled = false;
+        Destroy(gameObject, 0.45f);
         _myAudioSource.Play();
-         _myAnimator.Play("Explosion");
+        GameManager.Instance.OnEnemyDies(this);
+        _myAnimator.Play("Explosion");
     }
 
 

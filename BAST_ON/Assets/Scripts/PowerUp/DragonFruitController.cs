@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DragonFruitController : MonoBehaviour
 {
-
-    //Me he inspirado (se lo he fusilado) de el codigo de Luisja, si no funciona claramente es su culpa
-
     #region parameters
     ///<summary>
     ///Multiplicador de fuerza del powerup
@@ -18,9 +15,8 @@ public class DragonFruitController : MonoBehaviour
     ///Duracion del powerup
     ///</summary>
     [SerializeField] private float strenghtDuration = 1.0f;
-
-    
     #endregion
+
     #region methods
     //M�todo para destruir el powerup una vez es recogido por el jugador mediante TriggerEnter
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,8 +24,8 @@ public class DragonFruitController : MonoBehaviour
         CharacterAttackController check = collision.GetComponent<CharacterAttackController>(); //variable para acceder al characterhealth manager si este colisiona con el jugador
         if (check != null)
         {
-            check.modifyStrenght(newStrenght, strenghtDuration);
-            GameManager.Instance.AvisoDragon(strenghtDuration);
+            check.IncreaseStrenght(newStrenght);
+            GameManager.Instance.DragonCallBack(strenghtDuration, newStrenght);
             Destroy(gameObject);
         }
     }

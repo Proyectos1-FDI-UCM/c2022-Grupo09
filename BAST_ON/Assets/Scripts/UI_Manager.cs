@@ -54,9 +54,9 @@ public class UI_Manager : MonoBehaviour
         _kiwi.SetActive(active);
     }
 
-    public void DragonActive(float duration)
+    public void DragonActive(bool active)
     {
-        StartCoroutine(DragonSprite(duration));
+        _dragon.SetActive(active);
     }
 
     public void StartGame()

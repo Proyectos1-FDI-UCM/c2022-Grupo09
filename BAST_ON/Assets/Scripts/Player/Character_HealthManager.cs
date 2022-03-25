@@ -26,16 +26,6 @@ public class Character_HealthManager : MonoBehaviour
     #endregion
 
     #region methods
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Si se produce colisión entre enemigos baja la vida
-        EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
-        if (enemy != null && !isInvincible & !enemy.isDead)
-        {
-            ChangeHealthValue(-1, enemy.transform.position);
-            StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
-        }
-    }
     private IEnumerator InvulnerabilityTrigger(float invulnerabilityTime){
         blink = true;
         Physics2D.IgnoreLayerCollision(6, 7, true);
@@ -50,9 +40,9 @@ public class Character_HealthManager : MonoBehaviour
     /// </summary>
     /// <param name="value"></param>
     /// <param name="damagerPosition"></param>
-    public void ChangeHealthValue(int value, Vector3 damagerPosition)
+    public void ChangeHealthValue(int value, Vector3 damageImpulse)
     {
-        if (value < 0) _myMovementController.DamageImpulseRequest(damagerPosition);
+        if (value < 0) _myMovementController.DamageImpulseRequest(damageImpulse);
         ChangeHealthValue(value);        
     }
     ///<summary>
@@ -73,7 +63,7 @@ public class Character_HealthManager : MonoBehaviour
             _currentHealth = _maxHealth;
         }
         GameManager.Instance.OnHealthValueChange(_currentHealth);
-        if(value<0) StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
+        if(value < 0) StartCoroutine(InvulnerabilityTrigger(_invulnerabilityTime)); //Hace invulnerable a Chicho para que no le quite 20millones en un momento
     }
 
     public void Die()

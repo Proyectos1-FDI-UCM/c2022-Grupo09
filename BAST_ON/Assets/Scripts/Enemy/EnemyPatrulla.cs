@@ -20,6 +20,7 @@ public class EnemyPatrulla : MonoBehaviour
     private Vector2 _rightTarget, _leftTarget;
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
+    private EnemyLifeComponent _myLifeComponent;
     #endregion
 
     #region properties
@@ -44,6 +45,7 @@ public class EnemyPatrulla : MonoBehaviour
     {
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myRigidbody = GetComponent<Rigidbody2D>();
+        _myLifeComponent = GetComponent<EnemyLifeComponent>();
 
         _rightTarget = _limDer.transform.position;
         _leftTarget = _limIzq.transform.position;
@@ -101,6 +103,9 @@ public class EnemyPatrulla : MonoBehaviour
         // Si el enemigo es estático y está suficientemente cerca del target no se mueve
         // Hecho para evitar que continúe moviéndose alante y atrás cuando a efectos prácticos ya ha llegado al target
         if (_staticEnemy && (_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
+
+        // Llamada el método del Life Component que recibe la dirección del movimiento
+        _myLifeComponent.SetMovementDirection(_movementDirection);
 
         // Aplicación del movimiento
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
