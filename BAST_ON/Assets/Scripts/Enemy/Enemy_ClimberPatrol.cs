@@ -76,7 +76,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
         {
             isOnFloor = false;
         }
-
+        
 
 
 

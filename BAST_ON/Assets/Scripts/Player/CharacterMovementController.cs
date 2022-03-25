@@ -166,10 +166,11 @@ public class CharacterMovementController : MonoBehaviour
         }
 
         // Ajustar dirección del sprite en función de la dirección o de la pared en la que esté.
-        _mySpriteRenderer.flipX = _movementDirection.x < 0;
+        if (_movementDirection.x != 0)_mySpriteRenderer.flipX = _movementDirection.x < 0;
         if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = true;
         else if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = false;
 
+        // Bloqueo del movimiento en walljump
         if (_wallAttackElapsedTime > _wallJumpBlockMovement) 
         {
             _attackedWall = false;
@@ -177,6 +178,21 @@ public class CharacterMovementController : MonoBehaviour
         }
         else if (_attackedWall) _wallAttackElapsedTime += Time.deltaTime;
 
+        //Sonido de pasos
+        _currentTime += Time.deltaTime;
+        if (_myFloorDetector.IsGrounded() && _movement != Vector2.zero && audioToggle)
+        {
+            _currentTime = 0;
+            _myAudioSource.Play();
+            audioToggle = false;
+        }
+        else if (!audioToggle && _currentTime >= 0.335)
+        {
+            _myAudioSource.Stop();
+            audioToggle = true;
+        }
+
+        // Animaciones
         _myAnimator.SetBool("Wall", _myWallDetector.isInWall() != 0);
         _myAnimator.SetBool("Grounded", _myFloorDetector.IsGrounded());
         _myAnimator.SetFloat("VerticalDirection", _movement.y);
@@ -185,7 +201,7 @@ public class CharacterMovementController : MonoBehaviour
     private void FixedUpdate()
     {
         // Impulso que va reduciendo a cada iteración
-        _impulseDirection = _impulseDirection / _impulseElapsedTime;
+        _impulseDirection /= _impulseElapsedTime;
 
         // Reductor gravedad si está en la pared
         if (_myWallDetector.isInWall() != 0 && !_myFloorDetector.IsGrounded()) _gravityReducer = _onWallGravityReduce;
@@ -200,21 +216,12 @@ public class CharacterMovementController : MonoBehaviour
 
         // Movimiento del personaje
         _movement = _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime);
-        _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
-        //Sonido de pasos
-        _currentTime += Time.deltaTime;
-        if (_myFloorDetector.IsGrounded() && _movement != Vector2.zero&&audioToggle)
-        {
-            _currentTime = 0;
-            _myAudioSource.Play();
-            audioToggle = false;
-        }
-        else if (!audioToggle && _currentTime >= 0.335)
-        {
-            _myAudioSource.Stop();
-            audioToggle = true;
-        }
+        // Bloqueo del movimiento al estar en una pared
+        if (_myWallDetector.isInWall() == 1 && _movement.x > 0) _movement.x = 0;
+        else if (_myWallDetector.isInWall() == -1 && _movement.x < 0) _movement.x = 0;
+
+        _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         // Contador del tiempo en el aire
         if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
@@ -226,6 +233,5 @@ public class CharacterMovementController : MonoBehaviour
 
         // Reset del movimiento
         _movementDirection = Vector2.zero;
-      
     }
 }

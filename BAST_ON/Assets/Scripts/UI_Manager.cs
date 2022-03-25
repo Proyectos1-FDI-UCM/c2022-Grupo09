@@ -61,8 +61,6 @@ public class UI_Manager : MonoBehaviour
 
     public void StartGame()
     {
-        _dragon.SetActive(false);
-        _kiwi.SetActive(false);
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
@@ -107,6 +105,8 @@ public class UI_Manager : MonoBehaviour
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
         _hud.SetActive(false);
+        _dragon.SetActive(false);
+        _kiwi.SetActive(false);
     }
 
     // Update is called once per frame

@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baston: {fileID: 8705272921097061316}
   _attackTime: 0.2
-  _attackCooldown: 0.3
+  _attackCooldown: 0.25
   repelStrenght: 15
 --- !u!114 &2064836601977449977
 MonoBehaviour:
@@ -230,7 +230,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _floorDetectorOffset: 0.01
-  _horizontalSizeDiminuer: 0.04
+  _horizontalSizeDiminuer: 0.4
   _verticalSizeDiminuer: 0.5
 --- !u!114 &7959864021097517536
 MonoBehaviour:
