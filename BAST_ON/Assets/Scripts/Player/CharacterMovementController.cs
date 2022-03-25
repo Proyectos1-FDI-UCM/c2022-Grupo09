@@ -19,6 +19,8 @@ public class CharacterMovementController : MonoBehaviour
     private float _verticalDamageImpulse = 2f;
     [SerializeField]
     private float _horizontalDamageImpulse = 2f;
+    private float _currentTime;
+    private bool audioToggle=true;
     #endregion
 
     #region properties
@@ -64,6 +66,7 @@ public class CharacterMovementController : MonoBehaviour
     private Rigidbody2D _myRigidbody;
     private WallDetector _myWallDetector;
     private Animator _myAnimator;
+    private AudioSource _myAudioSource;
     #endregion
 
     #region methods
@@ -136,6 +139,7 @@ public class CharacterMovementController : MonoBehaviour
     void Start()
     {
         _myTransform = transform;
+        _myAudioSource = GetComponent<AudioSource>();
         _myCameraController = _myCamera.GetComponent<CameraController>();
         _myAttackController = GetComponent<CharacterAttackController>();
         _myFloorDetector = GetComponent<FloorDetector>();
@@ -198,13 +202,17 @@ public class CharacterMovementController : MonoBehaviour
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         //Sonido de pasos
-        if (_myFloorDetector.IsGrounded() && _movement != Vector2.zero)
+        _currentTime += Time.deltaTime;
+        if (_myFloorDetector.IsGrounded() && _movement != Vector2.zero&&audioToggle)
         {
-            GetComponent<AudioSource>().enabled = true;
+            _currentTime = 0;
+            _myAudioSource.Play();
+            audioToggle = false;
         }
-        else
+        else if (!audioToggle && _currentTime >= 0.335)
         {
-            GetComponent<AudioSource>().enabled = false;
+            _myAudioSource.Stop();
+            audioToggle = true;
         }
 
         // Contador del tiempo en el aire
