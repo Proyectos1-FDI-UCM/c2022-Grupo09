@@ -36,8 +36,8 @@ public class WallDetector : MonoBehaviour
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x + _sizeOffset.x, 0), Vector2.down * (_myCollider.bounds.extents.y - _verticalSizeReducer));
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, _myCollider.bounds.extents.y - _verticalSizeReducer), Vector2.right * 2 * (_myCollider.bounds.extents.x));
         */
-        if (_rightBoxCast.collider != null) return 1;
-        else if (_leftBoxCast.collider != null) return -1;
+        if (_rightBoxCast) return 1;
+        else if (_leftBoxCast) return -1;
         return 0;
     }
 
