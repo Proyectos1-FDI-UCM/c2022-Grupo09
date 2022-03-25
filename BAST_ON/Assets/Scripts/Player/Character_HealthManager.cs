@@ -102,7 +102,6 @@ public class Character_HealthManager : MonoBehaviour
         _currentTime += Time.deltaTime;
         if (blink&&_currentTime<=_blinkTime)
         {
-            Debug.Log("a");
             _mySpriteRenderer.enabled = false;
             
         }

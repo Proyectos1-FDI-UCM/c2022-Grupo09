@@ -198,7 +198,7 @@ public class CharacterMovementController : MonoBehaviour
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         //Sonido de pasos
-        if (_myFloorDetector.IsGrounded() && _movement != null)
+        if (_myFloorDetector.IsGrounded() && _movement != Vector2.zero)
         {
             GetComponent<AudioSource>().enabled = true;
         }
