@@ -197,6 +197,16 @@ public class CharacterMovementController : MonoBehaviour
         _movement = _gravity + ((_movementDirection * _speedMovement + _impulseDirection) * Time.fixedDeltaTime);
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
+        //Sonido de pasos
+        if (_myFloorDetector.IsGrounded() && _movement != null)
+        {
+            GetComponent<AudioSource>().enabled = true;
+        }
+        else
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
+
         // Contador del tiempo en el aire
         if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
         else _onAirElasedTime = 0f;
