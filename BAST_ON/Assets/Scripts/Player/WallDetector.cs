@@ -22,24 +22,30 @@ public class WallDetector : MonoBehaviour
     private Vector3 _verticalReducer;
     #endregion methods
 
-    public bool isInWall()
+    /// <summary>
+    /// Método que detecta si el jugador está en una pared. Devuelve 1 si la pared está a la derecha y -1 si está a la izquierda. En caso de no estar e una pared devuelve 0.
+    /// </summary>
+    /// <returns></returns>
+    public int isInWall()
     {
         //Bounds Cordenadas xyz de la caja del collider
-        RaycastHit2D _boxCast = Physics2D.BoxCast(_myCollider.bounds.center, _myCollider.bounds.size + _sizeOffset - _verticalReducer, 0f, Vector2.zero, 0f, _wallLayer);
+        RaycastHit2D _leftBoxCast = Physics2D.BoxCast(_myCollider.bounds.center - (_myCollider.bounds.size / 4), (_myCollider.bounds.size / 2) + _sizeOffset, 0f, Vector2.zero, 0f, _wallLayer);
+        RaycastHit2D _rightBoxCast = Physics2D.BoxCast(_myCollider.bounds.center + (_myCollider.bounds.size / 4), (_myCollider.bounds.size / 2) + _sizeOffset, 0f, Vector2.zero, 0f, _wallLayer);
         /*
         Debug.DrawRay(_myCollider.bounds.center + new Vector3(_myCollider.bounds.extents.x  + _sizeOffset.x, 0), Vector2.down * (_myCollider.bounds.extents.y  - _verticalSizeReducer));
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x + _sizeOffset.x, 0), Vector2.down * (_myCollider.bounds.extents.y - _verticalSizeReducer));
         Debug.DrawRay(_myCollider.bounds.center - new Vector3(_myCollider.bounds.extents.x, _myCollider.bounds.extents.y - _verticalSizeReducer), Vector2.right * 2 * (_myCollider.bounds.extents.x));
         */
-        return _boxCast.collider != null;
+        if (_rightBoxCast.collider != null) return 1;
+        else if (_leftBoxCast.collider != null) return -1;
+        return 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         _myCollider = GetComponent<CapsuleCollider2D>();
-        _sizeOffset = Vector2.right * _horizontalSizeAmplifier;
-        _verticalReducer = Vector2.up * _verticalSizeReducer;
+        _sizeOffset = Vector2.right * _horizontalSizeAmplifier - Vector2.up * _verticalSizeReducer;
     }
 
     // Update is called once per frame

@@ -176,7 +176,7 @@ public class CharacterMovementController : MonoBehaviour
         }
         else if (_attackedWall) _wallAttackElapsedTime += Time.deltaTime;
 
-        _myAnimator.SetBool("Wall", _myWallDetector.isInWall());
+        _myAnimator.SetBool("Wall", _myWallDetector.isInWall() != 0);
         _myAnimator.SetBool("Grounded", _myFloorDetector.IsGrounded());
         _myAnimator.SetFloat("VerticalDirection", _movement.y);
     }
@@ -187,7 +187,7 @@ public class CharacterMovementController : MonoBehaviour
         _impulseDirection = _impulseDirection / _impulseElapsedTime;
 
         // Reductor gravedad si está en la pared
-        if (_myWallDetector.isInWall() && !_myFloorDetector.IsGrounded()) _gravityReducer = _onWallGravityReduce;
+        if (_myWallDetector.isInWall() != 0 && !_myFloorDetector.IsGrounded()) _gravityReducer = _onWallGravityReduce;
         else _gravityReducer = 1;
 
         // Calculo de la gravedad
