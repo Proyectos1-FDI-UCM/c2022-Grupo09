@@ -72,7 +72,6 @@ public class CharacterAttackController : MonoBehaviour
         {
             if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
             _elapsedAttackTime = 0f;
-            _bastonTransform.rotation = Quaternion.identity;
 
             // Walljump
             if (_myWallDetector.isInWall() == 1) _bastonTransform.rotation = Quaternion.Euler(0, 0, -52);
@@ -93,29 +92,21 @@ public class CharacterAttackController : MonoBehaviour
                     (verticalAttackDirection < _cotaSuma) &&
                     (verticalAttackDirection >= _cotaResta))
                 {
-                    if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 45);
-                    else _bastonTransform.Rotate(Vector3.forward, 135);
+                    if (_defaultDirection > 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 45);
+                    else _bastonTransform.rotation = Quaternion.Euler(0, 0, 135);
                 }
-                // Frente (default)
-                // Frente abajo
-                /*else if ((horizontalAttackDirection > _cotaResta) &&
-                    (horizontalAttackDirection <= _cotaSuma) &&
-                    (verticalAttackDirection > -_cotaSuma) &&
-                    (verticalAttackDirection <= -_cotaResta))
-                {
-                    if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, -45);
-                    else _bastonTransform.Rotate(Vector3.forward, -135);
-                }*/
                 // Abajo
                 else if ((horizontalAttackDirection >= 0) &&
                     (horizontalAttackDirection <= Mathf.Sqrt(2) / 2) &&
                     (verticalAttackDirection >= -1) &&
                     (verticalAttackDirection) <= -Mathf.Sqrt(2) / 2)
-                { _bastonTransform.Rotate(Vector3.forward, -90); }
-                // hacia la izquierda si se mueve a la izquierda
-                else if (horizontalAttackDirection > 0 && _defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
+                { _bastonTransform.rotation = Quaternion.Euler(0, 0, -90); }
+                // Frente
+                else if (_defaultDirection < 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 180);
+                else _bastonTransform.rotation = Quaternion.identity;
             }
-            else if (_defaultDirection < 0) _bastonTransform.Rotate(Vector3.forward, 180);
+            else if (_defaultDirection < 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 180);
+            else _bastonTransform.rotation = Quaternion.identity;
 
             _originalAttackRotation = _bastonTransform.rotation;
             _baston.SetActive(true);
@@ -127,9 +118,8 @@ public class CharacterAttackController : MonoBehaviour
         if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown && !_myFloorDetector.IsGrounded())
         {
             _elapsedAttackTime = 0f;
-            _bastonTransform.rotation = Quaternion.identity;
-            if (_defaultDirection > 0) _bastonTransform.Rotate(Vector3.forward, 225f);
-            else _bastonTransform.Rotate(Vector3.forward, -45f);
+            if (_defaultDirection > 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 225f);
+            else _bastonTransform.rotation = Quaternion.Euler(0, 0, -45f);
             _originalAttackRotation = _bastonTransform.rotation;
             _baston.SetActive(true);
         }
@@ -153,7 +143,7 @@ public class CharacterAttackController : MonoBehaviour
         if (_baston.activeSelf)
         {
             _bastonTransform.rotation = _originalAttackRotation;
-            if (_myWallDetector.isInWall() != 0) _myMovementController.WallWasAttacked(true);
+            if (_myWallDetector.isInWall() != 0 && !_myFloorDetector.IsGrounded()) _myMovementController.WallWasAttacked(true);
             _elapsedAttackTime += Time.deltaTime;
             // Cuando el ataque se haya completado desactiva el bast�n
             if (_elapsedAttackTime > _attackTime)

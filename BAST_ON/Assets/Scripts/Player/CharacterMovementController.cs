@@ -67,6 +67,7 @@ public class CharacterMovementController : MonoBehaviour
     private WallDetector _myWallDetector;
     private Animator _myAnimator;
     private AudioSource _myAudioSource;
+    private SpriteRenderer _mySpriteRenderer;
     #endregion
 
     #region methods
@@ -149,6 +150,7 @@ public class CharacterMovementController : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myWallDetector = GetComponent<WallDetector>();
 
+        _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myAnimator = GetComponent<Animator>();
         _originalSpeedMovement = _speedMovement;
     }
@@ -163,13 +165,10 @@ public class CharacterMovementController : MonoBehaviour
             _myAttackController.SetDefaultDirection(_movementDirection.x);
         }
 
-        // Rotación ajustada para dirección de la animación
-        if (_movementDirection.x > 0) _myTransform.rotation = Quaternion.identity;
-        else if (_movementDirection.x < 0)
-        {
-            _myTransform.rotation = Quaternion.identity;
-            _myTransform.Rotate(Vector3.up, 180f);
-        }
+        // Ajustar dirección del sprite en función de la dirección o de la pared en la que esté.
+        _mySpriteRenderer.flipX = _movementDirection.x < 0;
+        if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = true;
+        else if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = false;
 
         if (_wallAttackElapsedTime > _wallJumpBlockMovement) 
         {
