@@ -6,7 +6,7 @@ public class EnemyPatrulla : MonoBehaviour
 {
     #region parameters
     [SerializeField]
-    public float speed = 5f;
+    private float speed = 5f;
     /// <summary>
     /// Determina si un enemigo se quedará quieto en un punto.
     /// En caso de estar en otro sitio, se moverá por defecto al límite derecho de la patrulla.
@@ -23,8 +23,20 @@ public class EnemyPatrulla : MonoBehaviour
     #endregion
 
     #region properties
+    private float _originalSpeed;
     private Vector2 _targetPosition;
     private Vector2 _movementDirection;
+    #endregion
+
+    #region methods
+    public void SlowDown(float speedReducer)
+    {
+        speed = _originalSpeed/speedReducer;
+    }
+    public void RestoreSpeed()
+    {
+        speed = _originalSpeed;
+    }
     #endregion
 
 
@@ -37,6 +49,8 @@ public class EnemyPatrulla : MonoBehaviour
         _leftTarget = _limIzq.transform.position;
 
         _targetPosition = _rightTarget;
+
+        _originalSpeed = speed;
     }
 
     /*void Update()
