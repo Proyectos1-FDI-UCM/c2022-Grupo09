@@ -80,14 +80,15 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator CosaDeRalentizar(int duration)
     {
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Relentizar a los enemigos
+        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
             EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
             if (patrulla!=null) patrulla.SlowDown(2);
         }
-        
         _UIManagerReference.KiwiActive(true);
+
         yield return new WaitForSeconds(duration);
+
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
         {
             EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
@@ -117,7 +118,6 @@ public class GameManager : MonoBehaviour
     {
         _playerReference.SetActive(false);
         Time.timeScale = 0;
-        
     }
 
     // Update is called once per frame

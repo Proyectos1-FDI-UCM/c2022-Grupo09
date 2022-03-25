@@ -61,7 +61,6 @@ public class CharacterAttackController : MonoBehaviour
         if (verticalAttackDirection < 0)
         {
             verticalAttackDirection = 0;
-            horizontalAttackDirection /= Mathf.Abs(horizontalAttackDirection);
         }
     }
     // Recibe la direcci�n del ataque y lo activa en esa direcci�n

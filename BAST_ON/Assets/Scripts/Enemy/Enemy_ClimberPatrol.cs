@@ -30,11 +30,11 @@ public class Enemy_ClimberPatrol : MonoBehaviour
         {
             if(isWallAhead)
             {
-                SetNewDirection();
+                //SetNewDirection();
             }
             else
             {
-                SetNewDirection();
+                //SetNewDirection();
             }
         }
     }
@@ -58,20 +58,20 @@ public class Enemy_ClimberPatrol : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         
-        
-        if(/*colisiona con tope de ruta*/){
+        /*
+        if(/*colisiona con tope de ruta*//*){
             Flip();
         }
 
-
-        if(/*colisiona con suelo*/){
+        
+        if(/*colisiona con suelo*//*){
             isOnFloor = true;
         }
         else
         {
             isOnFloor = false;
         }
-
+        */
 
 
 

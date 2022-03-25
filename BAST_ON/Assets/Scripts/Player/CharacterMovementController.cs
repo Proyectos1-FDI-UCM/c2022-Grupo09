@@ -166,7 +166,7 @@ public class CharacterMovementController : MonoBehaviour
         }
 
         // Ajustar dirección del sprite en función de la dirección o de la pared en la que esté.
-        _mySpriteRenderer.flipX = _movementDirection.x < 0;
+        if (_movementDirection.x != 0)_mySpriteRenderer.flipX = _movementDirection.x < 0;
         if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = true;
         else if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = false;
 
