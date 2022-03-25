@@ -20,7 +20,7 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField]
     private float _horizontalDamageImpulse = 2f;
     private float _currentTime;
-    private bool audioToggle=true;
+    private bool audioToggle = true;
     #endregion
 
     #region properties
