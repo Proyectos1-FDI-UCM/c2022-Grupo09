@@ -1851,8 +1851,6 @@ MonoBehaviour:
   - {fileID: 8433497146046450584}
   fullFruit: {fileID: 21300000, guid: 4f1e9262cec73694f8e4e99daa45b795, type: 3}
   emptyFruit: {fileID: 21300000, guid: fa4cb11faf51f024fa2d8eb14a8349c7, type: 3}
-  _myKiwiAnimator: {fileID: 0}
-  _myDragonAnimator: {fileID: 0}
   _dragon: {fileID: 0}
   _kiwi: {fileID: 0}
   _mainMenu: {fileID: 9119655466240981555}
@@ -1871,7 +1869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 8354120742461079612}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!114 &3253272046896495552
