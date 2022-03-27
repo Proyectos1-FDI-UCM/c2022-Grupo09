@@ -8,7 +8,7 @@ public class DisparadorController : MonoBehaviour
     [SerializeField]
     private GameObject _myDisp, _myPlayer,_mySoundArea;
     private Transform _myTransform;
-    private CircleCollider2D _dispCollider, _soundCollider;
+    private CircleCollider2D _dispCollider;
     #endregion
 
     #region parameters
@@ -27,7 +27,6 @@ public class DisparadorController : MonoBehaviour
     {
         _myTransform = transform;
         _dispCollider = GetComponent<CircleCollider2D>();
-        _soundCollider = _mySoundArea.GetComponent<CircleCollider2D>();
     }
 
     void Update()
