@@ -30,8 +30,18 @@ public class ParallaxController : MonoBehaviour
     void Update()
     {
         float distance = (camTransform.position.x * parallaxEffect);
+        float relativeDistance = (camTransform.position.x * (1 - parallaxEffect));
 
         myTrasform.position = new Vector3(_startPos + distance, myTrasform.position.y, myTrasform.position.z);
+        
+        if(relativeDistance < _startPos + _lenght)
+        {
+            _startPos += _lenght;
+        }
+        else if(relativeDistance < _startPos- _lenght) 
+        {
+            _startPos -= _lenght;
+        }
 
     }
 }
