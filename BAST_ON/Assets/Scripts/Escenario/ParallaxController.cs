@@ -13,12 +13,12 @@ public class ParallaxController : MonoBehaviour
 
     [SerializeField] private GameObject cam;
 
-    [SerializeField] private float parallaxEffect = 1.0f;
+    [SerializeField, Range(-1.0f,1.0f)] private float parallaxEffect = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
         myTrasform = gameObject.GetComponent<Transform>();
-        camTransform = gameObject.GetComponent<Transform>();
+        camTransform = cam.GetComponent<Transform>();
         mySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
 
@@ -29,16 +29,17 @@ public class ParallaxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_lenght);
         float distance = (camTransform.position.x * parallaxEffect);
         float relativeDistance = (camTransform.position.x * (1 - parallaxEffect));
 
         myTrasform.position = new Vector3(_startPos + distance, myTrasform.position.y, myTrasform.position.z);
         
-        if(relativeDistance < _startPos + _lenght)
+        if(relativeDistance > _startPos + _lenght)
         {
             _startPos += _lenght;
         }
-        else if(relativeDistance < _startPos- _lenght) 
+        else if(relativeDistance < _startPos - _lenght) 
         {
             _startPos -= _lenght;
         }
