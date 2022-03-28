@@ -27,12 +27,14 @@ public class UI_Manager : MonoBehaviour
     //[SerializeField] private Sprite DragonPower;
     [SerializeField] private GameObject _dragon, _kiwi;
 
-    [SerializeField] private Image _kiwiSprite, _dragonSprite;
+    /*[SerializeField] private Image _kiwiSprite, _dragonSprite;*/
 
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
     private GameObject _previousMenu;
 
-    
+    private bool _isBlinking = true;
+
+
 
     #region methods
     public void updateLifeBar(int _currentHealth){
@@ -43,6 +45,7 @@ public class UI_Manager : MonoBehaviour
         for(int i = _currentHealth; i < _fruitArray.Length; i++)
         {
             _fruitArray[i].sprite = emptyFruit;
+            
         }
     }
 
@@ -59,10 +62,12 @@ public class UI_Manager : MonoBehaviour
     }
     IEnumerator BlinkKiwi()
     {
-            _kiwiSprite.enabled = true;
-            yield return new WaitForSeconds(0.5f);
-            _kiwiSprite.enabled = false;
-            yield return new WaitForSeconds(0.5f);
+        _isBlinking = true;
+        _kiwi.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _kiwi.SetActive(false);
+        _isBlinking = false;
+
     }
    
     public void StartBlinkKiwi()
@@ -76,23 +81,21 @@ public class UI_Manager : MonoBehaviour
 
     IEnumerator BlinkDragon()
     {
-            _dragonSprite.enabled = true;
-            yield return new WaitForSeconds(0.5f);
-            _dragonSprite.enabled = false;
-            yield return new WaitForSeconds(0.5f);
+        _dragon.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        _dragon.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
     }
     public void StartBlinkDragon()
     {
         StartCoroutine(BlinkDragon());
     }
-       
-  
-    
     public void StartGame()
     {
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
+        
     }
     public void ResumeGame()
     {
@@ -136,8 +139,8 @@ public class UI_Manager : MonoBehaviour
         _hud.SetActive(false);
         _dragon.SetActive(false);
         _kiwi.SetActive(false);
-        _kiwiSprite = GetComponent<Image>();
-        _dragonSprite = GetComponent<Image>();
+        /*_kiwiSprite = GetComponent<Image>();
+        _dragonSprite = GetComponent<Image>();*/
     }
 
     // Update is called once per frame
@@ -148,5 +151,6 @@ public class UI_Manager : MonoBehaviour
             if (!_pauseMenu.activeSelf) PauseGame();
             else ResumeGame();
         }
+        _isBlinking = false;
     }
 }

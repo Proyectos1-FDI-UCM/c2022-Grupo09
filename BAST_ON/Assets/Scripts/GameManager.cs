@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerReference; 
     [SerializeField] private GameObject _UIReference;
 
-    private bool _isBlinking;
+    
     #endregion
 
     #region methods
@@ -93,18 +93,19 @@ public class GameManager : MonoBehaviour
 
         if (duration == duration / 2)
         {
-            _isBlinking = true;
+            
             _UIManagerReference.StartBlinkKiwi();
         }
         
         yield return new WaitForSeconds(duration);
 
+        
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
         {
             EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
             if (patrulla != null) patrulla.RestoreSpeed();
         }
-        _isBlinking = false;
+        
         _UIManagerReference.KiwiActive(false);
         _myCharacterMovementController.NormalVelocity();
         
@@ -137,11 +138,13 @@ public class GameManager : MonoBehaviour
         _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
         _myCharacterMovementController = _playerReference.GetComponent<CharacterMovementController>();
         _myCharacterAttackController = _playerReference.GetComponent<CharacterAttackController>();
+       
     }
     
     // Start is called before the first frame update
     void Start()
     {
+        
         _playerReference.SetActive(false);
         Time.timeScale = 0;
     }

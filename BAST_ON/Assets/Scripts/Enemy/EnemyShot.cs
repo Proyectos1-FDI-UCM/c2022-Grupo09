@@ -23,12 +23,17 @@ public class EnemyShot : MonoBehaviour
             player.ChangeHealthValue(-1, _myTransform.right);
             Destroy(gameObject);
         }
-        else
+        BastonImpulseController baston = collision.gameObject.GetComponent<BastonImpulseController>();
+        if (baston == null) Destroy(gameObject);
+
+        EnemyLifeComponent enemy = collision.gameObject.GetComponent<EnemyLifeComponent>();
+        if (enemy != null)
         {
-            BastonImpulseController baston = collision.gameObject.GetComponent<BastonImpulseController>();
-            if (baston == null) Destroy(gameObject);
+            enemy.ChangeHealth(-1);
+            Destroy(gameObject);
         }
     }
+
 
     public void CambiaRotacion(float rotation)
     {

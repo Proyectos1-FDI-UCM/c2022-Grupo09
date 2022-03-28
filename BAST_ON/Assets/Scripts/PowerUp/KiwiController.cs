@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KiwiController : MonoBehaviour
 {
+   
     #region parameters
     [SerializeField]
     private float _SlowDown = 0.25f; //Velocidad de relentización de tiempo
@@ -12,6 +13,7 @@ public class KiwiController : MonoBehaviour
     [SerializeField]
     private int _duration = 10;
     #endregion
+
 
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +24,9 @@ public class KiwiController : MonoBehaviour
             check.PlusVelocity(_moreVelocity);
             GameManager.Instance.KiwiCallBack(_duration);
             Destroy(gameObject);
+
         }
     }
     #endregion
+    
 }

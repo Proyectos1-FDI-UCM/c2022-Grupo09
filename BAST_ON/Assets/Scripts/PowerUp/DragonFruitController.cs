@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DragonFruitController : MonoBehaviour
 {
+   
     #region parameters
     ///<summary>
     ///Multiplicador de fuerza del powerup
