@@ -7,7 +7,7 @@ public class KiwiController : MonoBehaviour
    
     #region parameters
     [SerializeField]
-    private float _SlowDown = 0.25f; //Velocidad de relentización de tiempo
+    private float _SlowDown = 10f; //Velocidad de relentización de tiempo
     [SerializeField]
     private float _moreVelocity = 2f;
     [SerializeField]
@@ -22,7 +22,7 @@ public class KiwiController : MonoBehaviour
         if (check != null)
         {
             check.PlusVelocity(_moreVelocity);
-            GameManager.Instance.KiwiCallBack(_duration);
+            GameManager.Instance.KiwiCallBack(_duration, _SlowDown);
             Destroy(gameObject);
 
         }

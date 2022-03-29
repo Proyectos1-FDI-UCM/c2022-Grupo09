@@ -29,7 +29,7 @@ public class ParallaxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_lenght);
+        //Debug.Log(_lenght);
         float distance = (camTransform.position.x * parallaxEffect);
         float relativeDistance = (camTransform.position.x * (1 - parallaxEffect));
 

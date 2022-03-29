@@ -77,39 +77,45 @@ public class GameManager : MonoBehaviour
     {
         _listOfEnemies.Remove(enemy);
     }
-    public void KiwiCallBack(int duration)
+    public void KiwiCallBack(int duration, float slowDown)
     {
-        StartCoroutine(KiwiPowerUp(duration));
+        StartCoroutine(KiwiPowerUp(duration, slowDown));
     }
-    IEnumerator KiwiPowerUp(int duration)
+    IEnumerator KiwiPowerUp(int duration, float slowDown)
     {
        
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
-            EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
-            if (patrulla!=null) patrulla.SlowDown(2);
+            if (enemy != null)
+            {
+                EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
+                if (patrulla != null) patrulla.SlowDown(slowDown);
+            }
         }
         _UIManagerReference.KiwiActive(true);
 
-        if (duration == duration / 2)
+        /*if (duration == duration / 2)
         {
             
             _UIManagerReference.StartBlinkKiwi();
         }
         
-        yield return new WaitForSeconds(duration);
-
+        yield return new WaitForSeconds(duration);*/
+        yield return new WaitForSeconds(duration/2);
+        _UIManagerReference.StartBlinkKiwi();
+        yield return new WaitForSeconds(duration/2);
         
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
         {
-            EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
-            if (patrulla != null) patrulla.RestoreSpeed();
+            if (enemy != null)
+            {
+                EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
+                if (patrulla != null) patrulla.RestoreSpeed();
+            }
         }
         
         _UIManagerReference.KiwiActive(false);
         _myCharacterMovementController.NormalVelocity();
-        
-
     }
     public void DragonCallBack(float duration, float newImpulse)
     {
@@ -119,8 +125,11 @@ public class GameManager : MonoBehaviour
     {
         _UIManagerReference.DragonActive(true);
         _myCharacterMovementController.IncreaseBastonImpulse(newImpulse);
-        if (duration == duration / 2) _UIManagerReference.StartBlinkDragon();
-        yield return new WaitForSeconds(duration);
+        /*if (duration == duration / 2) _UIManagerReference.StartBlinkDragon();
+        yield return new WaitForSeconds(duration);*/
+        yield return new WaitForSeconds(duration/2);
+        _UIManagerReference.StartBlinkDragon();
+        yield return new WaitForSeconds(duration/2);
         _UIManagerReference.DragonActive(false);
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);

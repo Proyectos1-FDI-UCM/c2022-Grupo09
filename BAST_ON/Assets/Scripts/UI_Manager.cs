@@ -28,7 +28,7 @@ public class UI_Manager : MonoBehaviour
     //[SerializeField] private Sprite DragonPower;
     [SerializeField] private GameObject _dragon, _kiwi;
 
-    /*[SerializeField] private Image _kiwiSprite, _dragonSprite;*/
+    private Image _kiwiSprite, _dragonSprite;
 
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
     private GameObject _previousMenu;
@@ -60,15 +60,19 @@ public class UI_Manager : MonoBehaviour
     public void KiwiActive(bool active)
     {
         _kiwi.SetActive(active);
+        _kiwiSprite.enabled = active;
     }
     IEnumerator BlinkKiwi()
     {
         _isBlinking = true;
-        _kiwi.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        _kiwi.SetActive(false);
+        while (_kiwi.activeSelf)
+        {
+            _kiwiSprite.enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            _kiwiSprite.enabled = true;
+            yield return new WaitForSeconds(0.5f);
+        }
         _isBlinking = false;
-
     }
    
     public void StartBlinkKiwi()
@@ -78,14 +82,20 @@ public class UI_Manager : MonoBehaviour
     public void DragonActive(bool active)
     {
         _dragon.SetActive(active);
+        _dragonSprite.enabled = active;
     }
 
     IEnumerator BlinkDragon()
     {
-        _dragon.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        _dragon.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        _isBlinking = true;
+        while (_dragon.activeSelf)
+        {
+            _dragonSprite.enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            _dragonSprite.enabled = true;
+            yield return new WaitForSeconds(0.5f);
+        }
+        _isBlinking = false;
     }
     public void StartBlinkDragon()
     {
@@ -147,8 +157,8 @@ public class UI_Manager : MonoBehaviour
         _hud.SetActive(false);
         _dragon.SetActive(false);
         _kiwi.SetActive(false);
-        /*_kiwiSprite = GetComponent<Image>();
-        _dragonSprite = GetComponent<Image>();*/
+        _kiwiSprite = _kiwi.GetComponent<Image>();
+        _dragonSprite = _dragon.GetComponent<Image>();
     }
 
     // Update is called once per frame

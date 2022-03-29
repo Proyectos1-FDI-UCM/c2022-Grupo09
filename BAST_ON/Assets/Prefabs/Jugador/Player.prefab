@@ -180,8 +180,8 @@ MonoBehaviour:
   _jumpSpeed: 14
   _bastonImpulse: 24
   _wallJumpBlockMovement: 0.3
-  _verticalDamageImpulse: 50
-  _horizontalDamageImpulse: 30
+  _verticalDamageImpulse: 10
+  _horizontalDamageImpulse: 6
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
