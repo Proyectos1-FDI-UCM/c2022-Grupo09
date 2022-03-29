@@ -17,9 +17,9 @@ public class ParallaxController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myTrasform = gameObject.GetComponent<Transform>();
+        myTrasform = GetComponent<Transform>();
         camTransform = cam.GetComponent<Transform>();
-        mySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
 
 
         _startPos = myTrasform.position.x;
