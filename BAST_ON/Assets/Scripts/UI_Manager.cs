@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -31,10 +32,10 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
     private GameObject _previousMenu;
-
+    [SerializeField] private GameObject PauseFirstButton,ResumeFirstButton,OpcionClosed;
     private bool _isBlinking = true;
 
-
+    
 
     #region methods
     public void updateLifeBar(int _currentHealth){
@@ -95,7 +96,8 @@ public class UI_Manager : MonoBehaviour
         _mainMenu.SetActive(false);
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
-        
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(PauseFirstButton);
     }
     public void ResumeGame()
     {
@@ -108,6 +110,8 @@ public class UI_Manager : MonoBehaviour
         {
             GameManager.Instance.Pause();
             _pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(ResumeFirstButton);
         }
     }
     public void ExitToMainMenu()
@@ -119,11 +123,15 @@ public class UI_Manager : MonoBehaviour
         _previousMenu = previousMenu;
         _previousMenu.SetActive(false);
         _controlsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(OpcionClosed);
     }
     public void ExitOptionsMenu()
     {
         _controlsMenu.SetActive(false);
         _previousMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(ResumeFirstButton);
     }
     public void QuitGame()
     {
