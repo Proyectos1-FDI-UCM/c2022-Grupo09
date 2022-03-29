@@ -11,6 +11,7 @@ public class CharacterAttackController : MonoBehaviour
     private FloorDetector _myFloorDetector;
     private WallDetector _myWallDetector;
     private CharacterMovementController _myMovementController;
+    private AudioSource _myAttackSound;
     #endregion
 
     #region parameters
@@ -129,6 +130,7 @@ public class CharacterAttackController : MonoBehaviour
         _myFloorDetector = GetComponent<FloorDetector>();
         _myWallDetector = GetComponent<WallDetector>();
         _myMovementController = GetComponent<CharacterMovementController>();
+        _myAttackSound = _baston.GetComponent<AudioSource>();
         _bastonTransform = _baston.transform;
         _baston.SetActive(false);
     }
@@ -139,6 +141,7 @@ public class CharacterAttackController : MonoBehaviour
         // Si el ataque ha empezado empieza a contar
         if (_baston.activeSelf)
         {
+            _myAttackSound.Play();
             _bastonTransform.rotation = _originalAttackRotation;
             if (_myWallDetector.isInWall() != 0 && !_myFloorDetector.IsGrounded()) _myMovementController.WallWasAttacked(true);
             _elapsedAttackTime += Time.deltaTime;
