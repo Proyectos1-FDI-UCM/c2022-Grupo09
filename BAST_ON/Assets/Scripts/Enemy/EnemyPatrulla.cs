@@ -98,8 +98,8 @@ public class EnemyPatrulla : MonoBehaviour
         // Si el movimiento es hacia la izquierda lo gira
         
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
-        /*_wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
-        _floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);*/
+        _wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
+        _floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);
     }
 
     private void FixedUpdate()
