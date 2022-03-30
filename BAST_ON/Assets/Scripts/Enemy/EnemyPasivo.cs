@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrulla : MonoBehaviour
+public class EnemyPasivo : MonoBehaviour
 {
     #region parameters
     [SerializeField]
@@ -21,18 +21,21 @@ public class EnemyPatrulla : MonoBehaviour
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
+    //[SerializeField] private Transform _detector;
     #endregion
 
     #region properties
     private float _originalSpeed;
     private Vector2 _targetPosition;
     private Vector2 _movementDirection;
+    private RaycastHit2D _wallInfo;
+    private RaycastHit2D _floorInfo;
     #endregion
 
     #region methods
     public void SlowDown(float speedReducer)
     {
-        speed = _originalSpeed/speedReducer;
+        speed = _originalSpeed / speedReducer;
     }
     public void RestoreSpeed()
     {
@@ -92,7 +95,7 @@ public class EnemyPatrulla : MonoBehaviour
     {
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
-        
+
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
         //_wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
         //_floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);
@@ -114,7 +117,7 @@ public class EnemyPatrulla : MonoBehaviour
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
         // Cambio de target cuando se llega a uno de ellos
-        if (!_staticEnemy)
+        if (!_staticEnemy/*||_wallInfo.collider||!_floorInfo.collider*/)
         {
             if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
             else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
