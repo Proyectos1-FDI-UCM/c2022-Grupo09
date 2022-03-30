@@ -123,4 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newStrenght: 1.4
-  strenghtDuration: 1
+  strenghtDuration: 5
