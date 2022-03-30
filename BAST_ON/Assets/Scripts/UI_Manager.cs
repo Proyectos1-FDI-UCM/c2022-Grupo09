@@ -51,12 +51,6 @@ public class UI_Manager : MonoBehaviour
     }
 
    
-    IEnumerator DragonSprite(float duration)
-    {
-        _dragon.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        _dragon.SetActive(false);
-    }
     public void KiwiActive(bool active)
     {
         _kiwi.SetActive(active);
