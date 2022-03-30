@@ -81,7 +81,7 @@ public class Enemy_ClimberPatrol : MonoBehaviour
 
     void SetNewDirection(float angle)
     {
-        _myTransform.Rotate(new Vector3(0, 0, angle));
+        _myTransform.Rotate(Vector3.forward, angle);
         
     }
 
