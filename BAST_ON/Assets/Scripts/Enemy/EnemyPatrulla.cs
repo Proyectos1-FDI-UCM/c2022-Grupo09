@@ -8,8 +8,8 @@ public class EnemyPatrulla : MonoBehaviour
     [SerializeField]
     private float speed = 5f, detectdist = 1f;
     /// <summary>
-    /// Determina si un enemigo se quedará quieto en un punto.
-    /// En caso de estar en otro sitio, se moverá por defecto al límite derecho de la patrulla.
+    /// Determina si un enemigo se quedarï¿½ quieto en un punto.
+    /// En caso de estar en otro sitio, se moverï¿½ por defecto al lï¿½mite derecho de la patrulla.
     /// </summary>
     [SerializeField] private bool _staticEnemy = false;
     #endregion
@@ -21,8 +21,7 @@ public class EnemyPatrulla : MonoBehaviour
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
-    [SerializeField]
-    private Transform _detector;
+    //[SerializeField] private Transform _detector;
     #endregion
 
     #region properties
@@ -94,27 +93,27 @@ public class EnemyPatrulla : MonoBehaviour
     }*/
     private void Update()
     {
-        // Ajuste de la rotación del sprite del enemigo en función de la dirección
+        // Ajuste de la rotaciï¿½n del sprite del enemigo en funciï¿½n de la direcciï¿½n
         // Si el movimiento es hacia la izquierda lo gira
         
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
-        _wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
-        _floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);
+        //_wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
+        //_floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);
     }
 
     private void FixedUpdate()
     {
-        // Cálculo del movimiento
+        // Cï¿½lculo del movimiento
         _movementDirection = _targetPosition - _myRigidbody.position;
 
-        // Si el enemigo es estático y está suficientemente cerca del target no se mueve
-        // Hecho para evitar que continúe moviéndose alante y atrás cuando a efectos prácticos ya ha llegado al target
+        // Si el enemigo es estï¿½tico y estï¿½ suficientemente cerca del target no se mueve
+        // Hecho para evitar que continï¿½e moviï¿½ndose alante y atrï¿½s cuando a efectos prï¿½cticos ya ha llegado al target
         if (_staticEnemy && (_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
 
-        // Llamada el método del Life Component que recibe la dirección del movimiento
+        // Llamada el mï¿½todo del Life Component que recibe la direcciï¿½n del movimiento
         _myLifeComponent.SetMovementDirection(_movementDirection);
 
-        // Aplicación del movimiento
+        // Aplicaciï¿½n del movimiento
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
         // Cambio de target cuando se llega a uno de ellos
