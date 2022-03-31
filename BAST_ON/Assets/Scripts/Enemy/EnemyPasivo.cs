@@ -16,7 +16,7 @@ public class EnemyPasivo : MonoBehaviour
 
     #region references
     [SerializeField]
-    private GameObject _limIzq, _limDer;
+    private GameObject _detector;
     private Vector2 _rightTarget, _leftTarget;
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
@@ -28,6 +28,7 @@ public class EnemyPasivo : MonoBehaviour
     private float _originalSpeed;
     private Vector2 _targetPosition;
     private Vector2 _movementDirection;
+    private Transform _myDetector;
     private RaycastHit2D _wallInfo;
     private RaycastHit2D _floorInfo;
     #endregion
@@ -50,8 +51,7 @@ public class EnemyPasivo : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myLifeComponent = GetComponent<EnemyLifeComponent>();
 
-        _rightTarget = _limDer.transform.position;
-        _leftTarget = _limIzq.transform.position;
+        _myDetector = _detector.transform;
 
         _targetPosition = _rightTarget;
 
@@ -97,8 +97,8 @@ public class EnemyPasivo : MonoBehaviour
         // Si el movimiento es hacia la izquierda lo gira
 
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
-        //_wallInfo = Physics2D.Raycast(_detector.position, Vector2.right, detectdist);
-        //_floorInfo = Physics2D.Raycast(_detector.position, Vector2.down, detectdist);
+        _wallInfo = Physics2D.Raycast(_myDetector.position, Vector2.right, detectdist);
+        _floorInfo = Physics2D.Raycast(_myDetector.position, Vector2.down, detectdist);
     }
 
     private void FixedUpdate()
@@ -117,7 +117,7 @@ public class EnemyPasivo : MonoBehaviour
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
         // Cambio de target cuando se llega a uno de ellos
-        if (!_staticEnemy/*||_wallInfo.collider||!_floorInfo.collider*/)
+        if (_wallInfo.collider||!_floorInfo.collider)
         {
             if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
             else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
