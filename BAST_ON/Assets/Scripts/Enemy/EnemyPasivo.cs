@@ -12,12 +12,12 @@ public class EnemyPasivo : MonoBehaviour
     /// En caso de estar en otro sitio, se mover� por defecto al l�mite derecho de la patrulla.
     /// </summary>
     [SerializeField] private bool _staticEnemy = false;
+    private bool rotated = false;
     #endregion
 
     #region references
     [SerializeField]
     private GameObject _detector;
-    private Vector2 _rightTarget, _leftTarget;
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
@@ -26,8 +26,7 @@ public class EnemyPasivo : MonoBehaviour
 
     #region properties
     private float _originalSpeed;
-    private Vector2 _targetPosition;
-    private Vector2 _movementDirection;
+    private Vector2 _movementDirection, _detectorOrigin;
     private Transform _myDetector;
     private RaycastHit2D _wallInfo;
     private RaycastHit2D _floorInfo;
@@ -53,8 +52,7 @@ public class EnemyPasivo : MonoBehaviour
 
         _myDetector = _detector.transform;
 
-        _targetPosition = _rightTarget;
-
+        _movementDirection = Vector2.right;
         _originalSpeed = speed;
     }
 
@@ -95,16 +93,16 @@ public class EnemyPasivo : MonoBehaviour
     {
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
-
+        if (!rotated) _detectorOrigin = _myDetector.position;
+        else _detectorOrigin.x = _myDetector.position.x - 2;
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
-        _wallInfo = Physics2D.Raycast(_myDetector.position, Vector2.right, detectdist);
-        _floorInfo = Physics2D.Raycast(_myDetector.position, Vector2.down, detectdist);
+        _wallInfo = Physics2D.Raycast(_detectorOrigin, _movementDirection, detectdist);
+        _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist);
     }
 
     private void FixedUpdate()
     {
         // C�lculo del movimiento
-        _movementDirection = _targetPosition - _myRigidbody.position;
 
         // Si el enemigo es est�tico y est� suficientemente cerca del target no se mueve
         // Hecho para evitar que contin�e movi�ndose alante y atr�s cuando a efectos pr�cticos ya ha llegado al target
@@ -119,8 +117,8 @@ public class EnemyPasivo : MonoBehaviour
         // Cambio de target cuando se llega a uno de ellos
         if (_wallInfo.collider||!_floorInfo.collider)
         {
-            if (_targetPosition == _rightTarget && _myRigidbody.position.x >= _targetPosition.x) _targetPosition = _leftTarget;
-            else if (_myRigidbody.position.x <= _targetPosition.x) _targetPosition = _rightTarget;
+            _movementDirection = -_movementDirection;
+            rotated = !rotated;
         }
     }
 
