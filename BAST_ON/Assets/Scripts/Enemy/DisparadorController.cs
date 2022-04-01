@@ -20,6 +20,8 @@ public class DisparadorController : MonoBehaviour
     private float timer, ang;
     private Vector2 pos;
     private Vector2 _instanciatePoint;
+    private float _startShooting;
+    private float _startElapsedTime = 0;
     #endregion
 
 
@@ -27,24 +29,29 @@ public class DisparadorController : MonoBehaviour
     {
         _myTransform = transform;
         _dispCollider = GetComponent<CircleCollider2D>();
+        _startShooting = Random.Range(0, 300) / 100f;
+
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= frecuencia)
+        if (_startElapsedTime > _startShooting)
         {
-            pos = _myPlayer.transform.position - _myTransform.position;
-            pos.Normalize();
-            ang = Mathf.Acos(pos.x);
-            if (pos.y < 0) ang = -ang;
-            ang *= 180 / Mathf.PI;
+            timer += Time.deltaTime;
+            if (timer >= frecuencia)
+            {
+                pos = _myPlayer.transform.position - _myTransform.position;
+                pos.Normalize();
+                ang = Mathf.Acos(pos.x);
+                if (pos.y < 0) ang = -ang;
+                ang *= 180 / Mathf.PI;
 
-            _instanciatePoint = (Vector2)_myTransform.position + _dispCollider.offset + (pos * (_dispCollider.radius + 0.5f));
+                _instanciatePoint = (Vector2)_myTransform.position + _dispCollider.offset + (pos * (_dispCollider.radius + 0.5f));
 
-            Instantiate(_myDisp, _instanciatePoint, Quaternion.Euler(0, 0, ang));
-            timer = 0;
+                Instantiate(_myDisp, _instanciatePoint, Quaternion.Euler(0, 0, ang));
+                timer = 0;
+            }
         }
-            
+        else _startElapsedTime += Time.deltaTime;
     }
 }
