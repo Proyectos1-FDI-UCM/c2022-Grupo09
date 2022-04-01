@@ -37,7 +37,7 @@ public class SoundArea : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        _myAudioSource.Play();
-        _soundPlayed = false;
+        if(!_soundPlayed)_myAudioSource.Play();
+        _soundPlayed = true;
     }
 }
