@@ -11,7 +11,7 @@ public class EsquivDisparo : MonoBehaviour
     #endregion
     #region parameters
     [SerializeField]
-    private float freq=2;
+    private float freq = 2;
     #endregion
     #region properties
     private float timer;
