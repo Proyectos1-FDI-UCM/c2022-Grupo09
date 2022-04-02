@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
-
-    [SerializeField] private GameObject whatToSpawn;
-    [SerializeField] private GameObject spawnPosReference;
-
+    #region parameters
     [SerializeField] private float _spawnDelay = 2.0f;
+    #endregion
+
+    #region parameters
+    private float timer = 0.0f;
+    #endregion
+
+    #region references
+    [SerializeField] private GameObject whatToSpawn;
 
     private Transform spawnPosTransform;
     private GameObject spawnInstance = null;
-    private float timer = 0.0f;
+    #endregion
 
 
     // Start is called before the first frame update
-    
+
     private void SpawnNewInstance(){
-        spawnInstance = Instantiate(whatToSpawn, spawnPosTransform.position, Quaternion.identity) as GameObject;
+        spawnInstance = Instantiate(whatToSpawn, spawnPosTransform.position, Quaternion.identity);
     }
 
     /// <summary>
@@ -27,18 +32,17 @@ public class SpawnerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        spawnPosTransform = spawnPosReference.GetComponent<Transform>();      
-        
+        spawnPosTransform = transform;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(timer > _spawnDelay)
-        if(spawnInstance == null){
+            if(spawnInstance == null){
             SpawnNewInstance();
             timer = 0.0f;
-        } 
+            } 
     
         timer += Time.deltaTime;
     }

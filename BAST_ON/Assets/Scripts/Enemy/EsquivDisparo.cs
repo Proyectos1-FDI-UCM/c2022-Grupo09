@@ -6,7 +6,7 @@ public class EsquivDisparo : MonoBehaviour
 {
     #region references
     [SerializeField]
-    private GameObject _myShot, _myPrefab;
+    private GameObject _myShot;
     private Transform _myTransform;
     #endregion
     #region parameters
@@ -19,7 +19,7 @@ public class EsquivDisparo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _myTransform = _myPrefab.transform;
+        _myTransform = transform;
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class EsquivDisparo : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= freq)
         {
-            Instantiate(_myShot, transform.position, Quaternion.Euler(_myTransform.rotation.eulerAngles.x, _myTransform.rotation.eulerAngles.y, _myTransform.rotation.eulerAngles.z));
+            Instantiate(_myShot, _myTransform.position, Quaternion.Euler(_myTransform.rotation.eulerAngles));
             timer = 0;
         }
     }
