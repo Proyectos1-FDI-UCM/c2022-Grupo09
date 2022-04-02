@@ -10,12 +10,15 @@ public class GearDamageController : MonoBehaviour
     #region parameters
     [SerializeField]
     private int _gearDamage = 1;
-
+    [SerializeField]
     private int _speed = 1;
     #endregion
 
-    #region methods
+    #region parameters
+    private bool _wasHit = false;
+    #endregion
 
+    #region methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Character_HealthManager player = collision.gameObject.GetComponent<Character_HealthManager>();
@@ -24,14 +27,18 @@ public class GearDamageController : MonoBehaviour
             player.ChangeHealthValue(-_gearDamage);
             Destroy(gameObject);
         }
-    }
-    //Falta hacer que haga daño a Jose01
-    /*public void CambiaRotacion(float rotation)
-    {
-        _gearTransform.rotation = Quaternion.identity;
-        _gearTransform.Rotate(Vector3.forward, rotation);
-    }*/
 
+        if (_wasHit)
+        {
+            // Ducktyping para detectar Joseju y hacerle daño
+        }
+    }
+    
+    public void CambiaRotacion(float rotation)
+    {
+        _gearTransform.rotation = Quaternion.Euler(0, 0, rotation);
+        _wasHit = true;
+    }
     #endregion
 
     private void Start()

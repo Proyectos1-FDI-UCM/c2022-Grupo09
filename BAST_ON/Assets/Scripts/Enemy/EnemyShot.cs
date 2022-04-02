@@ -13,7 +13,6 @@ public class EnemyShot : MonoBehaviour
     private float _speed;
     #endregion
 
-
     #region methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -39,8 +38,7 @@ public class EnemyShot : MonoBehaviour
 
     public void CambiaRotacion(float rotation)
     {
-        _myTransform.rotation = Quaternion.identity;
-        _myTransform.Rotate(Vector3.forward, rotation);
+        _myTransform.rotation = Quaternion.Euler(0, 0, rotation);
     }
     #endregion
 

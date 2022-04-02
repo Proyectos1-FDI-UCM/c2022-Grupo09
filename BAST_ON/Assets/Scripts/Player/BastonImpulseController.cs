@@ -12,8 +12,6 @@ public class BastonImpulseController : MonoBehaviour
     CharacterAttackController _myCharacterAttackController;
 
     Transform _bastonTransform;
-
-    
     #endregion
 
     #region methods
@@ -28,6 +26,11 @@ public class BastonImpulseController : MonoBehaviour
 
             EnemyShot disparo = collision.GetComponent<EnemyShot>();
             if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
+            else
+            {
+                GearDamageController engranaje = collision.GetComponent<GearDamageController>();
+                if (engranaje != null) engranaje.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
+            }
 
             _characterMovementController.ImpulseRequest(-impulseDirection);
 
