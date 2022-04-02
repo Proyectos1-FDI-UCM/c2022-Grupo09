@@ -30,7 +30,9 @@ public class GearDamageController : MonoBehaviour
 
         if (_wasHit)
         {
-            // Ducktyping para detectar Joseju y hacerle daño
+            JoseJuanController joseju = collision.gameObject.GetComponent<JoseJuanController>();
+            if (joseju != null) joseju.ChangeSecondFaseHealth(-1);
+            Destroy(gameObject);
         }
     }
     
