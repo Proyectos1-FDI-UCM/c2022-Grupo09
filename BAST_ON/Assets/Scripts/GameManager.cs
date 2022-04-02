@@ -6,20 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     #region references
-    private Character_HealthManager _myCharacterHealthManager;
-
     private CharacterMovementController _myCharacterMovementController;
 
     private CharacterAttackController _myCharacterAttackController;
 
-    private EnemyLifeComponent _myEnemyLifeComponent;
-
-    private EnemyPatrulla _myEnemy;
-
-    [SerializeField] private List<EnemyLifeComponent> _listOfEnemies;
-
-    [SerializeField] private GameObject _dragon, _kiwi;
-
+    private List<EnemyLifeComponent> _listOfEnemies;
 
     private UI_Manager _UIManagerReference;
 
@@ -29,13 +20,9 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject _playerReference; 
     [SerializeField] private GameObject _UIReference;
-
-    
     #endregion
 
     #region methods
-
-
     public void Pause()
     {
         Time.timeScale = 0;
@@ -83,7 +70,6 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator KiwiPowerUp(int duration, float slowDown)
     {
-       
         foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
             if (enemy != null)
@@ -94,13 +80,6 @@ public class GameManager : MonoBehaviour
         }
         _UIManagerReference.KiwiActive(true);
 
-        /*if (duration == duration / 2)
-        {
-            
-            _UIManagerReference.StartBlinkKiwi();
-        }
-        
-        yield return new WaitForSeconds(duration);*/
         yield return new WaitForSeconds(duration/2);
         _UIManagerReference.StartBlinkKiwi();
         yield return new WaitForSeconds(duration/2);
@@ -125,18 +104,13 @@ public class GameManager : MonoBehaviour
     {
         _UIManagerReference.DragonActive(true);
         _myCharacterMovementController.IncreaseBastonImpulse(newImpulse);
-        /*if (duration == duration / 2) _UIManagerReference.StartBlinkDragon();
-        yield return new WaitForSeconds(duration);*/
         yield return new WaitForSeconds(duration/2);
         _UIManagerReference.StartBlinkDragon();
         yield return new WaitForSeconds(duration/2);
         _UIManagerReference.DragonActive(false);
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);
-        
     }
-
-   
     #endregion
 
     private void Awake() {
@@ -144,23 +118,14 @@ public class GameManager : MonoBehaviour
         _listOfEnemies = new List<EnemyLifeComponent>();
         _instance = this;
         _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
-        _myCharacterHealthManager = _playerReference.GetComponent<Character_HealthManager>();
         _myCharacterMovementController = _playerReference.GetComponent<CharacterMovementController>();
         _myCharacterAttackController = _playerReference.GetComponent<CharacterAttackController>();
-       
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        
         _playerReference.SetActive(false);
         Time.timeScale = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

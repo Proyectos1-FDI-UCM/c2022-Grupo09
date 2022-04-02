@@ -77,25 +77,11 @@ public class EnemyLifeComponent : MonoBehaviour
         isDead = true;
         _myEnemyPatrulla.enabled = false;
         Destroy(gameObject, 0.45f);
-        _myAudioSource.Play();
         GameManager.Instance.OnEnemyDies(this);
         _myAnimator.Play("Explosion");
+        _myAudioSource.Play();
     }
 
-
-
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     BastonImpulseController check = GetComponent<BastonImpulseController>();
-    //     if(check != null)
-    //     {
-           
-    //     }
-    
-    //     EnemyLifeComponent otherCheck = GetComponent<EnemyLifeComponent>();
-    
-        
-    // }
     
     public void ReleasePowerUp()
     {

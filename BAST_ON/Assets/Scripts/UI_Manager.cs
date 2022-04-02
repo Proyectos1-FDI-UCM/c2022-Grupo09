@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class UI_Manager : MonoBehaviour
 {
-     ///<summary>
+    #region references
+    ///<summary>
     ///Array que determina la vida en el UI
     ///</summary>
     [SerializeField] private Image[] _fruitArray;
@@ -18,24 +19,25 @@ public class UI_Manager : MonoBehaviour
     ///Referencia al sprite de la vida vacía
     ///</summary>
     [SerializeField] private Sprite emptyFruit;
-    ///<summary>
-    ///Referencia al sprite de la duración del powerUp kiwi
-    ///</summary>
-    //[SerializeField] private Sprite kiwiPower;
-    ///<summary>
-    ///Referencia al sprite de la duración del powerUp DragonFruit
-    ///</summary>
-    //[SerializeField] private Sprite DragonPower;
+    /// <summary>
+    /// Referencias al game object de dragon fruit y kiwi del UI
+    /// </summary>
     [SerializeField] private GameObject _dragon, _kiwi;
-
+    /// <summary>
+    /// Referencias al sprite de dragon fruit y kiwi del UI
+    /// </summary>
     private Image _kiwiSprite, _dragonSprite;
-
+    /// <summary>
+    /// Referencias a los menús de la UI
+    /// </summary>
     [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
+    /// <summary>
+    /// Referencia al menú previo al menú de controles cuando se entra en este
+    /// </summary>
     private GameObject _previousMenu;
     [SerializeField] private GameObject PauseFirstButton,ResumeFirstButton,OpcionClosed;
-    private bool _isBlinking = true;
+    #endregion
 
-    
 
     #region methods
     public void updateLifeBar(int _currentHealth){
@@ -58,7 +60,6 @@ public class UI_Manager : MonoBehaviour
     }
     IEnumerator BlinkKiwi()
     {
-        _isBlinking = true;
         while (_kiwi.activeSelf)
         {
             _kiwiSprite.enabled = false;
@@ -66,7 +67,6 @@ public class UI_Manager : MonoBehaviour
             _kiwiSprite.enabled = true;
             yield return new WaitForSeconds(0.5f);
         }
-        _isBlinking = false;
     }
    
     public void StartBlinkKiwi()
@@ -81,7 +81,6 @@ public class UI_Manager : MonoBehaviour
 
     IEnumerator BlinkDragon()
     {
-        _isBlinking = true;
         while (_dragon.activeSelf)
         {
             _dragonSprite.enabled = false;
@@ -89,7 +88,6 @@ public class UI_Manager : MonoBehaviour
             _dragonSprite.enabled = true;
             yield return new WaitForSeconds(0.5f);
         }
-        _isBlinking = false;
     }
     public void StartBlinkDragon()
     {
@@ -163,6 +161,5 @@ public class UI_Manager : MonoBehaviour
             if (!_pauseMenu.activeSelf) PauseGame();
             else ResumeGame();
         }
-        _isBlinking = false;
     }
 }
