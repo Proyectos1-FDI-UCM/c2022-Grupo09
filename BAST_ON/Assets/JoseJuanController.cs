@@ -9,11 +9,10 @@ public class JoseJuanController : MonoBehaviour
     /// Número de engranajes que recibe Jose Juan en la segunda fase hasta poder ser golpeado por Chicho.
     /// </summary>
     [SerializeField]
-    private int _maxSecondFaseHealth = 5;
+    private int _maxSecondPhaseHealth = 5;
     #endregion
 
     #region properties
-    private int _currentSecondFaseHealth;
     /// <summary>
     /// Valor que indica si Jose Juan puede ser golpeado por Chicho o no
     /// </summary>
@@ -21,11 +20,23 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Valor que indica la fase actual de Jose Juan
     /// </summary>
-    private int _currentFase = 0;
+    private int _currentPhase = 0;
+    /// <summary>
+    /// Valor que indica la oleada actual de la primera fase (posición en el array de oleadas)
+    /// </summary>
+    private int _currentFirstPhaseWave = 1;
+    /// <summary>
+    /// Valor que indica los engranajes restantes para que Chicho pueda golpear a Jose Juan
+    /// </summary>
+    private int _currentSecondPhaseHealth;
     #endregion
 
     #region references
     PolygonCollider2D _josejuCollider;
+    /// <summary>
+    /// Referencia a todas las oleadas de enemigos (plataformas y enemigos) de la primera fase
+    /// </summary>
+    [SerializeField] GameObject[] _firstPhaseWaves;
     #endregion
 
     #region methods
@@ -36,63 +47,80 @@ public class JoseJuanController : MonoBehaviour
             BastonImpulseController baston = collision.GetComponent<BastonImpulseController>();
             if (baston != null)
             {
-                if (_currentFase == 0) StartFirstFase();
-                else if (_currentFase == 1)
+                if (_currentPhase == 0) StartFirstPhase();
+                else if (_currentPhase == 1)
                 {
-                    EndFirstFase();
-                    StartSecondFase();
+                    EndFirstPhase();
+                    StartSecondPhase();
                 }
-                else EndSecondFase();
+                else EndSecondPhase();
             }
         }
     }
     /// <summary>
     /// Método que comienza la primera fase del boss
     /// </summary>
-    public void StartFirstFase()
+    public void StartFirstPhase()
     {
-        _currentFase = 1;
+        _currentPhase = 1;
         _canBeHit = false;
         _josejuCollider.enabled = false;
     }
     /// <summary>
+    /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
+    /// </summary>
+    public void EndingFirstPhase()
+    {
+        _canBeHit = true;
+        _josejuCollider.enabled = true;
+    }
+    /// <summary>
     /// Método que termina la primera fase del boss
     /// </summary>
-    public void EndFirstFase()
+    public void EndFirstPhase()
     {
 
     }
     /// <summary>
     /// Método que empieza la segunda fase del boss
     /// </summary>
-    public void StartSecondFase()
+    public void StartSecondPhase()
     {
-        _currentFase = 2;
+        _currentPhase = 2;
         _josejuCollider.enabled = true;
         _canBeHit = false;
     }
     /// <summary>
+    /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la segunda fase
+    /// </summary>
+    public void EndingSecondPhase()
+    {
+        _canBeHit = true;
+    }
+    /// <summary>
     /// Método que termina la segunda fase del boss
     /// </summary>
-    public void EndSecondFase()
+    public void EndSecondPhase()
     {
 
     }
     /// <summary>
-    /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle
-    /// </summary>
-    public void EndingFase()
-    {
-        _canBeHit = true;
-        _josejuCollider.enabled = true;
-    }
-    /// <summary>
     /// Método que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
     /// </summary>
-    public void ChangeSecondFaseHealth(int value)
+    public void ChangeSecondPhaseHealth(int value)
     {
-        _currentSecondFaseHealth += value;
-        if (_currentSecondFaseHealth <= 0) _canBeHit = true;
+        _currentSecondPhaseHealth += value;
+        if (_currentSecondPhaseHealth <= 0) EndingSecondPhase();
+    }
+
+    /// <summary>
+    /// Método que cambia a la siguiente oleada de enemigos
+    /// </summary>
+    public void NextWave()
+    {
+        // Quitar oleada actual
+        // aumentar _currentFirstPhaseWave
+        // Colocar nueva oleada actual
     }
     #endregion
 
@@ -101,12 +129,12 @@ public class JoseJuanController : MonoBehaviour
     void Start()
     {
         _josejuCollider = GetComponent<PolygonCollider2D>();
-        _currentSecondFaseHealth = _maxSecondFaseHealth;
+        _currentSecondPhaseHealth = _maxSecondPhaseHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

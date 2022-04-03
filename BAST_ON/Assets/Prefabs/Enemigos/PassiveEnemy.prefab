@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conversionValue: 1
   _impulseStopTime: 3
-  _myEnemyPatrulla: {fileID: 0}
+  _myEnemyPatrulla: {fileID: 7345684796174965007}
 --- !u!95 &3622680410856688948
 Animator:
   serializedVersion: 3

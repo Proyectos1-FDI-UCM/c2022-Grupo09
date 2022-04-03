@@ -52,7 +52,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     }
 
     /// <summary>
-    /// Cancela el impulso del bastón y llama al método de recuperar ruta
+    /// Cancela el impulso del bastón y recupera la ruta
     /// </summary>
     private void RestartEnemy()
     {

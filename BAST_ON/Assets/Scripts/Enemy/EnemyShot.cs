@@ -50,6 +50,6 @@ public class EnemyShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        _myTransform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }
