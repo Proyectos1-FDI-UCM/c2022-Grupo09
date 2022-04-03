@@ -13,8 +13,12 @@ public class SwitchController : MonoBehaviour
     private AudioSource _myAudioSource;
     #endregion
 
+    #region parameters
+    [SerializeField] private bool _opened = false;
+    #endregion
+
     #region properties
-    private bool _opened = false, _soundPlayed=false;
+    private bool _soundPlayed=false;
     #endregion
 
     #region methods
