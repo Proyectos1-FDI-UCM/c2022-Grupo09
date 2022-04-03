@@ -11,7 +11,6 @@ public class EnemyPasivo : MonoBehaviour
     /// Determina si un enemigo se quedar� quieto en un punto.
     /// En caso de estar en otro sitio, se mover� por defecto al l�mite derecho de la patrulla.
     /// </summary>
-    [SerializeField] private bool _staticEnemy = false;
     private bool rotated = false;
     int layer;
     #endregion
@@ -73,9 +72,7 @@ public class EnemyPasivo : MonoBehaviour
     {
         // C�lculo del movimiento
 
-        // Si el enemigo es est�tico y est� suficientemente cerca del target no se mueve
-        // Hecho para evitar que contin�e movi�ndose alante y atr�s cuando a efectos pr�cticos ya ha llegado al target
-        if (_staticEnemy && (_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
+        if ((_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
 
         // Llamada el m�todo del Life Component que recibe la direcci�n del movimiento
         _myLifeComponent.SetMovementDirection(_movementDirection);
@@ -83,7 +80,6 @@ public class EnemyPasivo : MonoBehaviour
         // Aplicaci�n del movimiento
         _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
-        // Cambio de target cuando se llega a uno de ellos
         if (_wallInfo.collider||!_floorInfo.collider)
         {
             _movementDirection = -_movementDirection;
