@@ -56,46 +56,13 @@ public class EnemyPasivo : MonoBehaviour
         _originalSpeed = speed;
     }
 
-    /*void Update()
-    {   
-        
-        if (rightMov)
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (transform.position.x >= _limDer.transform.position.x)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-            }
-            else if (transform.position.x <= _limIzq.transform.position.x)
-
-            {
-
-                transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-        }else if (!rightMov)
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-            
-            if (transform.position.x <= _limIzq.transform.position.x)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-            }
-            else if (transform.position.x >= _limDer.transform.position.x)
-            {
-
-                transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-
-
-        }
-    }*/
     private void Update()
     {
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
+        _mySpriteRenderer.flipX = _movementDirection.x < 0;
         if (!rotated) _detectorOrigin = _myDetector.position;
         else _detectorOrigin.x = _myDetector.position.x - 2;
-        _mySpriteRenderer.flipX = _movementDirection.x < 0;
         _wallInfo = Physics2D.Raycast(_detectorOrigin, _movementDirection, detectdist);
         _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist);
     }

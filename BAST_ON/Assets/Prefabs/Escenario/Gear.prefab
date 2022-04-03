@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8933396288510389748}
   - component: {fileID: 8933396288510389751}
   - component: {fileID: -7110222841765745402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,12 +100,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8933396288510389751
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0006121993, y: 0.0018365737}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gearDamage: 1
-  _speed: 1
+  _speed: 7
