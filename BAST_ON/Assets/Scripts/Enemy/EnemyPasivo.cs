@@ -30,6 +30,9 @@ public class EnemyPasivo : MonoBehaviour
     private Transform _myDetector;
     private RaycastHit2D _wallInfo;
     private RaycastHit2D _floorInfo;
+
+    private Vector2 _gravity;
+    private float _onAirElapsedTime = 0;
     #endregion
 
     #region methods
@@ -70,15 +73,17 @@ public class EnemyPasivo : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // C�lculo del movimiento
+        if (!_floorInfo) _onAirElapsedTime += Time.deltaTime;
+        else _onAirElapsedTime = 0;
 
-        if ((_movementDirection).magnitude < 0.1f) _movementDirection = Vector2.zero;
+        // C�lculo de la gravedad
+        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElapsedTime);
 
         // Llamada el m�todo del Life Component que recibe la direcci�n del movimiento
         _myLifeComponent.SetMovementDirection(_movementDirection);
 
         // Aplicaci�n del movimiento
-        _myRigidbody.MovePosition(_myRigidbody.position + _movementDirection.normalized * speed * Time.fixedDeltaTime);
+        _myRigidbody.MovePosition(_myRigidbody.position + _gravity + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
         if (_wallInfo.collider||!_floorInfo.collider)
         {

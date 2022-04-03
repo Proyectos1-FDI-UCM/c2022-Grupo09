@@ -39,7 +39,7 @@ public class CharacterMovementController : MonoBehaviour
     /// <summary>
     /// Variable auxiliar que cuenta el tiempo que el jugador lleva en el aire para aplicarlo a la gravedad.
     /// </summary>
-    private float _onAirElasedTime = 0f;
+    private float _onAirElapsedTime = 0f;
 
     private float _gravityReducer;
     /// <summary>
@@ -103,7 +103,7 @@ public class CharacterMovementController : MonoBehaviour
             _impulseDirection = forceDirection * _bastonImpulse;
             _impulseElapsedTime = 1f;
             // Reset del tiempo en el aire para dar mejor sensación de juego
-            _onAirElasedTime = 0f;
+            _onAirElapsedTime = 0f;
             _myCameraController.ResetVerticalOffset();
         }
     }
@@ -127,7 +127,7 @@ public class CharacterMovementController : MonoBehaviour
 
         _blockMovement = true;
         _impulseElapsedTime = 1f;
-        _onAirElasedTime = 0f;
+        _onAirElapsedTime = 0f;
     }
     public void WallWasAttacked(bool attacked)
     {
@@ -215,7 +215,7 @@ public class CharacterMovementController : MonoBehaviour
         else _gravityReducer = 1;
 
         // Calculo de la gravedad
-        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElasedTime) / _gravityReducer;
+        _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElapsedTime) / _gravityReducer;
 
         // Velocidad a 0 si acaba de golpear una pared
         if (_blockMovement) _speedMovement = 0;
@@ -231,8 +231,8 @@ public class CharacterMovementController : MonoBehaviour
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         // Contador del tiempo en el aire
-        if (!_myFloorDetector.IsGrounded()) _onAirElasedTime += Time.fixedDeltaTime;
-        else _onAirElasedTime = 0f;
+        if (!_myFloorDetector.IsGrounded()) _onAirElapsedTime += Time.fixedDeltaTime;
+        else _onAirElapsedTime = 0f;
 
         // Contador para reducir el impulso
         if (_impulseElapsedTime < _impulseDirection.magnitude) _impulseElapsedTime += Time.fixedDeltaTime;
