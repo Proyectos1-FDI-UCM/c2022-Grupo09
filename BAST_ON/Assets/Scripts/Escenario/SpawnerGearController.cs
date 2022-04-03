@@ -15,7 +15,7 @@ public class SpawnerGearController : MonoBehaviour
     private float _frequency = 2.0f;
 
     [SerializeField]
-    private float _rangoGeneración = 15.0f;
+    private float _rangoGeneracion = 15.0f;
 
     private float _timer = 0.0f;
     #endregion
@@ -24,7 +24,7 @@ public class SpawnerGearController : MonoBehaviour
 
     public void RandomGear()
     {
-        float posXGen = Random.Range(-_rangoGeneración, _rangoGeneración);
+        float posXGen = Random.Range(-_rangoGeneracion, _rangoGeneracion);
         float posYGen = _gearTransform.position.y;
 
         Vector3 posAletaoria = new Vector3(posXGen, posYGen, 0);
