@@ -13,6 +13,7 @@ public class EnemyPasivo : MonoBehaviour
     /// </summary>
     [SerializeField] private bool _staticEnemy = false;
     private bool rotated = false;
+    int layer;
     #endregion
 
     #region references
@@ -46,6 +47,7 @@ public class EnemyPasivo : MonoBehaviour
 
     private void Start()
     {
+        layer = LayerMask.GetMask("Floor");
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myLifeComponent = GetComponent<EnemyLifeComponent>();
@@ -63,8 +65,8 @@ public class EnemyPasivo : MonoBehaviour
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
         if (!rotated) _detectorOrigin = _myDetector.position;
         else _detectorOrigin.x = _myDetector.position.x - 2;
-        _wallInfo = Physics2D.Raycast(_detectorOrigin, _movementDirection, detectdist);
-        _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist);
+        _wallInfo = Physics2D.Raycast(_detectorOrigin, _movementDirection, detectdist, layer);
+        _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist, layer);
     }
 
     private void FixedUpdate()
