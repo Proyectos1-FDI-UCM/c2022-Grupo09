@@ -10,7 +10,7 @@ public class ParallaxController : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
 
 
-
+    
     [SerializeField] private GameObject cam;
 
     [SerializeField, Range(-1.0f,1.0f)] private float parallaxEffect = 1.0f;
@@ -45,4 +45,6 @@ public class ParallaxController : MonoBehaviour
         }
 
     }
+
+    
 }

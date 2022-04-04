@@ -7,6 +7,8 @@ public class salidasyentradasniveles : MonoBehaviour
 
     [SerializeField] private GameObject salidanivel;
     private GameObject player;
+
+    [SerializeField] private GameObject[] Backgrounds;
    
        
 
@@ -17,6 +19,10 @@ public class salidasyentradasniveles : MonoBehaviour
         if(player != null)
         {
             player.transform.position = salidanivel.transform.position;
+            foreach(var i in Backgrounds)
+            {
+                i.GetComponent<BGSwapper>().SwapBG();
+            }
         }
     }
 }
