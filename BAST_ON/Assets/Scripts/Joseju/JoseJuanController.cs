@@ -10,6 +10,10 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private int _maxSecondPhaseHealth = 5;
+    /// <summary>
+    /// Velocidad a la que Joseju se dirige a su posición de la fase 1
+    /// </summary>
+    [SerializeField] private float _toFirstPhasePositionSpeed = 5;
     #endregion
 
     #region properties
@@ -24,19 +28,42 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Valor que indica la oleada actual de la primera fase (posición en el array de oleadas)
     /// </summary>
-    private int _currentFirstPhaseWave = 1;
+    private int _currentFirstPhaseWave = 0;
     /// <summary>
     /// Valor que indica los engranajes restantes para que Chicho pueda golpear a Jose Juan
     /// </summary>
     private int _currentSecondPhaseHealth;
+    /// <summary>
+    /// Valor que indica si Joseju tiene que ir a su posición en la primera fase
+    /// </summary>
+    private bool _moveToFirstFase = false;
     #endregion
 
     #region references
-    PolygonCollider2D _josejuCollider;
+    /// <summary>
+    /// Referencia al collider de Joseju
+    /// </summary>
+    private PolygonCollider2D _josejuCollider;
     /// <summary>
     /// Referencia a todas las oleadas de enemigos (plataformas y enemigos) de la primera fase
     /// </summary>
-    [SerializeField] GameObject[] _firstPhaseWaves;
+    [SerializeField] private GameObject[] _firstPhaseWaves;
+    /// <summary>
+    /// Referencia a los enemigos de la oleada actual
+    /// </summary>
+    private List<EnemyLifeComponent> _waveEnemies;
+    /// <summary>
+    /// Referencia al transform de Joseju
+    /// </summary>
+    private Transform _josejuTransform;
+    /// <summary>
+    /// Referencia al objeto con la posición de Joseju en la fase 1
+    /// </summary>
+    [SerializeField] private GameObject _firstPhasePositionObject;
+    /// <summary>
+    /// Referencai a la posición de Joseju en la fase 1
+    /// </summary>
+    private Vector3 _firstPhasePosition;
     #endregion
 
     #region methods
@@ -62,6 +89,8 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartFirstPhase()
     {
+        _moveToFirstFase = true;
+
         _currentPhase = 1;
         _canBeHit = false;
         _josejuCollider.enabled = false;
@@ -130,11 +159,19 @@ public class JoseJuanController : MonoBehaviour
     {
         _josejuCollider = GetComponent<PolygonCollider2D>();
         _currentSecondPhaseHealth = _maxSecondPhaseHealth;
+
+        _josejuTransform = transform;
+        _firstPhasePosition = _firstPhasePositionObject.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_moveToFirstFase)
+        {
+            _josejuTransform.Translate((_firstPhasePosition - _josejuTransform.position).normalized * _toFirstPhasePositionSpeed * Time.deltaTime);
 
+            if (_josejuTransform.position.x >= _firstPhasePosition.x) _moveToFirstFase = false;
+        }
     }
 }
