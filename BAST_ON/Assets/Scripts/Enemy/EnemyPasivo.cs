@@ -6,18 +6,18 @@ public class EnemyPasivo : MonoBehaviour
 {
     #region parameters
     [SerializeField]
-    private float speed = 5f, detectdist = 1f;
+    private float speed = 3f, detectdist = 1f;
     /// <summary>
     /// Determina si un enemigo se quedar� quieto en un punto.
     /// En caso de estar en otro sitio, se mover� por defecto al l�mite derecho de la patrulla.
     /// </summary>
-    private bool rotated = false;
-    int layer;
+    private bool rotated = false, wallInfo;
+    int layerF;
     #endregion
 
     #region references
     [SerializeField]
-    private GameObject _detector;
+    private GameObject _detectorD, DetectorI;
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
@@ -27,8 +27,8 @@ public class EnemyPasivo : MonoBehaviour
     #region properties
     private float _originalSpeed;
     private Vector2 _movementDirection, _detectorOrigin;
-    private Transform _myDetector;
-    private RaycastHit2D _wallInfo;
+    private Transform _myDetectorD, _myDetectorI;
+    private RaycastHit2D _wallInfoD, _wallInfoI;
     private RaycastHit2D _floorInfo;
 
     private Vector2 _gravity;
@@ -49,12 +49,12 @@ public class EnemyPasivo : MonoBehaviour
 
     private void Start()
     {
-        layer = LayerMask.GetMask("Floor");
+        layerF = LayerMask.GetMask("Floor");
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myLifeComponent = GetComponent<EnemyLifeComponent>();
 
-        _myDetector = _detector.transform;
+        _myDetectorD = _detectorD.transform;
 
         _movementDirection = Vector2.right;
         _originalSpeed = speed;
@@ -65,16 +65,36 @@ public class EnemyPasivo : MonoBehaviour
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
-        if (!rotated) _detectorOrigin = _myDetector.position;
-        else _detectorOrigin.x = _myDetector.position.x - 2;
-        _wallInfo = Physics2D.Raycast(_detectorOrigin, _movementDirection, detectdist, layer);
-        _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist, layer);
+        if (!rotated)
+        {
+            _detectorOrigin = _myDetectorD.position;
+            _wallInfoD = Physics2D.Raycast(_detectorOrigin, Vector2.right, detectdist);
+        }
+        else
+        {
+            _detectorOrigin = _myDetectorI.position;
+            _wallInfoI = Physics2D.Raycast(_detectorOrigin, Vector2.left, detectdist);
+        }
+
+
+        _floorInfo = Physics2D.Raycast(_detectorOrigin, Vector2.down, detectdist);
+
+        if (!rotated) wallInfo = _wallInfoD.collider;
+        else wallInfo = _wallInfoI.collider;
+
+        if (!wallInfo || _floorInfo.collider)
+        {
+            _movementDirection = -_movementDirection;
+            rotated = !rotated;
+        }
     }
 
     private void FixedUpdate()
     {
         if (!_floorInfo) _onAirElapsedTime += Time.deltaTime;
         else _onAirElapsedTime = 0;
+
+        
 
         // C�lculo de la gravedad
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElapsedTime);
@@ -85,11 +105,7 @@ public class EnemyPasivo : MonoBehaviour
         // Aplicaci�n del movimiento
         _myRigidbody.MovePosition(_myRigidbody.position + _gravity + _movementDirection.normalized * speed * Time.fixedDeltaTime);
 
-        if (_wallInfo.collider||!_floorInfo.collider)
-        {
-            _movementDirection = -_movementDirection;
-            rotated = !rotated;
-        }
+        
     }
 
 }
