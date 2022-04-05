@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteGame()
     {
-
+        ExitToMainMenu();
     }
     #endregion
 
