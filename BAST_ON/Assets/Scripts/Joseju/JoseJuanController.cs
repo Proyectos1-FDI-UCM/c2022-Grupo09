@@ -40,6 +40,9 @@ public class JoseJuanController : MonoBehaviour
     #endregion
 
     #region references
+
+    [SerializeField]private GameObject WavePositionobject;
+    private Vector3 waveposition;
     /// <summary>
     /// Referencia al collider de Joseju
     /// </summary>
@@ -98,6 +101,7 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
     /// </summary>
+
     public void EndingFirstPhase()
     {
         _canBeHit = true;
@@ -147,9 +151,28 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void NextWave()
     {
-        // Quitar oleada actual
-        // aumentar _currentFirstPhaseWave
-        // Colocar nueva oleada actual
+        Destroy(_firstPhaseWaves[_currentFirstPhaseWave]);
+
+        _currentFirstPhaseWave++;
+        Instantiate(_firstPhaseWaves[_currentFirstPhaseWave], waveposition, Quaternion.identity);
+    }
+   public void RegisterWaveEnemy(EnemyLifeComponent enemy)
+    {
+        _waveEnemies.Add(enemy);
+
+    }
+    public bool waveend(List<EnemyLifeComponent> waveenemies)
+    {
+        bool emptywave = true;
+        int i = 0;
+        EnemyLifeComponent[] wavearray = waveenemies.ToArray();
+        while (i<wavearray.Length && emptywave)
+        {
+            if (wavearray[i] != null) emptywave = false;
+            i++;
+
+        }
+        return emptywave;
     }
     #endregion
 
@@ -162,6 +185,8 @@ public class JoseJuanController : MonoBehaviour
 
         _josejuTransform = transform;
         _firstPhasePosition = _firstPhasePositionObject.transform.position;
+
+        waveposition = WavePositionobject.transform.position;
     }
 
     // Update is called once per frame
@@ -172,6 +197,17 @@ public class JoseJuanController : MonoBehaviour
             _josejuTransform.Translate((_firstPhasePosition - _josejuTransform.position).normalized * _toFirstPhasePositionSpeed * Time.deltaTime);
 
             if (_josejuTransform.position.x >= _firstPhasePosition.x) _moveToFirstFase = false;
+        }
+        if (_currentPhase == 1)
+        {
+            if (waveend(_waveEnemies))
+            {
+                if (_currentFirstPhaseWave < _firstPhaseWaves.Length - 1) NextWave();
+
+                else EndingFirstPhase();
+
+            }
+
         }
     }
 }
