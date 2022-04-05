@@ -186,7 +186,7 @@ public class JoseJuanController : MonoBehaviour
     public void EndingSecondPhase()
     {
         _canBeHit = true;
-        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, true);
+        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, false);
     }
     /// <summary>
     /// Método que termina la segunda fase del boss
