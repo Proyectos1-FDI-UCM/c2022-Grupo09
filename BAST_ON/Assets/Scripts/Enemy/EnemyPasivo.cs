@@ -6,8 +6,9 @@ public class EnemyPasivo : MonoBehaviour
 {
     #region parameters
     [SerializeField]
-    private float speed = 3, distance = 1;
+    private float speed = 1, distance = 1;
     private bool rotate = true;
+    private int layer;
     #endregion
 
     #region references
@@ -28,30 +29,37 @@ public class EnemyPasivo : MonoBehaviour
 
     private void Start()
     {
+        layer = LayerMask.GetMask("Floor");
         _myRigidBody = GetComponent<Rigidbody2D>();
         _movementDirection = Vector2.right;
     }
 
     private void Update()
     {
-        _myRigidBody.MovePosition(_movementDirection);
-        _groundDetect = Physics2D.Raycast(_detector.position, Vector2.down, distance);
-        _wallDetect = Physics2D.Raycast(_detector.position, _movementDirection, distance);
+
+        _groundDetect = Physics2D.Raycast(_detector.position, Vector2.down, distance,layer);
+        _wallDetect = Physics2D.Raycast(_detector.position, _movementDirection, distance, layer);
 
         if (!_groundDetect.collider || _wallDetect.collider)
         {
             if (rotate)
             {
                 transform.eulerAngles = new Vector3(0, -180, 0);
+                _movementDirection = -_movementDirection;
                 rotate = !rotate;
             }
             else
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
+                _movementDirection = -_movementDirection;
                 rotate = !rotate;
             }
         }
 
+    }
+    private void FixedUpdate()
+    {
+        _myRigidBody.MovePosition(_myRigidBody.position + _movementDirection.normalized * speed*Time.fixedDeltaTime);
     }
 
 
