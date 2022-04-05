@@ -10,7 +10,7 @@ public class FloorDetectorSender : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _patrolReference = this.gameObject.gameObject.GetComponent<Enemy_ClimberPatrol>();
+        _patrolReference = gameObject.GetComponent<Enemy_ClimberPatrol>();
     }
 
     private void OnCollisionStay2D(Collision2D other) {

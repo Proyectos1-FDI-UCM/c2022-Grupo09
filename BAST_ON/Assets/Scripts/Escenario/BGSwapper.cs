@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class BGSwapper : MonoBehaviour
 {
-    private Sprite defaultSprite;
-    [SerializeField] private Sprite otherSprite;
-    private SpriteRenderer mySpriteRenderer;
+    [SerializeField] GameObject _JungleBackground;
+    [SerializeField] GameObject _FactoryBackground;
+    
 
     private bool hasBeenSwapped = false;
     
     void Start()
     {
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
-        defaultSprite = mySpriteRenderer.sprite; 
+        _JungleBackground.SetActive(true);
+        _FactoryBackground.SetActive(false);
     }
 
     public void SwapBG(){
         if(!hasBeenSwapped)
         {
-            mySpriteRenderer.sprite = otherSprite;
+            _FactoryBackground.SetActive(true);
+            _JungleBackground.SetActive(false);
         }
         else
         {
-            mySpriteRenderer.sprite = defaultSprite;
+            _JungleBackground.SetActive(true);
+            _FactoryBackground.SetActive(false);
         }    
     }
 }

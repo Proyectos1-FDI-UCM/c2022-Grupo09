@@ -6,11 +6,17 @@ public class salidasyentradasniveles : MonoBehaviour
 {
 
     [SerializeField] private GameObject salidanivel;
+    [SerializeField] private GameObject cam;
+
+    [SerializeField] private bool swapsBG = false;
     private GameObject player;
 
-    [SerializeField] private GameObject[] Backgrounds;
+
+    private BGSwapper camBGSwapper;
    
-       
+    private void Start() {
+        camBGSwapper = cam.GetComponent<BGSwapper>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,10 +25,11 @@ public class salidasyentradasniveles : MonoBehaviour
         if(player != null)
         {
             player.transform.position = salidanivel.transform.position;
-            foreach(var i in Backgrounds)
-            {
-                i.GetComponent<BGSwapper>().SwapBG();
+            
+            if(swapsBG){
+            camBGSwapper.SwapBG();
             }
+            
         }
     }
 }
