@@ -193,7 +193,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndSecondPhase()
     {
-
+        _gearSpawner.SetActive(false);
     }
     /// <summary>
     /// Método que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
