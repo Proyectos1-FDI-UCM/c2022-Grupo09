@@ -91,6 +91,8 @@ public class JoseJuanController : MonoBehaviour
     {
         _moveToFirstFase = true;
 
+        _firstPhaseWaves[_currentFirstPhaseWave].SetActive(true);
+
         _currentPhase = 1;
         _canBeHit = false;
         _josejuCollider.enabled = false;
@@ -161,10 +163,9 @@ public class JoseJuanController : MonoBehaviour
     {
         bool emptyWave = true;
         int i = 0;
-        WaveEnemy[] waveArray = waveEnemies.ToArray();
-        while (i<waveArray.Length && emptyWave)
+        while (i < waveEnemies.Count && emptyWave)
         {
-            if (waveArray[i] != null) emptyWave = false;
+            if (waveEnemies[i] != null) emptyWave = false;
             i++;
         }
         return emptyWave;
@@ -180,6 +181,8 @@ public class JoseJuanController : MonoBehaviour
 
         _josejuTransform = transform;
         _firstPhasePosition = _firstPhasePositionObject.transform.position;
+
+        _waveEnemies = new List<WaveEnemy>();
     }
 
     // Update is called once per frame
