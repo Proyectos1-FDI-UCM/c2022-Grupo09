@@ -57,6 +57,10 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject _phaseZeroSpawner;
     /// <summary>
+    /// Referencia a la puerta entre fase 0 y 1
+    /// </summary>
+    [SerializeField] private GameObject _toFirstPhaseDoor;
+    /// <summary>
     /// Referencia a todas las oleadas de enemigos (plataformas y enemigos) de la primera fase
     /// </summary>
     [SerializeField] private GameObject[] _firstPhaseWaves;
@@ -102,6 +106,7 @@ public class JoseJuanController : MonoBehaviour
     public void StartFirstPhase()
     {
         _phaseZeroSpawner.SetActive(false);
+        _toFirstPhaseDoor.SetActive(false);
 
         _moveToFirstFase = true;
 
