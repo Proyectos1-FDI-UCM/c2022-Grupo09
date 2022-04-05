@@ -75,7 +75,6 @@ public class EnemyLifeComponent : MonoBehaviour
     public void Die()
     {   
         isDead = true;
-        _myEnemyPatrulla.enabled = false;
         Destroy(gameObject, 0.45f);
         GameManager.Instance.OnEnemyDies(this);
         _myAnimator.Play("Explosion");

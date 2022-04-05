@@ -41,9 +41,21 @@ public class JoseJuanController : MonoBehaviour
 
     #region references
     /// <summary>
+    /// Referencia al jugador
+    /// </summary>
+    [SerializeField] private GameObject _player;
+    /// <summary>
+    /// Referencia al collider del jugador
+    /// </summary>
+    private CapsuleCollider2D _playerCollider;
+    /// <summary>
     /// Referencia al collider de Joseju
     /// </summary>
     private PolygonCollider2D _josejuCollider;
+    /// <summary>
+    /// Referencia al spawner del inicio de la bossfight
+    /// </summary>
+    [SerializeField] private GameObject _phaseZeroSpawner;
     /// <summary>
     /// Referencia a todas las oleadas de enemigos (plataformas y enemigos) de la primera fase
     /// </summary>
@@ -89,6 +101,8 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartFirstPhase()
     {
+        _phaseZeroSpawner.SetActive(false);
+
         _moveToFirstFase = true;
 
         _firstPhaseWaves[_currentFirstPhaseWave].SetActive(true);
@@ -100,7 +114,6 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
     /// </summary>
-
     public void EndingFirstPhase()
     {
         _canBeHit = true;
@@ -118,6 +131,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartSecondPhase()
     {
+        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, true);
         _currentPhase = 2;
         _josejuCollider.enabled = true;
         _canBeHit = false;
@@ -128,6 +142,7 @@ public class JoseJuanController : MonoBehaviour
     public void EndingSecondPhase()
     {
         _canBeHit = true;
+        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, true);
     }
     /// <summary>
     /// Método que termina la segunda fase del boss
@@ -177,12 +192,15 @@ public class JoseJuanController : MonoBehaviour
     void Start()
     {
         _josejuCollider = GetComponent<PolygonCollider2D>();
+        // Valor inicial de la vida
         _currentSecondPhaseHealth = _maxSecondPhaseHealth;
 
         _josejuTransform = transform;
         _firstPhasePosition = _firstPhasePositionObject.transform.position;
-
+        // Inicializar lista de enemigos
         _waveEnemies = new List<WaveEnemy>();
+
+        _playerCollider = _player.GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame

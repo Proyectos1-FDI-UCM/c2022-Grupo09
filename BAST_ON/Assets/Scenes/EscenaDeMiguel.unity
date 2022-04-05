@@ -728,6 +728,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 168908537012560921, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1171207514}
     - target: {fileID: 307969359015523452, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -3260,6 +3264,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2623972424330276245, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3132568337879154003, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -5343,6 +5351,14 @@ PrefabInstance:
     - target: {fileID: 4920652273084701717, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
       propertyPath: m_Tiles.Array.data[418].second.m_TileSpriteIndex
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120047038891994301, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263671718487358572, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5625099463881006126, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
       propertyPath: m_Layer
