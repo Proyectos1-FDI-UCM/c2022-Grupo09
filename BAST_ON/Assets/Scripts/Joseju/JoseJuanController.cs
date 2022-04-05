@@ -51,7 +51,7 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Referencia a los enemigos de la oleada actual
     /// </summary>
-    private List<EnemyLifeComponent> _waveEnemies;
+    private List<WaveEnemy> _waveEnemies;
     /// <summary>
     /// Referencia al transform de Joseju
     /// </summary>
@@ -148,19 +148,20 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void NextWave()
     {
+        _waveEnemies.Clear();
         _firstPhaseWaves[_currentFirstPhaseWave].SetActive(false);
         _currentFirstPhaseWave++;
         _firstPhaseWaves[_currentFirstPhaseWave].SetActive(true);
     }
-    public void RegisterWaveEnemy(EnemyLifeComponent enemy)
+    public void RegisterWaveEnemy(WaveEnemy enemy)
     {
         _waveEnemies.Add(enemy);
     }
-    public bool WaveEnd(List<EnemyLifeComponent> waveEnemies)
+    public bool WaveEnd(List<WaveEnemy> waveEnemies)
     {
         bool emptyWave = true;
         int i = 0;
-        EnemyLifeComponent[] waveArray = waveEnemies.ToArray();
+        WaveEnemy[] waveArray = waveEnemies.ToArray();
         while (i<waveArray.Length && emptyWave)
         {
             if (waveArray[i] != null) emptyWave = false;
@@ -198,7 +199,6 @@ public class JoseJuanController : MonoBehaviour
                 if (_currentFirstPhaseWave < _firstPhaseWaves.Length - 1) NextWave();
                 else EndingFirstPhase();
             }
-
         }
     }
 }
