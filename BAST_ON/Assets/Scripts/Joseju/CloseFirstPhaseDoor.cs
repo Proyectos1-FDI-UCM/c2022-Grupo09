@@ -6,6 +6,8 @@ public class CloseFirstPhaseDoor : MonoBehaviour
 {
     #region references
     [SerializeField] private GameObject _door;
+    [SerializeField] private GameObject _joseju;
+    private JoseJuanController _joseJuanController;
     #endregion
 
     #region methods
@@ -15,7 +17,12 @@ public class CloseFirstPhaseDoor : MonoBehaviour
         if (player != null)
         {
             _door.SetActive(true);
+            _joseJuanController.PlaceFirstPhaseCamera();
         }
     }
     #endregion
+    private void Start()
+    {
+        _joseJuanController = _joseju.GetComponent<JoseJuanController>();
+    }
 }

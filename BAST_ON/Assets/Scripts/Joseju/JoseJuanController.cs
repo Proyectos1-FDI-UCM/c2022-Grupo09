@@ -73,6 +73,10 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     private Transform _josejuTransform;
     /// <summary>
+    /// Referencia al objeto con la posición de Joseju en la fase 0
+    /// </summary>
+    [SerializeField] private GameObject _phaseZeroPositionObject;
+    /// <summary>
     /// Referencia al objeto con la posición de Joseju en la fase 1
     /// </summary>
     [SerializeField] private GameObject _firstPhasePositionObject;
@@ -88,6 +92,16 @@ public class JoseJuanController : MonoBehaviour
     /// Referencia al spawner de engranajes
     /// </summary>
     [SerializeField] private GameObject _gearSpawner;
+    /// <summary>
+    /// Referencia a la cámara
+    /// </summary>
+    [SerializeField] private GameObject _camera;
+    private CameraController _cameraController;
+    private Transform _cameraTransform;
+    [SerializeField] private GameObject _cameraPhaseZeroPositionObject;
+    private Vector3 _cameraPhaseZeroPosition;
+    [SerializeField] private GameObject _cameraFirstPhasePositionObject;
+    private Vector3 _cameraFirstPhasePosition;
     #endregion
 
     #region methods
@@ -99,15 +113,35 @@ public class JoseJuanController : MonoBehaviour
             if (baston != null)
             {
                 if (_currentPhase == 0) StartFirstPhase();
-                else if (_currentPhase == 1)
-                {
-                    EndFirstPhase();
-                    StartSecondPhase();
-                }
+                else if (_currentPhase == 1) StartSecondPhase();
                 else EndSecondPhase();
             }
         }
     }
+    public void StartJoseju()
+    {
+        _cameraController.enabled = false;
+        _currentPhase = 0;
+        _canBeHit = true;
+        _currentFirstPhaseWave = 0;
+        _currentSecondPhaseHealth = _maxSecondPhaseHealth;
+        _gearSpawner.SetActive(false);
+        _moveToFirstFase = false;
+        Physics2D.IgnoreCollision(_josejuCollider, _playerCollider, false);
+        _phaseZeroSpawner.SetActive(true);
+        _toFirstPhaseDoor.SetActive(true);
+        _josejuTransform.position = _phaseZeroPositionObject.transform.position;
+        _toSecondPhaseDoor.SetActive(true);
+        _camera.transform.position = _cameraPhaseZeroPosition;
+    }
+    /// <summary>
+    /// Método que coloca la cámara en la posición que tendrá en la primera fase
+    /// </summary>
+    public void PlaceFirstPhaseCamera()
+    {
+        _cameraTransform.position = _cameraFirstPhasePosition;
+    }
+
     /// <summary>
     /// Método que comienza la primera fase del boss
     /// </summary>
@@ -133,13 +167,6 @@ public class JoseJuanController : MonoBehaviour
         _josejuCollider.enabled = true;
     }
     /// <summary>
-    /// Método que termina la primera fase del boss
-    /// </summary>
-    public void EndFirstPhase()
-    {
-
-    }
-    /// <summary>
     /// Método que empieza la segunda fase del boss
     /// </summary>
     public void StartSecondPhase()
@@ -149,6 +176,7 @@ public class JoseJuanController : MonoBehaviour
         _josejuCollider.enabled = true;
         _canBeHit = false;
 
+        _cameraController.enabled = true;
         _toSecondPhaseDoor.SetActive(false);
         _gearSpawner.SetActive(true);
     }
@@ -217,6 +245,11 @@ public class JoseJuanController : MonoBehaviour
         _waveEnemies = new List<WaveEnemy>();
 
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
+
+        _cameraTransform = _camera.transform;
+        _cameraController = _camera.GetComponent<CameraController>();
+        _cameraPhaseZeroPosition = _cameraPhaseZeroPositionObject.transform.position;
+        _cameraFirstPhasePosition = _cameraFirstPhasePositionObject.transform.position;
     }
 
     // Update is called once per frame
@@ -236,6 +269,10 @@ public class JoseJuanController : MonoBehaviour
                 if (_currentFirstPhaseWave < _firstPhaseWaves.Length - 1) NextWave();
                 else EndingFirstPhase();
             }
+        }
+        if (_currentPhase == 2)
+        {
+            _cameraTransform.position = _cameraTransform.position.y * Vector2.up;
         }
     }
 }
