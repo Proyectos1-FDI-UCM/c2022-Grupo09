@@ -24,17 +24,17 @@ public class SpawnerGearController : MonoBehaviour
 
     public void RandomGear()
     {
-        float posXGen = Random.Range(-_rangoGeneracion, _rangoGeneracion);
+        float posXGen = _gearTransform.position.x + Random.Range(-_rangoGeneracion, _rangoGeneracion);
         float posYGen = _gearTransform.position.y;
 
-        Vector3 posAletaoria = new Vector3(posXGen, posYGen, 0);
+        Vector3 posAletaoria = new Vector3( posXGen, posYGen, 0);
 
         Instantiate(_myGear, posAletaoria, Quaternion.Euler(_gearTransform.rotation.eulerAngles));
     }
 
     public void DuplicateFrecuence()
     {
-        _frequency /= 2;
+        _frequency *= 2;
     }
 
     #endregion

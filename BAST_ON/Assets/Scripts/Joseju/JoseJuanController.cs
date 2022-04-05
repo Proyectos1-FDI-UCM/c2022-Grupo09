@@ -236,6 +236,11 @@ public class JoseJuanController : MonoBehaviour
         }
         return emptyWave;
     }
+
+    public void FollowCamera()
+    {
+        _josejuTransform.Translate((Vector2)_cameraTransform.position - (Vector2)_josejuTransform.position);
+    }
     #endregion
 
 
@@ -283,8 +288,9 @@ public class JoseJuanController : MonoBehaviour
         }
         if (_currentPhase == 2)
         {
-            _cameraTransform.position = _cameraTransform.position.y * Vector2.up;
+            _cameraTransform.position = _cameraTransform.position.y * Vector2.up + _cameraFirstPhasePosition.x * Vector2.right;
             if (_playerTransform.position.y > _parkourFinish.y) _gearSpawnerController.DuplicateFrecuence();
+            FollowCamera();
         }
     }
 }
