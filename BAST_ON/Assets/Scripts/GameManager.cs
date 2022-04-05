@@ -111,6 +111,11 @@ public class GameManager : MonoBehaviour
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);
     }
+
+    public void CompleteGame()
+    {
+
+    }
     #endregion
 
     private void Awake() {

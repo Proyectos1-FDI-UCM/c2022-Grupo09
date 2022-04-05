@@ -44,6 +44,7 @@ public class JoseJuanController : MonoBehaviour
     /// Referencia al jugador
     /// </summary>
     [SerializeField] private GameObject _player;
+    private Transform _playerTransform;
     /// <summary>
     /// Referencia al collider del jugador
     /// </summary>
@@ -92,6 +93,10 @@ public class JoseJuanController : MonoBehaviour
     /// Referencia al spawner de engranajes
     /// </summary>
     [SerializeField] private GameObject _gearSpawner;
+    private SpawnerGearController _gearSpawnerController;
+    [SerializeField] private GameObject _parkourFinishObject;
+    private Vector3 _parkourFinish;
+    [SerializeField] GameObject _exitSecondPhaseDoor;
     /// <summary>
     /// Referencia a la cámara
     /// </summary>
@@ -132,6 +137,7 @@ public class JoseJuanController : MonoBehaviour
         _toFirstPhaseDoor.SetActive(true);
         _josejuTransform.position = _phaseZeroPositionObject.transform.position;
         _toSecondPhaseDoor.SetActive(true);
+        _exitSecondPhaseDoor.SetActive(true);
         _camera.transform.position = _cameraPhaseZeroPosition;
     }
     /// <summary>
@@ -194,6 +200,7 @@ public class JoseJuanController : MonoBehaviour
     public void EndSecondPhase()
     {
         _gearSpawner.SetActive(false);
+        _exitSecondPhaseDoor.SetActive(false);
     }
     /// <summary>
     /// Método que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
@@ -245,6 +252,10 @@ public class JoseJuanController : MonoBehaviour
         _waveEnemies = new List<WaveEnemy>();
 
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
+        _playerTransform = _player.transform;
+
+        _gearSpawnerController = _gearSpawner.GetComponent<SpawnerGearController>();
+        _parkourFinish = _parkourFinishObject.transform.position;
 
         _cameraTransform = _camera.transform;
         _cameraController = _camera.GetComponent<CameraController>();
@@ -273,6 +284,7 @@ public class JoseJuanController : MonoBehaviour
         if (_currentPhase == 2)
         {
             _cameraTransform.position = _cameraTransform.position.y * Vector2.up;
+            if (_playerTransform.position.y > _parkourFinish.y) _gearSpawnerController.DuplicateFrecuence();
         }
     }
 }
