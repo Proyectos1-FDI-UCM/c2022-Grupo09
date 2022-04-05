@@ -80,6 +80,14 @@ public class JoseJuanController : MonoBehaviour
     /// Referencai a la posición de Joseju en la fase 1
     /// </summary>
     private Vector3 _firstPhasePosition;
+    /// <summary>
+    /// Referencia a la puerta entre la fase 1 y 2
+    /// </summary>
+    [SerializeField] private GameObject _toSecondPhaseDoor;
+    /// <summary>
+    /// Referencia al spawner de engranajes
+    /// </summary>
+    [SerializeField] private GameObject _gearSpawner;
     #endregion
 
     #region methods
@@ -140,6 +148,9 @@ public class JoseJuanController : MonoBehaviour
         _currentPhase = 2;
         _josejuCollider.enabled = true;
         _canBeHit = false;
+
+        _toSecondPhaseDoor.SetActive(false);
+        _gearSpawner.SetActive(true);
     }
     /// <summary>
     /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la segunda fase
