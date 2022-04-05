@@ -51,7 +51,7 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Referencia a los enemigos de la oleada actual
     /// </summary>
-    private List<EnemyLifeComponent> _waveEnemies;
+    private List<WaveEnemy> _waveEnemies;
     /// <summary>
     /// Referencia al transform de Joseju
     /// </summary>
@@ -98,6 +98,7 @@ public class JoseJuanController : MonoBehaviour
     /// <summary>
     /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
     /// </summary>
+
     public void EndingFirstPhase()
     {
         _canBeHit = true;
@@ -147,9 +148,26 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void NextWave()
     {
-        // Quitar oleada actual
-        // aumentar _currentFirstPhaseWave
-        // Colocar nueva oleada actual
+        _waveEnemies.Clear();
+        _firstPhaseWaves[_currentFirstPhaseWave].SetActive(false);
+        _currentFirstPhaseWave++;
+        _firstPhaseWaves[_currentFirstPhaseWave].SetActive(true);
+    }
+    public void RegisterWaveEnemy(WaveEnemy enemy)
+    {
+        _waveEnemies.Add(enemy);
+    }
+    public bool WaveEnd(List<WaveEnemy> waveEnemies)
+    {
+        bool emptyWave = true;
+        int i = 0;
+        WaveEnemy[] waveArray = waveEnemies.ToArray();
+        while (i<waveArray.Length && emptyWave)
+        {
+            if (waveArray[i] != null) emptyWave = false;
+            i++;
+        }
+        return emptyWave;
     }
     #endregion
 
@@ -172,6 +190,15 @@ public class JoseJuanController : MonoBehaviour
             _josejuTransform.Translate((_firstPhasePosition - _josejuTransform.position).normalized * _toFirstPhasePositionSpeed * Time.deltaTime);
 
             if (_josejuTransform.position.x >= _firstPhasePosition.x) _moveToFirstFase = false;
+        }
+
+        if (_currentPhase == 1)
+        {
+            if (WaveEnd(_waveEnemies))
+            {
+                if (_currentFirstPhaseWave < _firstPhaseWaves.Length - 1) NextWave();
+                else EndingFirstPhase();
+            }
         }
     }
 }
