@@ -40,9 +40,6 @@ public class JoseJuanController : MonoBehaviour
     #endregion
 
     #region references
-
-    [SerializeField]private GameObject WavePositionobject;
-    private Vector3 waveposition;
     /// <summary>
     /// Referencia al collider de Joseju
     /// </summary>
@@ -151,28 +148,25 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void NextWave()
     {
-        Destroy(_firstPhaseWaves[_currentFirstPhaseWave]);
-
+        _firstPhaseWaves[_currentFirstPhaseWave].SetActive(false);
         _currentFirstPhaseWave++;
-        Instantiate(_firstPhaseWaves[_currentFirstPhaseWave], waveposition, Quaternion.identity);
+        _firstPhaseWaves[_currentFirstPhaseWave].SetActive(true);
     }
-   public void RegisterWaveEnemy(EnemyLifeComponent enemy)
+    public void RegisterWaveEnemy(EnemyLifeComponent enemy)
     {
         _waveEnemies.Add(enemy);
-
     }
-    public bool waveend(List<EnemyLifeComponent> waveenemies)
+    public bool WaveEnd(List<EnemyLifeComponent> waveEnemies)
     {
-        bool emptywave = true;
+        bool emptyWave = true;
         int i = 0;
-        EnemyLifeComponent[] wavearray = waveenemies.ToArray();
-        while (i<wavearray.Length && emptywave)
+        EnemyLifeComponent[] waveArray = waveEnemies.ToArray();
+        while (i<waveArray.Length && emptyWave)
         {
-            if (wavearray[i] != null) emptywave = false;
+            if (waveArray[i] != null) emptyWave = false;
             i++;
-
         }
-        return emptywave;
+        return emptyWave;
     }
     #endregion
 
@@ -185,8 +179,6 @@ public class JoseJuanController : MonoBehaviour
 
         _josejuTransform = transform;
         _firstPhasePosition = _firstPhasePositionObject.transform.position;
-
-        waveposition = WavePositionobject.transform.position;
     }
 
     // Update is called once per frame
@@ -198,14 +190,13 @@ public class JoseJuanController : MonoBehaviour
 
             if (_josejuTransform.position.x >= _firstPhasePosition.x) _moveToFirstFase = false;
         }
+
         if (_currentPhase == 1)
         {
-            if (waveend(_waveEnemies))
+            if (WaveEnd(_waveEnemies))
             {
                 if (_currentFirstPhaseWave < _firstPhaseWaves.Length - 1) NextWave();
-
                 else EndingFirstPhase();
-
             }
 
         }
