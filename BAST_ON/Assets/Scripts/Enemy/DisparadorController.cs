@@ -14,6 +14,7 @@ public class DisparadorController : MonoBehaviour
     #region parameters
     [SerializeField]
     private float frecuencia = 6;
+    [SerializeField] private float _shootingRange = 20;
     #endregion
 
     #region properties
@@ -41,15 +42,19 @@ public class DisparadorController : MonoBehaviour
             if (timer >= frecuencia)
             {
                 pos = _myPlayer.transform.position - _myTransform.position;
-                pos.Normalize();
-                ang = Mathf.Acos(pos.x);
-                if (pos.y < 0) ang = -ang;
-                ang *= 180 / Mathf.PI;
+                // Comprobación para no disparar si el jugador está lejos
+                if (pos.magnitude < _shootingRange)
+                {
+                    pos.Normalize();
+                    ang = Mathf.Acos(pos.x);
+                    if (pos.y < 0) ang = -ang;
+                    ang *= 180 / Mathf.PI;
 
-                _instanciatePoint = (Vector2)_myTransform.position + _dispCollider.offset + (pos * (_dispCollider.radius + 0.5f));
+                    _instanciatePoint = (Vector2)_myTransform.position + _dispCollider.offset + (pos * (_dispCollider.radius + 0.5f));
 
-                Instantiate(_myDisp, _instanciatePoint, Quaternion.Euler(0, 0, ang));
-                timer = 0;
+                    Instantiate(_myDisp, _instanciatePoint, Quaternion.Euler(0, 0, ang));
+                    timer = 0;
+                }
             }
         }
         else _startElapsedTime += Time.deltaTime;
