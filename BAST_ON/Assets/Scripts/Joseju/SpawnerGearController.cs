@@ -34,7 +34,7 @@ public class SpawnerGearController : MonoBehaviour
 
     public void DuplicateFrecuence()
     {
-        _frequency *= 2;
+        _frequency /= 2;
     }
 
     #endregion
