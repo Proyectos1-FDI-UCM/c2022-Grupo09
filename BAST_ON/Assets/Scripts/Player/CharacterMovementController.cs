@@ -19,6 +19,8 @@ public class CharacterMovementController : MonoBehaviour
     private float _verticalDamageImpulse = 2f;
     [SerializeField]
     private float _horizontalDamageImpulse = 2f;
+
+    [SerializeField] private float _maxGravityValue = 1.0f;
     private float _currentTime;
     private bool audioToggle = true;
     #endregion
@@ -216,6 +218,11 @@ public class CharacterMovementController : MonoBehaviour
 
         // Calculo de la gravedad
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElapsedTime) / _gravityReducer;
+
+        if(_gravity.y > -_maxGravityValue)
+        {
+            _gravity.y = -_maxGravityValue;
+        }
 
         // Velocidad a 0 si acaba de golpear una pared
         if (_blockMovement) _speedMovement = 0;

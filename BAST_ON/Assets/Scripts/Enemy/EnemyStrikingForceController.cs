@@ -44,7 +44,7 @@ public class EnemyStrikingForceController : MonoBehaviour
         if(hasBeenStruck && check == null)
         {
             _myEnemyLifeComponent.ChangeHealth(/*- Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue)*/ -1);
-            _myRigidBody.Sleep();
+            
             hasBeenStruck = false;
             _myAnimator.SetBool("haSidoGolpeado", false);
             if (_myEnemyPatrulla != null) _myEnemyPatrulla.enabled = true;

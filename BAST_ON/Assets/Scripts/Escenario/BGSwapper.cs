@@ -12,20 +12,15 @@ public class BGSwapper : MonoBehaviour
     
     void Start()
     {
-        _JungleBackground.SetActive(true);
-        _FactoryBackground.SetActive(false);
+        SwapBG(false);
     }
 
-    public void SwapBG(){
-        if(!hasBeenSwapped)
-        {
-            _FactoryBackground.SetActive(true);
-            _JungleBackground.SetActive(false);
-        }
-        else
-        {
-            _JungleBackground.SetActive(true);
-            _FactoryBackground.SetActive(false);
-        }    
+    
+
+    public void SwapBG(bool swapValue)
+    {
+        _JungleBackground.SetActive(!swapValue);
+        _FactoryBackground.SetActive(swapValue);
+        hasBeenSwapped = swapValue;   
     }
 }

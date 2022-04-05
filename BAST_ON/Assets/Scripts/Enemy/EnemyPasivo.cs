@@ -63,6 +63,4 @@ public class EnemyPasivo : MonoBehaviour
     {
         _myRigidBody.MovePosition(_myRigidBody.position + _movementDirection.normalized * speed*Time.fixedDeltaTime);
     }
-
-
 }

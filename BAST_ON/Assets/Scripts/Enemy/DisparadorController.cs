@@ -5,8 +5,8 @@ using UnityEngine;
 public class DisparadorController : MonoBehaviour
 {
     #region references
-    [SerializeField]
-    private GameObject _myDisp, _myPlayer,_mySoundArea;
+    [SerializeField] private GameObject _myDisp, _myPlayer;
+    private GameObject _mySoundArea;
     private Transform _myTransform;
     private CircleCollider2D _dispCollider;
     #endregion
@@ -42,7 +42,7 @@ public class DisparadorController : MonoBehaviour
             if (timer >= frecuencia)
             {
                 pos = _myPlayer.transform.position - _myTransform.position;
-                // Comprobación para no disparar si el jugador está lejos
+                // Comprobaciï¿½n para no disparar si el jugador estï¿½ lejos
                 if (pos.magnitude < _shootingRange)
                 {
                     pos.Normalize();
