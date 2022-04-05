@@ -219,11 +219,6 @@ public class CharacterMovementController : MonoBehaviour
         // Calculo de la gravedad
         _gravity = (Vector2.down * _myRigidbody.gravityScale * _onAirElapsedTime) / _gravityReducer;
 
-        if(_gravity.y > -_maxGravityValue)
-        {
-            _gravity.y = -_maxGravityValue;
-        }
-
         // Velocidad a 0 si acaba de golpear una pared
         if (_blockMovement) _speedMovement = 0;
         else _speedMovement = _originalSpeedMovement;
