@@ -288,7 +288,7 @@ public class JoseJuanController : MonoBehaviour
         }
         if (_currentPhase == 2)
         {
-            _cameraTransform.position = _cameraTransform.position.y * Vector2.up + _cameraFirstPhasePosition.x * Vector2.right;
+            _cameraTransform.position = _cameraTransform.position.y * Vector3.up + _cameraFirstPhasePosition.x * Vector3.right + _cameraTransform.position.z * Vector3.forward;
             if (_playerTransform.position.y > _parkourFinish.y) _gearSpawnerController.DuplicateFrecuence();
             FollowCamera();
         }
