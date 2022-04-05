@@ -6,7 +6,7 @@ public class EsquivDisparo : MonoBehaviour
 {
     #region references
     [SerializeField]
-    private GameObject _myShot;
+    private GameObject _myShot, _myOrigin;
     private Transform _myTransform;
     #endregion
     #region parameters
@@ -19,7 +19,7 @@ public class EsquivDisparo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _myTransform = transform;
+        _myTransform = _myOrigin.transform;
     }
 
     // Update is called once per frame
