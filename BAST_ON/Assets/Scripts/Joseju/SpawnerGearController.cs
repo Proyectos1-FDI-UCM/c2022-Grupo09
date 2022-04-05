@@ -32,6 +32,11 @@ public class SpawnerGearController : MonoBehaviour
         Instantiate(_myGear, posAletaoria, Quaternion.Euler(_gearTransform.rotation.eulerAngles));
     }
 
+    public void DuplicateFrecuence()
+    {
+        _frequency /= 2;
+    }
+
     #endregion
     void Start()
     {
