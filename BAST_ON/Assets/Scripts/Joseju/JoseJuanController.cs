@@ -45,6 +45,8 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject _player;
     private Transform _playerTransform;
+    [SerializeField] private GameObject _baston;
+    private BoxCollider2D _bastonCollider;
     /// <summary>
     /// Referencia al collider del jugador
     /// </summary>
@@ -133,6 +135,7 @@ public class JoseJuanController : MonoBehaviour
         _gearSpawner.SetActive(false);
         _moveToFirstFase = false;
         Physics2D.IgnoreCollision(_josejuCollider, _playerCollider, false);
+        Physics2D.IgnoreCollision(_josejuCollider, _bastonCollider, false);
         _phaseZeroSpawner.SetActive(true);
         _toFirstPhaseDoor.SetActive(true);
         _josejuTransform.position = _phaseZeroPositionObject.transform.position;
@@ -178,6 +181,7 @@ public class JoseJuanController : MonoBehaviour
     public void StartSecondPhase()
     {
         Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, true);
+        Physics2D.IgnoreCollision(_bastonCollider, _josejuCollider, true);
         _currentPhase = 2;
         _josejuCollider.enabled = true;
         _canBeHit = false;
@@ -193,6 +197,7 @@ public class JoseJuanController : MonoBehaviour
     {
         _canBeHit = true;
         Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, false);
+        Physics2D.IgnoreCollision(_bastonCollider, _josejuCollider, false);
     }
     /// <summary>
     /// Método que termina la segunda fase del boss
@@ -256,6 +261,7 @@ public class JoseJuanController : MonoBehaviour
         // Inicializar lista de enemigos
         _waveEnemies = new List<WaveEnemy>();
 
+        _bastonCollider = _baston.GetComponent<BoxCollider2D>();
         _playerCollider = _player.GetComponent<CapsuleCollider2D>();
         _playerTransform = _player.transform;
 
