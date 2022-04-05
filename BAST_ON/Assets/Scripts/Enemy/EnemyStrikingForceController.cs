@@ -15,7 +15,7 @@ public class EnemyStrikingForceController : MonoBehaviour
     #endregion
 
     #region references
-    private EnemyPatrulla _myEnemyPatrulla;
+    private MonoBehaviour _myEnemyPatrulla;
     private EnemyLifeComponent _myEnemyLifeComponent;
 
     private Animator _myAnimator;
@@ -67,7 +67,13 @@ public class EnemyStrikingForceController : MonoBehaviour
     {
         _myAnimator = GetComponent<Animator>();
         _myEnemyLifeComponent = GetComponent<EnemyLifeComponent>();
+        
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
+        if(_myEnemyPatrulla == null)
+        {
+            _myEnemyPatrulla = GetComponent<EnemyPasivo>();
+        }
+
         _myRigidBody = GetComponent<Rigidbody2D>();
         _myTransform = transform;
     }

@@ -52,7 +52,7 @@ public class spawncontroller_fases : MonoBehaviour
         {
             if (state != spawnState.SPAWNING)
             {
-                StartCoroutine(SpawnWave(waves[ nextwave]));
+                StartCoroutine(SpawnWave(waves[nextwave]));
             }
             else
             {
