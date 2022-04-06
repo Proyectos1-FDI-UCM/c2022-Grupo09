@@ -6,12 +6,12 @@ public class JoseJuanController : MonoBehaviour
 {
     #region parameters
     /// <summary>
-    /// Número de engranajes que recibe Jose Juan en la segunda fase hasta poder ser golpeado por Chicho.
+    /// Nï¿½mero de engranajes que recibe Jose Juan en la segunda fase hasta poder ser golpeado por Chicho.
     /// </summary>
     [SerializeField]
     private int _maxSecondPhaseHealth = 5;
     /// <summary>
-    /// Velocidad a la que Joseju se dirige a su posición de la fase 1
+    /// Velocidad a la que Joseju se dirige a su posiciï¿½n de la fase 1
     /// </summary>
     [SerializeField] private float _toFirstPhasePositionSpeed = 5;
     #endregion
@@ -26,7 +26,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     private int _currentPhase = 0;
     /// <summary>
-    /// Valor que indica la oleada actual de la primera fase (posición en el array de oleadas)
+    /// Valor que indica la oleada actual de la primera fase (posiciï¿½n en el array de oleadas)
     /// </summary>
     private int _currentFirstPhaseWave = 0;
     /// <summary>
@@ -34,9 +34,9 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     private int _currentSecondPhaseHealth;
     /// <summary>
-    /// Valor que indica si Joseju tiene que ir a su posición en la primera fase
+    /// Valor que indica si Joseju tiene que ir a su posiciï¿½n en la primera fase
     /// </summary>
-    private bool _moveToFirstFase = false, trigger=false;
+    private bool _moveToFirstFase = false;
     #endregion
 
     #region references
@@ -76,15 +76,15 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     private Transform _josejuTransform;
     /// <summary>
-    /// Referencia al objeto con la posición de Joseju en la fase 0
+    /// Referencia al objeto con la posiciï¿½n de Joseju en la fase 0
     /// </summary>
     [SerializeField] private GameObject _phaseZeroPositionObject;
     /// <summary>
-    /// Referencia al objeto con la posición de Joseju en la fase 1
+    /// Referencia al objeto con la posiciï¿½n de Joseju en la fase 1
     /// </summary>
     [SerializeField] private GameObject _firstPhasePositionObject;
     /// <summary>
-    /// Referencai a la posición de Joseju en la fase 1
+    /// Referencai a la posiciï¿½n de Joseju en la fase 1
     /// </summary>
     private Vector3 _firstPhasePosition;
     /// <summary>
@@ -100,7 +100,7 @@ public class JoseJuanController : MonoBehaviour
     private Vector3 _parkourFinish;
     [SerializeField] GameObject _exitSecondPhaseDoor;
     /// <summary>
-    /// Referencia a la cámara
+    /// Referencia a la cï¿½mara
     /// </summary>
     [SerializeField] private GameObject _camera;
     private CameraController _cameraController;
@@ -144,7 +144,7 @@ public class JoseJuanController : MonoBehaviour
         _camera.transform.position = _cameraPhaseZeroPosition;
     }
     /// <summary>
-    /// Método que coloca la cámara en la posición que tendrá en la primera fase
+    /// Mï¿½todo que coloca la cï¿½mara en la posiciï¿½n que tendrï¿½ en la primera fase
     /// </summary>
     public void PlaceFirstPhaseCamera()
     {
@@ -152,7 +152,7 @@ public class JoseJuanController : MonoBehaviour
     }
 
     /// <summary>
-    /// Método que comienza la primera fase del boss
+    /// Mï¿½todo que comienza la primera fase del boss
     /// </summary>
     public void StartFirstPhase()
     {
@@ -168,7 +168,7 @@ public class JoseJuanController : MonoBehaviour
         _josejuCollider.enabled = false;
     }
     /// <summary>
-    /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
+    /// Mï¿½todo que deja indefenso a Jose Juan y permite a Chicho golpearle en la primera fase
     /// </summary>
     public void EndingFirstPhase()
     {
@@ -176,7 +176,7 @@ public class JoseJuanController : MonoBehaviour
         _josejuCollider.enabled = true;
     }
     /// <summary>
-    /// Método que empieza la segunda fase del boss
+    /// Mï¿½todo que empieza la segunda fase del boss
     /// </summary>
     public void StartSecondPhase()
     {
@@ -191,7 +191,7 @@ public class JoseJuanController : MonoBehaviour
         _gearSpawner.SetActive(true);
     }
     /// <summary>
-    /// Método que deja indefenso a Jose Juan y permite a Chicho golpearle en la segunda fase
+    /// Mï¿½todo que deja indefenso a Jose Juan y permite a Chicho golpearle en la segunda fase
     /// </summary>
     public void EndingSecondPhase()
     {
@@ -200,7 +200,7 @@ public class JoseJuanController : MonoBehaviour
         Physics2D.IgnoreCollision(_bastonCollider, _josejuCollider, false);
     }
     /// <summary>
-    /// Método que termina la segunda fase del boss
+    /// Mï¿½todo que termina la segunda fase del boss
     /// </summary>
     public void EndSecondPhase()
     {
@@ -208,7 +208,7 @@ public class JoseJuanController : MonoBehaviour
         _exitSecondPhaseDoor.SetActive(false);
     }
     /// <summary>
-    /// Método que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
+    /// Mï¿½todo que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
     /// </summary>
     public void ChangeSecondPhaseHealth(int value)
     {
@@ -217,7 +217,7 @@ public class JoseJuanController : MonoBehaviour
     }
 
     /// <summary>
-    /// Método que cambia a la siguiente oleada de enemigos
+    /// Mï¿½todo que cambia a la siguiente oleada de enemigos
     /// </summary>
     public void NextWave()
     {
@@ -295,7 +295,8 @@ public class JoseJuanController : MonoBehaviour
         if (_currentPhase == 2)
         {
             _cameraTransform.position = _cameraTransform.position.y * Vector3.up + _cameraFirstPhasePosition.x * Vector3.right + _cameraTransform.position.z * Vector3.forward;
-            if (_playerTransform.position.y > _parkourFinish.y&& !trigger) _gearSpawnerController.DuplicateFrecuence(); trigger = true;
+            if (_playerTransform.position.y > _parkourFinish.y) _gearSpawnerController.DuplicateFrecuence();
+            else _gearSpawnerController.RestoreFrecuence();
             FollowCamera();
         }
     }

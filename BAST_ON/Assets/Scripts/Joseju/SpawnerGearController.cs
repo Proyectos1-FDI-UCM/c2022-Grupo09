@@ -20,6 +20,8 @@ public class SpawnerGearController : MonoBehaviour
     private float _timer = 0.0f;
     #endregion
 
+    private float _originalFrequency;
+
     #region methods
 
     public void RandomGear()
@@ -34,13 +36,17 @@ public class SpawnerGearController : MonoBehaviour
 
     public void DuplicateFrecuence()
     {
-        _frequency /= 2f;
+        _frequency = _originalFrequency / 2f;
+    }
+    public void RestoreFrecuence(){
+        _frequency = _originalFrequency;
     }
 
     #endregion
     void Start()
     {
         _gearTransform = transform;
+        _originalFrequency = _frequency;
     }
     void Update()
     {
