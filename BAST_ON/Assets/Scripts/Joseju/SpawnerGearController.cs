@@ -47,7 +47,6 @@ public class SpawnerGearController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer >= _frequency) 
         {
-            Debug.Log(_timer);
             RandomGear();
             _timer = 0.0f;
         }
