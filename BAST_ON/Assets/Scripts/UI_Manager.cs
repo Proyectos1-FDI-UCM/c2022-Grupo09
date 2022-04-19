@@ -93,6 +93,15 @@ public class UI_Manager : MonoBehaviour
     {
         StartCoroutine(BlinkDragon());
     }
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        _mainMenu.SetActive(false);
+        _hud.SetActive(true);
+        GameManager.Instance.StartGame();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(PauseFirstButton);
+    }
     public void StartGame()
     {
         _mainMenu.SetActive(false);
