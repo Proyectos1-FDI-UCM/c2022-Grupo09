@@ -301,6 +301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1054122495030894754, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
+      propertyPath: _myPlayer
+      value: 
+      objectReference: {fileID: 201615603}
     - target: {fileID: 4105865500195146518, guid: aebc606a8c7cc924697b94b83a70759b, type: 3}
       propertyPath: m_Name
       value: EnemigoDisparo (2)
