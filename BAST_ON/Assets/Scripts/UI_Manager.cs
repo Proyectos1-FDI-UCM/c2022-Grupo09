@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -147,6 +148,10 @@ public class UI_Manager : MonoBehaviour
     public void QuitGame()
     {
         GameManager.Instance.QuitGame();
+    }
+
+    public void GoToTestMenu(){
+        SceneManager.LoadSceneAsync("MenuPruebas");
     }
     #endregion
     // Start is called before the first frame update
