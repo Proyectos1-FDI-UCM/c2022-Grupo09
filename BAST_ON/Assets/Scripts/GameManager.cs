@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         ExitToMainMenu(); 
     }
-    public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Añadimos referencias a EnemyLifeCOmponent a la lista
+    public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Aï¿½adimos referencias a EnemyLifeCOmponent a la lista
     {
         _listOfEnemies.Add(reference);
     }
@@ -119,7 +119,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     private void Awake() {
-
         _listOfEnemies = new List<EnemyLifeComponent>();
         _instance = this;
         _UIManagerReference = _UIReference.GetComponent<UI_Manager>();
