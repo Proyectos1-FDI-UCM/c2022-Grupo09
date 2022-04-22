@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1171207514}
-  _offset: {x: 1, y: 4, z: -10}
+  _offset: {x: 1, y: 2, z: -10}
   _verticalOffset: 3
   _lookUpTime: 2
   _lerpSpeed: 0.1

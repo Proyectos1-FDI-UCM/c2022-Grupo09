@@ -15,32 +15,27 @@ public class CharacterAttackController : MonoBehaviour
 
     #region parameters
     [SerializeField]
-    private float _attackTime = 1f;
+    private float _bastonazoTime = 0.2f;
     [SerializeField]
     private float _attackCooldown = 1f;
+    [SerializeField]
+    private float _jumpsCooldown = 1f;
+    [SerializeField]
+    private float _dashCooldown = 1f;
     [SerializeField] private float repelStrenght = 15;
     #endregion
 
     #region properties
-    private float _elapsedAttackTime;
-    private float _elapsedCooldownTime;
+    private float _elapsedBastonazoTime = 0;
+    private float _elapsedAttackCooldownTime = 0;
+    private float _elapsedJumpCooldownTime = 0;
+    private float _elapsedDashCooldownTime = 0;
     private float _defaultDirection;
     private Quaternion _originalAttackRotation;
     public float RepelStrenght => repelStrenght;
-    ///<summary>
-    ///Es cos(22'5�) y sen(3*22'5�).
-    ///Utilizado para delimitar las areas de input que corresponden a cada direcci�n de ataque.
-    ///</summary>
-    private float _cotaSuma = ((Mathf.Sqrt(2 + Mathf.Sqrt(2))) / 2);
-    ///<summary>
-    ///Es sen(22'5�) y cos(3*22'5�).
-    ///Utilizado para delimitar las areas de input que corresponden a cada direcci�n de ataque.
-    ///</summary>
-    private float _cotaResta = ((Mathf.Sqrt(2 - Mathf.Sqrt(2))) / 2);
     #endregion
 
     #region methods
-    
     public void IncreaseStrenght(float strenghtModifier)
     {
         repelStrenght *= strenghtModifier;
@@ -54,71 +49,79 @@ public class CharacterAttackController : MonoBehaviour
     {
         _defaultDirection = dir;
     }
-    private void RedirectFloorAttack(ref float horizontalAttackDirection, ref float verticalAttackDirection)
+    private void RedirectFloorAttack(ref float angle)
     {
-        if (verticalAttackDirection < 0)
+        if (_myFloorDetector.IsGrounded() && angle <= -45)
         {
-            verticalAttackDirection = 0;
+            angle = 0;
         }
     }
-    // Recibe la direcci�n del ataque y lo activa en esa direcci�n
-    public void Bastonazo(float horizontalAttackDirection, float verticalAttackDirection)
+
+    public void Bastonazo(float angle)
     {
-        // Solo entra en el m�todo si no hay ya un ataque
-        if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown)
+        if (!_baston.activeSelf)
         {
-            if (_myFloorDetector.IsGrounded()) RedirectFloorAttack(ref horizontalAttackDirection, ref verticalAttackDirection);
-            _elapsedAttackTime = 0f;
-
-            // Walljump
-            if (_myWallDetector.isInWall() == 1) _bastonTransform.rotation = Quaternion.Euler(0, 0, -52);
-            else if (_myWallDetector.isInWall() == -1) _bastonTransform.rotation = Quaternion.Euler(0, 0, -127);
-
-            // Si se ha escogido una direcci�n para el ataque
-            else if (horizontalAttackDirection != 0 || verticalAttackDirection != 0)
-            {
-                // Arriba
-                if ((horizontalAttackDirection >= 0) &&
-                    (horizontalAttackDirection <= _cotaResta) &&
-                    (verticalAttackDirection <= 1) &&
-                    verticalAttackDirection >= _cotaSuma)
-                { _bastonTransform.rotation = Quaternion.Euler(0, 0, 90); }
-                // Frente arriba
-                else if ((horizontalAttackDirection > _cotaResta) &&
-                    (horizontalAttackDirection <= _cotaSuma) &&
-                    (verticalAttackDirection < _cotaSuma) &&
-                    (verticalAttackDirection >= _cotaResta))
-                {
-                    if (_defaultDirection > 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 45);
-                    else _bastonTransform.rotation = Quaternion.Euler(0, 0, 135);
-                }
-                // Abajo
-                else if ((horizontalAttackDirection >= 0) &&
-                    (horizontalAttackDirection <= Mathf.Sqrt(2) / 2) &&
-                    (verticalAttackDirection >= -1) &&
-                    (verticalAttackDirection) <= -Mathf.Sqrt(2) / 2)
-                { _bastonTransform.rotation = Quaternion.Euler(0, 0, -90); }
-                // Frente
-                else if (_defaultDirection < 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 180);
-                else _bastonTransform.rotation = Quaternion.identity;
-            }
-            else if (_defaultDirection < 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 180);
-            else _bastonTransform.rotation = Quaternion.identity;
-
+            _bastonTransform.rotation = Quaternion.Euler(0, 0, angle);
             _originalAttackRotation = _bastonTransform.rotation;
             _baston.SetActive(true);
+            _elapsedBastonazoTime = 0f;
+        }
+    }
+    public void Golpe(float horizontalAttackDirection, float verticalAttackDirection)
+    {
+        if (_elapsedAttackCooldownTime > _attackCooldown)
+        {
+            _elapsedAttackCooldownTime = 0f;
+            // Devuelve en 1er y 2o cuadrante
+            float angle = Mathf.Rad2Deg * Mathf.Acos(horizontalAttackDirection);
+            //  Si está en 3er o 4o cuadrante cambia de signo
+            if (verticalAttackDirection < 0) angle = -angle;
+            else if (verticalAttackDirection == 0 && horizontalAttackDirection == 0) angle = 0;
+            // Si chicho está en el suelo y pega hacia abajo redirige el golpe
+            RedirectFloorAttack(ref angle);
+
+            // Arriba
+            if (angle <= 90 && angle > 67.5f) angle = 90;
+            // Arriba frente
+            else if (angle > 22.5f) angle = 45;
+            // Frente
+            else if (angle > -45) angle = 0;
+            // Abajo
+            else /*if (angle > -90)*/ angle = -90;
+
+            if (_defaultDirection >= 0) Bastonazo(angle);
+            else Bastonazo(180 - angle);
+        }
+    }
+
+    public void Salto()
+    {
+        // No en el suelo
+        if (_elapsedJumpCooldownTime > _jumpsCooldown && !_myFloorDetector.IsGrounded())
+        {
+            _elapsedJumpCooldownTime = 0f;
+            int inWall = _myWallDetector.isInWall();
+            // En el aire
+            if (inWall == 0) Bastonazo(-90);
+            // En la pared
+            else
+            {
+                // En pared a la derecha
+                if (inWall == 1) Bastonazo(-57);
+                // En pared a la izquierda
+                else if (inWall == -1) Bastonazo(180 + 57);
+                _myMovementController.WallWasAttacked(true);
+            }
         }
     }
 
     public void Dash()
     {
-        if (!_baston.activeSelf && _elapsedCooldownTime > _attackCooldown && !_myFloorDetector.IsGrounded())
+        if (_elapsedDashCooldownTime > _dashCooldown && !_myFloorDetector.IsGrounded())
         {
-            _elapsedAttackTime = 0f;
-            if (_defaultDirection > 0) _bastonTransform.rotation = Quaternion.Euler(0, 0, 225f);
-            else _bastonTransform.rotation = Quaternion.Euler(0, 0, -45f);
-            _originalAttackRotation = _bastonTransform.rotation;
-            _baston.SetActive(true);
+            _elapsedDashCooldownTime = 0f;
+            if (_defaultDirection >= 0) Bastonazo(180 + 45);
+            else Bastonazo(-45);
         }
     }
     #endregion
@@ -140,15 +143,27 @@ public class CharacterAttackController : MonoBehaviour
         if (_baston.activeSelf)
         {
             _bastonTransform.rotation = _originalAttackRotation;
-            if (_myWallDetector.isInWall() != 0 && !_myFloorDetector.IsGrounded()) _myMovementController.WallWasAttacked(true);
-            _elapsedAttackTime += Time.deltaTime;
-            // Cuando el ataque se haya completado desactiva el bast�n
-            if (_elapsedAttackTime > _attackTime)
-            {
-                _baston.SetActive(false);
-                _elapsedCooldownTime = 0f;
-            }
+            _elapsedBastonazoTime += Time.deltaTime;
+            // Cuando el ataque se haya completado desactiva el bastón
+            if (_elapsedBastonazoTime > _bastonazoTime) _baston.SetActive(false);
         }
-        else if (_elapsedCooldownTime < _attackCooldown) _elapsedCooldownTime += Time.deltaTime;
+        // Cooldown del ataque
+        else if (_elapsedAttackCooldownTime < _attackCooldown)
+        {
+            _elapsedAttackCooldownTime += Time.deltaTime;
+        }
+        // Cooldown de saltos
+        else if (_elapsedJumpCooldownTime < _jumpsCooldown)
+        {
+            _elapsedJumpCooldownTime += Time.deltaTime;
+        }
+        // Cooldown en dash
+        else if (_elapsedDashCooldownTime < _dashCooldown)
+        {
+            _elapsedDashCooldownTime += Time.deltaTime;
+        }
+
+        if (_myWallDetector.isInWall() == 1) _defaultDirection = -1;
+        else if (_myWallDetector.isInWall() == -1) _defaultDirection = 1;
     }
 }

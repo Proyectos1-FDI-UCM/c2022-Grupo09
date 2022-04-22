@@ -16,12 +16,13 @@ public class CharacterInputManager : MonoBehaviour
     #region properties
     private float _horizontalInput;
     private float _verticalInput;
-    private float _previusVerticalInput = 0;
+    private float _previousVerticalInput = 0;
     private float _jumpInput;
+    private float _previousJumpInput;
     private float _attackInput;
-    private float _horizontalAttackInput;
-    private float _verticalAttackInput;
+    private float _previousAttackInput;
     private float _dashInput;
+    private float _previousDashInput;
     #endregion
 
     #region methods
@@ -49,13 +50,16 @@ public class CharacterInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Ejes de input
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
         _jumpInput = Input.GetAxis("Jump");
         _attackInput = Input.GetAxis("Fire1");
+        _dashInput = Input.GetAxis("Dash");
+        // Animación de movimiento
         _myAnimator.SetFloat("MovementDirection", Mathf.Abs(_horizontalInput));
 
-        if(_horizontalInput != 0)
+        if (_horizontalInput != 0)
         {
             _myMovementController.SetMovementDirection(_horizontalInput);
         }
@@ -63,28 +67,28 @@ public class CharacterInputManager : MonoBehaviour
         {
             _myCameraController.SetVerticalOffset(_verticalInput);
         }
-        else if (_verticalInput != _previusVerticalInput)
+        else if (_verticalInput != _previousVerticalInput)
         {
             _myCameraController.ResetVerticalOffset();
         }
-        if (_jumpInput != 0)
+        if (_jumpInput != 0 && _jumpInput != _previousJumpInput)
         {
             _myMovementController.JumpRequest();
         }
 
-        _horizontalAttackInput = Input.GetAxis("Horizontal");
-        _verticalAttackInput = Input.GetAxis("Vertical");
-        _dashInput = Input.GetAxis("Dash");
-        NormalizeAttackInput(ref _horizontalAttackInput, ref _verticalAttackInput);
-        if (_attackInput != 0)
+        NormalizeAttackInput(ref _horizontalInput, ref _verticalInput);
+        if (_attackInput != 0 && _attackInput != _previousAttackInput)
         {
-            _myAttackController.Bastonazo(Mathf.Abs(_horizontalAttackInput), _verticalAttackInput);
+            _myAttackController.Golpe(Mathf.Abs(_horizontalInput), _verticalInput);
         }
-        if (_dashInput > 0)
+        if (_dashInput > 0 && _dashInput != _previousDashInput)
         {
             _myAttackController.Dash();
         }
 
-        _previusVerticalInput = _verticalInput;
+        _previousVerticalInput = _verticalInput;
+        _previousAttackInput = _attackInput;
+        _previousJumpInput = _jumpInput;
+        _previousDashInput = _dashInput;
     }
 }
