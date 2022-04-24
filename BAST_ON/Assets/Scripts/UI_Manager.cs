@@ -98,7 +98,6 @@ public class UI_Manager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Lvl 1");
-        StartGame();
     }
     public void StartGame()
     {
