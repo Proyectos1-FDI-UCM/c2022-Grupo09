@@ -92,6 +92,10 @@ public class CharacterMovementController : MonoBehaviour
             _impulseElapsedTime = 1f;
             _myCameraController.ResetVerticalOffset();
         }
+        else
+        {
+            _myAttackController.Salto();
+        }
     }
 
     ///<summary>

@@ -196,8 +196,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baston: {fileID: 8705272921097061316}
-  _attackTime: 0.2
+  _bastonazoTime: 0.2
   _attackCooldown: 0.25
+  _jumpsCooldown: 0.25
+  _dashCooldown: 0.25
   repelStrenght: 15
 --- !u!114 &2064836601977449977
 MonoBehaviour:
