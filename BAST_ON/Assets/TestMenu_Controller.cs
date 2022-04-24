@@ -33,7 +33,7 @@ public class TestMenu_Controller : MonoBehaviour
     {
         try
         {
-        SceneManager.LoadSceneAsync("Test2");
+        SceneManager.LoadSceneAsync("PruebaEnemigos");
         }
         catch(UnassignedReferenceException e)
         {
