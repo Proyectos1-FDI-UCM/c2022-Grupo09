@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pruebas/PracticasPowerups.unity
     guid: 5ebe56f0764c14443a7df9851b4b46cd
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Lvl 1.unity
+    guid: 25753bf4c0df44c4e9581a5b4c38b0dd
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Lvl 2.unity
+    guid: c0478f5b6c48db2429097ba921d46947
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Lvl 3.unity
+    guid: eab2b1a3cbf1ba34eab5992e721b2d48
+  - enabled: 1
+    path: Assets/Scenes/Niveles/Lvl Joseju.unity
+    guid: 3cbe9dab97d3bc64c990ff2053669243
   m_configObjects: {}
