@@ -57,7 +57,7 @@ public class TestMenu_Controller : MonoBehaviour
     {
         try
         {
-        SceneManager.LoadSceneAsync("Test4");
+        SceneManager.LoadSceneAsync("PruebaBossfight");
         }
         catch(UnassignedReferenceException e)
         {
