@@ -45,7 +45,7 @@ public class TestMenu_Controller : MonoBehaviour
     {
         try
         {
-        SceneManager.LoadSceneAsync("Test3");
+        SceneManager.LoadSceneAsync("PracticasPowerups");
         }
         catch(UnassignedReferenceException e)
         {

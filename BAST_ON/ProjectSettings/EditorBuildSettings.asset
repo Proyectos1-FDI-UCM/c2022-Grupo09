@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/juanitilemaps.unity
-    guid: 89e3b46c4cf04354a8e6b214d60dd2f3
+  - enabled: 1
+    path: Assets/Scenes/Pruebas/MenuPruebas.unity
+    guid: 2a988b3fb55c26e489b427f9635ca2a1
+  - enabled: 1
+    path: Assets/Scenes/Pruebas/PracticasPowerups.unity
+    guid: 5ebe56f0764c14443a7df9851b4b46cd
   m_configObjects: {}
