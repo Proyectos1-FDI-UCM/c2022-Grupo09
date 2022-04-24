@@ -97,11 +97,8 @@ public class UI_Manager : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        _mainMenu.SetActive(false);
-        _hud.SetActive(true);
-        GameManager.Instance.StartGame();
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(PauseFirstButton);
+        SceneManager.LoadScene("Lvl 1");
+        StartGame();
     }
     public void StartGame()
     {
