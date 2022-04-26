@@ -6,7 +6,7 @@ public class EnemyPatrulla : MonoBehaviour
 {
     #region parameters
     [SerializeField]
-    private float speed = 5f, detectdist = 1f;
+    private float speed = 5f;
     /// <summary>
     /// Determina si un enemigo se quedar� quieto en un punto.
     /// En caso de estar en otro sitio, se mover� por defecto al l�mite derecho de la patrulla.
