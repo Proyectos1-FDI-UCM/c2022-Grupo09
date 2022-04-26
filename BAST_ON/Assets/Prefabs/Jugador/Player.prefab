@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 4707773782861010996}
   - component: {fileID: 3388199697058540207}
   - component: {fileID: 1584218004262604693}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Baston Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

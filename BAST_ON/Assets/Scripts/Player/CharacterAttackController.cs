@@ -120,8 +120,13 @@ public class CharacterAttackController : MonoBehaviour
         if (_elapsedDashCooldownTime > _dashCooldown && !_myFloorDetector.IsGrounded())
         {
             _elapsedDashCooldownTime = 0f;
-            if (_defaultDirection >= 0) Bastonazo(180 + 45);
-            else Bastonazo(-45);
+            if (_myWallDetector.isInWall() == 1) Bastonazo(180 + 45);
+            else if (_myWallDetector.isInWall() == -1) Bastonazo(-45);
+            else
+            {
+                if (_defaultDirection >= 0) Bastonazo(180 + 45);
+                else Bastonazo(-45);
+            }
         }
     }
     #endregion

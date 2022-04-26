@@ -212,15 +212,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1985461454945788849, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2709866870836899336, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129970146870042863, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3863385726074309942, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6228605240592573915, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352999144391048573, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458695363262661944, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6768060716812112201, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309214496577100609, guid: 33824b5bd155cb046aa8ddf1fff24e49, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
@@ -984,6 +1008,10 @@ PrefabInstance:
     - target: {fileID: 1676595374184265813, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341972834328012880, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6468474152613596022, guid: b2daa4363fb725d49b5255a5c8c6a6c0, type: 3}
       propertyPath: _myCamera
