@@ -46,8 +46,8 @@ public class JoseJuanController : MonoBehaviour
     [SerializeField] private GameObject _player;
     private Transform _playerTransform;
     [SerializeField] private GameObject _baston;
-    private LayerMask _josejuLayer = LayerMask.GetMask("JoseJuan");
-    private LayerMask _bastonLayer = LayerMask.GetMask("Baston");
+    [SerializeField] private int _josejuLayer = 9;
+    [SerializeField] private int _bastonLayer = 10;
     /// <summary>
     /// Referencia al collider de Joseju
     /// </summary>
@@ -246,6 +246,7 @@ public class JoseJuanController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         _josejuCollider = GetComponent<PolygonCollider2D>();
         // Valor inicial de la vida
         _currentSecondPhaseHealth = _maxSecondPhaseHealth;

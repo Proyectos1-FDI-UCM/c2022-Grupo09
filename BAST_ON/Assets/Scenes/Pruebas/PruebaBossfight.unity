@@ -249,6 +249,14 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 2013777720}
+    - target: {fileID: 168908537012560921, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: _bastonLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 168908537012560921, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
+      propertyPath: _josejuLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 934516988781384092, guid: c4bd634f1c947f14a91beb22c3a2f703, type: 3}
       propertyPath: _frequency
       value: 2.5
