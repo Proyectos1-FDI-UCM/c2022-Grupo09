@@ -67,7 +67,7 @@ public class TestMenu_Controller : MonoBehaviour
 
     public void GoToMainScene()
     {
-        SceneManager.LoadSceneAsync("MainScene");
+        SceneManager.LoadSceneAsync("Lvl 1");
     }
 
 }
