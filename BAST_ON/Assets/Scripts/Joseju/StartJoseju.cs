@@ -16,6 +16,7 @@ public class StartJoseju : MonoBehaviour
         if (player != null)
         {
             _josejuController.StartJoseju();
+            Destroy(gameObject);
         }
     }
     #endregion
