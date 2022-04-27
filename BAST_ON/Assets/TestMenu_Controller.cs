@@ -21,7 +21,7 @@ public class TestMenu_Controller : MonoBehaviour
     {
         try
         {
-        SceneManager.LoadSceneAsync("Test1");
+        SceneManager.LoadSceneAsync("PruebaMovimiento");
         }
         catch(UnassignedReferenceException e)
         {
