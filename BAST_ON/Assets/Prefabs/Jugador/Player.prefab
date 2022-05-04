@@ -182,6 +182,7 @@ MonoBehaviour:
   _wallJumpBlockMovement: 0.3
   _verticalDamageImpulse: 10
   _horizontalDamageImpulse: 6
+  _speedLimit: 3
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
