@@ -33,16 +33,17 @@ public class CharacterAttackController : MonoBehaviour
     private float _defaultDirection;
     private Quaternion _originalAttackRotation;
     public float RepelStrenght => repelStrenght;
+    private float _originalRepelStrenght;
     #endregion
 
     #region methods
     public void IncreaseStrenght(float strenghtModifier)
     {
-        repelStrenght *= strenghtModifier;
+        repelStrenght = _originalRepelStrenght * strenghtModifier;
     }
     public void DecreaseStrenght(float strenghtModifier)
     {
-        repelStrenght /= strenghtModifier;
+        repelStrenght = _originalRepelStrenght * strenghtModifier;
     }
 
     public void SetDefaultDirection(float dir)
@@ -139,6 +140,7 @@ public class CharacterAttackController : MonoBehaviour
         _myMovementController = GetComponent<CharacterMovementController>();
         _bastonTransform = _baston.transform;
         _baston.SetActive(false);
+        _originalRepelStrenght = repelStrenght;
     }
 
     // Update is called once per frame
@@ -168,7 +170,7 @@ public class CharacterAttackController : MonoBehaviour
             _elapsedDashCooldownTime += Time.deltaTime;
         }
 
-        if (_myWallDetector.isInWall() == 1) _defaultDirection = -1;
-        else if (_myWallDetector.isInWall() == -1) _defaultDirection = 1;
+        if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _defaultDirection = -1;
+        else if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _defaultDirection = 1;
     }
 }

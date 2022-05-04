@@ -19,6 +19,8 @@ public class CharacterMovementController : MonoBehaviour
     private float _verticalDamageImpulse = 2f;
     [SerializeField]
     private float _horizontalDamageImpulse = 2f;
+    [SerializeField]
+    private float _speedLimit = 6.9f;
 
     private float _currentTime;
     private bool audioToggle = true;
@@ -55,6 +57,8 @@ public class CharacterMovementController : MonoBehaviour
     private Vector2 _movement;
 
     private float _wallAttackElapsedTime = 0;
+
+    private float _originalBastonImpulse;
     #endregion
 
     #region references
@@ -114,11 +118,11 @@ public class CharacterMovementController : MonoBehaviour
     }
     public void IncreaseBastonImpulse(float impulseIncreaser)
     {
-        _bastonImpulse *= impulseIncreaser;
+        _bastonImpulse = _originalBastonImpulse * impulseIncreaser;
     }
     public void DecreaseBastonImpulse(float impulseDecreaser)
     {
-        _bastonImpulse /= impulseDecreaser;
+        _bastonImpulse = _originalBastonImpulse / impulseDecreaser;
     }
 
     public void DamageImpulseRequest(Vector3 damageImpulse)
@@ -164,6 +168,7 @@ public class CharacterMovementController : MonoBehaviour
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _myAnimator = GetComponent<Animator>();
         _originalSpeedMovement = _speedMovement;
+        _originalBastonImpulse = _bastonImpulse;
     }
 
     // Update is called once per frame
@@ -183,7 +188,7 @@ public class CharacterMovementController : MonoBehaviour
         else if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = false;
 
         // Bloqueo del movimiento en walljump
-        if (_wallAttackElapsedTime > _wallJumpBlockMovement) 
+        if (_wallAttackElapsedTime > _wallJumpBlockMovement)
         {
             _blockMovement = false;
             _wallAttackElapsedTime = 0f;
@@ -233,6 +238,12 @@ public class CharacterMovementController : MonoBehaviour
         // Bloqueo del movimiento al estar en una pared
         if (_myWallDetector.isInWall() == 1 && _movement.x > 0) _movement.x = 0;
         else if (_myWallDetector.isInWall() == -1 && _movement.x < 0) _movement.x = 0;
+
+        if (_movement.magnitude > _speedLimit)
+        {
+            _movement.Normalize();
+            _movement *= _speedLimit;
+        }
 
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
