@@ -22,7 +22,7 @@ public class SoundArea : MonoBehaviour {
         }
         else
         {
-            Debug.Log("a");
+            //Debug.Log("a");
             _soundPlayed = true;
         }
     }
