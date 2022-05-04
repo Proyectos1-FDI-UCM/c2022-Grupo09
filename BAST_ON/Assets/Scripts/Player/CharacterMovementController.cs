@@ -122,7 +122,7 @@ public class CharacterMovementController : MonoBehaviour
     }
     public void DecreaseBastonImpulse(float impulseDecreaser)
     {
-        _bastonImpulse = _originalBastonImpulse / impulseDecreaser;
+        _bastonImpulse = _originalBastonImpulse;
     }
 
     public void DamageImpulseRequest(Vector3 damageImpulse)

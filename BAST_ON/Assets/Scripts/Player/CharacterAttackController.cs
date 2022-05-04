@@ -43,7 +43,7 @@ public class CharacterAttackController : MonoBehaviour
     }
     public void DecreaseStrenght(float strenghtModifier)
     {
-        repelStrenght = _originalRepelStrenght * strenghtModifier;
+        repelStrenght = _originalRepelStrenght;
     }
 
     public void SetDefaultDirection(float dir)
