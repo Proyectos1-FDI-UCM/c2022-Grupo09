@@ -245,6 +245,8 @@ public class CharacterMovementController : MonoBehaviour
             _movement *= _speedLimit;
         }
 
+        if (_myWallDetector.isInWall() != 0 && _movement.y > 0.05f) _movement.y = 0.05f;
+
         _myRigidbody.MovePosition(_myRigidbody.position + _movement);
 
         // Contador del tiempo en el aire
