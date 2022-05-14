@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3622680410856688948}
   - component: {fileID: 1836989697372702947}
   - component: {fileID: 4375825828385539767}
+  - component: {fileID: 5966713820914838398}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -187,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  distance: 0.1
+  distance: 0.15
   _detector: {fileID: 7561781926581818137}
 --- !u!95 &3622680410856688948
 Animator:
@@ -320,6 +321,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0.008455953, y: -0.32678065}
   m_Size: {x: 0.8924691, y: 1.2426469}
   m_Direction: 0
+--- !u!114 &5966713820914838398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393164507037591020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f069ab97c8d732243a49e441fdebf4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floorLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _floorDetectorOffset: 0.05
+  _horizontalSizeDiminuer: 0.04
+  _verticalSizeDiminuer: 0.5
 --- !u!1 &5621661366067092156
 GameObject:
   m_ObjectHideFlags: 0

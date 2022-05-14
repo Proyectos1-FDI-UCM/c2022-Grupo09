@@ -16,10 +16,13 @@ public class EnemyPasivo : MonoBehaviour
     private Transform _detector;
     private Rigidbody2D _myRigidBody;
     private RaycastHit2D _groundDetect, _wallDetect, _enemyDetect;
+    private FloorDetector _myFloorDetector;
     #endregion
 
     #region properties
     private Vector2 _movementDirection;
+    private Vector2 _gravity;
+    private float _onAirElapsedTime;
     #endregion
 
     #region methods
@@ -33,6 +36,7 @@ public class EnemyPasivo : MonoBehaviour
         layerE = LayerMask.GetMask("Enemies");
         _myRigidBody = GetComponent<Rigidbody2D>();
         _movementDirection = Vector2.right;
+        _myFloorDetector = GetComponent<FloorDetector>();
     }
 
     private void Update()
@@ -60,7 +64,11 @@ public class EnemyPasivo : MonoBehaviour
 
     }
     private void FixedUpdate()
-    {
-        _myRigidBody.MovePosition(_myRigidBody.position + _movementDirection.normalized * speed*Time.fixedDeltaTime);
+    {   // Calculo de la gravedad
+        _gravity = Vector2.down * _onAirElapsedTime;
+        _myRigidBody.MovePosition(_myRigidBody.position + (_gravity + _movementDirection.normalized * speed) * Time.fixedDeltaTime);
+        // Contador del tiempo en el aire
+        if (!_myFloorDetector.IsGrounded()) _onAirElapsedTime += Time.fixedDeltaTime;
+        else _onAirElapsedTime = 0f;
     }
 }
