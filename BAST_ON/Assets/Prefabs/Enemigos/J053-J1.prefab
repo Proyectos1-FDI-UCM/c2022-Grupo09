@@ -48216,6 +48216,9 @@ MonoBehaviour:
   _maxSecondPhaseHealth: 5
   _toFirstPhasePositionSpeed: 5
   _player: {fileID: 0}
+  _baston: {fileID: 0}
+  _josejuLayer: 9
+  _bastonLayer: 10
   _phaseZeroSpawner: {fileID: 7770676428370271407}
   _toFirstPhaseDoor: {fileID: 1104294533980748680}
   _firstPhaseWaves:
@@ -49004,10 +49007,6 @@ PrefabInstance:
     - target: {fileID: 7026778215021453854, guid: c94c24fa1fe946a42be410175d746dd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7026778215021453855, guid: c94c24fa1fe946a42be410175d746dd5, type: 3}
-      propertyPath: _frequency
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c94c24fa1fe946a42be410175d746dd5, type: 3}

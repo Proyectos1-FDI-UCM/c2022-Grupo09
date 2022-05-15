@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myGear: {fileID: 8933396288510389749, guid: c8adf781125937943b8ddb683fc7c5be, type: 3}
-  _frequency: 1.5
+  _frequency: 0.6
+  _rangoGeneracion: 7
