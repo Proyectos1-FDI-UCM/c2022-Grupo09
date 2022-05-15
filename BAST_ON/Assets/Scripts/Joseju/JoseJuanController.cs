@@ -106,6 +106,9 @@ public class JoseJuanController : MonoBehaviour
     private Vector3 _cameraPhaseZeroPosition;
     [SerializeField] private GameObject _cameraFirstPhasePositionObject;
     private Vector3 _cameraFirstPhasePosition;
+
+    private ParpadeoJoseju _parpadeo;
+    private Animator _myAnimator;
     #endregion
 
     #region methods
@@ -152,6 +155,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartFirstPhase()
     {
+        _parpadeo.SetBlinking(false);
         _phaseZeroSpawner.SetActive(false);
         _toFirstPhaseDoor.SetActive(false);
 
@@ -168,6 +172,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndingFirstPhase()
     {
+        _parpadeo.SetBlinking(true);
         _canBeHit = true;
         _josejuCollider.enabled = true;
     }
@@ -176,6 +181,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartSecondPhase()
     {
+        _parpadeo.SetBlinking(false);
         Physics2D.IgnoreLayerCollision(_josejuLayer, _bastonLayer);
         _currentPhase = 2;
         _josejuCollider.enabled = true;
@@ -190,6 +196,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndingSecondPhase()
     {
+        _parpadeo.SetBlinking(true);
         _canBeHit = true;
         Physics2D.IgnoreLayerCollision(_josejuLayer, _bastonLayer, false);
     }
@@ -198,8 +205,12 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndSecondPhase()
     {
+        _parpadeo.SetBlinking(false);
         _gearSpawner.SetActive(false);
         _exitSecondPhaseDoor.SetActive(false);
+
+        _myAnimator.Play("Explosion");
+        Destroy(gameObject, 0.45f);
     }
     /// <summary>
     /// M�todo que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
@@ -265,6 +276,9 @@ public class JoseJuanController : MonoBehaviour
         _cameraController = _camera.GetComponent<CameraController>();
         _cameraPhaseZeroPosition = _cameraPhaseZeroPositionObject.transform.position;
         _cameraFirstPhasePosition = _cameraFirstPhasePositionObject.transform.position;
+
+        _parpadeo = GetComponent<ParpadeoJoseju>();
+        _myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
