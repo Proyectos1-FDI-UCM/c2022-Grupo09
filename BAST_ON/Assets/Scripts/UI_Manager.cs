@@ -94,10 +94,10 @@ public class UI_Manager : MonoBehaviour
     {
         StartCoroutine(BlinkDragon());
     }
-    public void NewGame()
+    public void RestartGame()
     {
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.NewGame();
+        GameManager.Instance.RestartGame();
     }
     public void StartGame()
     {
