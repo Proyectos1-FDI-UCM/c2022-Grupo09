@@ -23,7 +23,7 @@ public class DragonFruitController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CharacterAttackController check = collision.GetComponent<CharacterAttackController>(); //variable para acceder al characterhealth manager si este colisiona con el jugador
-        if (check != null)
+        if (check != null && !GameManager.Instance.GetDragonActive())
         {
             check.IncreaseStrenght(newStrenght);
             GameManager.Instance.DragonCallBack(strenghtDuration, newStrenght);

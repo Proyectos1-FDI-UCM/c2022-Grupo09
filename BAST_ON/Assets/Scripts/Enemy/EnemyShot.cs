@@ -6,6 +6,7 @@ public class EnemyShot : MonoBehaviour
 {
     #region references
     private Transform _myTransform;
+    private Animator _myAnimator;
     #endregion
 
     #region parameters
@@ -48,6 +49,12 @@ public class EnemyShot : MonoBehaviour
     private void SlowDown(float slowDown)
     {
         _speed = _originalSpeed / slowDown;
+        _myAnimator.SetFloat("KiwiReducer", 1 / slowDown);
+    }
+    private void SpeedUp()
+    {
+        _speed = _originalSpeed;
+        _myAnimator.SetFloat("KiwiReducer", 1);
     }
     #endregion
 
@@ -55,6 +62,7 @@ public class EnemyShot : MonoBehaviour
     {
         _myTransform = transform;
         _originalSpeed = _speed;
+        _myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -62,7 +70,7 @@ public class EnemyShot : MonoBehaviour
     {
         // Comprobación de si hay un Kiwi Activo
         if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
-        else _speed = _originalSpeed;
+        else SpeedUp();
         _myTransform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }

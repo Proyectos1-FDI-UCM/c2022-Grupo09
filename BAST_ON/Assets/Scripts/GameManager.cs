@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     #region properties
+    private bool _activeDragon = false;
     private bool _activeKiwi = false;
     private float _kiwiSlowDown = 0f;
     #endregion
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator DragonPowerUp(float duration, float newImpulse)
     {
+        _activeDragon = true;
         _UIManagerReference.DragonActive(true);
         _myCharacterMovementController.IncreaseBastonImpulse(newImpulse);
         yield return new WaitForSeconds(duration/2);
@@ -125,6 +127,12 @@ public class GameManager : MonoBehaviour
         _UIManagerReference.DragonActive(false);
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);
+        _activeDragon = false;
+    }
+
+    public bool GetDragonActive()
+    {
+        return _activeDragon;
     }
 
     public void CompleteGame()

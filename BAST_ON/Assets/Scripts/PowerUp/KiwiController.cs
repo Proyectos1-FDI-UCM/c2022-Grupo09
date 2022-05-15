@@ -9,8 +9,6 @@ public class KiwiController : MonoBehaviour
     [SerializeField]
     private float _SlowDown = 10f; //Velocidad de relentización de tiempo
     [SerializeField]
-    private float _moreVelocity = 2f;
-    [SerializeField]
     private int _duration = 10;
     #endregion
 
@@ -19,12 +17,10 @@ public class KiwiController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CharacterMovementController check = collision.GetComponent<CharacterMovementController>();
-        if (check != null)
+        if (check != null && !GameManager.Instance.GetKiwiActive())
         {
-            check.PlusVelocity(_moreVelocity);
             GameManager.Instance.KiwiCallBack(_duration, _SlowDown);
             Destroy(gameObject);
-
         }
     }
     #endregion

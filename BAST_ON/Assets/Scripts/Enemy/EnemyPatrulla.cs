@@ -21,6 +21,7 @@ public class EnemyPatrulla : MonoBehaviour
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
+    private Animator _myAnimator;
     #endregion
 
     #region properties
@@ -33,6 +34,12 @@ public class EnemyPatrulla : MonoBehaviour
     public void SlowDown(float speedReducer)
     {
         speed = _originalSpeed/speedReducer;
+        _myAnimator.SetFloat("KiwiReducer", 1 / speedReducer);
+    }
+    private void SpeedUp()
+    {
+        speed = _originalSpeed;
+        _myAnimator.SetFloat("KiwiReducer", 1);
     }
     #endregion
 
@@ -49,6 +56,7 @@ public class EnemyPatrulla : MonoBehaviour
         _targetPosition = _rightTarget;
 
         _originalSpeed = speed;
+        _myAnimator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -58,7 +66,7 @@ public class EnemyPatrulla : MonoBehaviour
 
         // Comprobación de si hay un Kiwi Activo
         if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
-        else speed = _originalSpeed;
+        else SpeedUp();
     }
 
     private void FixedUpdate()
