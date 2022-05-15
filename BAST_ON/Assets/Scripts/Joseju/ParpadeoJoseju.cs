@@ -9,10 +9,13 @@ public class ParpadeoJoseju : MonoBehaviour
     #endregion
 
     #region parameters
-    [SerializeField] Color _blinkColor = Color.gray;
+    [SerializeField] private Color _blinkColor = Color.gray;
+    [SerializeField] private float _duracionGolpeEngranaje = 0.2f;
     #endregion
 
     #region properties
+    private float _engranajeElapsedTime = 0;
+    private bool _engranaje = false;
     private bool _blinking = true;
     private Color _baseColor;
     private float _baseLimit, _blinkLimit;
@@ -23,6 +26,11 @@ public class ParpadeoJoseju : MonoBehaviour
     public void SetBlinking(bool blinking)
     {
         _blinking = blinking;
+    }
+
+    public void GolpeEngranaje()
+    {
+        _engranaje = true;
     }
     #endregion
 
@@ -39,8 +47,6 @@ public class ParpadeoJoseju : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (_blinking)
         {
             if (_mySprite.color.r >= _baseLimit) _toBase = false;
@@ -49,6 +55,16 @@ public class ParpadeoJoseju : MonoBehaviour
             if (_toBase) _mySprite.color = Color.Lerp(_mySprite.color, _baseColor, 0.005f);
             else _mySprite.color = Color.Lerp(_mySprite.color, _blinkColor, 0.005f);
 
+        }
+        else if (_engranaje)
+        {
+            _mySprite.color = _baseColor;
+            _engranajeElapsedTime += Time.deltaTime;
+            if (_engranajeElapsedTime >= _duracionGolpeEngranaje)
+            {
+                _engranaje = false;
+                _engranajeElapsedTime = 0f;
+            }
         }
         else _mySprite.color = _blinkColor;
 

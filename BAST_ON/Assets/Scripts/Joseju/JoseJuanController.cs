@@ -218,6 +218,7 @@ public class JoseJuanController : MonoBehaviour
     public void ChangeSecondPhaseHealth(int value)
     {
         _currentSecondPhaseHealth += value;
+        _parpadeo.GolpeEngranaje();
         if (_currentSecondPhaseHealth <= 0) EndingSecondPhase();
     }
 
