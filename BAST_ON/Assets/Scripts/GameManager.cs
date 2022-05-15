@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
   
-    public void NewGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene("Lvl 1");
     }
