@@ -58,9 +58,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
   
+    public void NewGame()
+    {
+        SceneManager.LoadScene("Lvl 1");
+    }
+
     public void OnPlayerDeath()
     {
-        ExitToMainMenu(); 
+        _UIManagerReference.OpenDeathMenu();
     }
     public void SendEnemyLifeComponent(EnemyLifeComponent reference) //A�adimos referencias a EnemyLifeCOmponent a la lista
     {

@@ -31,7 +31,7 @@ public class UI_Manager : MonoBehaviour
     /// <summary>
     /// Referencias a los menús de la UI
     /// </summary>
-    [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud;
+    [SerializeField] private GameObject _mainMenu, _pauseMenu, _controlsMenu, _hud, _deathMenu;
     /// <summary>
     /// Referencia al menú previo al menú de controles cuando se entra en este
     /// </summary>
@@ -97,7 +97,7 @@ public class UI_Manager : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("Lvl 1");
+        GameManager.Instance.NewGame();
     }
     public void StartGame()
     {
@@ -114,7 +114,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void PauseGame()
     {
-        if (!_mainMenu.activeSelf && !_controlsMenu.activeSelf)
+        if (!_mainMenu.activeSelf && !_controlsMenu.activeSelf && !_deathMenu.activeSelf)
         {
             GameManager.Instance.Pause();
             _pauseMenu.SetActive(true);
@@ -141,6 +141,15 @@ public class UI_Manager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(ResumeFirstButton);
     }
+    public void OpenDeathMenu()
+    {
+        _hud.SetActive(false);
+        _deathMenu.SetActive(true);
+    }
+    public void ContinueGame()
+    {
+        ExitToMainMenu();
+    }
     public void QuitGame()
     {
         GameManager.Instance.QuitGame();
@@ -156,6 +165,7 @@ public class UI_Manager : MonoBehaviour
         _mainMenu.SetActive(true);
         _pauseMenu.SetActive(false);
         _controlsMenu.SetActive(false);
+        _deathMenu.SetActive(false);
         _hud.SetActive(false);
         _dragon.SetActive(false);
         _kiwi.SetActive(false);
