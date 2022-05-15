@@ -178,10 +178,11 @@ public class CharacterMovementController : MonoBehaviour
         if (_movementDirection.x != 0)
         {
             _myCameraController.SetOffset(_movementDirection.normalized);
-            _myAttackController.SetDefaultDirection(_movementDirection.x);
             // Ajustar dirección del sprite en función de la dirección
             _mySpriteRenderer.flipX = _movementDirection.x < 0;
         }
+        if (!_mySpriteRenderer.flipX) _myAttackController.SetDefaultDirection(1);
+        else _myAttackController.SetDefaultDirection(-1);
 
         // Ajustar dirección del sprite si está en una pared.
         if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _mySpriteRenderer.flipX = true;
