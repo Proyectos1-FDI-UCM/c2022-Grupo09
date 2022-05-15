@@ -20,10 +20,10 @@ public class ToNextLevel : MonoBehaviour
 
             DontDestroyOnLoad(_currentLevelGameObject);
             SceneManager.LoadScene(_nextLevelName);
-            StartCoroutine(PausaCarga());
+            StartCoroutine(LoadNextLevel());
         }
     }
-    IEnumerator PausaCarga()
+    IEnumerator LoadNextLevel()
     {
         yield return new WaitUntil(() => SceneManager.GetActiveScene().name == _nextLevelName);
         UI_Manager test = GameObject.Find("UI").GetComponent<UI_Manager>();

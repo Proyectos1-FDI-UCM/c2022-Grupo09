@@ -837,7 +837,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8433497145446151560}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2688,7 +2688,7 @@ GameObject:
   - component: {fileID: 1790334490527213625}
   - component: {fileID: 2604117149471584738}
   m_Layer: 0
-  m_Name: StartButton
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

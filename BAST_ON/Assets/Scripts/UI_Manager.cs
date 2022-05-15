@@ -103,11 +103,15 @@ public class UI_Manager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         GameManager.Instance.RestartGame();
     }
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        GameManager.Instance.NewGame();
+    }
     public void StartGame()
     {
-        Debug.Log($"StartGame 1 {_mainMenu.activeSelf}");
+        //Debug.Log("StartGame");
         _mainMenu.SetActive(false);
-        Debug.Log($"StartGame 2 {_mainMenu.activeSelf}");
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
         EventSystem.current.SetSelectedGameObject(null);
@@ -181,8 +185,8 @@ public class UI_Manager : MonoBehaviour
         _kiwi.SetActive(false);
         _kiwiSprite = _kiwi.GetComponent<Image>();
         _dragonSprite = _dragon.GetComponent<Image>();
-        Debug.Log($"Start {_mainMenu.activeSelf}");
         _started = true;
+        //Debug.Log("Start");
     }
 
     // Update is called once per frame

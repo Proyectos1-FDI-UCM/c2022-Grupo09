@@ -62,7 +62,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Lvl 1");
     }
-
+    public void NewGame()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("Lvl 1");
+        StartCoroutine(LoadLevel1());
+    }
+    IEnumerator LoadLevel1()
+    {
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Lvl 1");
+        UI_Manager test = GameObject.Find("UI").GetComponent<UI_Manager>();
+        //Debug.Log(test);
+        yield return new WaitUntil(() => test.GetStarted());
+        test.StartGame();
+        Destroy(gameObject);
+    }
     public void OnPlayerDeath()
     {
         _UIManagerReference.OpenDeathMenu();
