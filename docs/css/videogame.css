@@ -6,17 +6,29 @@ html,body {
   font-size: 18px;
 }
 body {
+  background: #b5e99e;
+
+
   padding-bottom: 1rem;
-  color: #5a5a5a;
+  color: #000000;
 }
 
+/*
+BACKGROUND DEL DIV
+*/
 
+div.desc__container {
+
+  background-color: #d0ecc4;
+
+ }
 
 
 /* CUSTOMIZE THE HEADER
 -------------------------------------------------- */
 
 img.img-header {
+  
   max-height: 500px;
 }
 
