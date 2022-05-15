@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    #region properties
+    private bool _activeKiwi = false;
+    private float _kiwiSlowDown = 0f;
+    #endregion
+
     #region references
     private CharacterMovementController _myCharacterMovementController;
 
@@ -70,31 +75,41 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator KiwiPowerUp(int duration, float slowDown)
     {
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
+        /*foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
             if (enemy != null)
             {
                 EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
                 if (patrulla != null) patrulla.SlowDown(slowDown);
             }
-        }
+        }*/
+        _kiwiSlowDown = slowDown;
+        _activeKiwi = true;
         _UIManagerReference.KiwiActive(true);
 
         yield return new WaitForSeconds(duration/2);
         _UIManagerReference.StartBlinkKiwi();
         yield return new WaitForSeconds(duration/2);
-        
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
+        _activeKiwi = false;
+        /*foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
         {
             if (enemy != null)
             {
                 EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
                 if (patrulla != null) patrulla.RestoreSpeed();
             }
-        }
+        }*/
         
         _UIManagerReference.KiwiActive(false);
-        _myCharacterMovementController.NormalVelocity();
+        //_myCharacterMovementController.NormalVelocity();
+    }
+    public bool GetKiwiActive()
+    {
+        return _activeKiwi;
+    }
+    public float GetKiwiSlowDown()
+    {
+        return _kiwiSlowDown;
     }
     public void DragonCallBack(float duration, float newImpulse)
     {

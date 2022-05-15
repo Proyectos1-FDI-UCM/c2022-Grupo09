@@ -8,9 +8,13 @@ public class EnemyShot : MonoBehaviour
     private Transform _myTransform;
     #endregion
 
-    #region references
+    #region parameters
     [SerializeField]
-    private float _speed;
+    private float _speed = 1f;
+    #endregion
+
+    #region properties
+    private float _originalSpeed;
     #endregion
 
     #region methods
@@ -40,16 +44,25 @@ public class EnemyShot : MonoBehaviour
     {
         _myTransform.rotation = Quaternion.Euler(0, 0, rotation);
     }
+
+    private void SlowDown(float slowDown)
+    {
+        _speed = _originalSpeed / slowDown;
+    }
     #endregion
 
     private void Start()
     {
         _myTransform = transform;
+        _originalSpeed = _speed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else _speed = _originalSpeed;
         _myTransform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }

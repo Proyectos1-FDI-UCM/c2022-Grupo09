@@ -15,11 +15,21 @@ public class EsquivDisparo : MonoBehaviour
     #endregion
     #region properties
     private float timer;
-    #endregion 
+    private float _originalFrequency;
+    #endregion
+
+    #region methods
+    private void SlowDown(float slowDown)
+    {
+        freq = _originalFrequency * slowDown;
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
         _myTransform = _myOrigin.transform;
+        _originalFrequency = freq;
     }
 
     // Update is called once per frame
@@ -31,5 +41,9 @@ public class EsquivDisparo : MonoBehaviour
             Instantiate(_myShot, _myTransform.position, Quaternion.Euler(_myTransform.rotation.eulerAngles));
             timer = 0;
         }
+
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else freq = _originalFrequency;
     }
 }

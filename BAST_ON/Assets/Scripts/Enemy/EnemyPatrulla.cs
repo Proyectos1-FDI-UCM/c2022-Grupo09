@@ -34,10 +34,6 @@ public class EnemyPatrulla : MonoBehaviour
     {
         speed = _originalSpeed/speedReducer;
     }
-    public void RestoreSpeed()
-    {
-        speed = _originalSpeed;
-    }
     #endregion
 
 
@@ -59,6 +55,10 @@ public class EnemyPatrulla : MonoBehaviour
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
+
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else speed = _originalSpeed;
     }
 
     private void FixedUpdate()

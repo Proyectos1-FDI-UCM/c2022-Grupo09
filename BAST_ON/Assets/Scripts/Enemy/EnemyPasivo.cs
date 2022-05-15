@@ -23,6 +23,7 @@ public class EnemyPasivo : MonoBehaviour
     private Vector2 _movementDirection;
     private Vector2 _gravity;
     private float _onAirElapsedTime;
+    private float _originalSpeed;
     #endregion
 
     #region methods
@@ -37,6 +38,12 @@ public class EnemyPasivo : MonoBehaviour
         _myRigidBody = GetComponent<Rigidbody2D>();
         _movementDirection = Vector2.right;
         _myFloorDetector = GetComponent<FloorDetector>();
+        _originalSpeed = speed;
+    }
+
+    private void SlowDown(float slowDown)
+    {
+        speed = _originalSpeed / slowDown;
     }
 
     private void Update()
@@ -66,6 +73,10 @@ public class EnemyPasivo : MonoBehaviour
                 rotate = !rotate;
             }
         }
+
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else speed = _originalSpeed;
 
     }
     private void FixedUpdate()
