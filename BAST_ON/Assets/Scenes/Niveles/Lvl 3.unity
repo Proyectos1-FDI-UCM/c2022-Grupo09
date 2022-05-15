@@ -70161,9 +70161,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1537251524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56d7a056ee159c4da30520a5f56d86a, type: 3}
+  m_Script: {fileID: 11500000, guid: becc3a4d4238c1b49a594da43b34cc73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nextLevelName: Lvl Joseju
+  _currentLevelGameObject: {fileID: 1122150343}
 --- !u!4 &1537251526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1594628919829432430, guid: aea1ff9f990079f4e83884a26f3c36e3, type: 3}

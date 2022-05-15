@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
+    #region properties
+    private bool _started = false;
+    #endregion
+
     #region references
     ///<summary>
     ///Array que determina la vida en el UI
@@ -101,7 +105,9 @@ public class UI_Manager : MonoBehaviour
     }
     public void StartGame()
     {
+        Debug.Log($"StartGame 1 {_mainMenu.activeSelf}");
         _mainMenu.SetActive(false);
+        Debug.Log($"StartGame 2 {_mainMenu.activeSelf}");
         _hud.SetActive(true);
         GameManager.Instance.StartGame();
         EventSystem.current.SetSelectedGameObject(null);
@@ -158,6 +164,10 @@ public class UI_Manager : MonoBehaviour
     public void GoToTestMenu(){
         SceneManager.LoadSceneAsync("MenuPruebas");
     }
+    public bool GetStarted()
+    {
+        return _started;
+    }
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -171,6 +181,8 @@ public class UI_Manager : MonoBehaviour
         _kiwi.SetActive(false);
         _kiwiSprite = _kiwi.GetComponent<Image>();
         _dragonSprite = _dragon.GetComponent<Image>();
+        Debug.Log($"Start {_mainMenu.activeSelf}");
+        _started = true;
     }
 
     // Update is called once per frame
