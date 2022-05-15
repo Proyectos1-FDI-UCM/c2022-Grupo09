@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1594628919829432430}
   - component: {fileID: 1594628919829432425}
   - component: {fileID: 1594628919829432424}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: salidanivel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,3 +71,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   salidanivel: {fileID: 0}
+  cam: {fileID: 0}
+  swapsBG: 0
