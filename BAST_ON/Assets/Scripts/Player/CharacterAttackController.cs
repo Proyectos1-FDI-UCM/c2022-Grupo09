@@ -90,6 +90,10 @@ public class CharacterAttackController : MonoBehaviour
             // Abajo
             else /*if (angle > -90)*/ angle = -90;
 
+            // Ajuste de la dirección si al jugador está en una pared
+            if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _defaultDirection = -1;
+            else if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _defaultDirection = 1;
+
             if (_defaultDirection >= 0) Bastonazo(angle);
             else Bastonazo(180 - angle);
         }
@@ -112,6 +116,7 @@ public class CharacterAttackController : MonoBehaviour
                 // En pared a la izquierda
                 else if (inWall == -1) Bastonazo(180 + 57);
                 _myMovementController.WallWasAttacked(true);
+                _defaultDirection = -_defaultDirection;
             }
         }
     }
@@ -170,7 +175,9 @@ public class CharacterAttackController : MonoBehaviour
             _elapsedDashCooldownTime += Time.deltaTime;
         }
 
-        if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _defaultDirection = -1;
-        else if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _defaultDirection = 1;
+
+        // Ajuste de la dirección si al jugador está en una pared y en el suelo
+        if (_myWallDetector.isInWall() == 1 && _myFloorDetector.IsGrounded()) _defaultDirection = 1;
+        else if (_myWallDetector.isInWall() == -1 && _myFloorDetector.IsGrounded()) _defaultDirection = -1;
     }
 }

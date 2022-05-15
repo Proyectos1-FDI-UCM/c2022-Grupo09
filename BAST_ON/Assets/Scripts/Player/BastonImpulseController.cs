@@ -17,27 +17,23 @@ public class BastonImpulseController : MonoBehaviour
     #region methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PowerUpController powerup = collision.GetComponent<PowerUpController>();
-        if (powerup == null)
+        Vector2 impulseDirection;
+        impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
+        impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
+
+        EnemyShot disparo = collision.GetComponent<EnemyShot>();
+        if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
+        else
         {
-            Vector2 impulseDirection;
-            impulseDirection.x = Mathf.Cos((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
-            impulseDirection.y = Mathf.Sin((Mathf.PI / 180) * _bastonTransform.rotation.eulerAngles.z);
-
-            EnemyShot disparo = collision.GetComponent<EnemyShot>();
-            if (disparo != null) disparo.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
-            else
-            {
-                GearDamageController engranaje = collision.GetComponent<GearDamageController>();
-                if (engranaje != null) engranaje.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
-            }
-
-            _characterMovementController.ImpulseRequest(-impulseDirection);
-
-            //Detectar enemigo con el bastón y empujarlo
-            EnemyStrikingForceController enemigo = collision.GetComponent<EnemyStrikingForceController>();
-            if (enemigo != null) enemigo.StrikeCallback(impulseDirection * _myCharacterAttackController.RepelStrenght);
+            GearDamageController engranaje = collision.GetComponent<GearDamageController>();
+            if (engranaje != null) engranaje.CambiaRotacion(_bastonTransform.rotation.eulerAngles.z);
         }
+
+        _characterMovementController.ImpulseRequest(-impulseDirection);
+
+        //Detectar enemigo con el bastón y empujarlo
+        EnemyStrikingForceController enemigo = collision.GetComponent<EnemyStrikingForceController>();
+        if (enemigo != null) enemigo.StrikeCallback(impulseDirection * _myCharacterAttackController.RepelStrenght);   
     }
     #endregion
 
