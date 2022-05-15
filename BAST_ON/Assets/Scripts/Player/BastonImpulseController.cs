@@ -38,6 +38,7 @@ public class BastonImpulseController : MonoBehaviour
             EnemyStrikingForceController enemigo = collision.GetComponent<EnemyStrikingForceController>();
             if (enemigo != null) enemigo.StrikeCallback(impulseDirection * _myCharacterAttackController.RepelStrenght);
         }
+        Debug.Log(collision);
     }
     #endregion
 

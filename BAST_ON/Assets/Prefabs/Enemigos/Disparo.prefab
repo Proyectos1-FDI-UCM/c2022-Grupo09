@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 904136681569794971}
   - component: {fileID: 8299771889603958603}
   - component: {fileID: 3991408454809026022}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: SoundArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
