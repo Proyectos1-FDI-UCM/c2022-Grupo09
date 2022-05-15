@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteGame()
     {
-        ExitToMainMenu();
+        SceneManager.LoadScene("Creditos");
     }
     #endregion
 
