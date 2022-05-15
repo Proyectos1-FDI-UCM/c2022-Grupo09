@@ -6,7 +6,7 @@ public class EnemyPatrulla : MonoBehaviour
 {
     #region parameters
     [SerializeField]
-    private float speed = 5f, detectdist = 1f;
+    private float speed = 5f;
     /// <summary>
     /// Determina si un enemigo se quedar� quieto en un punto.
     /// En caso de estar en otro sitio, se mover� por defecto al l�mite derecho de la patrulla.
@@ -21,6 +21,7 @@ public class EnemyPatrulla : MonoBehaviour
     private SpriteRenderer _mySpriteRenderer;
     private Rigidbody2D _myRigidbody;
     private EnemyLifeComponent _myLifeComponent;
+    private Animator _myAnimator;
     #endregion
 
     #region properties
@@ -33,10 +34,12 @@ public class EnemyPatrulla : MonoBehaviour
     public void SlowDown(float speedReducer)
     {
         speed = _originalSpeed/speedReducer;
+        _myAnimator.SetFloat("KiwiReducer", 1 / speedReducer);
     }
-    public void RestoreSpeed()
+    private void SpeedUp()
     {
         speed = _originalSpeed;
+        _myAnimator.SetFloat("KiwiReducer", 1);
     }
     #endregion
 
@@ -53,12 +56,17 @@ public class EnemyPatrulla : MonoBehaviour
         _targetPosition = _rightTarget;
 
         _originalSpeed = speed;
+        _myAnimator = GetComponent<Animator>();
     }
     private void Update()
     {
         // Ajuste de la rotaci�n del sprite del enemigo en funci�n de la direcci�n
         // Si el movimiento es hacia la izquierda lo gira
         _mySpriteRenderer.flipX = _movementDirection.x < 0;
+
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else SpeedUp();
     }
 
     private void FixedUpdate()

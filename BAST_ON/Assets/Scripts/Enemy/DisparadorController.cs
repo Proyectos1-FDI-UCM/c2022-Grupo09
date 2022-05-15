@@ -23,6 +23,14 @@ public class DisparadorController : MonoBehaviour
     private Vector2 _instanciatePoint;
     private float _startShooting;
     private float _startElapsedTime = 0;
+    private float _originalFrequency;
+    #endregion
+
+    #region methods
+    private void SlowDown(float slowDown)
+    {
+        frecuencia = _originalFrequency * slowDown;
+    }
     #endregion
 
 
@@ -31,7 +39,7 @@ public class DisparadorController : MonoBehaviour
         _myTransform = transform;
         _dispCollider = GetComponent<CircleCollider2D>();
         _startShooting = Random.Range(0, 300) / 100f;
-
+        _originalFrequency = frecuencia;
     }
 
     void Update()
@@ -58,5 +66,9 @@ public class DisparadorController : MonoBehaviour
             }
         }
         else _startElapsedTime += Time.deltaTime;
+
+        // Comprobación de si hay un Kiwi Activo
+        if (GameManager.Instance.GetKiwiActive()) SlowDown(GameManager.Instance.GetKiwiSlowDown());
+        else frecuencia = _originalFrequency;
     }
 }

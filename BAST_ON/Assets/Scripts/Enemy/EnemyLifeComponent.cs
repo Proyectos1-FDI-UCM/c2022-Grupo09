@@ -28,8 +28,8 @@ public class EnemyLifeComponent : MonoBehaviour
 
     #region references 
     private Transform _thisTransform;
-    
-
+    private Collider2D _myCollider;
+    private DisparadorController _myDisparos;
     [SerializeField]
     private GameObject _myPowerUp;
     private Animator _myAnimator;
@@ -73,21 +73,23 @@ public class EnemyLifeComponent : MonoBehaviour
     }
 
     public void Die()
-    {   
+    {
         isDead = true;
         Destroy(gameObject, 0.45f);
         GameManager.Instance.OnEnemyDies(this);
         _myAnimator.Play("Explosion");
         _myAudioSource.Play();
+        _myCollider.enabled = false;
+        if (_myDisparos != null) _myDisparos.enabled = false;
     }
 
-    
+
     public void ReleasePowerUp()
     {
-        if(Random.Range(0, 100) < _dropPercentage) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
-        
+        if (Random.Range(0, 100) < _dropPercentage) Instantiate(_myPowerUp, _thisTransform.position, Quaternion.identity);
+
     }
-   
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -98,5 +100,7 @@ public class EnemyLifeComponent : MonoBehaviour
         _myEnemyStrikingForceController = gameObject.GetComponent<EnemyStrikingForceController>();
         _myAnimator = gameObject.GetComponent<Animator>();
         _myEnemyPatrulla = GetComponent<EnemyPatrulla>();
+        _myCollider = GetComponent<Collider2D>();
+        _myDisparos = GetComponent<DisparadorController>();
     }
 }

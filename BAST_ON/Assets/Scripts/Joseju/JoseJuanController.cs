@@ -46,11 +46,8 @@ public class JoseJuanController : MonoBehaviour
     [SerializeField] private GameObject _player;
     private Transform _playerTransform;
     [SerializeField] private GameObject _baston;
-    private BoxCollider2D _bastonCollider;
-    /// <summary>
-    /// Referencia al collider del jugador
-    /// </summary>
-    private CapsuleCollider2D _playerCollider;
+    [SerializeField] private int _josejuLayer = 9;
+    [SerializeField] private int _bastonLayer = 10;
     /// <summary>
     /// Referencia al collider de Joseju
     /// </summary>
@@ -109,6 +106,9 @@ public class JoseJuanController : MonoBehaviour
     private Vector3 _cameraPhaseZeroPosition;
     [SerializeField] private GameObject _cameraFirstPhasePositionObject;
     private Vector3 _cameraFirstPhasePosition;
+
+    private ParpadeoJoseju _parpadeo;
+    private Animator _myAnimator;
     #endregion
 
     #region methods
@@ -134,8 +134,7 @@ public class JoseJuanController : MonoBehaviour
         _currentSecondPhaseHealth = _maxSecondPhaseHealth;
         _gearSpawner.SetActive(false);
         _moveToFirstFase = false;
-        Physics2D.IgnoreCollision(_josejuCollider, _playerCollider, false);
-        Physics2D.IgnoreCollision(_josejuCollider, _bastonCollider, false);
+        Physics2D.IgnoreLayerCollision(_josejuLayer, _bastonLayer, false);
         _phaseZeroSpawner.SetActive(true);
         _toFirstPhaseDoor.SetActive(true);
         _josejuTransform.position = _phaseZeroPositionObject.transform.position;
@@ -156,6 +155,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartFirstPhase()
     {
+        _parpadeo.SetBlinking(false);
         _phaseZeroSpawner.SetActive(false);
         _toFirstPhaseDoor.SetActive(false);
 
@@ -172,6 +172,7 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndingFirstPhase()
     {
+        _parpadeo.SetBlinking(true);
         _canBeHit = true;
         _josejuCollider.enabled = true;
     }
@@ -180,8 +181,8 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void StartSecondPhase()
     {
-        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, true);
-        Physics2D.IgnoreCollision(_bastonCollider, _josejuCollider, true);
+        _parpadeo.SetBlinking(false);
+        Physics2D.IgnoreLayerCollision(_josejuLayer, _bastonLayer);
         _currentPhase = 2;
         _josejuCollider.enabled = true;
         _canBeHit = false;
@@ -195,17 +196,21 @@ public class JoseJuanController : MonoBehaviour
     /// </summary>
     public void EndingSecondPhase()
     {
+        _parpadeo.SetBlinking(true);
         _canBeHit = true;
-        Physics2D.IgnoreCollision(_playerCollider, _josejuCollider, false);
-        Physics2D.IgnoreCollision(_bastonCollider, _josejuCollider, false);
+        Physics2D.IgnoreLayerCollision(_josejuLayer, _bastonLayer, false);
     }
     /// <summary>
     /// M�todo que termina la segunda fase del boss
     /// </summary>
     public void EndSecondPhase()
     {
+        _parpadeo.SetBlinking(false);
         _gearSpawner.SetActive(false);
         _exitSecondPhaseDoor.SetActive(false);
+
+        _myAnimator.Play("Explosion");
+        Destroy(gameObject, 0.45f);
     }
     /// <summary>
     /// M�todo que cambia los engranajes restantes para que Jose Juan pueda ser golpeado por Chicho
@@ -213,6 +218,7 @@ public class JoseJuanController : MonoBehaviour
     public void ChangeSecondPhaseHealth(int value)
     {
         _currentSecondPhaseHealth += value;
+        _parpadeo.GolpeEngranaje();
         if (_currentSecondPhaseHealth <= 0) EndingSecondPhase();
     }
 
@@ -252,6 +258,7 @@ public class JoseJuanController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         _josejuCollider = GetComponent<PolygonCollider2D>();
         // Valor inicial de la vida
         _currentSecondPhaseHealth = _maxSecondPhaseHealth;
@@ -261,8 +268,6 @@ public class JoseJuanController : MonoBehaviour
         // Inicializar lista de enemigos
         _waveEnemies = new List<WaveEnemy>();
 
-        _bastonCollider = _baston.GetComponent<BoxCollider2D>();
-        _playerCollider = _player.GetComponent<CapsuleCollider2D>();
         _playerTransform = _player.transform;
 
         _gearSpawnerController = _gearSpawner.GetComponent<SpawnerGearController>();
@@ -272,6 +277,9 @@ public class JoseJuanController : MonoBehaviour
         _cameraController = _camera.GetComponent<CameraController>();
         _cameraPhaseZeroPosition = _cameraPhaseZeroPositionObject.transform.position;
         _cameraFirstPhasePosition = _cameraFirstPhasePositionObject.transform.position;
+
+        _parpadeo = GetComponent<ParpadeoJoseju>();
+        _myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -1325258062032671164}
   - component: {fileID: 8234691379644350316}
   - component: {fileID: 6363781197984527359}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DragonFruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

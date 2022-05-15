@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    #region properties
+    private bool _activeDragon = false;
+    private bool _activeKiwi = false;
+    private float _kiwiSlowDown = 0f;
+    #endregion
+
     #region references
     private CharacterMovementController _myCharacterMovementController;
 
@@ -52,11 +58,30 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
   
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Lvl 1");
+    }
+    public void NewGame()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("Lvl 1");
+        StartCoroutine(LoadLevel1());
+    }
+    IEnumerator LoadLevel1()
+    {
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Lvl 1");
+        UI_Manager test = GameObject.Find("UI").GetComponent<UI_Manager>();
+        //Debug.Log(test);
+        yield return new WaitUntil(() => test.GetStarted());
+        test.StartGame();
+        Destroy(gameObject);
+    }
     public void OnPlayerDeath()
     {
-        ExitToMainMenu(); 
+        _UIManagerReference.OpenDeathMenu();
     }
-    public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Añadimos referencias a EnemyLifeCOmponent a la lista
+    public void SendEnemyLifeComponent(EnemyLifeComponent reference) //Aï¿½adimos referencias a EnemyLifeCOmponent a la lista
     {
         _listOfEnemies.Add(reference);
     }
@@ -70,31 +95,41 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator KiwiPowerUp(int duration, float slowDown)
     {
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
+        /*foreach (EnemyLifeComponent enemy in _listOfEnemies) //Ralentizar a los enemigos
         {
             if (enemy != null)
             {
                 EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
                 if (patrulla != null) patrulla.SlowDown(slowDown);
             }
-        }
+        }*/
+        _kiwiSlowDown = slowDown;
+        _activeKiwi = true;
         _UIManagerReference.KiwiActive(true);
 
         yield return new WaitForSeconds(duration/2);
         _UIManagerReference.StartBlinkKiwi();
         yield return new WaitForSeconds(duration/2);
-        
-        foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
+        _activeKiwi = false;
+        /*foreach (EnemyLifeComponent enemy in _listOfEnemies) //Reacelerar a todos los enemigos
         {
             if (enemy != null)
             {
                 EnemyPatrulla patrulla = enemy.GetComponent<EnemyPatrulla>();
                 if (patrulla != null) patrulla.RestoreSpeed();
             }
-        }
+        }*/
         
         _UIManagerReference.KiwiActive(false);
-        _myCharacterMovementController.NormalVelocity();
+        //_myCharacterMovementController.NormalVelocity();
+    }
+    public bool GetKiwiActive()
+    {
+        return _activeKiwi;
+    }
+    public float GetKiwiSlowDown()
+    {
+        return _kiwiSlowDown;
     }
     public void DragonCallBack(float duration, float newImpulse)
     {
@@ -102,6 +137,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator DragonPowerUp(float duration, float newImpulse)
     {
+        _activeDragon = true;
         _UIManagerReference.DragonActive(true);
         _myCharacterMovementController.IncreaseBastonImpulse(newImpulse);
         yield return new WaitForSeconds(duration/2);
@@ -110,6 +146,12 @@ public class GameManager : MonoBehaviour
         _UIManagerReference.DragonActive(false);
         _myCharacterMovementController.DecreaseBastonImpulse(newImpulse);
         _myCharacterAttackController.DecreaseStrenght(newImpulse);
+        _activeDragon = false;
+    }
+
+    public bool GetDragonActive()
+    {
+        return _activeDragon;
     }
 
     public void CompleteGame()
@@ -119,7 +161,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     private void Awake() {
-
         _listOfEnemies = new List<EnemyLifeComponent>();
         _instance = this;
         _UIManagerReference = _UIReference.GetComponent<UI_Manager>();

@@ -43,6 +43,7 @@ public class EnemyStrikingForceController : MonoBehaviour
 
         if(hasBeenStruck && check == null)
         {
+            //Debug.Log("tal");
             _myEnemyLifeComponent.ChangeHealth(/*- Mathf.RoundToInt(_myRigidBody.velocity.magnitude / conversionValue)*/ -1);
             
             hasBeenStruck = false;

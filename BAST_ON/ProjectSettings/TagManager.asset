@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
   - SonidoArea
   - PatrolStop
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -18,9 +18,9 @@ TagManager:
   - Player
   - Floor
   - JoseJuan
-  - 
-  - 
-  - 
+  - Baston
+  - Engranaje
+  - NoBaston
   - 
   - 
   - 

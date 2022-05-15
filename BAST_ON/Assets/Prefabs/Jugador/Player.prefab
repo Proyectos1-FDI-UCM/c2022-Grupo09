@@ -182,6 +182,7 @@ MonoBehaviour:
   _wallJumpBlockMovement: 0.3
   _verticalDamageImpulse: 10
   _horizontalDamageImpulse: 6
+  _speedLimit: 3
   _myCamera: {fileID: 0}
 --- !u!114 &2021335209507521157
 MonoBehaviour:
@@ -197,9 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baston: {fileID: 8705272921097061316}
   _bastonazoTime: 0.2
-  _attackCooldown: 0.3
-  _jumpsCooldown: 0.3
-  _dashCooldown: 0.3
+  _attackCooldown: 0.25
+  _jumpsCooldown: 0.25
+  _dashCooldown: 0.25
   repelStrenght: 15
 --- !u!114 &2064836601977449977
 MonoBehaviour:
@@ -474,7 +475,7 @@ GameObject:
   - component: {fileID: 4707773782861010996}
   - component: {fileID: 3388199697058540207}
   - component: {fileID: 1584218004262604693}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Baston Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

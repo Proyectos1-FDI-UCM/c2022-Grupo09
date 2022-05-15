@@ -17,11 +17,11 @@ public class CharacterAttackController : MonoBehaviour
     [SerializeField]
     private float _bastonazoTime = 0.2f;
     [SerializeField]
-    private float _attackCooldown = 1f;
+    private float _attackCooldown = 0.3f;
     [SerializeField]
-    private float _jumpsCooldown = 1f;
+    private float _jumpsCooldown = 0.3f;
     [SerializeField]
-    private float _dashCooldown = 1f;
+    private float _dashCooldown = 0.3f;
     [SerializeField] private float repelStrenght = 15;
     #endregion
 
@@ -33,16 +33,17 @@ public class CharacterAttackController : MonoBehaviour
     private float _defaultDirection;
     private Quaternion _originalAttackRotation;
     public float RepelStrenght => repelStrenght;
+    private float _originalRepelStrenght;
     #endregion
 
     #region methods
     public void IncreaseStrenght(float strenghtModifier)
     {
-        repelStrenght *= strenghtModifier;
+        repelStrenght = _originalRepelStrenght * strenghtModifier;
     }
     public void DecreaseStrenght(float strenghtModifier)
     {
-        repelStrenght /= strenghtModifier;
+        repelStrenght = _originalRepelStrenght;
     }
 
     public void SetDefaultDirection(float dir)
@@ -89,6 +90,10 @@ public class CharacterAttackController : MonoBehaviour
             // Abajo
             else /*if (angle > -90)*/ angle = -90;
 
+            // Ajuste de la dirección si al jugador está en una pared
+            if (_myWallDetector.isInWall() == 1 && !_myFloorDetector.IsGrounded()) _defaultDirection = -1;
+            else if (_myWallDetector.isInWall() == -1 && !_myFloorDetector.IsGrounded()) _defaultDirection = 1;
+
             if (_defaultDirection >= 0) Bastonazo(angle);
             else Bastonazo(180 - angle);
         }
@@ -120,8 +125,13 @@ public class CharacterAttackController : MonoBehaviour
         if (_elapsedDashCooldownTime > _dashCooldown && !_myFloorDetector.IsGrounded())
         {
             _elapsedDashCooldownTime = 0f;
-            if (_defaultDirection >= 0) Bastonazo(180 + 45);
-            else Bastonazo(-45);
+            if (_myWallDetector.isInWall() == 1) Bastonazo(180 + 45);
+            else if (_myWallDetector.isInWall() == -1) Bastonazo(-45);
+            else
+            {
+                if (_defaultDirection >= 0) Bastonazo(180 + 45);
+                else Bastonazo(-45);
+            }
         }
     }
     #endregion
@@ -134,6 +144,7 @@ public class CharacterAttackController : MonoBehaviour
         _myMovementController = GetComponent<CharacterMovementController>();
         _bastonTransform = _baston.transform;
         _baston.SetActive(false);
+        _originalRepelStrenght = repelStrenght;
     }
 
     // Update is called once per frame
@@ -162,8 +173,5 @@ public class CharacterAttackController : MonoBehaviour
         {
             _elapsedDashCooldownTime += Time.deltaTime;
         }
-
-        if (_myWallDetector.isInWall() == 1) _defaultDirection = -1;
-        else if (_myWallDetector.isInWall() == -1) _defaultDirection = 1;
     }
 }
